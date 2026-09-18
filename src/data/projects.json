@@ -8422,9 +8422,9 @@
     "url": "https://github.com/supercorp-ai/supercov",
     "repoId": 1343957927,
     "category": "CLI & Pipelines",
-    "plainSummary": "supercov：对输入文本做分类或打分，交给本地规则继续处理。",
-    "jevDecisionPoint": "对输入文本做分类或打分，交给本地规则继续处理。",
-    "highlightBenefit": "把语义判断接到已有的命令行工作流。",
+    "plainSummary": "给编码 agent 的代码质量与测试覆盖率 CLI：Jev 给每个源文件打分，agent 就知道该先修哪里。覆盖率在本地跑，不需要账号。",
+    "jevDecisionPoint": "每个源文件一次请求，问 Jev 12 个命名属性的 Noul 判断；分数、good/fair/weak 分档和文件排序都由 CLI 自己算。",
+    "highlightBenefit": "分数可以拆回具体属性，对着文件核对；答案按内容缓存，第二次只为改动付费。",
     "tags": [
       "CLI",
       "Pipelines",
@@ -8435,7 +8435,9 @@
     ],
     "summarySource": "readme-extractive",
     "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
-    "plainSummaryEn": "Code quality and coverage for coding agents",
+    "plainSummaryEn": "Code quality and test coverage for coding agents: Jev scores each source file so the agent knows what to fix first. Coverage runs locally with no account.",
+    "jevDecisionPointEn": "Asks twelve named Noul properties about each source file in one request; the CLI composes the score, the bands, and the file ordering.",
+    "highlightBenefitEn": "A score decomposes into named properties you can check against the file, and answers are cached by content.",
     "enrichment": {
       "issueTextTrusted": false,
       "ai": {
