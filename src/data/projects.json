@@ -8414,5 +8414,50 @@
     ],
     "readmeSha": "9ef10cc029b62fe999ebb6e49a3be19afdf5ddb3",
     "sourceHash": "c4c8c1abb341fff34164c2e830a800d732d85cd9fc9c34407916dbd3e2a2025a"
+  },
+  {
+    "id": "doeixd:jev-pref",
+    "name": "jev-pref",
+    "author": "doeixd",
+    "url": "https://github.com/doeixd/jev-pref",
+    "repoId": 1374853245,
+    "category": "CLI & Pipelines",
+    "plainSummary": "jev-pref：把 AGENTS.md 中的项目偏好转为 jev-pref.json 规则，用 Jev 审查代码变更（hunk、暂存文件、PR），并把发现反馈给编码 Agent。",
+    "jevDecisionPoint": "对每条偏好规则和每个代码变更片段，判断该变更是否违反这条规则。",
+    "highlightBenefit": "以 CLI 形式运行（npx jev-pref setup），可接入 pre-commit、PR 与 Agent 工作流，区分阻断与建议级发现。",
+    "tags": [
+      "Code Review",
+      "Linter",
+      "Agent",
+      "CLI",
+      "JavaScript"
+    ],
+    "summarySource": "source-reviewed",
+    "claimStatus": "由作者提交；根据 README 与源码整理，未独立测试性能。",
+    "plainSummaryEn": "Turn AGENTS.md preferences into a fast, Jev-powered AI linter: define project-specific review rules in jev-pref.json, check hunks, staged files or PRs with Jev, and feed findings back to your coding agent.",
+    "jevDecisionPointEn": "For each preference rule and each code-change hunk, decide whether the change violates the rule.",
+    "highlightBenefitEn": "CLI (npx jev-pref setup) for pre-commit, PR and agent workflows, with blocking vs. advisory findings.",
+    "claimStatusEn": "Submitted by the author; summarized from the README and source. Performance not independently tested.",
+    "stars": 2,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "MIT",
+    "createdAt": "2026-09-17T18:01:44Z",
+    "lastCommitAt": "2026-09-18T17:49:11Z",
+    "headSha": "9d77ea6069123a0b3eedf465ec39781842722b0a",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/13461122?v=4",
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-09-18T19:31:44.267Z",
+    "evidence": [
+      {
+        "url": "https://github.com/doeixd/jev-pref/blob/9d77ea6069123a0b3eedf465ec39781842722b0a/README.md",
+        "note": "固定版本的 README"
+      },
+      {
+        "url": "https://github.com/doeixd/jev-pref/blob/9d77ea6069123a0b3eedf465ec39781842722b0a/packages/jev-pref/src/jev.js",
+        "note": "固定版本的 Jev 调用实现"
+      }
+    ]
   }
 ]
