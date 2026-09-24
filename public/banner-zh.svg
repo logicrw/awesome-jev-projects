@@ -105,7 +105,7 @@
 
     <g transform="translate(-75, 95)">
       <rect width="150" height="24" rx="12" fill="#182216" stroke="#41543a" stroke-width="1"/>
-      <text x="75" y="16" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#d7fa91">631 VERIFIED REPOS</text>
+      <text x="75" y="16" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#d7fa91">662 VERIFIED REPOS</text>
     </g>
   </g>
 </svg>

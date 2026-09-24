@@ -58483,5 +58483,98 @@
       ]
     },
     "sourceHash": "17763f7d436e8c068ba70ae3dcca182050ff5e1253948994a6ef6fe685da018a"
+  },
+  {
+    "id": "codex-jev-router-suenot",
+    "name": "Codex Jev Router",
+    "author": "suenot",
+    "url": "https://github.com/suenot/codex-jev-router",
+    "category": "Routing & Cost Optimization",
+    "plainSummary": "Jev 判断简短的 Codex 子代理任务摘要，本地规则再按置信度选择模型和推理档位；不确定时回退到 Sol。",
+    "jevDecisionPoint": "用 Choice 选择子代理档位，并用 Noul 判断任务是否异常困难。",
+    "highlightBenefit": "只在创建子代理时路由，并把门槛与回退逻辑保留在本地代码。",
+    "plainSummaryEn": "Jev judges a short Codex subagent task summary, then local confidence rules select a model and reasoning tier or fall back to Sol.",
+    "jevDecisionPointEn": "Uses Choice to select a subagent tier and Noul to flag exceptionally difficult tasks.",
+    "highlightBenefitEn": "Routes at subagent creation while keeping thresholds and fallback behavior in local code.",
+    "plainSummaryJa": "Jev が Codex のサブエージェントの短いタスク概要を判定し、ローカルの信頼度ルールでモデルと推論レベルを選び、判断できない場合は Sol に戻す。",
+    "jevDecisionPointJa": "Choice でサブエージェントのレベルを選び、Noul で特に難しいタスクかを判定する。",
+    "highlightBenefitJa": "サブエージェント作成時に振り分け、しきい値とフォールバックをローカルコードに保つ。",
+    "plainSummaryKo": "Jev가 짧은 Codex 하위 에이전트 작업 요약을 판단하고 로컬 신뢰도 규칙으로 모델과 추론 수준을 선택하며, 불확실하면 Sol로 되돌립니다.",
+    "jevDecisionPointKo": "Choice로 하위 에이전트 수준을 고르고 Noul로 매우 어려운 작업인지 판단합니다.",
+    "highlightBenefitKo": "하위 에이전트를 만들 때 경로를 결정하고 기준값과 대체 경로는 로컬 코드에 둡니다.",
+    "tags": [
+      "llm-routing-cost",
+      "coding-agents"
+    ],
+    "repo": "suenot/codex-jev-router",
+    "stars": 1,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "MIT",
+    "createdAt": "2026-09-23T17:55:26Z",
+    "updatedAt": "2026-09-23T23:00:33Z",
+    "pushedAt": "2026-09-23T22:27:17Z",
+    "lastCommitAt": "2026-09-23T22:27:17Z",
+    "lastSyncedAt": "2026-09-23T23:59:02.906Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/1426876?v=4",
+    "language": "JavaScript",
+    "topics": [],
+    "archived": false,
+    "headSha": "c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695",
+    "sourceUrl": "https://github.com/suenot/codex-jev-router/blob/c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695/src/router.mjs",
+    "sourcePath": "src/router.mjs",
+    "evidenceLines": [
+      9,
+      19
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对固定版本源码；未在本站运行或独立测量成本节省。",
+    "claimStatusEn": "Fixed-commit source was reviewed; this catalog did not run the workflow or independently measure cost savings.",
+    "claimStatusJa": "固定コミットのソースを確認済みです。このカタログでは実行や費用削減の独立測定をしていません。",
+    "claimStatusKo": "고정 커밋의 소스를 확인했습니다. 이 카탈로그에서 실행하거나 비용 절감을 독립적으로 측정하지 않았습니다.",
+    "licenseStatus": "confirmed",
+    "enrichment": {
+      "mode": "source-reviewed",
+      "reviewedAt": "2026-09-23T23:59:02.906Z"
+    },
+    "repoId": 1383963530,
+    "sourceReviewedAt": "2026-09-23T23:59:02.906Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695",
+      "reviewedAt": "2026-09-23T23:59:02.906Z",
+      "files": [
+        {
+          "path": "src/router.mjs",
+          "url": "https://github.com/suenot/codex-jev-router/blob/c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695/src/router.mjs",
+          "hash": "37a99720453080cdbec3ab31d5a8bcb378f88b2ffe7e03fbe5a1e36927bac458",
+          "hashType": "sha256"
+        },
+        {
+          "path": "src/decider.mjs",
+          "url": "https://github.com/suenot/codex-jev-router/blob/c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695/src/decider.mjs",
+          "hash": "945f71fa17dace5d993f38ee3aa6b2139c42f3af9a9c2ceddc8a3580e19ee156",
+          "hashType": "sha256"
+        }
+      ]
+    },
+    "evidence": [
+      {
+        "url": "https://github.com/suenot/codex-jev-router/blob/c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695/src/router.mjs",
+        "note": "Fixed-commit source reviewed / 已核对固定版本源码"
+      },
+      {
+        "url": "https://github.com/suenot/codex-jev-router/blob/c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695/src/decider.mjs",
+        "note": "Fixed-commit source reviewed / 已核对固定版本源码"
+      },
+      {
+        "url": "https://github.com/suenot/codex-jev-router/blob/c31f1bcc9c792d526c5b6ca0bbbc2bad8bfdf695/README.md",
+        "note": "Setup and scope documentation / 安装与使用说明"
+      }
+    ],
+    "metadataFetchedAt": "2026-09-23T23:59:02.906Z"
   }
 ]
