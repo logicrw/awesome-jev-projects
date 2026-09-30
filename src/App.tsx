@@ -254,13 +254,16 @@ function Modal({
   onClose,
   children,
   locale,
+  descriptionId,
 }: {
   locale: Locale;
   title: string;
   onClose: () => void;
   children: React.ReactNode;
+  descriptionId?: string;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
   const startedOutside = useRef(false);
   useEffect(() => {
@@ -269,8 +272,12 @@ function Modal({
     const previousOverflow = document.body.style.overflow;
     el.showModal();
     document.body.style.overflow = "hidden";
+    const focusFrame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus({ preventScroll: true });
+    });
     return () => {
-      el.close();
+      window.cancelAnimationFrame(focusFrame);
+      if (el.open) el.close();
       document.body.style.overflow = previousOverflow;
       if (previousFocus?.isConnected)
         previousFocus.focus({ preventScroll: true });
@@ -280,8 +287,13 @@ function Modal({
     <dialog
       ref={ref}
       className="modal"
+      aria-modal="true"
       aria-labelledby={titleId}
-      onCancel={onClose}
+      aria-describedby={descriptionId}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
       onPointerDown={(e) => {
         const bounds = e.currentTarget.getBoundingClientRect();
         startedOutside.current =
@@ -304,11 +316,13 @@ function Modal({
       <div className="modal-head">
         <h2 id={titleId}>{title}</h2>
         <button
+          ref={closeButtonRef}
+          type="button"
           className="icon-button"
           aria-label={translate("关闭弹窗", locale)}
           onClick={onClose}
         >
-          <X size={20} />
+          <X size={20} aria-hidden="true" />
         </button>
       </div>
       {children}
@@ -328,6 +342,7 @@ function App({ initialProjects, initialLocale, initialDay }: AppProps = {}) {
   const [locale] = useState<Locale>(() => initialLocale ?? readLocale());
   const [heroTab, setHeroTab] = useState<"discover" | "quickstart" | "mechanism">("discover");
   const heroId = useId();
+  const projectSummaryId = useId();
 
   const {
     projects,
@@ -1817,12 +1832,17 @@ function App({ initialProjects, initialLocale, initialDay }: AppProps = {}) {
         </Modal>
       )}
       {active && (
-        <Modal locale={locale} title={active.name} onClose={closeProject}>
+        <Modal
+          locale={locale}
+          title={active.name}
+          descriptionId={projectSummaryId}
+          onClose={closeProject}
+        >
           <div className="detail-author">
             <span>{active.author}</span>
             <span className="tag">{label(active.category)}</span>
           </div>
-          <p className="detail-summary">
+          <p id={projectSummaryId} className="detail-summary">
             {projectText(active, "plainSummary")}
           </p>
           <div className="decision-block">
