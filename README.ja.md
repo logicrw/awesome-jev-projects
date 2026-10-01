@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/ja/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#カテゴリ"><img src="https://img.shields.io/badge/Curated%20Projects-801%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#カテゴリ"><img src="https://img.shields.io/badge/Curated%20Projects-802%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@ Agent を構築する際、すべての分岐判断を巨大な推論モデル�
 **TypeSafe Jev（System 1）** は、離散選択、スコアリング、真偽値判定に特化した軽量モデルです：
 - ⚡ **100ms 未満の高速応答**：50–100ms で判断を完了し、Agent の高速ループを維持します。
 - 🎯 **ネイティブな型安全出力**：`Choice`、`Score`、`Noul` を直接返し、壊れやすい正規表現パースが不要です。
-- 🛡️ **誇大広告を排除**：17 の実用分野にわたる 801+ 件の検証済みオープンソースコードのみを厳選掲載しています。
+- 🛡️ **誇大広告を排除**：17 の実用分野にわたる 802+ 件の検証済みオープンソースコードのみを厳選掲載しています。
 
 ### 📊 アーキテクチャ比較：System 1 (Jev) vs System 2 (巨大推論モデル)
 
@@ -50,7 +50,7 @@ Agent を構築する際、すべての分岐判断を巨大な推論モデル�
 - ⚡ **固定検索バーとフローティング絞り込み**：スクロール中も追従するツールバーから、いつでもカテゴリやタグで即座に絞り込み可能。
 - 🔍 **100% コミット固定のソース検証**：全プロジェクトが公開ソースコードの具体的な判断行と直接リンクしています。
 
-> **[検索・絞り込み ↗](https://logicrw.github.io/awesome-jev-projects/ja/)** · **801 件の厳選プロジェクト**
+> **[検索・絞り込み ↗](https://logicrw.github.io/awesome-jev-projects/ja/)** · **802 件の厳選プロジェクト**
 
 コミュニティによって運営される Jev プロジェクトカタログです。公開ソースコードと明確な設計を持つオープンソースプロジェクトを整理し、開発者のアーキテクチャ選定を支援します。
 
@@ -86,7 +86,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [Context GC・メモリ (42)](https://logicrw.github.io/awesome-jev-projects/ja/categories/context-gc-filter/)
 - [音楽・UI 制作 (26)](https://logicrw.github.io/awesome-jev-projects/ja/categories/creative-tools/)
 - [データ・検索 (50)](https://logicrw.github.io/awesome-jev-projects/ja/categories/data-search/)
-- [判断ツール (37)](https://logicrw.github.io/awesome-jev-projects/ja/categories/decision-tools/)
+- [判断ツール (38)](https://logicrw.github.io/awesome-jev-projects/ja/categories/decision-tools/)
 - [分野別ツール (85)](https://logicrw.github.io/awesome-jev-projects/ja/categories/domain-vertical-tools/)
 - [評価・可観測性 (29)](https://logicrw.github.io/awesome-jev-projects/ja/categories/evaluation-observability/)
 - [ゲーム・リアルタイム判断 (54)](https://logicrw.github.io/awesome-jev-projects/ja/categories/high-frequency-simulation/)
@@ -1674,6 +1674,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev が判断する箇所**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [詳細と固定バージョンのソース](https://logicrw.github.io/awesome-jev-projects/ja/projects/sedthh/xjevboost/) · ライセンス: Apache-2.0
+
+- [**jev-book-tags**](https://github.com/iamjonatha/jev-book-tags) — A free calibre plugin that suggests genre and subject tags for individual books, selected books or an entire library, with configurable thresholds and review controls.
+  - **Jev が判断する箇所**: I maintain JEV Book Tags, an independent, free GPL-3.0-or-later calibre plugin. It was developed with substantial AI assistance and reviewed and tested during implementation. It is not affiliated with TypeSafe AI or calibre; users bring their own API key and external API charges may apply.
+  - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [詳細と固定バージョンのソース](https://logicrw.github.io/awesome-jev-projects/ja/projects/iamjonatha/jev-book-tags/) · ライセンス: 記載なし
 
 - [**turing-jail**](https://github.com/bugkiwi/turing-jail) — Interactive three-level AI interrogation game powered by TypeSafe Jev; write responses and pass plea, logic, and paradox verdicts to earn release.
   - **Jev が判断する箇所**: For each level, Jev evaluates release probability plus plea, logic, and paradox signals, then selects a persuasion tactic and scores persuasiveness.

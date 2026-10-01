@@ -4,7 +4,7 @@ The definitive community radar and directory for TypeSafe Jev and System-1 Agent
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 801
+Catalog entries: 802
 
 ## Install the Agent Skill
 
@@ -11284,3 +11284,19 @@ Shrinks Playwright suites in CI by letting Jev select tests related to code diff
 - Source evidence: https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/README.md
 - Source evidence: https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/prompt.ts
 - Source evidence: https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/selection.ts
+
+## jev-book-tags
+
+A free calibre plugin that suggests genre and subject tags for individual books, selected books or an entire library, with configurable thresholds and review controls.
+
+- Repository: https://github.com/iamjonatha/jev-book-tags
+- Category: Decision Tools
+- Jev decision: I maintain JEV Book Tags, an independent, free GPL-3.0-or-later calibre plugin. It was developed with substantial AI assistance and reviewed and tested during implementation. It is not affiliated with TypeSafe AI or calibre; users bring their own API key and external API charges may apply.
+- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+- Review scope: Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.
+- License: Not declared
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/iamjonatha/jev-book-tags/
+- Source evidence: https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/README.md
+- Source evidence: https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/client.py
+- Source evidence: https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/core.py
+- Source evidence: https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/tests/test_core.py

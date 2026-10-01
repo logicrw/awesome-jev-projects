@@ -69086,5 +69086,90 @@
       "issueBodySha256": "c178bd69d0a0629cc72b4d603dc01e02d33ab355e58a36f257444e1b6a1f6e3c",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/106"
     }
+  },
+  {
+    "id": "iamjonatha:jev-book-tags",
+    "name": "jev-book-tags",
+    "author": "iamjonatha",
+    "url": "https://github.com/iamjonatha/jev-book-tags",
+    "repoId": 1399761744,
+    "category": "Decision Tools",
+    "plainSummary": "jev-book-tags：把任务状态交给 Jev，返回供本地程序使用的结构化判断；具体策略请查看来源。",
+    "jevDecisionPoint": "把任务状态交给 Jev，返回供本地程序使用的结构化判断；具体策略请查看来源。",
+    "jevDecisionPointEn": "I maintain JEV Book Tags, an independent, free GPL-3.0-or-later calibre plugin. It was developed with substantial AI assistance and reviewed and tested during implementation. It is not affiliated with TypeSafe AI or calibre; users bring their own API key and external API charges may apply.",
+    "highlightBenefit": "把选择和打分接进现有程序；暂无可核验的性能对照。",
+    "highlightBenefitEn": "Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.",
+    "tags": [
+      "typed-decisions",
+      "classification-ranking",
+      "domain-workflows"
+    ],
+    "summarySource": "readme-extractive",
+    "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
+    "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
+    "plainSummaryEn": "A free calibre plugin that suggests genre and subject tags for individual books, selected books or an entire library, with configurable thresholds and review controls.",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "license": null,
+    "createdAt": "2026-10-01T10:38:35Z",
+    "lastCommitAt": "2026-10-01T10:54:36Z",
+    "headSha": "a02e768e8ec6f283b93fce5345999559ea2b88d7",
+    "metadataFetchedAt": "2026-10-01T11:02:46.305Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/1169884?v=4",
+    "verificationStatus": "integration-detected",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-01T11:02:46.305Z",
+    "evidence": [
+      {
+        "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/README.md",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/client.py",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/core.py",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/tests/test_core.py",
+        "note": "固定版本的 Jev 集成与说明来源"
+      }
+    ],
+    "sourceVerification": {
+      "method": "bounded-source-heuristic",
+      "sha": "a02e768e8ec6f283b93fce5345999559ea2b88d7",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/README.md",
+          "hash": "1ecc7431d2156e7d9574975167a5a5d42ddd6f74b7663408d3626927b2ea1de1"
+        },
+        {
+          "path": "plugin/client.py",
+          "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/client.py",
+          "hash": "571f0aa54753819f09cf2ecc5dd6b5a7ec2344a62743869d070224f143fd0eff"
+        },
+        {
+          "path": "plugin/core.py",
+          "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/core.py",
+          "hash": "f5e66d94c24770615fa7f15e092f724c2d4844ec4843e4307302666f195faf86"
+        },
+        {
+          "path": "tests/test_core.py",
+          "url": "https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/tests/test_core.py",
+          "hash": "d7eea8305f1feef5a92a014f1899f1382c533455233831b72569d0329a4148c7"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 108,
+      "issueBodySha256": "2206d8146fc336ab4c2df34e4e1dde6de25cfff00361b85fe20b69043dc701c2",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/108"
+    }
   }
 ]
