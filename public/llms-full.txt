@@ -4,7 +4,7 @@ The definitive community radar and directory for TypeSafe Jev and System-1 Agent
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 802
+Catalog entries: 803
 
 ## Install the Agent Skill
 
@@ -11300,3 +11300,17 @@ A free calibre plugin that suggests genre and subject tags for individual books,
 - Source evidence: https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/client.py
 - Source evidence: https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/plugin/core.py
 - Source evidence: https://github.com/iamjonatha/jev-book-tags/blob/a02e768e8ec6f283b93fce5345999559ea2b88d7/tests/test_core.py
+
+## cribrix
+
+Self-hosted RAG service that uses Jev to decide which retrieved context reaches the generator and whether the generated answer is released.
+
+- Repository: https://github.com/david96182/cribrix
+- Category: Routing & Cost Optimization
+- Jev decision: All calls go through the official typesafe-sdk (AsyncTypeSafeClient.system\_one):
+- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+- Review scope: Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/david96182/cribrix/
+- Source evidence: https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/README.md
+- Source evidence: https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/cribrix/clients/jev.py

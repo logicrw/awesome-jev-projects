@@ -69171,5 +69171,72 @@
       "issueBodySha256": "2206d8146fc336ab4c2df34e4e1dde6de25cfff00361b85fe20b69043dc701c2",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/108"
     }
+  },
+  {
+    "id": "david96182:cribrix",
+    "name": "cribrix",
+    "author": "david96182",
+    "url": "https://github.com/david96182/cribrix",
+    "repoId": 1386338932,
+    "category": "Routing & Cost Optimization",
+    "plainSummary": "cribrix：给候选记录判断相关性或打分，再由本地程序筛选和排序。",
+    "jevDecisionPoint": "给候选记录判断相关性或打分，再由本地程序筛选和排序。",
+    "jevDecisionPointEn": "All calls go through the official typesafe-sdk (AsyncTypeSafeClient.system_one):",
+    "highlightBenefit": "把语义判断接进已有的数据查询流程。",
+    "highlightBenefitEn": "Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.",
+    "tags": [
+      "llm-routing-cost",
+      "search-retrieval",
+      "security-guardrails"
+    ],
+    "summarySource": "readme-extractive",
+    "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
+    "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
+    "plainSummaryEn": "Self-hosted RAG service that uses Jev to decide which retrieved context reaches the generator and whether the generated answer is released.",
+    "stars": 1,
+    "forks": 1,
+    "openIssues": 0,
+    "license": "MIT",
+    "createdAt": "2026-09-24T20:41:35Z",
+    "lastCommitAt": "2026-09-25T21:34:10Z",
+    "headSha": "a2b6ca24fd715863d530154b12be90ae865a16b3",
+    "metadataFetchedAt": "2026-10-01T14:47:55.708Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/88980449?v=4",
+    "verificationStatus": "integration-detected",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-01T14:47:55.708Z",
+    "evidence": [
+      {
+        "url": "https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/README.md",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/cribrix/clients/jev.py",
+        "note": "固定版本的 Jev 集成与说明来源"
+      }
+    ],
+    "sourceVerification": {
+      "method": "bounded-source-heuristic",
+      "sha": "a2b6ca24fd715863d530154b12be90ae865a16b3",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/README.md",
+          "hash": "7f858952184660b0731733f14e525a14734b9edb27038608ebc50d8676df002a"
+        },
+        {
+          "path": "cribrix/clients/jev.py",
+          "url": "https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/cribrix/clients/jev.py",
+          "hash": "f1424845b093aabeec3c2f0619349fd8a7dcef7593934b76ef4b06180042eb5c"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 109,
+      "issueBodySha256": "db8cbddea081266169597642e8e61305cec748a339d7a254f4cfe35a7e6b5524",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/109"
+    }
   }
 ]
