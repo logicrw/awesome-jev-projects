@@ -69010,5 +69010,81 @@
       "issueBodySha256": "f82e9fadd445ed367867825d818048ae7c7fdc3070f26c2a11a5a22942e22e1a",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/107"
     }
+  },
+  {
+    "id": "arthurfiorette:jev-playwright",
+    "name": "jev-playwright",
+    "author": "arthurfiorette",
+    "url": "https://github.com/arthurfiorette/jev-playwright",
+    "repoId": 1385975720,
+    "category": "Browser & OS Action",
+    "plainSummary": "在 CI 中根据代码改动智能缩减 Playwright 测试集：让 Jev 评估 diff 并挑选出相关的测试用例，跳过不必要的全量测试。",
+    "jevDecisionPoint": "对比 git 改动内容，由 Jev 判断哪些 Playwright 测试用例与改动强相关，其余用例直接跳过。",
+    "jevDecisionPointEn": "Reporter inspects included changes, asks Jev which tests to run, and skips the rest.",
+    "highlightBenefit": "大幅缩短 CI 运行时间与资源消耗，测试选择过程具备清晰可追踪的结构化决策依据。",
+    "highlightBenefitEn": "Speeds up CI runs and saves resources with transparent, typed selection decisions.",
+    "tags": [
+      "browser-automation",
+      "evaluation-benchmarks",
+      "typed-decisions"
+    ],
+    "summarySource": "readme-extractive",
+    "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
+    "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
+    "plainSummaryEn": "Shrinks Playwright suites in CI by letting Jev select tests related to code diffs.",
+    "stars": 6,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "MIT",
+    "createdAt": "2026-09-24T16:54:44Z",
+    "lastCommitAt": "2026-09-25T00:30:55Z",
+    "headSha": "96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398",
+    "metadataFetchedAt": "2026-10-01T05:19:05.561Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/47537704?v=4",
+    "verificationStatus": "integration-detected",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-01T05:19:05.562Z",
+    "evidence": [
+      {
+        "url": "https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/README.md",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/prompt.ts",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/selection.ts",
+        "note": "固定版本的 Jev 集成与说明来源"
+      }
+    ],
+    "sourceVerification": {
+      "method": "bounded-source-heuristic",
+      "sha": "96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/README.md",
+          "hash": "d34f4ccbaa02d75e476cad394b3980a2fa05a0d1a0c86dd3c5f4d3934fffd8b3"
+        },
+        {
+          "path": "src/prompt.ts",
+          "url": "https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/prompt.ts",
+          "hash": "95f541ba2c1ec9aa8c2f6042770adb0bf5083b4124356986774864b284679799"
+        },
+        {
+          "path": "src/selection.ts",
+          "url": "https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/selection.ts",
+          "hash": "d9409722ec5f618c4ab04b9363b71ffe6969c49f49e46dcc5ab7c0a3aea17443"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 106,
+      "issueBodySha256": "c178bd69d0a0629cc72b4d603dc01e02d33ab355e58a36f257444e1b6a1f6e3c",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/106"
+    }
   }
 ]

@@ -480,7 +480,7 @@ function hasImplementationEvidence(text, path) {
   const providerImport =
     /\bfrom\s+(?:typesafe(?:_ai|_sdk)?|jev)(?:\.[\w.]+)?\s+import\b/i.test(code) ||
     /\bimport\s+(?:static\s+)?(?:(?!com\.typesafe\.(?:config|play|scalalogging|sslconfig|sbt|akka))(?:[\w.]+\.)?(?:typesafe(?:_ai|_sdk)?|jev)(?:\.[\w.]+)*)\b/i.test(code) ||
-    /\b(?:from|require\s*\(|import\s*\(?)\s*["'](?:package:(?:jev|typesafe)[\w./-]*|@typesafe\/(?:jev|sdk)|typesafe(?:-ai|-sdk)?|jev|github\.com\/(?:typesafe-ai|typesafe|[\w.-]+\/jev[\w.-]*)|(?:go\.)?typesafe\.ai\/[\w.-]*)["']/i.test(code) ||
+    /\b(?:from|require\s*\(|import\s*\(?)\s*["'](?:package:(?:jev|typesafe)[\w./-]*|@typesafe(?:-ai)?\/[\w.-]+|typesafe(?:-ai|-sdk)?|jev|github\.com\/(?:typesafe-ai|typesafe|[\w.-]+\/jev[\w.-]*)|(?:go\.)?typesafe\.ai\/[\w.-]*)["']/i.test(code) ||
     /\b(?:use\s+(?:typesafe(?:_ai|_sdk|_jev)?|jev)(?:::[\w{}*,\s:]+)?|extern\s+crate\s+(?:typesafe(?:_ai|_sdk|_jev)?|jev))\s*;/i.test(code) ||
     /\bimport\s*\([\s\S]*?["'](?:github\.com\/(?:typesafe-ai|typesafe|[\w.-]+\/jev[\w.-]*)|(?:go\.)?typesafe\.ai\/[\w.-]*)["']/i.test(code);
 
@@ -646,7 +646,7 @@ export async function inspectRepository({
         const plower = p.toLowerCase();
         const pbase = posix.basename(plower);
         if (lower.endsWith("/" + plower) || plower.endsWith("/" + lower)) return true;
-        if (pbase && pbase === base && /(?:src|lib|app|server|internal|core|pkg|providers?|routers?)/i.test(lower)) return true;
+        if (pbase && (pbase === base || base.toLowerCase().includes(pbase)) && /(?:src|lib|app|server|internal|core|pkg|providers?|routers?)/i.test(lower)) return true;
       }
       return false;
     };
@@ -667,8 +667,11 @@ export async function inspectRepository({
           Number(/typesafe|jev/i.test(posix.basename(a.path))) ||
         Number(/(?:^|\/)(?:bench|benchmark|benchmarks|examples?|demos?|fixtures?|scripts?)(?:\/|$)/i.test(a.path)) -
           Number(/(?:^|\/)(?:bench|benchmark|benchmarks|examples?|demos?|fixtures?|scripts?)(?:\/|$)/i.test(b.path)) ||
-        Number(/(?:^|\/)(?:judge|gate|decision|backend|client|agent|model|service|policy|api|route|provider|evaluator|engine|handler)/i.test(b.path)) -
-          Number(/(?:^|\/)(?:judge|gate|decision|backend|client|agent|model|service|policy|api|route|provider|evaluator|engine|handler)/i.test(a.path)) ||
+        Number(/(?:^|\/)(?:judge|gate|decision|backend|client|agent|model|service|policy|api|route|provider|evaluator|engine|handler|selection|select|prompt|filter|classifier|routing|rule)/i.test(b.path)) -
+          Number(/(?:^|\/)(?:judge|gate|decision|backend|client|agent|model|service|policy|api|route|provider|evaluator|engine|handler|selection|select|prompt|filter|classifier|routing|rule)/i.test(a.path)) ||
+        Number(/(?:^|\/)(?:ci|docker|github|gitlab|azure|gitea|bitbucket)(?:\/|$)/i.test(a.path)) -
+          Number(/(?:^|\/)(?:ci|docker|github|gitlab|azure|gitea|bitbucket)(?:\/|$)/i.test(b.path)) ||
+        (a.path.split("/").length - b.path.split("/").length) ||
         Number(/(?:^|\/)(?:__init__|\.d)\.[a-z]+$/i.test(a.path)) -
           Number(/(?:^|\/)(?:__init__|\.d)\.[a-z]+$/i.test(b.path)) ||
         Number(/jev|typesafe/i.test(b.path)) -

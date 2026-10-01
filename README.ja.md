@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/ja/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#カテゴリ"><img src="https://img.shields.io/badge/Curated%20Projects-800%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#カテゴリ"><img src="https://img.shields.io/badge/Curated%20Projects-801%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@ Agent を構築する際、すべての分岐判断を巨大な推論モデル�
 **TypeSafe Jev（System 1）** は、離散選択、スコアリング、真偽値判定に特化した軽量モデルです：
 - ⚡ **100ms 未満の高速応答**：50–100ms で判断を完了し、Agent の高速ループを維持します。
 - 🎯 **ネイティブな型安全出力**：`Choice`、`Score`、`Noul` を直接返し、壊れやすい正規表現パースが不要です。
-- 🛡️ **誇大広告を排除**：17 の実用分野にわたる 800+ 件の検証済みオープンソースコードのみを厳選掲載しています。
+- 🛡️ **誇大広告を排除**：17 の実用分野にわたる 801+ 件の検証済みオープンソースコードのみを厳選掲載しています。
 
 ### 📊 アーキテクチャ比較：System 1 (Jev) vs System 2 (巨大推論モデル)
 
@@ -50,7 +50,7 @@ Agent を構築する際、すべての分岐判断を巨大な推論モデル�
 - ⚡ **固定検索バーとフローティング絞り込み**：スクロール中も追従するツールバーから、いつでもカテゴリやタグで即座に絞り込み可能。
 - 🔍 **100% コミット固定のソース検証**：全プロジェクトが公開ソースコードの具体的な判断行と直接リンクしています。
 
-> **[検索・絞り込み ↗](https://logicrw.github.io/awesome-jev-projects/ja/)** · **800 件の厳選プロジェクト**
+> **[検索・絞り込み ↗](https://logicrw.github.io/awesome-jev-projects/ja/)** · **801 件の厳選プロジェクト**
 
 コミュニティによって運営される Jev プロジェクトカタログです。公開ソースコードと明確な設計を持つオープンソースプロジェクトを整理し、開発者のアーキテクチャ選定を支援します。
 
@@ -79,7 +79,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 
 ## カテゴリ
 
-- [ブラウザ・デスクトップ (52)](https://logicrw.github.io/awesome-jev-projects/ja/categories/browser-os-action/)
+- [ブラウザ・デスクトップ (53)](https://logicrw.github.io/awesome-jev-projects/ja/categories/browser-os-action/)
 - [CLI・パイプライン (87)](https://logicrw.github.io/awesome-jev-projects/ja/categories/cli-pipelines/)
 - [分類・カタログ (2)](https://logicrw.github.io/awesome-jev-projects/ja/categories/classification-taxonomy/)
 - [コード・グラフ探索 (15)](https://logicrw.github.io/awesome-jev-projects/ja/categories/codebase-graph-pathfinding/)
@@ -233,6 +233,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev が判断する箇所**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [詳細と固定バージョンのソース](https://logicrw.github.io/awesome-jev-projects/ja/projects/jaibhasin/jev-yt-time-saver/) · ライセンス: 記載なし
+
+- [**jev-playwright**](https://github.com/arthurfiorette/jev-playwright) — Shrinks Playwright suites in CI by letting Jev select tests related to code diffs.
+  - **Jev が判断する箇所**: Reporter inspects included changes, asks Jev which tests to run, and skips the rest.
+  - **このプロジェクトの用途**: Speeds up CI runs and saves resources with transparent, typed selection decisions.
+  - [詳細と固定バージョンのソース](https://logicrw.github.io/awesome-jev-projects/ja/projects/arthurfiorette/jev-playwright/) · ライセンス: MIT
 
 - [**jev-browser**](https://github.com/Mrlyk/jev-browser) — Browser automation CLI for AI agents, powered by the Jev model's millisecond decisions and near-zero inference costs
   - **Jev が判断する箇所**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.

@@ -465,7 +465,7 @@ export function createSubmissionReviewer({
         headers["X-Title"] = "Awesome Jev Projects";
       }
 
-      const truncatedCodeSources = codeSources.slice(0, 8).map((src) => ({
+      const truncatedCodeSources = codeSources.slice(0, 16).map((src) => ({
         path: src.path,
         text: extractCodeWindow(redact(src.text ?? "", token), 10000),
       }));

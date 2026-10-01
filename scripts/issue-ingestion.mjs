@@ -168,7 +168,8 @@ export async function prepareSubmission({
     };
   }
 
-  const { repo, sha, commits, readme, evidence } = result;
+  const { repo, sha, commits, readme } = result;
+  let evidence = result.evidence;
   const readmeFiles = result.readmeFiles ?? [];
   const codeSources = (evidence?.files ?? []).filter(
     (file) => !readmeFiles.some((rf) => rf.path === file.path),
@@ -209,7 +210,15 @@ export async function prepareSubmission({
       }
     }
     if (reviewVerdict.verified === true && evidence) {
-      evidence.verified = true;
+      evidence = {
+        ...evidence,
+        verified: true,
+        implementationFiles: evidence.implementationFiles?.length
+          ? evidence.implementationFiles
+          : codeSources.length > 0
+            ? [codeSources[0]]
+            : [],
+      };
     }
   }
 

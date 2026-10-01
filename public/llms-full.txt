@@ -4,7 +4,7 @@ The definitive community radar and directory for TypeSafe Jev and System-1 Agent
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 800
+Catalog entries: 801
 
 ## Install the Agent Skill
 
@@ -11269,3 +11269,18 @@ Plain-English browser e2e tests cheap enough to run on every PR. Built on Jev an
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/sedum-dev/sedum/
 - Source evidence: https://github.com/sedum-dev/sedum/blob/44f2a83a6d6205f098348721535356fa8d1bb346/README.md
 - Source evidence: https://github.com/sedum-dev/sedum/blob/44f2a83a6d6205f098348721535356fa8d1bb346/packages/provider-typesafe/src/index.ts
+
+## jev-playwright
+
+Shrinks Playwright suites in CI by letting Jev select tests related to code diffs.
+
+- Repository: https://github.com/arthurfiorette/jev-playwright
+- Category: Browser & OS Action
+- Jev decision: Reporter inspects included changes, asks Jev which tests to run, and skips the rest.
+- Purpose: Speeds up CI runs and saves resources with transparent, typed selection decisions.
+- Review scope: Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/arthurfiorette/jev-playwright/
+- Source evidence: https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/README.md
+- Source evidence: https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/prompt.ts
+- Source evidence: https://github.com/arthurfiorette/jev-playwright/blob/96bdcc6bdf2dd0a9194c302e84eb6c87abb4f398/src/selection.ts

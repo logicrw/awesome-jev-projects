@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-800%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-801%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：
 - ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。
 - 🎯 **原生确定性输出**：原生支持 `Choice`（多选一）、`Score`（打分）与 `Noul`（二元逻辑与概率），免去易碎的正则提取。
-- 🛡️ **严格拒绝概念炒作**：全网严选 **800+** 个绑定真实公开开源源码版本的落地项目，覆盖 17 大核心工程赛道。
+- 🛡️ **严格拒绝概念炒作**：全网严选 **801+** 个绑定真实公开开源源码版本的落地项目，覆盖 17 大核心工程赛道。
 
 ### 📊 架构分工对比：System 1 (Jev) vs System 2 (大推理模型)
 
@@ -50,7 +50,7 @@
 - ⚡ **毫秒级吸顶搜索与浮动过滤**：即便页面下滑，也可随时唤出浮动分类面板，支持多标签一键点选过滤。
 - 🔍 **100% 绑定固定源码**：所有收录项目均核验真实 commit SHA 与具体接入点，绝无空气包装与死链。
 
-> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **800 个精选项目**
+> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **801 个精选项目**
 
 由社区维护的 Jev 项目与架构雷达，收录具有公开源码与清晰集成逻辑的开源项目，帮助开发者快速探索和落地 System-1 决策架构。
 
@@ -79,7 +79,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 
 ## 分类
 
-- [浏览器与桌面 (52)](https://logicrw.github.io/awesome-jev-projects/categories/browser-os-action/)
+- [浏览器与桌面 (53)](https://logicrw.github.io/awesome-jev-projects/categories/browser-os-action/)
 - [命令行与流水线 (87)](https://logicrw.github.io/awesome-jev-projects/categories/cli-pipelines/)
 - [分类与目录 (2)](https://logicrw.github.io/awesome-jev-projects/categories/classification-taxonomy/)
 - [代码与图谱 (15)](https://logicrw.github.io/awesome-jev-projects/categories/codebase-graph-pathfinding/)
@@ -233,6 +233,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在哪一步做判断**: Jev 根据视频标题、频道、时长、描述和搜索意图判断每个 YouTube 视频是否浪费时间并给出浪费分数。
   - **这个项目的用途**: 把选择和打分接进现有程序；暂无可核验的性能对照。
   - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/jaibhasin/jev-yt-time-saver/) · 许可证: 未声明
+
+- [**jev-playwright**](https://github.com/arthurfiorette/jev-playwright) — 在 CI 中根据代码改动智能缩减 Playwright 测试集：让 Jev 评估 diff 并挑选出相关的测试用例，跳过不必要的全量测试。
+  - **Jev 在哪一步做判断**: 对比 git 改动内容，由 Jev 判断哪些 Playwright 测试用例与改动强相关，其余用例直接跳过。
+  - **这个项目的用途**: 大幅缩短 CI 运行时间与资源消耗，测试选择过程具备清晰可追踪的结构化决策依据。
+  - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/arthurfiorette/jev-playwright/) · 许可证: MIT
 
 - [**jev-browser**](https://github.com/Mrlyk/jev-browser) — 在交互终端中用自然语言操作浏览器，也可通过结构化 CLI 命令供 AI Agent 调用。
   - **Jev 在哪一步做判断**: Jev 根据自然语言指令从最多253个候选页面元素中选择概率最高的操作目标。
