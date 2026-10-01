@@ -68943,5 +68943,72 @@
       "issueBodySha256": "5372d65e4fb6a1706da996afcfc1854d4714ff10d9323cb3d71bc5111ddba476",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/104"
     }
+  },
+  {
+    "id": "sedum-dev:sedum",
+    "name": "sedum",
+    "author": "sedum-dev",
+    "url": "https://github.com/sedum-dev/sedum",
+    "repoId": 1376657109,
+    "category": "Browser & OS Action",
+    "plainSummary": "sedum：把任务状态交给 Jev，返回供本地程序使用的结构化判断；具体策略请查看来源。",
+    "jevDecisionPoint": "把任务状态交给 Jev，返回供本地程序使用的结构化判断；具体策略请查看来源。",
+    "jevDecisionPointEn": "Jev returns a structured decision for the local program; consult the source for the exact decision policy.",
+    "highlightBenefit": "把选择和打分接进现有程序；暂无可核验的性能对照。",
+    "highlightBenefitEn": "Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.",
+    "tags": [
+      "browser-automation",
+      "evaluation-benchmarks",
+      "typed-decisions"
+    ],
+    "summarySource": "readme-extractive",
+    "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
+    "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
+    "plainSummaryEn": "Plain-English browser e2e tests cheap enough to run on every PR. Built on Jev and Playwright, open source, bring your own key.",
+    "stars": 1,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "MIT",
+    "createdAt": "2026-09-19T02:56:45Z",
+    "lastCommitAt": "2026-09-30T14:15:57Z",
+    "headSha": "44f2a83a6d6205f098348721535356fa8d1bb346",
+    "metadataFetchedAt": "2026-10-01T01:39:10.012Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/331116282?v=4",
+    "verificationStatus": "integration-detected",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-01T01:39:10.012Z",
+    "evidence": [
+      {
+        "url": "https://github.com/sedum-dev/sedum/blob/44f2a83a6d6205f098348721535356fa8d1bb346/README.md",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/sedum-dev/sedum/blob/44f2a83a6d6205f098348721535356fa8d1bb346/packages/provider-typesafe/src/index.ts",
+        "note": "固定版本的 Jev 集成与说明来源"
+      }
+    ],
+    "sourceVerification": {
+      "method": "bounded-source-heuristic",
+      "sha": "44f2a83a6d6205f098348721535356fa8d1bb346",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/sedum-dev/sedum/blob/44f2a83a6d6205f098348721535356fa8d1bb346/README.md",
+          "hash": "fdb002c6c1c053ea05cc6eac07939d7466466c8b91bea4fad703afd21609e9dd"
+        },
+        {
+          "path": "packages/provider-typesafe/src/index.ts",
+          "url": "https://github.com/sedum-dev/sedum/blob/44f2a83a6d6205f098348721535356fa8d1bb346/packages/provider-typesafe/src/index.ts",
+          "hash": "9c19659587c9634ca327543e5aefa49e8601a9396a3269d1b16de11396c6309c"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 107,
+      "issueBodySha256": "f82e9fadd445ed367867825d818048ae7c7fdc3070f26c2a11a5a22942e22e1a",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/107"
+    }
   }
 ]
