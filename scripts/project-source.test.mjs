@@ -90,6 +90,20 @@ test("explicit submission field wins over unrelated evidence and example reposit
   );
 });
 
+test("extractSubmittedRepository accepts natural variations of repository headings", () => {
+  for (const title of [
+    "Repo",
+    "GitHub Repo",
+    "开源仓库",
+    "项目地址",
+    "代码仓库",
+    "仓库链接",
+  ]) {
+    const body = `### ${title}\nhttps://github.com/owner/tool\n`;
+    assert.equal(extractSubmittedRepository(body), "owner/tool");
+  }
+});
+
 test("fallback accepts repeated deep links for one repository, rejects ambiguous targets", () => {
   assert.equal(
     extractSubmittedRepository(

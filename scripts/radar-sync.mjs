@@ -70,7 +70,7 @@ export function verifyIntegration(repo, text, { codeSources = [] } = {}) {
     /\bchoice\b/i.test(text) &&
     (/\bscore\b/i.test(text) || /\bnoul\b/i.test(text) || /\blogits?\b/i.test(text) || /\bconfidence\b/i.test(text) || /\bquestions?\b/i.test(text));
   const exact = routerDecision || serverSystemOne ||
-    /(?<![\w.-])(?:api\.)?typesafe\.ai(?![\w.-])|@typesafe\/(?:jev|sdk)|from\s+typesafe(?:_ai|_sdk)?\s+import|typesafe(?:_ai|-ai|_sdk|-sdk)|\bjev\.(?:choice|score|noul|decision|query|client|ask)|\b(?:JevClient|TypeSafeClient)\b|TYPESAFE_API_KEY|(?<![~/\w.-])typesafe-ai\/jev/i.test(
+    /(?<![\w.-])(?:api\.)?typesafe\.ai(?![\w.-])|@typesafe(?:-ai)?\/[\w.-]+|from\s+typesafe(?:_ai|_sdk)?\s+import|typesafe(?:_ai|-ai|_sdk|-sdk)|\bjev\.(?:choice|score|noul|decision|query|client|ask)|\b(?:JevClient|TypeSafeClient)\b|TYPESAFE_API_KEY|(?<![~/\w.-])typesafe-ai\/jev|["'](?:package:(?:jev|typesafe)[\w./-]*|@typesafe(?:-ai)?\/[\w.-]+|github\.com\/(?:typesafe-ai|typesafe)[\w./-]*|(?:go\.)?typesafe\.ai\/[\w.-]*)["']|\buse\s+(?:typesafe(?:_ai|_sdk|_jev)?|jev)::/i.test(
       text,
     );
   const context =
@@ -80,7 +80,7 @@ export function verifyIntegration(repo, text, { codeSources = [] } = {}) {
       text,
     ));
   const implementation = routerDecision || serverSystemOne ||
-    /(?<![\w.-])api\.typesafe\.ai(?![\w.-])|from\s+typesafe(?:_ai|_sdk)?\s+import|(?:import|require|npm\s+(?:i|install)|pip\s+install|uv\s+add).{0,100}(?:typesafe|jev)|\bjev\.(?:choice|score|noul|decision|query|client|ask)|TypeSafeClient|JevClient|TYPESAFE_API_KEY|JEV_API_KEY|typesafe\.Client|typesafe\.AsyncClient|(?<![~/\w.-])typesafe-ai\/jev/i.test(
+    /(?<![\w.-])api\.typesafe\.ai(?![\w.-])|from\s+typesafe(?:_ai|_sdk)?\s+import|(?:import|require|npm\s+(?:i|install)|pip\s+install|uv\s+add).{0,100}(?:typesafe|jev)|\bjev\.(?:choice|score|noul|decision|query|client|ask)|TypeSafeClient|JevClient|TYPESAFE_API_KEY|JEV_API_KEY|typesafe\.Client|typesafe\.AsyncClient|(?<![~/\w.-])typesafe-ai\/jev|["'](?:package:(?:jev|typesafe)[\w./-]*|@typesafe(?:-ai)?\/[\w.-]+|github\.com\/(?:typesafe-ai|typesafe)[\w./-]*|(?:go\.)?typesafe\.ai\/[\w.-]*)["']|\buse\s+(?:typesafe(?:_ai|_sdk|_jev)?|jev)::/i.test(
       text,
     );
   const listOnly =
@@ -479,27 +479,23 @@ export async function main() {
         verifyIntegration,
         requireCodeEvidence: true,
       });
-      if (inspection.status !== "accepted" || inspection.repo.fork) {
-        receipts.push({ repo: full, status: "rejected", reason: inspection.reason ?? "fork" });
+      if (inspection.repo?.fork) {
+        receipts.push({ repo: full, status: "rejected", reason: "forks are not ingested" });
         report.discovery.rejected++;
         continue;
       }
-      const { repo, commits, sha, readme, evidence } = inspection;
-      const implementation = evidence.implementationFiles[0];
-      if (!implementation) throw new Error("No immutable implementation evidence");
-      const sourceContent = implementation.text;
-      const nativeReadmes = inspection.readmeFiles;
+      const nativeReadmes = inspection.readmeFiles ?? [];
       const sourceText =
-        nativeReadmes.map((file) => file.text).join("\n\n") || readme;
-
-      // L2: MUSE API Review Gate — Evaluate if candidate genuinely integrates Jev primitives
-      const codeSources = (evidence.implementationFiles ?? []).filter(
+        nativeReadmes.map((file) => file.text).join("\n\n") || inspection.readme || "";
+      const codeSources = (inspection.evidence?.files ?? []).filter(
         (file) => !nativeReadmes.some((rf) => rf.path === file.path),
       );
+
+      // L2: MUSE API Review Gate — Evaluate if candidate genuinely integrates Jev primitives
       let reviewVerdict = null;
-      if (typeof reviewCandidate === "function" && repo) {
+      if (typeof reviewCandidate === "function" && inspection.repo && codeSources.length > 0) {
         reviewVerdict = await reviewCandidate({
-          repo,
+          repo: inspection.repo,
           readme: sourceText,
           codeSources,
           issueBody: "",
@@ -508,20 +504,46 @@ export async function main() {
         });
       }
 
-      if (reviewVerdict && reviewVerdict.verified === false) {
-        receipts.push({
-          repo: full,
-          status: "rejected",
-          reason: reviewVerdict.reason || "MUSE 审查未通过：未发现有效的 Jev 原语决策调用",
-          reviewDetails: {
-            verified: false,
-            confidence: reviewVerdict.confidence,
-            reason: reviewVerdict.reason,
-          },
-        });
+      if (reviewVerdict) {
+        if (reviewVerdict.verified === false) {
+          const hasDeterministicEvidence =
+            inspection.status === "accepted" &&
+            (inspection.evidence?.implementationFiles ?? []).length > 0;
+          if (!hasDeterministicEvidence) {
+            receipts.push({
+              repo: full,
+              status: "rejected",
+              reason: reviewVerdict.reason || "MUSE 审查未通过：未发现有效的 Jev 原语决策调用",
+              reviewDetails: {
+                verified: false,
+                confidence: reviewVerdict.confidence,
+                reason: reviewVerdict.reason,
+              },
+            });
+            report.discovery.rejected++;
+            continue;
+          }
+        } else if (reviewVerdict.verified === true) {
+          inspection.status = "accepted";
+          if (inspection.evidence) {
+            inspection.evidence.verified = true;
+            if (!inspection.evidence.implementationFiles?.length && codeSources.length > 0) {
+              inspection.evidence.implementationFiles = [codeSources[0]];
+            }
+          }
+        }
+      }
+
+      if (inspection.status !== "accepted") {
+        receipts.push({ repo: full, status: "rejected", reason: inspection.reason ?? "rejected" });
         report.discovery.rejected++;
         continue;
       }
+
+      const { repo, commits, sha, readme, evidence } = inspection;
+      const implementation = evidence.implementationFiles?.[0];
+      if (!implementation) throw new Error("No immutable implementation evidence");
+      const sourceContent = implementation.text;
 
       const baseSummary = summarize(repo, sourceText, taxonomy);
       if (reviewVerdict?.category && taxonomy.some((t) => t.category === reviewVerdict.category)) {

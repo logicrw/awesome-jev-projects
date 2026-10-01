@@ -299,3 +299,14 @@ test("OpenRouter evidence cannot pair README/model text with a different impleme
   assert.equal(verifyIntegration(repo, model+request, {codeSources:[{path:'README.md',text:model+request}]}).verified, false);
   assert.equal(verifyIntegration(repo, model+request, {codeSources:[{path:'src/request.js',text:'// '+model+request}]}).verified, false);
 });
+
+test("verifyIntegration recognizes multi-language typesafe packages and imports", () => {
+  const dart = "import 'package:jev/jev.dart';\nfinal client = JevClient();\n// AI decision agent";
+  assert.equal(verifyIntegration({ name: "jev-dart" }, dart).verified, true);
+
+  const go = 'import "github.com/typesafe-ai/jev"\n// AI agent decision\nfunc main() { client := jev.New() }';
+  assert.equal(verifyIntegration({ name: "jev-go" }, go).verified, true);
+
+  const rust = "use jev::Client;\n// AI model decision\nfn main() { let c = Client::new(); }";
+  assert.equal(verifyIntegration({ name: "jev-rs" }, rust).verified, true);
+});

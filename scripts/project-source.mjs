@@ -11,11 +11,11 @@ const MAX_READMES = 3;
 const MAX_CODE_FILES = 8;
 const SHA = /^[a-f\d]{40,64}$/i;
 const REPOSITORY_FIELD =
-  /^(?:github repository|project repository|repository|项目仓库|仓库地址|github 仓库)$/i;
+  /^(?:(?:github|project|code|open\s*source)?\s*(?:repository|repo|url|link)|项目仓库|仓库地址|github\s*仓库|开源(?:仓库|地址)|项目地址|代码仓库|仓库链接|仓库)$/i;
 const TAGS_FIELD =
-  /^(?:project tags?|tags?|项目标签|标签|scenario tags?)$/i;
+  /^(?:(?:project|scenario|suggested)?\s*tags?|项目标签|标签|场景标签|建议标签)$/i;
 const CATEGORY_FIELD =
-  /^(?:primary category|category|项目分类|分类|所属分类)$/i;
+  /^(?:(?:primary|suggested)?\s*category|项目分类|分类|所属分类|建议分类|主分类)$/i;
 const REPO = /^[a-z\d](?:[a-z\d-]{0,37}[a-z\d])?\/[a-z\d_.-]{1,100}$/i;
 const pathPart = (path) => path.split("/").map(encodeURIComponent).join("/");
 const hash = (text) => createHash("sha256").update(text).digest("hex");
@@ -466,7 +466,7 @@ function hasOpenRouterJevIntegration(code) {
   );
   const openRouterSdk = /\b(?:from|require\s*\(|import\s*\()\s*["']@openrouter\/sdk["']/i.test(code) &&
     /\.\s*alpha\s*\.\s*decisions\s*\.\s*create\s*\(/i.test(code);
-  const openAiCompatible = /\b(?:OpenAI|ChatOpenAI|LiteLLM|createOpenAI|generateText|streamText)\b/i.test(code) &&
+  const openAiCompatible = /\b(?:OpenAI|AsyncOpenAI|ChatOpenAI|LiteLLM|createOpenAI|generateText|streamText)\b/i.test(code) &&
     hasOpenRouterHost;
   // A model ID alone may be a catalog or an unused mention; require request code too.
   return jevModel && (openRouterRequest || openRouterSdk || openAiCompatible);
@@ -485,7 +485,7 @@ function hasImplementationEvidence(text, path) {
     /\bimport\s*\([\s\S]*?["'](?:github\.com\/(?:typesafe-ai|typesafe|[\w.-]+\/jev[\w.-]*)|(?:go\.)?typesafe\.ai\/[\w.-]*)["']/i.test(code);
 
   const sdkCall =
-    /\b(?:TypeSafe|AsyncTypeSafe|TypeSafeClient|JevClient|typesafe\.(?:Client|AsyncClient|NewClient|New)|jev\.(?:Client|NewClient|New))\s*(?:\(|::new\s*\()|(?<!\b(?:random|math)\s*)\.\s*(?:choice|score|noul|decision|decide|query|ask|systemOne|system_one|evaluate|judge|route)\s*\(|\b(?:Choice|Score|Noul)\s*(?:::new|\.builder|\.of)\s*\(/i.test(code);
+    /\b(?:TypeSafe|AsyncTypeSafe|TypeSafeClient|JevClient|typesafe\.(?:Client|AsyncClient|NewClient|New)|jev\.(?:Client|NewClient|New))\s*(?:\(|::new\s*\()|(?<!\b(?:random|math)\s*)\.\s*(?:choice|score|noul|decision|decide|query|ask|systemOne|system_one|evaluate|judge|route)\s*\(|\b(?:Choice|Score|Noul)\s*(?:::new|\.builder|\.of|\()\s*\(|(?<![\w.]\s*)\b(?:choice|score|noul|decide)\s*\(/i.test(code);
 
   if (providerImport && sdkCall) return true;
 
@@ -509,7 +509,7 @@ function hasImplementationEvidence(text, path) {
     return true;
   }
 
-  const typesafeKey = /\b(?:TYPESAFE_API_KEY|JEV_API_KEY)\b/i.test(code);
+  const typesafeKey = /\b(?:TYPESAFE_API_KEY|TYPESAFE_KEY|JEV_API_KEY|JEV_KEY)\b/i.test(code);
   const jevPrimitive = /["'](?:type|kind)["']\s*:\s*["'](?:noul|choice|score)["']|\b(?:noul|choice|score)\b.{0,50}\b(?:answer|probabilities|confidence)/i.test(code);
   const anyHttpRequest = /\b(?:urllib\.request|requests|httpx|aiohttp|fetch|axios|got|ky|superagent|postJson|http\.(?:Post|Get|Client|NewRequest)|reqwest|ureq)\b/i.test(code);
   if (typesafeKey && jevPrimitive && anyHttpRequest) return true;

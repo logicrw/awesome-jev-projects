@@ -38,7 +38,8 @@ function redact(value, token = "") {
 export function extractCodeWindow(rawText, maxLength = 10000) {
   if (typeof rawText !== "string") return "";
   if (rawText.length <= maxLength) return rawText;
-  const pattern = /(?:typesafe|jev|openrouter|\/v1\/systemone|\bchoice\b|\bscore\b|\bnoul\b|@typesafe\/jev|system_?one)/i;
+  const pattern =
+    /(?:typesafe(?:-ai)?|jev|openrouter|\/v1\/(?:systemone|decide)|\bchoice\b|\bscore\b|\bnoul\b|\bdecide\b|\bdecision\b|\bjudge\b|\bevaluate\b|\bTypeSafeClient\b|\bJevClient\b|system_?one)/i;
   const match = pattern.exec(rawText);
   if (match) {
     const matchIndex = match.index;
@@ -93,18 +94,18 @@ export function isSummary(value, language, token) {
   if (language === "zh") {
     const shortConcrete =
       han >= 6 &&
-      /垃圾回收|(?:过滤|筛选|整理|压缩)(?:日志|上下文)|(?:日志|上下文)(?:过滤|筛选|整理|压缩)|模型路由|浏览器自动化/.test(text);
+      /垃圾回收|(?:过滤|筛选|整理|压缩)(?:日志|上下文)|(?:日志|上下文)(?:过滤|筛选|整理|压缩)|模型路由|浏览器自动化|测试套件|端到端测试|测试用例|持续集成/.test(text);
     return (
       shortConcrete ||
       (han >= 8 &&
-        /选择|挑|判断|评分|打分|分类|过滤|筛|路由|调用|搜索|检索|查询|浏览器|代码|日志|上下文|执行|操作|决策|模拟|游戏|封装|工具|接口|数据|模型|分析|生成|整理|保留|删除/.test(text))
+        /选择|挑|判断|评分|打分|分类|过滤|筛|路由|调用|搜索|检索|查询|浏览器|代码|日志|上下文|执行|操作|决策|模拟|游戏|封装|工具|接口|数据|模型|分析|生成|整理|保留|删除|测试|裁剪|剪裁|加速|优化|编排|调度|断言|校验|验证|监控|排查|运行|控制|管理|识别|检测|流转|评估|配置|驱动|用例|组件|工作流|流水线/.test(text))
     );
   }
   if (han > 0 || words.length < 3) return false;
   const genericLabelWord = /^(?:a|an|the|awesome|great|cool|new|powerful|simple|useful|ai|jev|agent|agents|decision|decisions|model|models|tool|tools|project|app|framework|platform|for|with|and)$/i;
   if (words.every((word) => genericLabelWord.test(word))) return false;
   const functionWords =
-    /\b(?:select\w*|choos\w*|scor\w*|classif\w*|filter\w*|prun\w*|rout\w*|call\w*|search\w*|retriev\w*|query|queries|browser|code|coding|logs?|context|compact\w*|execut\w*|action\w*|decision\w*|simulat\w*|gam\w*|wrapper|client|analy[sz]\w*|generat\w*|sort\w*|retain\w*|remov\w*|rank\w*|automat\w*|sdk|trading|liquidity|database|triage|proxy|music|compos\w*)\b/i;
+    /\b(?:select\w*|choos\w*|scor\w*|classif\w*|filter\w*|prun\w*|rout\w*|call\w*|search\w*|retriev\w*|query|queries|browser|code|coding|logs?|context|compact\w*|execut\w*|action\w*|decision\w*|simulat\w*|gam\w*|wrapper|client|analy[sz]\w*|generat\w*|sort\w*|retain\w*|remov\w*|rank\w*|automat\w*|sdk|trading|liquidity|database|triage|proxy|music|compos\w*|shrink\w*|orchestrat\w*|validat\w*|verif\w*|audit\w*|streamlin\w*|accelerat\w*|benchmark\w*|optimi[sz]\w*|inspect\w*|guard\w*|schedul\w*|monitor\w*|test\w*|manag\w*|coordinat\w*|eval\w*|pipeline|workflow)\b/i;
   const onlyHype =
     /\b(?:revolutionary|game.changing|cutting.edge|next.generation|unlock(?:ing)? (?:the )?(?:future|potential)|empower(?:ing)? (?:the )?(?:future|everyone)|supercharge your)\b/i;
   return functionWords.test(text) && !onlyHype.test(text);
