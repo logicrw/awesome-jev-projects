@@ -4,7 +4,7 @@ The definitive community radar and directory for TypeSafe Jev and System-1 Agent
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 803
+Catalog entries: 804
 
 ## Install the Agent Skill
 
@@ -11314,3 +11314,17 @@ Self-hosted RAG service that uses Jev to decide which retrieved context reaches 
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/david96182/cribrix/
 - Source evidence: https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/README.md
 - Source evidence: https://github.com/david96182/cribrix/blob/a2b6ca24fd715863d530154b12be90ae865a16b3/cribrix/clients/jev.py
+
+## medula
+
+Suggesting Médula for the coding-agents domain. I'm the author.
+
+- Repository: https://github.com/JoaquinRuiz/medula
+- Category: Security & Guardrails
+- Jev decision: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+- Review scope: Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/joaquinruiz/medula/
+- Source evidence: https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/README.md
+- Source evidence: https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/medula/src/medula/decisores/jev.py

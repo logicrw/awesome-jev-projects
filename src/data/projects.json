@@ -69238,5 +69238,72 @@
       "issueBodySha256": "db8cbddea081266169597642e8e61305cec748a339d7a254f4cfe35a7e6b5524",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/109"
     }
+  },
+  {
+    "id": "joaquinruiz:medula",
+    "name": "medula",
+    "author": "JoaquinRuiz",
+    "url": "https://github.com/JoaquinRuiz/medula",
+    "repoId": 1396257837,
+    "category": "Security & Guardrails",
+    "plainSummary": "medula：对输入文本做分类或打分，交给本地规则继续处理。",
+    "jevDecisionPoint": "对输入文本做分类或打分，交给本地规则继续处理。",
+    "jevDecisionPointEn": "Jev returns a structured decision for the local program; consult the source for the exact decision policy.",
+    "highlightBenefit": "把语义判断接到已有的命令行工作流。",
+    "highlightBenefitEn": "Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.",
+    "tags": [
+      "security-guardrails",
+      "coding-agents",
+      "evaluation-benchmarks"
+    ],
+    "summarySource": "readme-extractive",
+    "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
+    "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
+    "plainSummaryEn": "Suggesting Médula for the coding-agents domain. I'm the author.",
+    "stars": 8,
+    "forks": 6,
+    "openIssues": 5,
+    "license": "MIT",
+    "createdAt": "2026-09-29T18:02:17Z",
+    "lastCommitAt": "2026-10-02T11:08:22Z",
+    "headSha": "f59ab0e8de94f063a287dc41ddbf79bbfdc055db",
+    "metadataFetchedAt": "2026-10-02T11:10:23.768Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/3500637?v=4",
+    "verificationStatus": "integration-detected",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-02T11:10:23.768Z",
+    "evidence": [
+      {
+        "url": "https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/README.md",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/medula/src/medula/decisores/jev.py",
+        "note": "固定版本的 Jev 集成与说明来源"
+      }
+    ],
+    "sourceVerification": {
+      "method": "bounded-source-heuristic",
+      "sha": "f59ab0e8de94f063a287dc41ddbf79bbfdc055db",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/README.md",
+          "hash": "4aaf286be92a8d1d4ed34bd8ecae02859ce0bde889de71495fd490609a05f1b1"
+        },
+        {
+          "path": "medula/src/medula/decisores/jev.py",
+          "url": "https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/medula/src/medula/decisores/jev.py",
+          "hash": "82b263299aa6c1b7f27bf50b8050c8558065fdb3296afc85ebd3648d79766feb"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 110,
+      "issueBodySha256": "67efb66524584ac11df53ca691762fae522a2f3a4f13e1c67b6cbf895d1971bf",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/110"
+    }
   }
 ]
