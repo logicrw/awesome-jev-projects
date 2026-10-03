@@ -605,7 +605,7 @@ test("Muse Reviewer redacts credentials from code and repository prompt", async 
   assert.match(promptBody, /\[REDACTED\]/);
 });
 
-test("Muse Reviewer gracefully handles missing token, HTTP errors, and circuits", async () => {
+test("Muse Reviewer gracefully handles missing token, HTTP errors, and circuits with in-process retries", async () => {
   const missingTokenReviewer = createSubmissionReviewer({ token: "" });
   const resMissing = await missingTokenReviewer({ repo: { name: "test" } });
   assert.equal(resMissing.verified, null);
@@ -622,12 +622,42 @@ test("Muse Reviewer gracefully handles missing token, HTTP errors, and circuits"
   const resError = await errorReviewer({ repo: { name: "test" } });
   assert.equal(resError.verified, null);
   assert.equal(resError.status, "http-error");
+  assert.equal(resError.retryable, true);
+  assert.equal(attempts, 3); // Retried 3 times before failing
 
-  // Subsequent call hits open circuit
+  // Subsequent call hits open circuit without extra requests
   const resCircuit = await errorReviewer({ repo: { name: "test" } });
   assert.equal(resCircuit.verified, null);
   assert.equal(resCircuit.status, "circuit-open");
-  assert.equal(attempts, 1);
+  assert.equal(attempts, 3);
+});
+
+test("Muse Reviewer retries on transient error and succeeds on subsequent attempt", async () => {
+  let callCount = 0;
+  const reviewer = createSubmissionReviewer({
+    token: "test-token",
+    fetchImpl: async () => {
+      callCount++;
+      if (callCount === 1) {
+        return new Response("rate limited", { status: 429 });
+      }
+      return reply({
+        verified: true,
+        confidence: 0.95,
+        reason: "通过 POST /v1/systemone 提供兼容服务端接口",
+        category: "SDK & Decision Frameworks",
+        tags: ["typed-decisions"],
+        jevDecisionPoint: "提供兼容 Jev 的决策接口",
+        plainSummary: "本地决策服务端",
+        plainSummaryEn: "Local decision server",
+      });
+    },
+  });
+  const res = await reviewer({ repo: { name: "test" } });
+  assert.equal(callCount, 2);
+  assert.equal(res.verified, true);
+  assert.equal(res.status, "completed");
+  assert.equal(res.category, "SDK & Decision Frameworks");
 });
 
 test("extractCodeWindow centers on key Jev primitives when file exceeds maxLength", () => {

@@ -57,7 +57,7 @@ async function currentIssue(api, candidate) {
 }
 async function writeMarker(api, candidate, attempt) {
   const text = attempt === 0
-    ? "自动审核遇到仓库并发更新，项目尚未收录。系统将基于最新版本重新审核，最多自动重试 3 次。"
+    ? "自动审核已加入后台排队（可能由于并发更新或审查服务暂时抖动）。系统将自动安排重新审核，最多自动重试 3 次。"
     : `正在安排第 ${attempt}/${MAX_RETRIES} 次自动重新审核；收录结果会在实际部署核验后通知。`;
   await api(`/repos/${repository}/issues/${candidate.issueNumber}/comments`, {
     method: "POST",

@@ -582,3 +582,58 @@ test("prepareSubmission fast-rejects structural issues with needsEvidence false 
   assert.equal(result.needsEvidence, false);
   assert.equal(reviewerCalls, 0);
 });
+
+test("prepareSubmission returns transient-retry when reviewer fails with transient error", async () => {
+  const result = await prepareSubmission({
+    issue,
+    repository,
+    projects: [],
+    taxonomy: [],
+    api: async () => {},
+    inspect: async () => ({
+      ...inspected,
+      status: "rejected",
+      reason: "no implementation source evidence",
+    }),
+    reviewer: async () => ({
+      verified: null,
+      status: "http-error",
+      retryable: true,
+      reason: "HTTP 503",
+    }),
+    enrich: async ({ fallback }) => fallback,
+  });
+  assert.equal(result.status, "transient-retry");
+  assert.equal(result.retryable, true);
+  assert.equal(result.needsEvidence, false);
+  assert.equal(result.issueNumber, 12);
+  assert.equal(result.issueBodySha, bodyHash(issue.body));
+  assert.equal(result.reason, "HTTP 503");
+});
+
+test("prepareSubmission returns transient-retry when reviewer circuit is open", async () => {
+  const result = await prepareSubmission({
+    issue,
+    repository,
+    projects: [],
+    taxonomy: [],
+    api: async () => {},
+    inspect: async () => ({
+      ...inspected,
+      status: "rejected",
+      reason: "no implementation source evidence",
+    }),
+    reviewer: async () => ({
+      verified: null,
+      status: "circuit-open",
+      retryable: true,
+      reason: "circuit-open",
+    }),
+    enrich: async ({ fallback }) => fallback,
+  });
+  assert.equal(result.status, "transient-retry");
+  assert.equal(result.retryable, true);
+  assert.equal(result.needsEvidence, false);
+  assert.equal(result.issueNumber, 12);
+});
+

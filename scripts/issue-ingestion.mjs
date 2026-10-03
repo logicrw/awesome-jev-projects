@@ -223,6 +223,18 @@ export async function prepareSubmission({
   }
 
   if (result.status !== "accepted" && (!reviewVerdict || reviewVerdict.verified !== true)) {
+    if (reviewVerdict?.retryable === true || reviewVerdict?.status === "transient-failure") {
+      return {
+        status: "transient-retry",
+        reason: reviewVerdict.reason || "Muse API review service temporarily unavailable; queued for automatic retry",
+        needsEvidence: false,
+        retryable: true,
+        issueNumber: issue.number,
+        issueBodySha: bodyHash(issue.body),
+        submittedRepository: submitted,
+        reviewDetails: reviewVerdict,
+      };
+    }
     return {
       status: result.status,
       reason: result.reason,
@@ -682,11 +694,14 @@ async function main() {
     }
     await mkdir(dirname(resultPath), { recursive: true });
     await atomicJSON(resultPath, result);
+    const issueBodySha = result.issueBodySha ?? (result.project?.ingestion?.issueBodySha256 ?? "");
     await output({
       ready: ["ready", "resume"].includes(result.status),
       status: result.status,
       needs_evidence: result.needsEvidence === true,
+      retry: result.retryable === true,
       issue_number: issueNumber,
+      issue_body_sha: issueBodySha,
     });
     console.log(
       JSON.stringify({
@@ -794,7 +809,7 @@ async function main() {
       console.log("No valid issue number for feedback; skipping.");
       return;
     }
-    if (["ready", "resume", "ignored"].includes(prepared.status)) {
+    if (["ready", "resume", "ignored", "transient-retry"].includes(prepared.status)) {
       console.log(`Issue #${issueNumber} status is ${prepared.status}; feedback not needed.`);
       return;
     }

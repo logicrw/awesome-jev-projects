@@ -43,7 +43,9 @@ jobs:
       ready: ${{ steps.review.outputs.ready }}
       status: ${{ steps.review.outputs.status }}
       needs_evidence: ${{ steps.review.outputs.needs_evidence }}
+      retry: ${{ steps.review.outputs.retry }}
       issue_number: ${{ steps.review.outputs.issue_number }}
+      issue_body_sha: ${{ steps.review.outputs.issue_body_sha }}
       source_sha: ${{ steps.source.outputs.sha }}
       artifact_id: ${{ steps.receipt.outputs.artifact-id }}
     steps:
@@ -173,7 +175,7 @@ jobs:
           INGEST_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
   record-retry:
     needs: [review, publish]
-    if: always() && needs.publish.outputs.retry == 'true'
+    if: always() && (needs.publish.outputs.retry == 'true' || needs.review.outputs.status == 'transient-retry')
     permissions:
       contents: read
       issues: write
@@ -191,8 +193,8 @@ jobs:
       - run: node scripts/ingestion-retry.mjs mark
         env:
           GITHUB_TOKEN: ${{ secrets.RADAR_GITHUB_TOKEN || github.token }}
-          INGEST_ISSUE_NUMBER: ${{ needs.publish.outputs.issue_number }}
-          INGEST_ISSUE_BODY_SHA: ${{ needs.publish.outputs.issue_body_sha }}
+          INGEST_ISSUE_NUMBER: ${{ needs.publish.outputs.issue_number || needs.review.outputs.issue_number }}
+          INGEST_ISSUE_BODY_SHA: ${{ needs.publish.outputs.issue_body_sha || needs.review.outputs.issue_body_sha }}
   respond-feedback:
     needs: review
     if: github.repository == 'logicrw/awesome-jev-projects' && needs.review.outputs.status == 'rejected' && needs.review.outputs.issue_number != '0' && (github.event_name != 'workflow_dispatch' || !inputs.dry_run)
