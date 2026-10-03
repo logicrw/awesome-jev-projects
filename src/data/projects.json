@@ -72889,5 +72889,72 @@
       ]
     },
     "sourceHash": "1f81080c2b044a2f35564e781d7fab40c9ca24ab51ad7f84e21745129154ef3c"
+  },
+  {
+    "id": "samratduttaofficial:watersheep",
+    "name": "WaterSheep",
+    "author": "SamratDuttaOfficial",
+    "url": "https://github.com/SamratDuttaOfficial/WaterSheep",
+    "repoId": 1395162600,
+    "category": "SDK & Decision Frameworks",
+    "plainSummary": "开源权重的 Jev 兼容服务端，本地提供 /v1/systemone 决策接口与多原语概率推理。",
+    "jevDecisionPoint": "本地提供兼容 Jev 的 /v1/systemone 接口，为 Noul、Choice、Score 等结构化问题计算置信度概率。",
+    "jevDecisionPointEn": "Serves /v1/systemone locally to evaluate Noul, Choice, Score and multi-label structured questions with calibrated probabilities.",
+    "highlightBenefit": "在本地运行兼容 Jev 接口的高性能决策服务，无需依赖闭源云端 API。",
+    "highlightBenefitEn": "Runs a high-performance decision server locally compatible with Jev APIs, without relying on proprietary cloud APIs.",
+    "tags": [
+      "multilanguage-sdk",
+      "typed-decisions",
+      "classification-ranking"
+    ],
+    "summarySource": "readme-extractive",
+    "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
+    "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
+    "plainSummaryEn": "Open-weight Jev alternative that serves /v1/systemone locally, with calibrated Noul, Choice, Score and multi-label answers.",
+    "stars": 2,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "Apache-2.0",
+    "createdAt": "2026-09-29T12:10:45Z",
+    "lastCommitAt": "2026-10-02T14:00:10Z",
+    "headSha": "3ccf02b3839fd2d72e6fb29750488010c7d76360",
+    "metadataFetchedAt": "2026-10-03T01:24:01.624Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/41472530?v=4",
+    "verificationStatus": "integration-detected",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-03T01:24:01.625Z",
+    "evidence": [
+      {
+        "url": "https://github.com/SamratDuttaOfficial/WaterSheep/blob/3ccf02b3839fd2d72e6fb29750488010c7d76360/README.md",
+        "note": "固定版本的 Jev 集成与说明来源"
+      },
+      {
+        "url": "https://github.com/SamratDuttaOfficial/WaterSheep/blob/3ccf02b3839fd2d72e6fb29750488010c7d76360/watersheep/cli.py",
+        "note": "固定版本的 Jev 集成与说明来源"
+      }
+    ],
+    "sourceVerification": {
+      "method": "bounded-source-heuristic",
+      "sha": "3ccf02b3839fd2d72e6fb29750488010c7d76360",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/SamratDuttaOfficial/WaterSheep/blob/3ccf02b3839fd2d72e6fb29750488010c7d76360/README.md",
+          "hash": "b41f645b5837c24aa92f872d3ee16f563887d3beae8ee2a0734bb14d52a8eae3"
+        },
+        {
+          "path": "watersheep/cli.py",
+          "url": "https://github.com/SamratDuttaOfficial/WaterSheep/blob/3ccf02b3839fd2d72e6fb29750488010c7d76360/watersheep/cli.py",
+          "hash": "17c1d5b1e5bf67ce4af6d8006b298ef6d3cd490e1eddd1174f207b49fdd7199e"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 112,
+      "issueBodySha256": "595af31afd7166257e4c729316049a334df1e7e7e0b3390729131ad7c4767d6f",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/112"
+    }
   }
 ]

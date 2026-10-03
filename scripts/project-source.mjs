@@ -523,7 +523,8 @@ function hasImplementationEvidence(text, path) {
   if (jevWireClient) return true;
 
   const serverSystemOne =
-    /(?:@[\w.]*\.post|router\.(?:post|handle|POST)|app\.(?:post|all)|Route\s*\(\s*["']POST["']|Endpoint|def\s+post|fn\s+handle|route)\s*\(\s*["']\/v1\/(?:systemone|decide)["']/i.test(code) ||
+    /(?:@[\w.]*\.post|router\.(?:post|handle|POST)|app\.(?:post|all)|Route\s*\(\s*["']POST["']|Endpoint|def\s+post|fn\s+handle|route|do_POST|path\s*=)\s*\(?["']?\/v1\/(?:systemone|decide)["']?/i.test(code) ||
+    /(?:path|url|route|endpoint)\b[^;\n]*["']\/v1\/(?:systemone|decide)["']|["']\/v1\/(?:systemone|decide)["'][^;\n]*(?:in|\.startswith|\.endswith|==|===|\.includes|\.indexOf|path|url|\))/i.test(code) ||
     /(?:path\s*=\s*["']\/v1\/systemone["']|["']\/v1\/systemone["']\s*,\s*(?:tags|summary|description|handler|func))/i.test(code) ||
     /\b(?:client|session)\.post\s*\(\s*["']\/v1\/systemone["']/i.test(code);
   const serverPrimitives = /\bchoice\b/i.test(code) && (/\bscore\b/i.test(code) || /\bnoul\b/i.test(code) || /\blogits?\b/i.test(code) || /\bquestions?\b/i.test(code));

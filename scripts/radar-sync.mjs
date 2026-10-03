@@ -66,7 +66,8 @@ export function verifyIntegration(repo, text, { codeSources = [] } = {}) {
   // identifier and provider request marker are both required; names alone fail.
   const routerDecision = codeSources.some(hasOpenRouterJevSource);
   const serverSystemOne =
-    /(?:@[\w.]*\.post|router\.(?:post|handle|POST)|app\.(?:post|all)|Route\s*\(\s*["']POST["']|Endpoint|def\s+post|fn\s+handle|route|path\s*=)\s*\(?["']?\/v1\/(?:systemone|decide)["']?/i.test(text) &&
+    (/(?:@[\w.]*\.post|router\.(?:post|handle|POST)|app\.(?:post|all)|Route\s*\(\s*["']POST["']|Endpoint|def\s+post|fn\s+handle|route|do_POST|path\s*=)\s*\(?["']?\/v1\/(?:systemone|decide)["']?/i.test(text) ||
+    /(?:path|url|route|endpoint)\b[^;\n]*["']\/v1\/(?:systemone|decide)["']|["']\/v1\/(?:systemone|decide)["'][^;\n]*(?:in|\.startswith|\.endswith|==|===|\.includes|\.indexOf|path|url|\))/i.test(text)) &&
     /\bchoice\b/i.test(text) &&
     (/\bscore\b/i.test(text) || /\bnoul\b/i.test(text) || /\blogits?\b/i.test(text) || /\bconfidence\b/i.test(text) || /\bquestions?\b/i.test(text));
   const exact = routerDecision || serverSystemOne ||
@@ -102,7 +103,7 @@ export function verifyIntegration(repo, text, { codeSources = [] } = {}) {
     evidence: text
       .split("\n")
       .filter((l) =>
-        /(?<![\w.-])api\.typesafe\.ai(?![\w.-])|@typesafe|typesafe\/jev|typesafe-ai\/jev|openrouter\.ai|from\s+typesafe|\bjev\b|TYPESAFE_API_KEY|TypeSafeClient/i.test(
+        /(?<![\w.-])api\.typesafe\.ai(?![\w.-])|@typesafe|typesafe\/jev|typesafe-ai\/jev|openrouter\.ai|from\s+typesafe|\bjev\b|TYPESAFE_API_KEY|TypeSafeClient|\/v1\/(?:systemone|decide)/i.test(
           l,
         ),
       )
