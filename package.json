@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build && node scripts/build-static-site.mjs && node scripts/finalize-pages.mjs && node scripts/audit-build.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "radar": "node scripts/radar-sync.mjs",
-    "test": "node --test scripts/*.test.mjs",
+    "test": "node --test scripts/*.test.mjs test/*.test.mjs",
     "pretest": "node scripts/prepare-public-data.mjs && node scripts/generate-readme.mjs",
     "predev": "node scripts/prepare-public-data.mjs && node scripts/generate-readme.mjs",
     "prebuild": "node scripts/prepare-public-data.mjs && node scripts/generate-readme.mjs",

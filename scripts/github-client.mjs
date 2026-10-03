@@ -83,6 +83,7 @@ export function createGitHubClient({
         body?.parents?.length === 1 && sha(body.parents[0])) ||
       (method === "PATCH" && relative === "git/refs/heads/main" && body?.force === false && sha(body.sha)) ||
       (method === "POST" && /^issues\/[1-9]\d*\/(?:comments|labels)$/.test(relative)) ||
+      (method === "DELETE" && /^issues\/[1-9]\d*\/labels\/needs-evidence$/.test(relative) && body === undefined) ||
       (method === "PATCH" && /^issues\/[1-9]\d*$/.test(relative))
     );
     if (method !== "GET" && !allowedWrite)

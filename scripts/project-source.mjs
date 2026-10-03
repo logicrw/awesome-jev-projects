@@ -416,7 +416,7 @@ function identityMatches(project, names, repositoryId) {
   ].some((value) => names.has(canonicalRepository(value)?.toLowerCase()));
 }
 
-function codeCandidate(entry) {
+export function codeCandidate(entry) {
   const path = entry.path;
   const isNotebook = /\.ipynb$/i.test(path);
   const maxBytes = isNotebook ? MAX_NOTEBOOK_BYTES : MAX_FILE_BYTES;
@@ -542,6 +542,7 @@ export async function inspectRepository({
   verifyIntegration,
   requireCodeEvidence = false,
   preferredPaths = [],
+  semanticReview = false,
 }) {
   if (
     typeof repository !== "string" ||
@@ -629,7 +630,7 @@ export async function inspectRepository({
   let evidence = verifyIntegration(repo, readme);
   const files = [...readmeFiles];
   const implementationFiles = [];
-  if ((!evidence.verified || requireCodeEvidence) && evidence.reason !== "mention-only directory") {
+  if (semanticReview || ((!evidence.verified || requireCodeEvidence) && evidence.reason !== "mention-only directory")) {
     let tree;
     try {
       tree = await api(`/repos/${canonical}/git/trees/${sha}?recursive=1`);
@@ -637,6 +638,9 @@ export async function inspectRepository({
       if (error.status !== 404) throw error;
       tree = { tree: [] };
     }
+    // Hints influence ordering only. They never grant file eligibility or consume
+    // every discovery slot. Bound hints even when called outside Issue ingestion.
+    preferredPaths = [...new Set(preferredPaths.filter((p) => typeof p === "string" && safePath(p)))].slice(0, 16);
     const preferredSet = new Set(preferredPaths.map((p) => p.toLowerCase()));
     const allTree = tree.tree ?? [];
     const isPreferred = (entryPath) => {
@@ -652,12 +656,12 @@ export async function inspectRepository({
       return false;
     };
     const preferredCandidates = allTree.filter(
-      (entry) => entry.type === "blob" && safePath(entry.path) && isPreferred(entry.path),
+      (entry) => codeCandidate(entry) && isPreferred(entry.path),
     );
     const seenPreferred = new Set(preferredCandidates.map((c) => c.path.toLowerCase()));
     const directProbes = preferredPaths
-      .filter((p) => safePath(p) && !seenPreferred.has(p.toLowerCase()))
-      .map((p) => ({ path: p, type: "blob" }));
+      .map((path) => ({ path, type: "blob", mode: "100644" }))
+      .filter((entry) => codeCandidate(entry) && !seenPreferred.has(entry.path.toLowerCase()));
     const generalCandidates = allTree
       .slice(0, 5000)
       .filter((entry) => codeCandidate(entry) && !seenPreferred.has(entry.path.toLowerCase()));
@@ -681,7 +685,16 @@ export async function inspectRepository({
           Number(/(?:^|\/)(?:src|lib|app|main|client|agent|cmd|pkg|internal)/i.test(a.path)) ||
         a.path.localeCompare(b.path),
     );
-    for (const entry of candidates.slice(0, MAX_CODE_FILES)) {
+    const nominated = candidates.filter((entry) => isPreferred(entry.path));
+    const discovered = candidates.filter((entry) => !isPreferred(entry.path));
+    // At least half the budget remains independently discovered when available.
+    const selected = [
+      ...nominated.slice(0, MAX_CODE_FILES / 2),
+      ...discovered.slice(0, MAX_CODE_FILES - Math.min(nominated.length, MAX_CODE_FILES / 2)),
+    ];
+    if (selected.length < MAX_CODE_FILES)
+      selected.push(...nominated.slice(MAX_CODE_FILES / 2, MAX_CODE_FILES / 2 + MAX_CODE_FILES - selected.length));
+    for (const entry of selected) {
       let file;
       try {
         file = await api(
@@ -694,9 +707,13 @@ export async function inspectRepository({
       const isNotebook = /\.ipynb$/i.test(entry.path);
       let text = decodeFile(file, isNotebook ? MAX_NOTEBOOK_BYTES : MAX_FILE_BYTES);
       if (text === null) continue;
+      // A Contents response must describe the requested file, never a directory
+      // or a different resource reached through a malformed hint.
+      if ((file.type && file.type !== "file") || (file.path && file.path !== entry.path)) continue;
       if (isNotebook) {
         const nbCode = decodeNotebookCode(text);
-        if (nbCode !== null) text = nbCode;
+        if (nbCode === null) continue;
+        text = nbCode;
       }
       const source = sourceFile(canonical, sha, entry.path, text);
       files.push(source);
@@ -706,7 +723,7 @@ export async function inspectRepository({
         files.map((source) => source.text).join("\n\n"),
         { codeSources: files.filter((source) => !readmeFiles.includes(source)) },
       );
-      if (evidence.verified && (!requireCodeEvidence || implementationFiles.length)) break;
+      if (!semanticReview && evidence.verified && (!requireCodeEvidence || implementationFiles.length)) break;
     }
     if (requireCodeEvidence && !implementationFiles.length) {
       const codeOnlySources = files.filter((source) => !readmeFiles.includes(source));
@@ -731,13 +748,16 @@ export async function inspectRepository({
   }
   evidence = { ...evidence, files, implementationFiles };
   return {
-    status: evidence.verified ? "accepted" : "rejected",
-    ...(evidence.verified ? {} : { reason: evidence.reason }),
+    // Neutral collection cannot grant or deny semantic admission. The reviewer
+    // and its locally checked witness own that decision at both ingestion paths.
+    status: semanticReview ? "inspected" : evidence.verified ? "accepted" : "rejected",
+    ...(!semanticReview && !evidence.verified ? { reason: evidence.reason } : {}),
     repo,
     sha,
     commits,
     readme,
     readmeFiles,
+    codeSources: files.filter((file) => !readmeFiles.includes(file)),
     evidence,
   };
 }

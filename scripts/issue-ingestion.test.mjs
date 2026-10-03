@@ -1,5 +1,6 @@
 import test from "node:test";
 import { createSummaryEnricher } from "./source-enrichment.mjs";
+import { buildEvidenceBundle } from "./evidence-bundle.mjs";
 import assert from "node:assert/strict";
 import { assetDigest, DERIVED_DOCUMENTS } from "./ingestion-assets.mjs";
 import {
@@ -36,6 +37,8 @@ const meta = {
   created_at: "2026-09-01T00:00:00Z",
 };
 const sha = "a".repeat(40);
+const sourceText = 'import Jev from "@typesafe/jev";\nconst client = new Jev();\nconst answer = await client.choice(state);\nconsole.log(answer);';
+const taxonomy = [{ category: "Context GC & Filter", patterns: [], tags: ["Agent"] }];
 const inspected = {
   status: "accepted",
   repo: meta,
@@ -47,7 +50,8 @@ const inspected = {
       {
         path: "src/jev.ts",
         url: `https://github.com/example/jev-tool/blob/${sha}/src/jev.ts`,
-        hash: "proof",
+        hash: bodyHash(sourceText),
+        text: sourceText,
       },
     ],
   },
@@ -61,6 +65,17 @@ const fallback = {
   tags: ["Agent"],
   summarySource: "source-first",
 };
+function acceptedReview({ codeSources, taxonomy }, overrides = {}) {
+  const evidenceBundle = buildEvidenceBundle({ codeSources });
+  const operation = evidenceBundle.modelData.nodes.find((node) => node.kind === "operation")?.id;
+  return {
+    verified: true, status: "completed", role: "client", reasonCode: "implementation-observed",
+    witness: { entry: [operation], operation: [operation], result: [operation] },
+    category: taxonomy[0]?.category,
+    plainSummary: fallback.plainSummary, plainSummaryEn: fallback.plainSummaryEn,
+    evidenceBundle, witnessValidated: true, ...overrides,
+  };
+}
 const project = {
   id: "example:jev-tool",
   author: "example",
@@ -90,7 +105,7 @@ test("non-submissions, ambiguous URLs, and duplicate projects never reach AI", a
   const base = {
     repository,
     projects: [],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
     enrich: async () => {
       calls++;
@@ -156,8 +171,9 @@ test("verified ingestion fixes repository identity and retains immutable evidenc
     issue,
     repository,
     projects: [],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
+    reviewer: acceptedReview,
     inspect: async (input) => {
       assert.equal(input.requireCodeEvidence, true);
       return inspected;
@@ -390,7 +406,7 @@ test("a previously committed submission can resume deployment without calling AI
     issue,
     repository,
     projects: [prior],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
     inspect: async () => ({ status: "duplicate", repo: meta }),
     enrich: async () => {
@@ -417,7 +433,8 @@ test("third-party Issue prose is not treated as repository-author copy", async (
   ]) {
     const result = await prepareSubmission({
       issue: { ...issue, user: { login }, author_association: association },
-      repository, projects: [], taxonomy: [], api: async () => {},
+      repository, projects: [], taxonomy, api: async () => {},
+      reviewer: acceptedReview,
       inspect: async () => inspected,
       enrich: async (input) => {
         assert.equal(input.issueTrusted, trusted);
@@ -429,13 +446,14 @@ test("third-party Issue prose is not treated as repository-author copy", async (
 });
 
 
-test("source-first ingestion without Models still satisfies all four English fields", async () => {
+test("accepted witness reuses summaries without another Models call and preserves English fields", async () => {
   const result = await prepareSubmission({
     issue,
     repository,
     projects: [],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
+    reviewer: acceptedReview,
     inspect: async () => ({
       ...inspected,
       repo: { ...meta, language: "TypeScript" },
@@ -456,11 +474,12 @@ test("source-first ingestion without Models still satisfies all four English fie
   assert.equal(result.project.plainSummaryEn, meta.description);
 });
 
-test("submitted category and tags in issue body are extracted and canonicalized", async () => {
+test("submitted category and tags cannot override the model classification", async () => {
   const result = await prepareSubmission({
     repository,
     projects: [],
-    taxonomy: [{ category: "CLI & Pipelines", patterns: ["cli"], tags: ["CLI"] }],
+    taxonomy: [...taxonomy, { category: "CLI & Pipelines", patterns: ["cli"], tags: ["CLI"] }],
+    reviewer: acceptedReview,
     api: async () => {},
     issue: {
       ...issue,
@@ -470,8 +489,8 @@ test("submitted category and tags in issue body are extracted and canonicalized"
     enrich: createSummaryEnricher({ token: "" }),
   });
   assert.equal(result.status, "ready");
-  assert.equal(result.project.category, "CLI & Pipelines");
-  assert.deepEqual(result.project.tags, ["cli-git-gates", "security-guardrails"]);
+  assert.equal(result.project.category, "Context GC & Filter");
+  assert.ok(!result.project.tags.includes("security-guardrails"));
 });
 
 test("invalid prepared identities cannot select API paths or mutate the catalog", async () => {
@@ -516,37 +535,32 @@ test("prepareSubmission uses Muse Reviewer verdict to accept candidate and popul
       status: "rejected",
       reason: "no implementation source evidence",
     }),
-    reviewer: async ({ repo, codeSources }) => {
-      assert.equal(repo.name, "jev-tool");
-      assert.equal(codeSources.length, 1);
-      return {
-        verified: true,
-        confidence: 0.98,
-        reason: "在 src/jev.ts 中调用了 typesafe choice 原语。",
+    reviewer: async (input) => {
+      assert.equal(input.repo.name, "jev-tool");
+      assert.equal(input.codeSources.length, 1);
+      return acceptedReview(input, {
         category: "CLI & Pipelines",
-        tags: ["cli-git-gates"],
-        jevDecisionPoint: "在 git hook 中对代码规范进行打分决策。",
         plainSummary: "给 Agent 的终端日志做过滤。",
         plainSummaryEn: "Filters logs for agents using Jev.",
-      };
+      });
     },
     enrich: async ({ fallback }) => fallback,
     now: () => "2026-09-18T00:00:00Z",
   });
   assert.equal(result.status, "ready");
   assert.equal(result.project.category, "CLI & Pipelines");
-  assert.deepEqual(result.project.tags, ["cli-git-gates", "typed-decisions"]);
-  assert.equal(result.project.jevDecisionPoint, "在 git hook 中对代码规范进行打分决策。");
+  assert.ok(result.project.tags.includes("cli-git-gates"));
+  assert.equal(result.project.jevDecisionPoint, "给 Agent 的终端日志做过滤。");
   assert.equal(result.project.plainSummary, "给 Agent 的终端日志做过滤。");
   assert.equal(result.project.plainSummaryEn, "Filters logs for agents using Jev.");
 });
 
-test("prepareSubmission uses Muse Reviewer verdict to reject candidate with needsEvidence and reason", async () => {
+test("prepareSubmission respects the model veto and renders a local rejection reason", async () => {
   const result = await prepareSubmission({
     issue,
     repository,
     projects: [],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
     inspect: async () => inspected,
     reviewer: async () => ({
@@ -557,9 +571,10 @@ test("prepareSubmission uses Muse Reviewer verdict to reject candidate with need
     enrich: async ({ fallback }) => fallback,
   });
   assert.equal(result.status, "rejected");
-  assert.equal(result.needsEvidence, true);
+  assert.equal(result.needsEvidence, false);
   assert.equal(result.issueNumber, 12);
-  assert.match(result.reason, /代码中仅有 Jev 的注释提及/);
+  assert.equal(result.reasonCode, "model-rejected");
+  assert.doesNotMatch(result.reason, /代码中仅有 Jev 的注释提及/);
 });
 
 test("prepareSubmission fast-rejects structural issues with needsEvidence false and no reviewer call", async () => {
@@ -568,7 +583,7 @@ test("prepareSubmission fast-rejects structural issues with needsEvidence false 
     issue,
     repository,
     projects: [],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
     inspect: async () => ({ status: "rejected", reason: "repository is not public" }),
     reviewer: async () => {
@@ -578,7 +593,7 @@ test("prepareSubmission fast-rejects structural issues with needsEvidence false 
     enrich: async ({ fallback }) => fallback,
   });
   assert.equal(result.status, "rejected");
-  assert.equal(result.reason, "repository is not public");
+  assert.equal(result.reasonCode, "structural-rejection");
   assert.equal(result.needsEvidence, false);
   assert.equal(reviewerCalls, 0);
 });
@@ -588,7 +603,7 @@ test("prepareSubmission returns transient-retry when reviewer fails with transie
     issue,
     repository,
     projects: [],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
     inspect: async () => ({
       ...inspected,
@@ -608,7 +623,7 @@ test("prepareSubmission returns transient-retry when reviewer fails with transie
   assert.equal(result.needsEvidence, false);
   assert.equal(result.issueNumber, 12);
   assert.equal(result.issueBodySha, bodyHash(issue.body));
-  assert.equal(result.reason, "HTTP 503");
+  assert.equal(result.reasonCode, "transient-failure");
 });
 
 test("prepareSubmission returns transient-retry when reviewer circuit is open", async () => {
@@ -616,7 +631,7 @@ test("prepareSubmission returns transient-retry when reviewer circuit is open", 
     issue,
     repository,
     projects: [],
-    taxonomy: [],
+    taxonomy,
     api: async () => {},
     inspect: async () => ({
       ...inspected,

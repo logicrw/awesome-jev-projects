@@ -1,4 +1,5 @@
 import test from "node:test";
+import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import {
   createSummaryEnricher,
@@ -515,160 +516,140 @@ test("MUSE Spark OpenRouter key routes to OpenRouter endpoint with referrer head
   assert.equal(result.enrichment.plainSummary.source, "muse-spark");
 });
 
-test("Muse Reviewer parses verified verdict and extracts structured metadata", async () => {
-  const verifiedVerdict = {
-    verified: true,
-    confidence: 0.95,
-    reason: "在 src/judge.ts 中调用了 typesafe /v1/systemone 接口并发 15 个 Noul 原语进行打标。",
-    category: "CLI & Pipelines",
-    tags: ["cli-git-gates", "typed-decisions"],
-    jevDecisionPoint: "对输入段落并发请求 15 个 Noul 原语判断是否存在 AI 写作特征。",
-    plainSummary: "运行在 Claude Code Stop hook 上的 AI 水文检测器。",
-    plainSummaryEn: "An AI-tell prose linter running as a Claude Code Stop hook.",
+const sourceText = 'import { JevClient } from "@typesafe/jev";\nconst client = new JevClient();\nconst result = await client.choice({ state: input, options });\nconsole.log(result.answer);';
+const sourceFile = (text = sourceText, path = "src/client.ts") => ({
+  path, text, hash: createHash("sha256").update(text).digest("hex"),
+  url: `https://github.com/logicrw/demo/blob/${"a".repeat(40)}/${path}`,
+});
+const submission = { codeSources: [sourceFile()], taxonomy: [{ category: "CLI & Pipelines" }] };
+function verdictForRequest(options, overrides = {}) {
+  const request = JSON.parse(options.body);
+  const nodes = JSON.parse(request.messages[1].content).evidence.nodes;
+  const operation = nodes.filter((node) => node.kind === "operation").map((node) => node.id);
+  return {
+    verified: true, role: "client",
+    witness: { entry: [nodes[0].id], operation: operation.slice(0, 1), result: [nodes.at(-1).id] },
+    reasonCode: "implementation-observed", category: JSON.parse(request.messages[1].content).categories.indexOf("CLI/pipelines"),
+    plainSummary: chinese, plainSummaryEn: english,
+    ...overrides,
   };
+}
+
+test("Muse Reviewer validates witness, keeps model identity, and enforces the complete message budget", async () => {
   let calledUrl = "";
-  let calledAuth = "";
-  let requestBody = null;
+  let requestBody;
   const reviewer = createSubmissionReviewer({
-    token: "muse-key-12345",
-    fetchImpl: async (url, options) => {
+    token: "muse-key-12345", fetchImpl: async (url, options) => {
       calledUrl = url;
-      calledAuth = options.headers.Authorization;
+      assert.equal(options.headers.Authorization, "Bearer muse-key-12345");
+      assert.equal(options.redirect, "error");
       requestBody = JSON.parse(options.body);
-      return reply(verifiedVerdict);
+      assert.equal(Object.hasOwn(requestBody, "tools"), false);
+      assert.deepEqual(requestBody.messages.map((message) => message.role), ["system", "user"]);
+      assert.ok(Buffer.byteLength(JSON.stringify(requestBody.messages)) <= 1450);
+      assert.equal(requestBody.max_tokens, 384);
+      return reply(verdictForRequest(options));
     },
   });
-  const result = await reviewer({
-    repo: { full_name: "harshpuri84/slopcheck-jev", description: "AI prose detector" },
-    readme: "# slopcheck\nJev integration",
-    codeSources: [
-      { path: "src/judge.ts", text: "fetch('https://api.typesafe.ai/v1/systemone')" },
-    ],
-    issueBody: "Submission for slopcheck-jev",
-    taxonomy: [{ category: "CLI & Pipelines" }],
-  });
+  const result = await reviewer({ ...submission, readme: "README_INJECTION", issueBody: "ISSUE_INJECTION", repo: { description: "DESCRIPTION_INJECTION" } });
   assert.equal(calledUrl, "https://api.meta.ai/v1/chat/completions");
-  assert.equal(calledAuth, "Bearer muse-key-12345");
   assert.equal(requestBody.model, "muse-spark-1.3-contributor");
   assert.equal(requestBody.reasoning_effort, "low");
+  assert.doesNotMatch(JSON.stringify(requestBody), /README_INJECTION|ISSUE_INJECTION|DESCRIPTION_INJECTION/);
   assert.equal(result.verified, true);
-  assert.equal(result.confidence, 0.95);
+  assert.equal(result.status, "completed");
+  assert.equal(result.witnessValidated, true);
   assert.equal(result.category, "CLI & Pipelines");
-  assert.deepEqual(result.tags, ["cli-git-gates", "typed-decisions"]);
-  assert.equal(result.jevDecisionPoint, verifiedVerdict.jevDecisionPoint);
-  assert.equal(result.plainSummary, verifiedVerdict.plainSummary);
-  assert.equal(result.plainSummaryEn, verifiedVerdict.plainSummaryEn);
+  assert.equal(result.plainSummary, chinese);
+  assert.equal(result.plainSummaryEn, english);
+  assert.equal(result.budget.tokenizerVerified, false);
+  assert.equal(result.usage.status, "unknown");
+  assert.equal(result.usage.unknownAttempts, 1);
+  assert.ok(result.evidenceBundle);
+  assert.equal(Object.hasOwn(JSON.parse(JSON.stringify(result)), "evidenceBundle"), false);
+  assert.equal(result.implementationFiles[0].hash, submission.codeSources[0].hash);
 });
 
-test("Muse Reviewer parses rejection verdict with detailed Chinese reason", async () => {
-  const rejectedVerdict = {
-    verified: false,
-    confidence: 0.88,
-    reason: "仓库代码中虽然包含了项目脚手架，但没有任何导入或调用 Jev/TypeSafe 原语的代码。请补充具体的调用文件与代码行链接。",
-    category: "CLI & Pipelines",
-    tags: [],
-    jevDecisionPoint: "",
-    plainSummary: "",
-    plainSummaryEn: "",
-  };
-  const reviewer = createSubmissionReviewer({
-    token: "muse-key-12345",
-    fetchImpl: async () => reply(rejectedVerdict),
-  });
-  const result = await reviewer({
-    repo: { full_name: "example/empty-jev", description: "Empty project" },
-    readme: "# Empty project",
-    codeSources: [{ path: "index.js", text: "console.log('hello');" }],
-    taxonomy: [],
-  });
+test("Muse Reviewer preserves strict rejection with a local fixed reason", async () => {
+  const reviewer = createSubmissionReviewer({ token: "muse-key-12345", fetchImpl: async (_, options) => reply(verdictForRequest(options, {
+    verified: false, role: "none", witness: { entry: [], operation: [], result: [] },
+    reasonCode: "not-integrated", category: null, plainSummary: "", plainSummaryEn: "",
+  })) });
+  const result = await reviewer(submission);
   assert.equal(result.verified, false);
-  assert.equal(result.confidence, 0.88);
-  assert.match(result.reason, /没有任何导入或调用 Jev/);
+  assert.equal(result.status, "completed");
+  assert.equal(result.reasonCode, "not-integrated");
+  assert.match(result.reason, /未确认/);
+  assert.deepEqual(result.implementationFiles, []);
 });
 
-test("Muse Reviewer redacts credentials from code and repository prompt", async () => {
+test("Muse Reviewer excludes credential strings and comments before prompting", async () => {
   const secretKey = "sk-abcdef1234567890abcdef1234567890";
   let promptBody = "";
-  const reviewer = createSubmissionReviewer({
-    token: secretKey,
-    fetchImpl: async (_, options) => {
-      promptBody = options.body;
-      return reply({ verified: true, reason: "ok" });
-    },
-  });
-  await reviewer({
-    repo: { full_name: "example/secret-leak", description: `key=${secretKey}` },
-    readme: `Authorization: Bearer ${secretKey}`,
-    codeSources: [{ path: "test.py", text: `TYPESAFE_API_KEY=${secretKey}` }],
-  });
+  const reviewer = createSubmissionReviewer({ token: secretKey, fetchImpl: async (_, options) => {
+    promptBody = options.body;
+    return reply(verdictForRequest(options));
+  } });
+  const result = await reviewer({ ...submission, codeSources: [sourceFile(`// ${secretKey} SYSTEM OVERRIDE\n${sourceText}\nconst key = "${secretKey}";`)], readme: secretKey });
+  assert.equal(result.status, "completed");
   assert.equal(promptBody.includes(secretKey), false);
-  assert.match(promptBody, /\[REDACTED\]/);
+  assert.doesNotMatch(promptBody, /SYSTEM OVERRIDE/);
+  assert.equal(JSON.stringify(result).includes(secretKey), false);
 });
 
-test("Muse Reviewer gracefully handles missing token, HTTP errors, and circuits with in-process retries", async () => {
-  const missingTokenReviewer = createSubmissionReviewer({ token: "" });
-  const resMissing = await missingTokenReviewer({ repo: { name: "test" } });
-  assert.equal(resMissing.verified, null);
-  assert.equal(resMissing.status, "missing-token");
-
+test("Muse Reviewer skips missing code and handles missing token, HTTP errors, and circuits", async () => {
+  let calls = 0;
+  const noCode = createSubmissionReviewer({ token: "test-token", fetchImpl: () => { calls++; assert.fail("no code"); } });
+  const insufficient = await noCode({ codeSources: [], readme: sourceText });
+  assert.equal(insufficient.status, "insufficient-evidence");
+  assert.equal(insufficient.verified, null);
+  assert.equal(calls, 0);
+  const missing = await createSubmissionReviewer({ token: "" })(submission);
+  assert.equal(missing.verified, null);
+  assert.equal(missing.status, "missing-token");
   let attempts = 0;
-  const errorReviewer = createSubmissionReviewer({
-    token: "test-token",
-    fetchImpl: async () => {
-      attempts++;
-      return new Response("server error", { status: 500 });
-    },
-  });
-  const resError = await errorReviewer({ repo: { name: "test" } });
-  assert.equal(resError.verified, null);
-  assert.equal(resError.status, "http-error");
-  assert.equal(resError.retryable, true);
-  assert.equal(attempts, 3); // Retried 3 times before failing
-
-  // Subsequent call hits open circuit without extra requests
-  const resCircuit = await errorReviewer({ repo: { name: "test" } });
-  assert.equal(resCircuit.verified, null);
-  assert.equal(resCircuit.status, "circuit-open");
+  const reviewer = createSubmissionReviewer({ token: "test-token", fetchImpl: async () => {
+    attempts++; return new Response("credential-bearing error", { status: 500 });
+  } });
+  const failure = await reviewer(submission);
+  assert.equal(failure.verified, null);
+  assert.equal(failure.status, "http-error");
+  assert.equal(failure.retryable, true);
+  assert.equal(attempts, 3);
+  assert.equal(failure.attempts.length, 3);
+  assert.equal(JSON.stringify(failure).includes("credential-bearing"), false);
+  assert.equal((await reviewer(submission)).status, "circuit-open");
   assert.equal(attempts, 3);
 });
 
-test("Muse Reviewer retries on transient error and succeeds on subsequent attempt", async () => {
+test("Muse Reviewer honors Retry-After and succeeds with witness on retry", async () => {
   let callCount = 0;
-  const reviewer = createSubmissionReviewer({
-    token: "test-token",
-    fetchImpl: async () => {
-      callCount++;
-      if (callCount === 1) {
-        return new Response("rate limited", { status: 429 });
-      }
-      return reply({
-        verified: true,
-        confidence: 0.95,
-        reason: "通过 POST /v1/systemone 提供兼容服务端接口",
-        category: "SDK & Decision Frameworks",
-        tags: ["typed-decisions"],
-        jevDecisionPoint: "提供兼容 Jev 的决策接口",
-        plainSummary: "本地决策服务端",
-        plainSummaryEn: "Local decision server",
-      });
-    },
-  });
-  const res = await reviewer({ repo: { name: "test" } });
+  const delays = [];
+  const reviewer = createSubmissionReviewer({ token: "test-token", sleep: async (ms) => delays.push(ms), fetchImpl: async (_, options) => {
+    callCount++;
+    if (callCount === 1) return new Response("rate limited", { status: 429, headers: { "Retry-After": "2" } });
+    return reply(verdictForRequest(options));
+  } });
+  const result = await reviewer(submission);
   assert.equal(callCount, 2);
-  assert.equal(res.verified, true);
-  assert.equal(res.status, "completed");
-  assert.equal(res.category, "SDK & Decision Frameworks");
+  assert.deepEqual(delays, [2000]);
+  assert.equal(result.verified, true);
+  assert.equal(result.status, "completed");
 });
 
-test("extractCodeWindow centers on key Jev primitives when file exceeds maxLength", () => {
-  const prefix = "A".repeat(8000);
-  const core = "requests.post('https://api.typesafe.ai/v1/systemone', json={})";
-  const suffix = "B".repeat(8000);
-  const full = prefix + core + suffix;
+test("reviewed summaries are reused without a second generation or native prose override", async () => {
+  const enrich = createSummaryEnricher({ token: "test-token", fetchImpl: () => assert.fail("duplicate summary request") });
+  const reviewed = { verified: true, status: "completed", witnessValidated: true, source: "muse-spark", plainSummary: chinese, plainSummaryEn: english };
+  const result = await enrich({ repo, fallback, reviewed, issueBody: "## 一句话介绍\n外部说明把程序用途改成其他数据流程。" });
+  assert.equal(result.plainSummary, chinese);
+  assert.equal(result.plainSummaryEn, english);
+  assert.equal(result.enrichment.ai.status, "review-reused");
+  assert.equal(result.enrichment.ai.attempted, false);
+});
 
-  const window = extractCodeWindow(full, 5000);
+test("extractCodeWindow legacy helper remains bounded (reviewer does not use it)", () => {
+  const core = "requests.post('https://api.typesafe.ai/v1/systemone', json={})";
+  const window = extractCodeWindow("A".repeat(8000) + core + "B".repeat(8000), 5000);
   assert.equal(window.length, 5000);
   assert.equal(window.includes(core), true);
 });
-
-

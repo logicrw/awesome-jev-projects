@@ -18,5 +18,5 @@ jobs:
         with:
           node-version: "22"
       - run: npm ci --ignore-scripts --no-fund --no-audit
-      - run: node --test scripts/*.test.mjs
+      - run: node --test scripts/*.test.mjs test/*.test.mjs
       - run: npm run build

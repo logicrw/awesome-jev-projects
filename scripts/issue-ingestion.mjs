@@ -6,10 +6,9 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { createGitHubClient } from "./github-client.mjs";
 import {
   extractSubmittedRepository,
-  extractSubmittedTags,
-  extractSubmittedCategory,
   extractSubmittedCodePaths,
   inspectRepository,
+  codeCandidate,
 } from "./project-source.mjs";
 import { inferCanonicalTags } from "../src/lib/tags.mjs";
 import {
@@ -18,6 +17,10 @@ import {
 } from "./source-enrichment.mjs";
 import { summarize, verifyIntegration, atomicJSON } from "./radar-sync.mjs";
 import { readAssetBundle, validateAssetBundle } from "./ingestion-assets.mjs";
+import { validateVerdict, resolveWitnessFiles } from "./evidence-bundle.mjs";
+import { settleRetry, validateRetryClaim } from "./ingestion-retry.mjs";
+import { isSubmission } from "./submission-identity.mjs";
+export { isSubmission } from "./submission-identity.mjs";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const SITE_URL = "https://logicrw.github.io/awesome-jev-projects/";
 export const bodyHash = (body) =>
@@ -50,296 +53,207 @@ function sameProject(a, b) {
     (Number.isSafeInteger(a.repoId) && a.repoId === b.repoId)
   );
 }
-export function isSubmission(issue) {
-  const labeled = (issue.labels ?? []).some(
-    (label) => (typeof label === "string" ? label : label?.name) === "project-submission",
-  );
-  const titled = /^\s*\[(?:project|submission|submit|new\s*project)\]/i.test(issue.title ?? "");
-  const headed =
-    /^#{1,6}\s+(?:GitHub repository|Project repository|项目仓库|仓库地址|repository|开源仓库|代码仓库|项目地址|Repo)(?:\s*[\(（][\s\S]*?[\)）])?\s*$/im.test(
-      issue.body ?? "",
-    ) ||
-    /^\s*(?:repository|github repository|project repository|项目仓库|仓库地址|开源仓库|代码仓库|repo)[\s:：]+\s*https?:\/\/github\.com\//im.test(
-      issue.body ?? "",
-    );
-  return labeled || titled || headed;
+
+const REVIEW_MESSAGES = Object.freeze({
+  "invalid-submission": "投稿未提供唯一、有效的公开仓库地址。",
+  "structural-rejection": "仓库未满足公开性、身份或固定版本等基本收录条件。",
+  "duplicate": "此仓库已在目录中，无需重复收录。",
+  "accepted": "模型与固定源码见证均通过校验。",
+  "model-rejected": "模型未确认可收录的 Jev 源码集成；本轮自动审查已结束。",
+  "insufficient-evidence": "本轮未取得可核验的实现源码与关系见证，自动审查已结束；有效源码变化或新代码线索可触发下一轮。",
+  "invalid-output": "模型输出未通过结构或证据引用校验，本轮自动审查已结束。",
+  "provider-unavailable": "模型服务暂不可用，本轮未形成收录结论。",
+  "transient-failure": "审查服务暂时不可用，将在限额内自动重试。",
+});
+function reviewMessage(code) {
+  return REVIEW_MESSAGES[code] ?? REVIEW_MESSAGES["invalid-output"];
+}
+function reviewDiagnostics(review) {
+  if (!review || typeof review !== "object") return undefined;
+  return {
+    status: typeof review.status === "string" ? review.status.slice(0, 40) : "invalid-output",
+    verified: review.verified === true ? true : review.verified === false ? false : null,
+    ...(Array.isArray(review.attempts) ? { attempts: review.attempts.slice(0, 3).map((attempt) => ({
+      attempt: Number.isSafeInteger(attempt.attempt) ? attempt.attempt : 0,
+      status: typeof attempt.status === "string" ? attempt.status.slice(0, 40) : "unknown",
+      ...(Number.isInteger(attempt.httpStatus) ? { httpStatus: attempt.httpStatus } : {}),
+      usage: attempt.usage?.status === "reported" ? {
+        status: "reported",
+        ...Object.fromEntries(["promptTokens", "completionTokens", "totalTokens", "reasoningTokens"]
+          .filter((key) => Number.isSafeInteger(attempt.usage[key]) && attempt.usage[key] >= 0)
+          .map((key) => [key, attempt.usage[key]])),
+      } : { status: "unknown" },
+    })) } : {}),
+    ...(review.budget ? { budget: review.budget } : {}),
+    ...(review.usage ? { usage: review.usage } : {}),
+  };
+}
+function fixedSource(file, repo, sha) {
+  if (!file || typeof file.path !== "string" || !file.path ||
+      typeof file.text !== "string" || !file.text.trim() ||
+      !/^[a-f\d]{64}$/.test(file.hash ?? "") ||
+      bodyHash(file.text) !== file.hash || !/^[a-f\d]{40}$/.test(sha ?? "") ||
+      !codeCandidate({ path: file.path, type: "blob", size: Buffer.byteLength(file.text) })) return false;
+  try {
+    const url = new URL(file.url);
+    return url.origin === "https://github.com" && !url.search && !url.hash &&
+      !url.username && !url.password &&
+      decodeURIComponent(url.pathname) === `/${repo.full_name}/blob/${sha}/${file.path}`;
+  } catch { return false; }
 }
 export async function prepareSubmission({
-  issue,
-  repository,
-  projects,
-  taxonomy,
-  exclusions = [],
-  api,
-  enrich,
-  reviewer,
-  inspect = inspectRepository,
-  now = () => new Date().toISOString(),
-  commentBody = "",
+  issue, repository, projects, taxonomy, exclusions = [], api, enrich, reviewer,
+  inspect = inspectRepository, now = () => new Date().toISOString(), commentBody = "",
 }) {
   requireOwner(repository);
-  if (
-    !Number.isSafeInteger(issue?.number) ||
-    issue.number < 1 ||
-    issue.pull_request ||
-    issue.state !== "open"
-  )
-    return { status: "ignored", reason: "not an open issue" };
-  if (!isSubmission(issue))
-    return { status: "ignored", reason: "not a project submission" };
+  const finish = (status, reasonCode, extra = {}) => ({
+    status, reasonCode, reason: reviewMessage(reasonCode),
+    issueNumber: issue?.number, issueBodySha: bodyHash(issue?.body),
+    needsEvidence: status === "insufficient-evidence", ...extra,
+  });
+  if (!Number.isSafeInteger(issue?.number) || issue.number < 1 || issue.pull_request || issue.state !== "open")
+    return finish("ignored", "invalid-submission");
+  if (!isSubmission(issue)) return finish("ignored", "invalid-submission");
   const submitted = extractSubmittedRepository(issue.body);
-  if (!submitted)
-    return {
-      status: "rejected",
-      reason: "missing or ambiguous repository URL",
-      needsEvidence: false,
-      issueNumber: issue.number,
-    };
-  if (submitted.toLowerCase() === repository.toLowerCase())
-    return {
-      status: "rejected",
-      reason: "cannot ingest this directory itself",
-      needsEvidence: false,
-      issueNumber: issue.number,
-    };
+  if (!submitted || submitted.toLowerCase() === repository.toLowerCase())
+    return finish("rejected", "invalid-submission");
+
   let fullIssueText = [issue.body ?? "", commentBody].filter(Boolean).join("\n\n");
-  if (typeof api === "function" && issue.number) {
+  if (typeof api === "function") {
     try {
-      const comments = await api(
-        `/repos/${repository}/issues/${issue.number}/comments?per_page=100`,
-      );
-      if (Array.isArray(comments)) {
-        fullIssueText +=
-          "\n\n" +
-          comments
-            .map((c) => c?.body ?? "")
-            .filter(Boolean)
-            .join("\n\n");
-      }
-    } catch {}
+      const comments = await api(`/repos/${repository}/issues/${issue.number}/comments?per_page=100`);
+      if (Array.isArray(comments)) fullIssueText += "\n\n" + comments
+        .filter((c) => c.user?.type !== "Bot" && c.user?.login !== "github-actions[bot]")
+        .map((c) => typeof c.body === "string" ? c.body.slice(0, 16000) : "")
+        .join("\n\n");
+    } catch { /* Comment hints are optional; immutable repository evidence is authoritative. */ }
   }
   const preferredPaths = extractSubmittedCodePaths(fullIssueText, submitted);
-  const result = await inspect({
-    api,
-    repository: submitted,
-    existingProjects: projects,
-    exclusions,
-    verifyIntegration,
-    requireCodeEvidence: true,
-    preferredPaths,
-  });
+  let result;
+  try {
+    result = await inspect({
+      api, repository: submitted, existingProjects: projects, exclusions,
+      verifyIntegration, requireCodeEvidence: true, semanticReview: true, preferredPaths,
+    });
+  } catch {
+    return finish("transient-retry", "transient-failure", { retryable: true, submittedRepository: submitted });
+  }
   if (result.status === "duplicate") {
-    const prior = projects.find(
-      (p) =>
-        p.ingestion?.repository === repository &&
-        p.ingestion.issueNumber === issue.number &&
-        (p.repoId === result.repo?.id ||
-          publicIdentity(p) === result.repo?.full_name?.toLowerCase()),
-    );
-    if (prior) return { status: "resume", project: prior };
-    return {
-      status: "duplicate",
-      reason: result.reason,
-      needsEvidence: false,
-      issueNumber: issue.number,
-      submittedRepository: submitted,
-    };
+    const prior = projects.find((p) => p.ingestion?.repository === repository &&
+      p.ingestion.issueNumber === issue.number && p.ingestion.issueBodySha256 === bodyHash(issue.body) &&
+      (p.repoId === result.repo?.id || publicIdentity(p) === result.repo?.full_name?.toLowerCase()));
+    if (prior) return finish("resume", "duplicate", { project: prior });
+    return finish("duplicate", "duplicate", { submittedRepository: submitted });
   }
-
   const structuralRejections = new Set([
-    "invalid repository",
-    "repository not found or inaccessible",
-    "invalid repository metadata",
-    "repository is not public",
-    "forks are not ingested",
-    "repository already listed",
-    "repository is excluded by editorial review",
-    "repository has no accessible commit",
+    "invalid repository", "repository not found or inaccessible", "invalid repository metadata",
+    "repository is not public", "forks are not ingested", "repository already listed",
+    "repository is excluded by editorial review", "repository has no accessible commit",
     "repository has no immutable commit",
-    "mention-only directory",
   ]);
-  if (result.status === "rejected" && structuralRejections.has(result.reason)) {
-    return {
-      status: "rejected",
-      reason: result.reason,
-      needsEvidence: false,
-      issueNumber: issue.number,
-      submittedRepository: submitted,
-    };
-  }
+  if (result.status === "rejected" && structuralRejections.has(result.reason))
+    return finish("rejected", "structural-rejection", { submittedRepository: submitted });
 
-  const { repo, sha, commits, readme } = result;
-  let evidence = result.evidence;
+  const { repo, sha, commits = [], readme = "" } = result;
   const readmeFiles = result.readmeFiles ?? [];
-  const codeSources = (evidence?.files ?? []).filter(
-    (file) => !readmeFiles.some((rf) => rf.path === file.path),
-  );
+  const codeSources = (result.codeSources ?? result.evidence?.files ?? []).filter((file) =>
+    !readmeFiles.some((rf) => rf.path === file.path) &&
+    !/(?:^|\/)readme(?:\.[^/]*)?$/i.test(file.path ?? "") &&
+    fixedSource(file, repo, sha));
+  const details = { submittedRepository: submitted };
+  if (!repo || !codeSources.length)
+    return finish("insufficient-evidence", "insufficient-evidence", details);
+  if (typeof reviewer !== "function")
+    return finish("provider-unavailable", "provider-unavailable", details);
 
-  const issueTrusted = Boolean(
-    issue.user?.login &&
-      (issue.user.login.toLowerCase() === repo?.owner?.login?.toLowerCase() ||
-        ["OWNER", "MEMBER", "COLLABORATOR"].includes(issue.author_association)),
-  );
-
-  let reviewVerdict = null;
-  if (typeof reviewer === "function" && repo) {
-    reviewVerdict = await reviewer({
-      repo,
-      readme,
-      codeSources,
-      issueBody: issue.body ?? "",
-      issueTrusted,
-      taxonomy,
-    });
-  }
-
-  if (reviewVerdict) {
-    if (reviewVerdict.verified === false) {
-      const hasDeterministicEvidence =
-        result.status === "accepted" &&
-        (result.evidence?.implementationFiles ?? []).length > 0;
-      if (!hasDeterministicEvidence) {
-        return {
-          status: "rejected",
-          reason: reviewVerdict.reason || "源码审查未发现有效的 Jev 原语调用代码证据。",
-          needsEvidence: true,
-          issueNumber: issue.number,
-          submittedRepository: submitted,
-          reviewDetails: reviewVerdict,
-        };
-      }
+  let review;
+  try { review = await reviewer({ repo, readme, codeSources, taxonomy }); }
+  catch { return finish("transient-retry", "transient-failure", { ...details, retryable: true }); }
+  const diagnostics = reviewDiagnostics(review);
+  // A strict negative always vetoes L1, including syntactically plausible dead code.
+  if (review?.verified === false)
+    return finish("rejected", "model-rejected", { ...details, reviewDetails: diagnostics });
+  if (review?.verified !== true) {
+    if (review?.retryable === true) {
+      const notBefore = Date.parse(review.retryNotBefore);
+      const retryNotBefore = Number.isFinite(notBefore) && notBefore > Date.now()
+        ? new Date(notBefore).toISOString() : undefined;
+      return finish("transient-retry", "transient-failure", { ...details, retryable: true, retryNotBefore, reviewDetails: diagnostics });
     }
-    if (reviewVerdict.verified === true && evidence) {
-      evidence = {
-        ...evidence,
-        verified: true,
-        implementationFiles: evidence.implementationFiles?.length
-          ? evidence.implementationFiles
-          : codeSources.length > 0
-            ? [codeSources[0]]
-            : [],
-      };
-    }
+    const status = review?.status === "insufficient-evidence" ? "insufficient-evidence" :
+      ["missing-token", "circuit-open", "http-error", "request-failed", "timeout"].includes(review?.status) ?
+        "provider-unavailable" : "invalid-output";
+    return finish(status, status, { ...details, reviewDetails: diagnostics });
   }
-
-  if (result.status !== "accepted" && (!reviewVerdict || reviewVerdict.verified !== true)) {
-    if (reviewVerdict?.retryable === true || reviewVerdict?.status === "transient-failure") {
-      return {
-        status: "transient-retry",
-        reason: reviewVerdict.reason || "Muse API review service temporarily unavailable; queued for automatic retry",
-        needsEvidence: false,
-        retryable: true,
-        issueNumber: issue.number,
-        issueBodySha: bodyHash(issue.body),
-        submittedRepository: submitted,
-        reviewDetails: reviewVerdict,
-      };
-    }
-    return {
-      status: result.status,
-      reason: result.reason,
-      needsEvidence: result.reason === "no implementation source evidence",
-      issueNumber: issue.number,
-      submittedRepository: submitted,
-    };
-  }
-
-  const submittedCategory = extractSubmittedCategory(issue.body ?? "", taxonomy);
-  const submittedTags = extractSubmittedTags(issue.body ?? "");
-  const baseSummary = summarize(repo, readme, taxonomy);
-  if (submittedCategory) {
-    baseSummary.category = submittedCategory;
-  } else if (reviewVerdict?.category && taxonomy.some((t) => t.category === reviewVerdict.category)) {
-    baseSummary.category = reviewVerdict.category;
-  }
-  if (submittedTags.length) {
-    baseSummary.tags = inferCanonicalTags({
-      category: baseSummary.category,
-      tags: submittedTags,
+  if (review.status !== "completed")
+    return finish("invalid-output", "invalid-output", { ...details, reviewDetails: diagnostics });
+  // The bundle is built by trusted local reviewer code, never deserialized from model output.
+  // Revalidate its witness and bind every referenced source to the actual fixed snapshot.
+  const bundle = review.evidenceBundle;
+  const raw = Object.fromEntries(["verified", "role", "witness", "reasonCode", "category", "plainSummary", "plainSummaryEn"]
+    .map((key) => [key, review[key]]));
+  const verdict = bundle ? validateVerdict(raw, bundle, taxonomy) : null;
+  const implementationFiles = verdict ? resolveWitnessFiles(bundle, verdict) : [];
+  const witnessNodes = verdict ? [...new Set(Object.values(verdict.witness).flat())]
+    .map((id) => ({ id, ...bundle.nodeMap.get(id) })) : [];
+  if (!verdict || !implementationFiles.length || !witnessNodes.length || witnessNodes.some(({ source: file, startLine, endLine, ranges }) => {
+    if (!codeSources.some((source) => source.path === file.path && source.url === file.url && source.hash === file.hash && source.text === file.text)) return true;
+    const lineCount = file.text.split("\n").length;
+    if (!Number.isSafeInteger(startLine) || !Number.isSafeInteger(endLine) || startLine < 1 || endLine < startLine || endLine > lineCount ||
+        !Array.isArray(ranges) || !ranges.length || ranges.length > 100) return true;
+    let previous = 0;
+    return ranges.some((range) => {
+      if (!Array.isArray(range) || range.length !== 2 || !range.every(Number.isSafeInteger) || range[0] < startLine || range[1] > endLine || range[0] <= previous || range[1] < range[0]) return true;
+      previous = range[1];
+      return false;
     });
-  } else if (reviewVerdict?.tags?.length) {
-    baseSummary.tags = inferCanonicalTags({
-      category: baseSummary.category,
-      tags: reviewVerdict.tags,
-    });
-  }
-  if (reviewVerdict?.jevDecisionPoint) {
-    baseSummary.jevDecisionPoint = reviewVerdict.jevDecisionPoint;
-  }
-  if (reviewVerdict?.plainSummary) {
-    baseSummary.plainSummary = reviewVerdict.plainSummary;
-  }
-  if (reviewVerdict?.plainSummaryEn) {
-    baseSummary.plainSummaryEn = reviewVerdict.plainSummaryEn;
-  }
-  // Provider diagnostics are not canonical project data. Strip them before the
-  // candidate is persisted so review, validation and publication use identical bytes.
-  const { enrichment: _enrichment, ...editorial } = await enrich({
-    repo,
-    readme,
-    issueBody: issue.body ?? "",
-    issueTrusted,
-    fallback: baseSummary,
-  });
-  const [author, name] = repo.full_name.split("/");
-  const project = {
-    id: `${author}:${name}`.toLowerCase(),
-    name,
-    author,
-    url: `https://github.com/${repo.full_name}`,
-    repoId: repo.id,
-    ...editorial,
-    stars: repo.stargazers_count,
-    forks: repo.forks_count,
-    openIssues: repo.open_issues_count,
-    license:
-      repo.license?.spdx_id === "NOASSERTION"
-        ? null
-        : (repo.license?.spdx_id ?? null),
-    createdAt: repo.created_at,
-    lastCommitAt: commits[0]?.commit?.committer?.date ?? null,
-    headSha: sha,
-    metadataFetchedAt: now(),
-    metadataStatus: "ok",
-    avatarUrl: repo.owner?.avatar_url,
-    verificationStatus: "integration-detected",
-    runtimeVerified: false,
-    discoveredAt: now(),
-    claimStatus:
-      "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
-    claimStatusEn:
-      "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
-    evidence: evidence.files.map(({ url }) => ({
-      url,
-      note: "固定版本的 Jev 集成与说明来源",
-    })),
-    sourceVerification: {
-      method: "bounded-source-heuristic",
-      sha,
-      files: evidence.files.map(({ path, url, hash }) => ({ path, url, hash })),
-    },
-    ingestion: {
-      repository,
-      issueNumber: issue.number,
-      issueBodySha256: bodyHash(issue.body),
-      issueUrl: `https://github.com/${repository}/issues/${issue.number}`,
-    },
+  }))
+    return finish("invalid-output", "invalid-output", { ...details, reviewDetails: diagnostics });
+
+  const baseSummary = {
+    category: verdict.category,
+    plainSummary: verdict.plainSummary, plainSummaryEn: verdict.plainSummaryEn,
+    jevDecisionPoint: verdict.plainSummary, jevDecisionPointEn: verdict.plainSummaryEn,
+    highlightBenefit: "已定位固定版本的实现源码；尚无独立运行或性能验证。",
+    highlightBenefitEn: "Implementation evidence is pinned to a source revision; runtime and performance are not independently verified.",
+    tags: inferCanonicalTags({ category: verdict.category, tags: [] }),
+    summarySource: "ai-evidence-witness",
   };
-  if (
-    !project.evidence.length ||
-    ![
-      "plainSummary",
-      "plainSummaryEn",
-      "jevDecisionPoint",
-      "highlightBenefit",
-      "category",
-    ].every((k) => typeof project[k] === "string" && project[k].trim()) ||
-    !Array.isArray(project.tags) ||
-    !project.tags.length
-  )
-    throw new Error("Prepared project failed required-field validation");
-  return { status: "ready", project };
+  const issueTrusted = Boolean(issue.user?.login && (issue.user.login.toLowerCase() === repo.owner?.login?.toLowerCase() ||
+    ["OWNER", "MEMBER", "COLLABORATOR"].includes(issue.author_association)));
+  const enriched = typeof enrich === "function" ? await enrich({
+    repo, readme, issueBody: issue.body ?? "", issueTrusted,
+    fallback: baseSummary, reviewed: { ...review, ...verdict, witnessValidated: true },
+  }) : baseSummary;
+  // Classification and summaries belong to the witness verdict; extractive copy cannot override them.
+  const { enrichment: _enrichment, ...editorial } = { ...enriched, ...baseSummary };
+  const [author, name] = repo.full_name.split("/");
+  const files = [...new Map(witnessNodes.map(({ source }) => [source.path, source])).values()]
+    .map(({ path, url, hash }) => ({ path, url, hash }));
+  const evidenceNodes = witnessNodes.map(({ id, source, kind, startLine, endLine, ranges }) =>
+    ({ id, path: source.path, hash: source.hash, kind, startLine, endLine, ranges: ranges.map((range) => [...range]) }));
+  const project = {
+    id: `${author}:${name}`.toLowerCase(), name, author,
+    url: `https://github.com/${repo.full_name}`, repoId: repo.id, ...editorial,
+    stars: repo.stargazers_count, forks: repo.forks_count, openIssues: repo.open_issues_count,
+    license: repo.license?.spdx_id === "NOASSERTION" ? null : (repo.license?.spdx_id ?? null),
+    createdAt: repo.created_at, lastCommitAt: commits[0]?.commit?.committer?.date ?? null,
+    headSha: sha, metadataFetchedAt: now(), metadataStatus: "ok", avatarUrl: repo.owner?.avatar_url,
+    verificationStatus: "integration-detected", runtimeVerified: false, discoveredAt: now(),
+    claimStatus: "模型依据固定版本源码关系见证自动裁决；未经本站运行、安全或性能验证。",
+    claimStatusEn: "Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.",
+    evidence: files.map(({ url }) => ({ url, note: "固定版本的实现源码见证" })),
+    sourceVerification: { method: "ai-evidence-witness-v1", sha, files, role: verdict.role, witness: verdict.witness,
+      nodes: evidenceNodes, implementationFiles: implementationFiles.map(({ path }) => path) },
+    ingestion: { repository, issueNumber: issue.number, issueBodySha256: bodyHash(issue.body),
+      issueUrl: `https://github.com/${repository}/issues/${issue.number}` },
+  };
+  if (!project.evidence.length || !["plainSummary", "plainSummaryEn", "jevDecisionPoint", "highlightBenefit", "category"]
+    .every((key) => typeof project[key] === "string" && project[key].trim()) || !project.tags.length)
+    return finish("invalid-output", "invalid-output", { ...details, reviewDetails: diagnostics });
+  return finish("ready", "accepted", { project, reviewDetails: diagnostics });
 }
+
 function decodeSnapshot(file) {
   if (
     file.encoding !== "base64" ||
@@ -360,8 +274,12 @@ export async function publishSubmission({
   reviewedSourceSha,
   assetBundle,
   maxAttempts = 4,
+  retryClaim = null,
+  trustedWriter = process.env.INGEST_TRUSTED_WRITER,
+  dryRun = process.env.INGEST_DRY_RUN === "true",
 }) {
   requireOwner(repository);
+  if (dryRun || process.env.INGEST_DRY_RUN === "true") throw new Error("Dry-run publication is forbidden");
   const identity = publicIdentity(project);
   if (!identity || !Number.isSafeInteger(project.repoId) || project.repoId < 1 ||
       project.id !== identity.replace("/", ":"))
@@ -375,6 +293,10 @@ export async function publishSubmission({
     ingestion.issueNumber < 1
   )
     throw new Error("Invalid submission provenance");
+  if (retryClaim && (retryClaim.issueNumber !== ingestion.issueNumber ||
+      retryClaim.bodySha !== ingestion.issueBodySha256 ||
+      !await validateRetryClaim({ api, repository, candidate: retryClaim, trustedWriter })))
+    return { status: "superseded", changed: false, retryable: false };
   const issue = await api(
     `/repos/${repository}/issues/${ingestion.issueNumber}`,
   );
@@ -458,6 +380,11 @@ export async function publishSubmission({
     // Fail cheaply if main already changed. The non-force update below also
     // closes the check→write race: our commit's only parent is reviewedSourceSha.
     if ((await api(headPath)).object?.sha !== reviewedSourceSha) return stale();
+    if (retryClaim && !await validateRetryClaim({ api, repository, candidate: retryClaim, trustedWriter }))
+      return { status: "superseded", changed: false, retryable: false };
+    const latestIssue = await api(`/repos/${repository}/issues/${ingestion.issueNumber}`);
+    if (latestIssue.state !== "open" || latestIssue.pull_request || bodyHash(latestIssue.body) !== ingestion.issueBodySha256)
+      return { status: "changed", reason: "issue changed before branch update", retryable: false };
     try {
       await api(refPath, { method: "PATCH", body: { sha: createdCommit, force: false } });
       return { status: "ingested", changed: true, commit: createdCommit };
@@ -475,8 +402,11 @@ export async function acknowledgePublished({
   repository,
   projects,
   publishedProjects,
+  trustedWriter = process.env.INGEST_TRUSTED_WRITER,
+  dryRun = process.env.INGEST_DRY_RUN === "true",
 }) {
   requireOwner(repository);
+  if (dryRun || process.env.INGEST_DRY_RUN === "true") return [];
   const byIssue = new Map();
   for (const project of projects) {
     const i = project.ingestion;
@@ -530,7 +460,8 @@ export async function acknowledgePublished({
       );
       commented ||= comments.some(
         (c) =>
-          c.user?.login === "github-actions[bot]" && c.body?.includes(marker),
+          trustedComment(c, trustedWriter) &&
+          (c.body === marker || c.body === `${successComment}\n\n${marker}`),
       );
       if (commented || comments.length < 100) break;
       if (page === 20)
@@ -569,6 +500,8 @@ export async function acknowledgePublished({
         console.warn(`Could not remove needs-evidence label: ${err.message}`);
       }
     }
+    await settleRetry({ api, repository, trustedWriter, dryRun,
+      candidate: { issueNumber: issue.number, bodySha: project.ingestion.issueBodySha256 }, state: "completed" });
     await api(`/repos/${repository}/issues/${issue.number}`, {
       method: "PATCH",
       body: { state: "closed", state_reason: "completed" },
@@ -577,6 +510,61 @@ export async function acknowledgePublished({
   }
   return results;
 }
+function trustedComment(comment, trustedWriter) {
+  const login = comment.user?.login;
+  return login === "github-actions[bot]" ||
+    (typeof trustedWriter === "string" && /^[a-z\d](?:[a-z\d-]{0,38})(?:\[bot\])?$/i.test(trustedWriter) &&
+      login?.toLowerCase() === trustedWriter.toLowerCase());
+}
+/** Feedback is rendered entirely from local enums; model prose is never a control channel. */
+export async function sendReviewFeedback({
+  api, repository, prepared, trustedWriter = process.env.INGEST_TRUSTED_WRITER,
+  dryRun = process.env.INGEST_DRY_RUN === "true",
+}) {
+  requireOwner(repository);
+  if (dryRun || process.env.INGEST_DRY_RUN === "true") return { status: "dry-run" };
+  const issueNumber = prepared?.issueNumber;
+  const issueBodySha = prepared?.issueBodySha;
+  if (!Number.isSafeInteger(issueNumber) || issueNumber < 1 || !/^[a-f\d]{64}$/.test(issueBodySha ?? ""))
+    return { status: "invalid-receipt" };
+  const terminal = {
+    rejected: "rejected", duplicate: "rejected", "insufficient-evidence": "insufficient-evidence",
+    "invalid-output": "invalid-output", "provider-unavailable": "provider-unavailable",
+  }[prepared.status];
+  if (!terminal) return { status: "not-needed" };
+  const candidate = { ...(prepared.retryClaim ?? {}), issueNumber, bodySha: issueBodySha };
+  const path = `/repos/${repository}/issues/${issueNumber}`;
+  const current = async () => {
+    const issue = await api(path);
+    return issue.state === "open" && !issue.pull_request && bodyHash(issue.body) === issueBodySha ? issue : null;
+  };
+  if (!await current()) return { status: "superseded" };
+  if (prepared.retryClaim && !await validateRetryClaim({ api, repository, candidate, trustedWriter }))
+    return { status: "superseded" };
+  const reasonCode = Object.hasOwn(REVIEW_MESSAGES, prepared.reasonCode) ? prepared.reasonCode : "invalid-output";
+  const marker = `<!-- awesome-jev-review-feedback:v2:${issueNumber}:${issueBodySha}:${reasonCode} -->`;
+  const body = `**Awesome Jev 自动审查结果**\n\n${reviewMessage(reasonCode)}\n\n${marker}`;
+  let exists = false;
+  for (let page = 1; page <= 20; page++) {
+    const comments = await api(`${path}/comments?per_page=100&page=${page}`);
+    if (!Array.isArray(comments)) throw new Error("Invalid feedback comments response");
+    exists ||= comments.some((c) => trustedComment(c, trustedWriter) && c.body === body);
+    if (exists || comments.length < 100) break;
+    if (page === 20) throw new Error("Feedback pagination budget exhausted; no duplicate feedback written");
+  }
+  const latest = await current();
+  if (!latest) return { status: "superseded" };
+  if (!exists) await api(`${path}/comments`, { method: "POST", body: { body } });
+  const hasLabel = latest.labels?.some((label) => (typeof label === "string" ? label : label.name) === "needs-evidence");
+  const needsEvidence = prepared.status === "insufficient-evidence";
+  if (needsEvidence && !hasLabel)
+    await api(`${path}/labels`, { method: "POST", body: { labels: ["needs-evidence"] } });
+  else if (!needsEvidence && hasLabel)
+    await api(`${path}/labels/needs-evidence`, { method: "DELETE" });
+  await settleRetry({ api, repository, candidate, state: terminal, trustedWriter, dryRun });
+  return { status: exists ? "already-notified" : "notified" };
+}
+
 async function output(values) {
   if (process.env.GITHUB_OUTPUT)
     await appendFile(
@@ -591,6 +579,10 @@ async function main() {
   const repository = requireOwner(
     process.env.GITHUB_REPOSITORY ?? "logicrw/awesome-jev-projects",
   );
+  if (["publish", "acknowledge", "feedback"].includes(mode) && process.env.INGEST_DRY_RUN === "true") {
+    console.log(JSON.stringify({ status: "dry-run", mode }));
+    return;
+  }
   const token = process.env.GITHUB_TOKEN;
   if (!token)
     throw new Error(
@@ -654,17 +646,21 @@ async function main() {
       if (!Number.isSafeInteger(number) || number < 1)
         throw new Error("A positive issue number is required");
       const issue = await api(`/repos/${repository}/issues/${number}`);
-      result = await prepareSubmission({
-        issue,
-        repository,
-        projects,
-        taxonomy,
-        exclusions,
-        api,
-        enrich,
-        reviewer,
-        commentBody: event.comment?.body ?? "",
-      });
+      const retryClaim = process.env.INGEST_RETRY_CLAIM_ID ? {
+        issueNumber: number, bodySha: process.env.INGEST_EXPECTED_BODY_SHA,
+        claimId: process.env.INGEST_RETRY_CLAIM_ID, attempt: Number(process.env.INGEST_RETRY_ATTEMPT),
+      } : null;
+      const expectedBody = process.env.INGEST_EXPECTED_BODY_SHA;
+      if ((expectedBody && expectedBody !== bodyHash(issue.body)) ||
+          (retryClaim && !await validateRetryClaim({ api, repository, candidate: retryClaim, trustedWriter: process.env.INGEST_TRUSTED_WRITER }))) {
+        result = { status: "superseded", issueNumber: number, issueBodySha: bodyHash(issue.body), retryable: false };
+      } else {
+        result = await prepareSubmission({
+          issue, repository, projects, taxonomy, exclusions, api, enrich, reviewer,
+          commentBody: event.comment?.body ?? "",
+        });
+        if (retryClaim) result.retryClaim = retryClaim;
+      }
       if (result.status === "ready") {
         const withoutCurrent = projects.filter(
           (p) => !(p.ingestion?.repository === repository && p.ingestion?.issueNumber === number) &&
@@ -702,6 +698,7 @@ async function main() {
       retry: result.retryable === true,
       issue_number: issueNumber,
       issue_body_sha: issueBodySha,
+      retry_not_before: result.retryNotBefore ?? "",
     });
     console.log(
       JSON.stringify({
@@ -734,6 +731,7 @@ async function main() {
       project: prepared.project,
       reviewedSourceSha: prepared.reviewedSourceSha,
       assetBundle,
+      retryClaim: prepared.retryClaim,
     });
     await atomicJSON(resultPath, { ...prepared, publication: result });
     await output({
@@ -802,91 +800,7 @@ async function main() {
     console.log(JSON.stringify({ acknowledgements: results }));
   } else if (mode === "feedback") {
     const prepared = JSON.parse(await readFile(resultPath, "utf8"));
-    const issueNumber = Number(
-      prepared.issueNumber ?? process.env.INGEST_ISSUE_NUMBER,
-    );
-    if (!Number.isSafeInteger(issueNumber) || issueNumber < 1) {
-      console.log("No valid issue number for feedback; skipping.");
-      return;
-    }
-    if (["ready", "resume", "ignored", "transient-retry"].includes(prepared.status)) {
-      console.log(`Issue #${issueNumber} status is ${prepared.status}; feedback not needed.`);
-      return;
-    }
-    const issue = await api(`/repos/${repository}/issues/${issueNumber}`);
-    if (issue.state !== "open") {
-      console.log(`Issue #${issueNumber} is not open; skipping feedback.`);
-      return;
-    }
-    const reason =
-      prepared.reason ||
-      "仓库源码中暂未检测到有效的 Jev/TypeSafe 原语调用代码证据。";
-    const needsEvidence = prepared.needsEvidence === true;
-    const triggerCommentId = prepared.triggerCommentId;
-    const isCommentTrigger =
-      Number.isSafeInteger(triggerCommentId) && triggerCommentId > 0;
-    const initialMarker = `<!-- awesome-jev-review-feedback:${issueNumber} -->`;
-    const recheckMarker = isCommentTrigger
-      ? `<!-- awesome-jev-review-recheck:${issueNumber}:${triggerCommentId} -->`
-      : null;
-    const marker = recheckMarker || initialMarker;
-    let alreadyCommented = false;
-    for (let page = 1; page <= 5; page++) {
-      const comments = await api(
-        `/repos/${repository}/issues/${issueNumber}/comments?per_page=100&page=${page}`,
-      );
-      alreadyCommented ||= comments.some((c) => c.body?.includes(marker));
-      if (alreadyCommented || comments.length < 100) break;
-    }
-    if (!alreadyCommented) {
-      const feedbackBody = isCommentTrigger
-        ? [
-            "👋 **Awesome Jev 自动复查反馈**",
-            "",
-            "流水线已自动根据您补充的代码线索进行了重新复查：",
-            "",
-            `- **复查状态**：${needsEvidence ? "期待进一步补充代码证据 (Needs Evidence)" : "暂未检测到有效集成"}`,
-            `- **审查分析**：${reason}`,
-            "",
-            needsEvidence
-              ? "> 💡 请确认提供的链接或路径是否包含具体的决策原语调用逻辑（如 choice / score / noul / systemOne / /v1/systemone 等）。补充后流水线将再次自动复查推进收录！"
-              : "> 💡 如有误判，非常欢迎指出具体的代码位置与调用逻辑，我们会持续跟进！",
-            "",
-            marker,
-          ].join("\n")
-        : [
-            "👋 **Awesome Jev 项目收录反馈**",
-            "",
-            "非常感谢您向 Awesome Jev 社区提交项目！自动化代码集成流水线在对您的仓库进行源码检查后，整理了如下参考反馈：",
-            "",
-            `- **当前状态**：${needsEvidence ? "期待补充代码证据 (Needs Evidence)" : "暂未检测到有效集成"}`,
-            `- **审查分析**：${reason}`,
-            "",
-            needsEvidence
-              ? "> 💡 **如何快速复核**：如果项目中已接入 Jev / TypeSafe 决策机制（例如 Dart、Go、Rust、Java、Python、TS/JS 等多语言 SDK，或 OpenRouter decisions、`/v1/systemone` 调用），欢迎直接在本 Issue 中回复补充包含决策调用的**具体代码文件路径与关键行代码链接**。流水线将自动重新复查并推进收录！"
-              : "> 💡 **如有误判**：开源生态百花齐放，如果自动化审查存在理解偏差或尚未覆盖到您的接入方式，非常欢迎在本 Issue 中留言指出具体的代码位置与调用逻辑，我们会第一时间跟进！",
-            "",
-            marker,
-          ].join("\n");
-      await api(`/repos/${repository}/issues/${issueNumber}/comments`, {
-        method: "POST",
-        body: { body: feedbackBody },
-      });
-      console.log(`Posted feedback comment to Issue #${issueNumber}`);
-    } else {
-      console.log(`Feedback comment already exists on Issue #${issueNumber}`);
-    }
-    if (needsEvidence) {
-      try {
-        await api(`/repos/${repository}/issues/${issueNumber}/labels`, {
-          method: "POST",
-          body: { labels: ["needs-evidence"] },
-        });
-        console.log(`Added label 'needs-evidence' to Issue #${issueNumber}`);
-      } catch (err) {
-        console.warn(`Could not add label: ${err.message}`);
-      }
-    }
+    console.log(JSON.stringify(await sendReviewFeedback({ api, repository, prepared })));
   } else throw new Error("Unknown ingestion command");
 }
 if (

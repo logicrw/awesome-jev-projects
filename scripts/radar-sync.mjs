@@ -10,7 +10,8 @@ import {
   createSummaryEnricher,
   createSubmissionReviewer,
 } from "./source-enrichment.mjs";
-import { inspectRepository, hasOpenRouterJevSource } from "./project-source.mjs";
+import { inspectRepository, hasOpenRouterJevSource, codeCandidate } from "./project-source.mjs";
+import { validateVerdict, resolveWitnessFiles } from "./evidence-bundle.mjs";
 
 /** Manual/editorial copy must survive metadata sync. Keep existing statuses; curated is the same class. */
 export const PROTECTED_SUMMARY_SOURCES = Object.freeze([
@@ -118,6 +119,106 @@ export async function enrichCandidateSummary(repo, readme, fallbackSummary) {
   return enrichSummary({ repo, readme, fallback: fallbackSummary });
 }
 export const summarizeWithGitHubModels = enrichCandidateSummary;
+
+const RADAR_REVIEW_VERSION = "witness-v1";
+const MAX_REVIEW_ATTEMPTS = 3;
+const VERDICT_FIELDS = ["verified", "role", "reasonCode", "category", "plainSummary", "plainSummaryEn", "witness"];
+/** One semantic gate for radar discovery. The heuristic result never grants admission. */
+export async function reviewRadarCandidate({
+  inspection, taxonomy, reviewer = reviewCandidate, previousState = {},
+  now = new Date().toISOString(), configRevision = process.env.RADAR_REVIEW_REVISION ?? "",
+}) {
+  const codeSources = inspection.codeSources ?? [];
+  const fingerprint = createHash("sha256").update(JSON.stringify({
+    policy: RADAR_REVIEW_VERSION, revision: configRevision,
+    model: process.env.MUSE_MODEL ?? "", endpoint: process.env.MUSE_ENDPOINT ?? "",
+    configured: Boolean(process.env.MUSE_API_KEY),
+    sha: inspection.sha, files: codeSources.map(({ path, url, hash }) => ({ path, url, hash })),
+    categories: taxonomy.map(({ category }) => category),
+  })).digest("hex");
+  const prior = previousState.fingerprint === fingerprint ? previousState : {};
+  if (["rejected", "blocked", "retry-exhausted"].includes(prior.status) ||
+      (prior.status === "deferred" && Date.parse(prior.nextAttemptAt) > Date.parse(now))) {
+    return { status: prior.status, reason: prior.reason, cached: true, state: { ...prior, checkedAt: now } };
+  }
+  let reviewDetails;
+  const finish = (status, reason, extra = {}) => ({
+    status, reason, ...(reviewDetails ? { reviewDetails } : {}), ...extra,
+    state: { fingerprint, checkedAt: now, status, reason, attempts: prior.attempts ?? 0, ...extra.state },
+  });
+  if (inspection.status !== "inspected" || !inspection.repo || !inspection.sha) {
+    return finish("rejected", inspection.reason ?? "source-inspection-rejected");
+  }
+  if (!codeSources.length) return finish("blocked", "insufficient-evidence");
+  const attempts = (prior.attempts ?? 0) + 1;
+  const nextAttemptAt = (notBefore) => new Date(Math.max(
+    Date.parse(now) + 6 * 60 * 60 * 1000 * 2 ** (attempts - 1),
+    Number.isFinite(Date.parse(notBefore)) ? Date.parse(notBefore) : 0,
+  )).toISOString();
+  let reviewed;
+  try { reviewed = await reviewer({ codeSources, taxonomy }); }
+  catch { reviewed = { retryable: true, status: "request-failed" }; }
+  // Provider diagnostics contain only locally built status/budget/usage facts, never source or model prose.
+  reviewDetails = { status: reviewed?.status ?? "missing-response", attempts: reviewed?.attempts ?? [],
+    budget: reviewed?.budget, usage: reviewed?.usage };
+  if (!reviewed || reviewed.verified === null || typeof reviewed.verified !== "boolean") {
+    const retryable = !reviewed || reviewed.retryable === true;
+    const reason = typeof reviewed?.status === "string" && /^[a-z0-9-]{1,40}$/.test(reviewed.status)
+      ? reviewed.status : "review-unavailable";
+    const status = retryable ? attempts >= MAX_REVIEW_ATTEMPTS ? "retry-exhausted" : "deferred" : "blocked";
+    return finish(status, reason, { state: { attempts, ...(status === "deferred" ? {
+      nextAttemptAt: nextAttemptAt(reviewed?.retryNotBefore),
+    } : {}) } });
+  }
+  const payload = Object.fromEntries(VERDICT_FIELDS.map((key) => [key, reviewed[key]]));
+  let verdict, implementationFiles, witnessNodes;
+  try {
+    verdict = validateVerdict(payload, reviewed.evidenceBundle, taxonomy);
+    implementationFiles = verdict?.verified ? resolveWitnessFiles(reviewed.evidenceBundle, verdict) : [];
+    witnessNodes = verdict?.verified ? [...new Set(Object.values(verdict.witness).flat())]
+      .map((id) => ({ id, ...reviewed.evidenceBundle.nodeMap.get(id) })) : [];
+  } catch { verdict = null; }
+  if (reviewed.status !== "completed" || !verdict || (verdict.verified && (!reviewed.witnessValidated || !implementationFiles?.length ||
+      !witnessNodes?.length || witnessNodes.some(({ source, startLine, endLine, ranges }) =>
+        !codeSources.some((candidate) =>
+        source.path === candidate.path && source.url === candidate.url && source.hash === candidate.hash &&
+        source.text === candidate.text && createHash("sha256").update(candidate.text).digest("hex") === candidate.hash) ||
+        !/^[a-f\d]{40}$/.test(inspection.sha) ||
+        !codeCandidate({ path: source.path, type: "blob", size: Buffer.byteLength(source.text) }) ||
+        source.url !== `https://github.com/${inspection.repo.full_name}/blob/${inspection.sha}/${source.path.split("/").map(encodeURIComponent).join("/")}` ||
+        !Number.isSafeInteger(startLine) || !Number.isSafeInteger(endLine) || startLine < 1 || endLine < startLine ||
+        endLine > source.text.split("\n").length || !Array.isArray(ranges) || !ranges.length ||
+        ranges.some((range) => !Array.isArray(range) || range.length !== 2 ||
+          !Number.isSafeInteger(range[0]) || !Number.isSafeInteger(range[1]) ||
+          range[0] < startLine || range[1] < range[0] || range[1] > endLine))))) {
+    const status = attempts >= MAX_REVIEW_ATTEMPTS ? "retry-exhausted" : "deferred";
+    return finish(status, "invalid-witness", { state: { attempts, ...(status === "deferred" ? {
+      nextAttemptAt: nextAttemptAt(),
+    } : {}) } });
+  }
+  if (!verdict.verified) return finish("rejected", verdict.reasonCode, { state: { attempts } });
+  const baseSummary = {
+    category: verdict.category,
+    plainSummary: verdict.plainSummary, plainSummaryEn: verdict.plainSummaryEn,
+    jevDecisionPoint: verdict.plainSummary, jevDecisionPointEn: verdict.plainSummaryEn,
+    highlightBenefit: "已定位固定版本的实现源码；尚无独立运行或性能验证。",
+    highlightBenefitEn: "Implementation evidence is pinned to a source revision; runtime and performance are not independently verified.",
+    tags: inferCanonicalTags({ category: verdict.category, tags: [] }),
+    summarySource: "ai-evidence-witness",
+  };
+  // Reuse the checked summaries without reading native prose or making a second request.
+  const { enrichment: _diagnostics, ...enriched } = await enrichSummary({ reviewed, fallback: baseSummary });
+  const files = [...new Map(witnessNodes.map(({ source }) => [source.path, source])).values()]
+    .map(({ path, url, hash }) => ({ path, url, hash }));
+  const nodes = witnessNodes.map(({ id, source, kind, startLine, endLine, ranges }) =>
+    ({ id, path: source.path, hash: source.hash, kind, startLine, endLine, ranges: ranges.map((range) => [...range]) }));
+  return finish("accepted", verdict.reasonCode, {
+    reviewed: { ...reviewed, ...verdict }, implementationFiles,
+    sourceVerification: { method: "ai-evidence-witness-v1", sha: inspection.sha, files, role: verdict.role,
+      witness: verdict.witness, nodes, implementationFiles: implementationFiles.map(({ path }) => path) },
+    summary: { ...enriched, ...baseSummary }, state: { attempts },
+  });
+}
 
 export function summarize(repo, readme, taxonomy) {
   const focused = `${repo.name} ${repo.description ?? ""} ${(repo.topics ?? []).join(" ")} ${readme.slice(0, 7000)}`;
@@ -470,7 +571,7 @@ export async function main() {
   for (const candidate of list.slice(0, maxCandidates)) {
     const full = candidate.repo.full_name;
     report.discovery.checked++;
-    reviewState[full] = { checkedAt: started };
+    const previousState = reviewState[full] ?? {};
     try {
       const inspection = await inspectRepository({
         api,
@@ -479,98 +580,25 @@ export async function main() {
         exclusions,
         verifyIntegration,
         requireCodeEvidence: true,
+        semanticReview: true,
+        preferredPaths: [...candidate.paths],
       });
-      if (inspection.repo?.fork) {
-        receipts.push({ repo: full, status: "rejected", reason: "forks are not ingested" });
-        report.discovery.rejected++;
-        continue;
-      }
       const nativeReadmes = inspection.readmeFiles ?? [];
-      const sourceText =
-        nativeReadmes.map((file) => file.text).join("\n\n") || inspection.readme || "";
-      const codeSources = (inspection.evidence?.files ?? []).filter(
-        (file) => !nativeReadmes.some((rf) => rf.path === file.path),
-      );
-
-      // L2: MUSE API Review Gate — Evaluate if candidate genuinely integrates Jev primitives
-      let reviewVerdict = null;
-      if (typeof reviewCandidate === "function" && inspection.repo && codeSources.length > 0) {
-        reviewVerdict = await reviewCandidate({
-          repo: inspection.repo,
-          readme: sourceText,
-          codeSources,
-          issueBody: "",
-          issueTrusted: false,
-          taxonomy,
-        });
-      }
-
-      if (reviewVerdict) {
-        if (reviewVerdict.verified === false) {
-          const hasDeterministicEvidence =
-            inspection.status === "accepted" &&
-            (inspection.evidence?.implementationFiles ?? []).length > 0;
-          if (!hasDeterministicEvidence) {
-            receipts.push({
-              repo: full,
-              status: "rejected",
-              reason: reviewVerdict.reason || "MUSE 审查未通过：未发现有效的 Jev 原语决策调用",
-              reviewDetails: {
-                verified: false,
-                confidence: reviewVerdict.confidence,
-                reason: reviewVerdict.reason,
-              },
-            });
-            report.discovery.rejected++;
-            continue;
-          }
-        } else if (reviewVerdict.verified === true) {
-          inspection.status = "accepted";
-          if (inspection.evidence) {
-            inspection.evidence.verified = true;
-            if (!inspection.evidence.implementationFiles?.length && codeSources.length > 0) {
-              inspection.evidence.implementationFiles = [codeSources[0]];
-            }
-          }
-        }
-      }
-
-      if (inspection.status !== "accepted") {
-        receipts.push({ repo: full, status: "rejected", reason: inspection.reason ?? "rejected" });
-        report.discovery.rejected++;
+      const decision = await reviewRadarCandidate({ inspection, taxonomy, previousState, now: started });
+      reviewState[full] = decision.state;
+      if (decision.status !== "accepted") {
+        receipts.push({ repo: full, status: decision.status, reason: decision.reason, cached: decision.cached === true,
+          reviewDetails: decision.reviewDetails });
+        if (decision.status === "rejected") report.discovery.rejected++;
+        else report.discovery.deferred++;
         continue;
       }
 
-      const { repo, commits, sha, readme, evidence } = inspection;
-      const implementation = evidence.implementationFiles?.[0];
+      const { repo, commits, sha } = inspection;
+      const { implementationFiles, reviewed, summary } = decision;
+      const implementation = implementationFiles[0];
       if (!implementation) throw new Error("No immutable implementation evidence");
       const sourceContent = implementation.text;
-
-      const baseSummary = summarize(repo, sourceText, taxonomy);
-      if (reviewVerdict?.category && taxonomy.some((t) => t.category === reviewVerdict.category)) {
-        baseSummary.category = reviewVerdict.category;
-      }
-      if (reviewVerdict?.tags?.length) {
-        baseSummary.tags = inferCanonicalTags({
-          category: baseSummary.category,
-          tags: reviewVerdict.tags,
-        });
-      }
-      if (reviewVerdict?.jevDecisionPoint) {
-        baseSummary.jevDecisionPoint = reviewVerdict.jevDecisionPoint;
-      }
-      if (reviewVerdict?.plainSummary) {
-        baseSummary.plainSummary = reviewVerdict.plainSummary;
-      }
-      if (reviewVerdict?.plainSummaryEn) {
-        baseSummary.plainSummaryEn = reviewVerdict.plainSummaryEn;
-      }
-
-      const summary = await enrichCandidateSummary(
-        repo,
-        sourceText,
-        baseSummary,
-      );
       const sourceUrl = implementation.url;
       const project = {
         id: `${repo.owner.login}:${repo.name}`.toLowerCase(),
@@ -595,12 +623,10 @@ export async function main() {
         verificationStatus: "integration-detected",
         runtimeVerified: false,
         discoveredAt: started,
-        evidence: [{ url: sourceUrl, note: "自动发现的 Jev 集成证据" }],
-        sourceVerification: {
-          method: "bounded-source-heuristic",
-          sha,
-          files: evidence.implementationFiles.map(({path, url, hash}) => ({path, url, hash})),
-        },
+        claimStatus: "模型依据固定版本源码关系见证自动裁决；未经本站运行、安全或性能验证。",
+        claimStatusEn: "Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.",
+        evidence: decision.sourceVerification.files.map(({ url }) => ({ url, note: "固定版本的实现源码见证" })),
+        sourceVerification: decision.sourceVerification,
         sourceHash: createHash("sha256").update(sourceContent).digest("hex"),
       };
       known.push(project);
@@ -611,7 +637,9 @@ export async function main() {
         status: "accepted",
         sourceUrl,
         sourceHash: project.sourceHash,
-        evidence: evidence.evidence,
+        reason: decision.reason,
+        role: reviewed.role,
+        reviewDetails: decision.reviewDetails,
         readmeSources: nativeReadmes.map(({ path, url, hash }) => ({
           path,
           url,
@@ -620,6 +648,7 @@ export async function main() {
       });
       console.log(`[new] ${full} → ${project.category}`);
     } catch (e) {
+      reviewState[full] = { ...previousState, checkedAt: started };
       receipts.push({ repo: full, status: "error", error: e.message });
       console.log(`[candidate] ${full}: ${e.message}`);
     }
