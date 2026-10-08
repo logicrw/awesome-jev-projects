@@ -152,7 +152,7 @@ export async function consultMosForRepair({
   );
   const openrouter = endpoint ? endpoint === "https://openrouter.ai/api/v1/chat/completions" : token.startsWith("sk-or-");
   const url = endpoint || (isDeepSeek ? "https://api.deepseek.com/chat/completions" : openrouter ? "https://openrouter.ai/api/v1/chat/completions" : "https://api.meta.ai/v1/chat/completions");
-  const expectedModel = isDeepSeek ? (model || "deepseek-chat") : (openrouter ? "meta/muse-spark-1.3-contributor" : "muse-spark-1.3-contributor");
+  const expectedModel = isDeepSeek ? (model || "deepseek-flash") : (openrouter ? "meta/muse-spark-1.3-contributor" : "muse-spark-1.3-contributor");
   // Do not send a credential to an arbitrary configured URL or silently switch
   // to another model/provider while reporting that MOS performed the repair.
   const allowedEndpoints = [

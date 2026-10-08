@@ -263,7 +263,7 @@ export function createSummaryEnricher({
     process.env.MUSE_MODEL ||
     process.env.MODELS_MODEL ||
     (isDeepSeek
-      ? "deepseek-chat"
+      ? "deepseek-flash"
       : isMuse
         ? token?.startsWith("sk-or-")
           ? "meta/muse-spark-1.3-contributor"
@@ -572,7 +572,7 @@ export function createSubmissionReviewer({
     (isDeepSeek ? "https://api.deepseek.com/chat/completions" : isMuse ? token?.startsWith("sk-or-") ? "https://openrouter.ai/api/v1/chat/completions" :
       "https://api.meta.ai/v1/chat/completions" : MODELS_URL);
   const resolvedModel = model || process.env.DEEPSEEK_MODEL || process.env.MUSE_MODEL || process.env.MODELS_MODEL ||
-    (isDeepSeek ? "deepseek-chat" : isMuse ? token?.startsWith("sk-or-") ? "meta/muse-spark-1.3-contributor" :
+    (isDeepSeek ? "deepseek-flash" : isMuse ? token?.startsWith("sk-or-") ? "meta/muse-spark-1.3-contributor" :
       "muse-spark-1.3-contributor" : "gpt-4o-mini");
   const modelSource = source || (isDeepSeek ? "deepseek" : isMuse ? "muse-spark" : "github-models");
 

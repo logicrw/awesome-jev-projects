@@ -516,7 +516,7 @@ test("MUSE Spark OpenRouter key routes to OpenRouter endpoint with referrer head
   assert.equal(result.enrichment.plainSummary.source, "muse-spark");
 });
 
-test("DeepSeek API routes to DeepSeek endpoint with deepseek-chat model and source", async () => {
+test("DeepSeek API routes to DeepSeek endpoint with deepseek-flash model and source", async () => {
   let calledUrl = "";
   let calledModel = "";
   let calledAuth = "";
@@ -533,7 +533,7 @@ test("DeepSeek API routes to DeepSeek endpoint with deepseek-chat model and sour
   });
   const result = await enrich({ repo: { ...repo, description: "" }, fallback });
   assert.equal(calledUrl, "https://api.deepseek.com/chat/completions");
-  assert.equal(calledModel, "deepseek-chat");
+  assert.equal(calledModel, "deepseek-flash");
   assert.equal(calledAuth, "Bearer sk-deepseek-test-key-12345");
   assert.equal(sentPayload.reasoning_effort, undefined);
   assert.equal(result.enrichment.plainSummary.source, "deepseek");
