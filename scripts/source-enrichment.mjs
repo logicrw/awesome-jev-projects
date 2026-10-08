@@ -656,22 +656,38 @@ export function createSubmissionReviewer({
         }
         const content = payload?.choices?.[0]?.message?.content;
         if (typeof content !== "string" || Buffer.byteLength(content, "utf8") > 6000 ||
-            (payload.choices[0].finish_reason != null && payload.choices[0].finish_reason !== "stop"))
+            (payload.choices[0].finish_reason != null && payload.choices[0].finish_reason !== "stop")) {
+          receipt.failureStage = "content-or-finish-reason";
+          receipt.finishReason = payload?.choices?.[0]?.finish_reason;
+          receipt.contentLength = typeof content === "string" ? content.length : -1;
           throw new SyntaxError("invalid-output");
-        // Markdown fences and coercions are not JSON schema compatibility.
-        const generated = JSON.parse(content);
-        // The model selects a compact, zero-based category index. Only this local
-        // table can map it to a canonical category; arbitrary names cannot pass.
+        }
+        let generated;
+        try {
+          generated = JSON.parse(content);
+        } catch (e) {
+          receipt.failureStage = "json-parse-failed";
+          receipt.rawContentHead = content.slice(0, 150);
+          receipt.rawContentTail = content.slice(-100);
+          throw new SyntaxError("invalid-output");
+        }
         if (!generated || typeof generated !== "object" || Array.isArray(generated) ||
             !(generated.category === null || (Number.isInteger(generated.category) &&
-              generated.category >= 0 && generated.category < taxonomy.length)))
+              generated.category >= 0 && generated.category < taxonomy.length))) {
+          receipt.failureStage = "category-invalid";
+          receipt.categoryValue = generated?.category;
           throw new SyntaxError("invalid-output");
+        }
         const verdict = validateVerdict({ ...generated,
           category: generated.category === null ? null : taxonomy[generated.category].category,
         }, bundle, taxonomy);
         if (!verdict || (verdict.verified === true && SUMMARY_FIELDS.some((field) =>
-          !isSummary(verdict[field], field === "plainSummary" ? "zh" : "en", token))))
+          !isSummary(verdict[field], field === "plainSummary" ? "zh" : "en", token)))) {
+          receipt.failureStage = "verdict-invalid";
+          receipt.verdictNull = !verdict;
+          receipt.generatedVerified = generated?.verified;
           throw new SyntaxError("invalid-output");
+        }
         receipt.status = "completed";
         const completed = result("completed", {
           ...verdict, reason: REVIEW_REASONS[verdict.reasonCode],

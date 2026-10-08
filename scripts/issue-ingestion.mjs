@@ -664,7 +664,18 @@ async function main() {
         verified: review.verified,
         reviewStatus: review.status,
         reason: review.reason,
-        attempts: review.attempts?.map((a) => ({ attempt: a.attempt, status: a.status, httpStatus: a.httpStatus })),
+        attempts: review.attempts?.map((a) => ({
+          attempt: a.attempt,
+          status: a.status,
+          httpStatus: a.httpStatus,
+          failureStage: a.failureStage,
+          finishReason: a.finishReason,
+          contentLength: a.contentLength,
+          rawContentHead: a.rawContentHead,
+          categoryValue: a.categoryValue,
+          verdictNull: a.verdictNull,
+          generatedVerified: a.generatedVerified,
+        })),
         usage: review.usage,
       };
       await atomicJSON(resultPath, result);
