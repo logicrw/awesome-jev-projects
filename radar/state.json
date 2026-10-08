@@ -1,26 +1,26 @@
 {
   "_searchCursors": {
-    "repositories:topic:jev fork:false": 3,
-    "repositories:typesafe jev fork:false": 7,
-    "repositories:typesafe-ai fork:false": 7,
-    "repositories:jev-mcp fork:false": 5,
-    "repositories:jev decision fork:false": 3,
-    "repositories:\"TypeSafe AI\" in:readme fork:false": 7,
-    "repositories:\"Jev API\" in:readme fork:false": 5,
-    "repositories:topic:typesafe-ai fork:false": 1,
-    "repositories:topic:typesafe ai fork:false": 3,
-    "repositories:\"api.typesafe.ai\" in:readme fork:false": 5,
-    "repositories:\"typesafe.ai\" \"jev\" in:readme fork:false": 7,
+    "repositories:topic:jev fork:false": 5,
+    "repositories:typesafe jev fork:false": 9,
+    "repositories:typesafe-ai fork:false": 9,
+    "repositories:jev-mcp fork:false": 1,
+    "repositories:jev decision fork:false": 5,
+    "repositories:\"TypeSafe AI\" in:readme fork:false": 9,
+    "repositories:\"Jev API\" in:readme fork:false": 7,
+    "repositories:topic:typesafe-ai fork:false": 3,
+    "repositories:topic:typesafe ai fork:false": 1,
+    "repositories:\"api.typesafe.ai\" in:readme fork:false": 7,
+    "repositories:\"typesafe.ai\" \"jev\" in:readme fork:false": 9,
     "repositories:\"from typesafe import jev\" in:readme fork:false": 1,
-    "repositories:\"@typesafe/jev\" in:readme fork:false": 7,
-    "code:\"api.typesafe.ai\" in:file": 7,
-    "code:\"typesafe.ai\" in:file": 7,
+    "repositories:\"@typesafe/jev\" in:readme fork:false": 9,
+    "code:\"api.typesafe.ai\" in:file": 9,
+    "code:\"typesafe.ai\" in:file": 9,
     "code:\"from typesafe import\" in:file": 1,
     "code:\"@typesafe/jev\" in:file": 1,
-    "commits:\"typesafe.ai\"": 7,
-    "commits:\"Jev\" \"AI\"": 3,
-    "issues:\"typesafe.ai\" is:pr in:title,body": 3,
-    "issues:\"Jev\" \"TypeSafe\" is:pr in:title,body": 7
+    "commits:\"typesafe.ai\"": 9,
+    "commits:\"Jev\" \"AI\"": 5,
+    "issues:\"typesafe.ai\" is:pr in:title,body": 1,
+    "issues:\"Jev\" \"TypeSafe\" is:pr in:title,body": 9
   },
   "tamaratran/fast-jev-compaction": {
     "checkedAt": "2026-09-18T06:52:26.940Z"
@@ -3890,6 +3890,426 @@
     "checkedAt": "2026-10-08T13:07:30.607Z",
     "status": "blocked",
     "reason": "circuit-open",
+    "attempts": 1
+  },
+  "alanhuangyoo/OpenJev": {
+    "fingerprint": "0a9fff01f248ee8189d8f43db9d52b724dfc9e3461aa53b6035faedef4a0a505",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "brianhong-dev/omo-jev-plugin": {
+    "fingerprint": "b3561ba1d0100a0b174398bc3fc9ba437a0d818463a47cbb2ccc180458ae4400",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "rayanweragala/jev-call-router": {
+    "fingerprint": "e5bd7cf243899fb560b75212ebf4d91c6df24a5226438ee2e27bee4498b58b4b",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Algorythm-Canada/OpenJevSwift": {
+    "fingerprint": "53d95a3fecc7ed79b52a8818362c8a6854d859ab933d597aead12571f1eb03ce",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Joe-rq/ReJev": {
+    "fingerprint": "461fa8c9112f31b3d8b485a3422814f32b28b813d0c4e189f9e1a6da70be3a9c",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "mani-aiml/jev-demos": {
+    "fingerprint": "b72fbeaf4393424a9a80e3deb11225c1d6b3b52398485bad2ebe88feb256aa89",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "HsiangNianian/jev-turtle-soup": {
+    "fingerprint": "a3c93a1c6fb41eb39f6d89fb1926d50da023508df7e0ce1ade642962b5f0dfaf",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "n23eos/jev-skills": {
+    "fingerprint": "35126a1d50dd8fb1098676d91bce9ac3f305275d0bfe17f8316c9c5e898725dc",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "mity-prodgen/jev-test": {
+    "fingerprint": "5e3cb1f08ac22c053227ce95e52c92377b4ef91ed4413565ff305f12d1c6c579",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Merth1470/jev-research-mcp": {
+    "fingerprint": "576d981728e938197af5157a713ab54a2aecd9ce4c7fac583d79c88cea8ad0f2",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "harris21/decide-with-jev": {
+    "fingerprint": "b8ef85abdbd93ff95635de1429990a54ab64b8522ca3096d561114b5f836e6bd",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "alexdoandev/jev-laya-dsh": {
+    "fingerprint": "5880da16d1405a0699f8169e5e8b1ad6fa294c56348a3aee5581f242ec7f5006",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "muyouzhi6/astrbot_plugin_jev_active_reply": {
+    "fingerprint": "0044b8a8e7306bcfff1ace2af461ab1075030c285fef7a1bc9146390d25ab9aa",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "parall-hq/jevable": {
+    "fingerprint": "922de71a841a1838ed8c853b6276a78290970961868b0510b3ac9295f69c9080",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "JussCubs/jev-conductor-router": {
+    "fingerprint": "faa6832acbba2fbfebb2fc21f1c690e1289765e8ae2caee13e9b2e1e3a7e93e4",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "tincke10/Jevest": {
+    "fingerprint": "c0103fbf3895148ba548ae3d709900b40aaf9eda87aba6e7f70eb84bdd642e99",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Jev-trading/Jev-trading": {
+    "fingerprint": "3516989bf1125786812aeef8dc687fb4cffb17a9cf4ce429da89409c9d411f5a",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "altregubov/jev-antigravity-mcp": {
+    "fingerprint": "46cf0ee6642eed8768d452e17c54e8ad8fe9a39f9fb75fb5598441578a1eeb67",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "cnrai/openpave-jev": {
+    "fingerprint": "62e33ed9e9c7c78f9a1bf4f7c61ad96457127c20c161d785d9a0a22fb2508c89",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "RyanErkal/jevcast": {
+    "fingerprint": "7b9553346ff52911c27f44bfad9779ad2594df195c1ff76aad93eb8a90741fc5",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "h1code2/jev-x-blocker": {
+    "fingerprint": "0882885f8bc840445716e7be15ba1a5d08dbc2616e7ccdce9bf02eb47bfd8710",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "hongliang-wei/jevtrainer": {
+    "fingerprint": "29067d3ac2d1a906c1946acc6e01efc170684c7869bed0312d821c30fe3c81b2",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "CMaintz/jev-dotnet": {
+    "fingerprint": "d08027a0bf3d02ec0383f26e6fb14da74bc857b0d238aa9d80bdc22c989a1817",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "rinti/wagtail-jev": {
+    "fingerprint": "47d5413b67d477b10b7c3eb3839b8c0efaa484c9ceee7329ec1c3082d0f4e6c9",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "bragamat/jevkit": {
+    "fingerprint": "a17e800e465c8db93dd4b05e19c53693ae94c3085da5e14896511f25caa27718",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "yasdelayu/jev-crypto-scout": {
+    "fingerprint": "4f6848d7416cef52fb1fc92c958314328b61e250eb0314094434ebb756d67692",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "krishhgg/jev-map": {
+    "fingerprint": "e49c52dec978064e4c1c4d33c7464f05a5c738f650729d62da0d40682da03ab8",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "thezem/jev-one": {
+    "fingerprint": "39e6d75e08762b47f2efd71758dc6e91483df20f0991b850234682e4451fa7aa",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "kyan001/DSH-Jev-Thinking": {
+    "fingerprint": "6aa990f2376a9d90244dc30b7fa664bad279f4e9a10a71124fb2bbf1a9f3749c",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "rahulbansalc6414/jev-imdb-benchmark": {
+    "fingerprint": "33027a782548175e71c901155e42769ce1e52507265060ffd57d279f6da82fb3",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Coding-Dev-Tools/jev-decision": {
+    "fingerprint": "e11b85b90f0b7154e8fd2665781c2f2e75121cac809e7c6844e1d483c741c0e9",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "ivancasco/aidlc-plugin-jev": {
+    "fingerprint": "534094513611c74438ac41d3ef8e44dd15632201c3d635b9a4359b512f63516d",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "andretestanalyst/brasileirao-jev": {
+    "fingerprint": "fe09adc1b700880b05927537ace18057ce81baf98eed58df7474d8fbaa3da7b5",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "sprah/jev-monid-poc": {
+    "fingerprint": "952674f000743bc22d33b3c8cb76f2cae4c0f2644137840c41ff25d5deb4cd71",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "raiharsh88/jev-product-compliance": {
+    "fingerprint": "1856cb5cf37ba815284cd0e1e2249e4ce11fc23da30aab1f86f3d347c33e9685",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "CeciliaW888/jev-town": {
+    "fingerprint": "5ee8c75a995a5137ce79863de1b40539ed2acee719eb61e83f72619a3f9c1b8e",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "arthurkatcher/jev-realm-of-iron": {
+    "fingerprint": "681ff7728d848c1f3092dcc6f7b7cece511c8b0869e150bdedf814454cb99a7f",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "agugliotta/jev-kmp": {
+    "fingerprint": "7b70dd8d17c095ec191d244f0c2edac121944c1b75d2572fcb869eee6dc0108e",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Venomous-101/n8n-nodes-jev-ai": {
+    "fingerprint": "2c66e05aa1599f39a1a116a49ab5788cca1f2faa937564f124b891114c6f6c0a",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "julianoczkowski/jev-demo": {
+    "fingerprint": "9bfe9ec5e1457d1a71b433018dfb3b22abbf7c391682f41dc1d5e34c68a5fb9b",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "harshavarma02/system1-jev-laya-agent": {
+    "fingerprint": "32bb641e9d8dbaf64b95aed7382e7f5e1def7b4a308d0c6c8f6831e2e7531db3",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "vamsikrishna2421/jev-usecases": {
+    "fingerprint": "dbdcecb5201c001e0416fe47c790e90c4a59daebdc4befdd11e376a1aef8a379",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "codaaiteam/jev-loop-detector": {
+    "fingerprint": "7091feb1e582cae32066c01caabbff7318389e56b3b13a138b8c44262a2792bf",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 0
+  },
+  "mehdihadeli/typesafe-jev-dotnet-sdk": {
+    "fingerprint": "23b0f3fb7e338591eccf8b53612ff5601e17cc0253e4dc4effd6b97942c25f61",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "themsquared/jev-benchmark": {
+    "fingerprint": "d3a849a87c2652a24d3c1d8ffdbadc8c35dcc978d191df52f663b811a9c48979",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Pinutss/jev-mcp-router": {
+    "fingerprint": "f73ffa98656109df3e9aa355a78cc19364c7e1bdf95b86e40f5fc56153fd1c24",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "minhgv/jev-mcp": {
+    "fingerprint": "4634a7dc034a4dc55b9c4f86d2237d71671a88e702543a046832907f211f2505",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "dnevado/jev-trader": {
+    "fingerprint": "25620974c374a99b48a5decca991908588b98f7142f5b996b251e1a6ebf9991d",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "LimePencil/jev-observer": {
+    "fingerprint": "23f75bee758a736c4d7c040341a9c0bd31f356d7f3d423da9cefe1be97a1420e",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "patrice-blp/jev-llm-orchestration": {
+    "fingerprint": "65be1c30eaf8697fced99abf027bef9d868765d808e71475ef634e7f59fe1225",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "ArchAI-Labs/archai-jev": {
+    "fingerprint": "a437d5b651a956fb700c88788914345e60d7ed586ab07825b32d7b062dab98d1",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "RazeenLI/JevNexus": {
+    "fingerprint": "22449b17c8dbf933e6993fc85381e68df7631be32c6e86936e811549de44dd67",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "iamupd/oh-my-jev": {
+    "fingerprint": "51c4105a22cd279ac4e80464a4b2b4606458eb9e6dd309f8a018b53c6a7137cf",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "ForestMars/Will-It-Jev": {
+    "fingerprint": "0b968e018d42b275e727b9e8b5d873a5ed5785957510cd53e40ca5a3eedc9ef4",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "illescasDaniel/jev-mem": {
+    "fingerprint": "3944af2979a02b89fd96afde8d2e7dc6d64bb34c01f7f5b5f9ba86202fd50e8a",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "rlisml/jev-cascade": {
+    "fingerprint": "53e1189dcfa1b4c367d9ee0a03ab1a25d97c3359d3613f8def381dfd618e86dc",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "bahree/myJEV": {
+    "fingerprint": "86ce0cf7a21f53881bbd4153d90855bb5ef1a042bd5759108b46c1d5d6ad05f4",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "liangruibupt/jev-interest-cases": {
+    "fingerprint": "c94b4a11c9665d887c9c6d825cb259b0d5ddb61a58facfb58a73b693ea28b19d",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "finalfantasy224/jev-chat-linux": {
+    "fingerprint": "aa9d6a892891f7f0b80e0f868fd05da9d6e717ac26c01d1aba8bd19354ced295",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
+    "attempts": 1
+  },
+  "Shearerbeard/jev-driver": {
+    "fingerprint": "04e1146f26f650177ddf80ba947f6fcc2ab0a28e3ea9d30db8eb3880fce9ec52",
+    "checkedAt": "2026-10-08T23:08:19.198Z",
+    "status": "rejected",
+    "reason": "insufficient-evidence",
     "attempts": 1
   }
 }
