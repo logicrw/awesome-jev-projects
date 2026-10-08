@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/ko/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#분류"><img src="https://img.shields.io/badge/Curated%20Projects-854%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#분류"><img src="https://img.shields.io/badge/Curated%20Projects-857%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev (System 1)**는 빠른 타입 안전 결정을 위해 제작된 경량 모델입니다:
 - ⚡ **100ms 미만 초고속 응답**: 50–100ms 내에 결정을 내려 에이전트 루프의 민첩성을 유지합니다.
 - 🎯 **네이티브 타입 출력**: `Choice`, `Score`, `Noul`을 지원하여 취약한 JSON 정규식 파싱이 필요 없습니다.
-- 🛡️ **과대 광고 배제**: 17개 실제 엔지니어링 영역에 걸쳐 공개 소스 커밋이 검증된 854+개 프로젝트만을 엄선했습니다.
+- 🛡️ **과대 광고 배제**: 17개 실제 엔지니어링 영역에 걸쳐 공개 소스 커밋이 검증된 857+개 프로젝트만을 엄선했습니다.
 
 ### 📊 아키텍처 비교: System 1 (Jev) vs System 2 (거대 추론 모델)
 
@@ -50,7 +50,7 @@
 - ⚡ **고정 검색바 및 플로팅 필터**: 페이지를 스크롤하는 중에도 툴바에서 언제든지 태그와 카테고리를 즉시 필터링할 수 있습니다.
 - 🔍 **100% 커밋 고정 소스 검증**: 수록된 모든 프로젝트는 공개 소스 코드의 구체적인 결정 지점과 직접 연결됩니다.
 
-> **[검색 및 필터 ↗](https://logicrw.github.io/awesome-jev-projects/ko/)** · **854 개 엄선 프로젝트**
+> **[검색 및 필터 ↗](https://logicrw.github.io/awesome-jev-projects/ko/)** · **857 개 엄선 프로젝트**
 
 커뮤니티가 운영하는 Jev 프로젝트 디렉터리로, 공개 소스 코드와 명확한 결정 아키텍처를 갖춘 오픈소스 프로젝트를 선별하여 제공합니다.
 
@@ -85,13 +85,13 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [코드 및 그래프 탐색 (16)](https://logicrw.github.io/awesome-jev-projects/ko/categories/codebase-graph-pathfinding/)
 - [Context GC 및 메모리 (42)](https://logicrw.github.io/awesome-jev-projects/ko/categories/context-gc-filter/)
 - [음악 및 UI 제작 (28)](https://logicrw.github.io/awesome-jev-projects/ko/categories/creative-tools/)
-- [데이터 및 검색 (51)](https://logicrw.github.io/awesome-jev-projects/ko/categories/data-search/)
+- [데이터 및 검색 (52)](https://logicrw.github.io/awesome-jev-projects/ko/categories/data-search/)
 - [판단 도구 (42)](https://logicrw.github.io/awesome-jev-projects/ko/categories/decision-tools/)
 - [분야별 도구 (97)](https://logicrw.github.io/awesome-jev-projects/ko/categories/domain-vertical-tools/)
 - [평가 및 관측성 (29)](https://logicrw.github.io/awesome-jev-projects/ko/categories/evaluation-observability/)
-- [게임 및 실시간 판단 (56)](https://logicrw.github.io/awesome-jev-projects/ko/categories/high-frequency-simulation/)
+- [게임 및 실시간 판단 (57)](https://logicrw.github.io/awesome-jev-projects/ko/categories/high-frequency-simulation/)
 - [MCP 및 연동 (56)](https://logicrw.github.io/awesome-jev-projects/ko/categories/mcp-integrations/)
-- [모델 라우팅 (69)](https://logicrw.github.io/awesome-jev-projects/ko/categories/routing-cost-optimization/)
+- [모델 라우팅 (70)](https://logicrw.github.io/awesome-jev-projects/ko/categories/routing-cost-optimization/)
 - [SDK 및 판단 프레임워크 (133)](https://logicrw.github.io/awesome-jev-projects/ko/categories/sdk-decision-frameworks/)
 - [SDK 및 호환 연동 (6)](https://logicrw.github.io/awesome-jev-projects/ko/categories/sdk-integrations/)
 - [보안 및 콘텐츠 검토 (67)](https://logicrw.github.io/awesome-jev-projects/ko/categories/security-guardrails/)
@@ -1376,6 +1376,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev가 판단하는 지점**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **프로젝트의 용도**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [상세 설명 및 고정 버전 소스](https://logicrw.github.io/awesome-jev-projects/ko/projects/zilliztech/vector-graph-rag/) · 라이선스: MIT
+
+- [**jev4pg**](https://github.com/Sheltercosmo/jev4pg) — Semantic querying and gate decisions in PostgreSQL powered by Jev Noul predicates.
+  - **Jev가 판단하는 지점**: JevBackend.infer posts state and typed questions to evaluate Noul predicates during SQL query evaluation.
+  - **프로젝트의 용도**: Pushes semantic decisions down into PostgreSQL query evaluation with full source evidence and audit trails.
+  - [상세 설명 및 고정 버전 소스](https://logicrw.github.io/awesome-jev-projects/ko/projects/sheltercosmo/jev4pg/) · 라이선스: Apache-2.0
 
 - [**jev-semgrep**](https://github.com/uehaj/jev-semgrep) — 각 행이 어떤 의미에 맞는지 Jev로 채점하는 grep. AND/OR/NOT과 언어를 넘나드는 검색이 된다.
   - **Jev가 판단하는 지점**: 약 30행을 묶어 행마다 jev-latest에 Score 또는 Noul을 보내 해당 의미와 맞는지 묻는다.
@@ -2679,6 +2684,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **프로젝트의 용도**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [상세 설명 및 고정 버전 소스](https://logicrw.github.io/awesome-jev-projects/ko/projects/tomrichner/can-jev-bayes/) · 라이선스: Apache-2.0
 
+- [**FlightBench**](https://github.com/AlperKartkaya/FlightBench) — Fixed-wing aircraft landing simulator and benchmark where Jev Choice outputs actuator commands.
+  - **Jev가 판단하는 지점**: Jev receives aircraft states and solves four Choice questions, returning actuator probability distributions to JSBSim.
+  - **프로젝트의 용도**: Benchmarks Jev against LLMs and classical controllers in a high-fidelity flight dynamics simulation.
+  - [상세 설명 및 고정 버전 소스](https://logicrw.github.io/awesome-jev-projects/ko/projects/alperkartkaya/flightbench/) · 라이선스: MIT
+
 - [**jev-charactor**](https://github.com/YichenBC/jev-charactor) — Jev-Character: a TypeScript core for role-playing agents, autonomous game NPCs and AI towns. Agent memory, natural-language behavior authoring and programmatic dialogue, with a playable 2D multi-agent simulation.
   - **Jev가 판단하는 지점**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **프로젝트의 용도**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -3049,6 +3059,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev가 판단하는 지점**: Score 셋으로 작업·추론·도구 복잡도를 재고 사용 가능한 모델에서 Choice한다. 신뢰가 낮거나 Jev가 실패하면 현재 모델을 유지한다.
   - **프로젝트의 용도**: 모델 선택을 검사 가능한 닫힌 집합 판단으로 만든다. Jev를 쓸 수 없어도 현재 세션을 막지 않는다.
   - [상세 설명 및 고정 버전 소스](https://logicrw.github.io/awesome-jev-projects/ko/projects/gargpratyush/jev-router/) · 라이선스: MIT
+
+- [**mu**](https://github.com/qybaihe/mu) — A coding agent built on pi and AionUi whose routine calls at 38 decision points are made by Jev.
+  - **Jev가 판단하는 지점**: Uses Choice, Score, and Noul at 38 decision points including input preflight, tool injection defense, and context GC.
+  - **프로젝트의 용도**: Offloads high-frequency routine decisions to lightweight Jev primitives, reducing token cost and latency.
+  - [상세 설명 및 고정 버전 소스](https://logicrw.github.io/awesome-jev-projects/ko/projects/qybaihe/mu/) · 라이선스: MIT
 
 - [**vexjoy-agent**](https://github.com/notque/vexjoy-agent) — VexJoy 요청을 전문 Agent·skill·workflow에 연결하는 선택형 Jev 경로.
   - **Jev가 판단하는 지점**: 결정적 라우팅 규칙을 거친 뒤 남은 후보와 필요한 구성 요소를 판단한다.

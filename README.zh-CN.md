@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-854%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-857%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：
 - ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。
 - 🎯 **原生确定性输出**：原生支持 `Choice`（多选一）、`Score`（打分）与 `Noul`（二元逻辑与概率），免去易碎的正则提取。
-- 🛡️ **严格拒绝概念炒作**：全网严选 **854+** 个绑定真实公开开源源码版本的落地项目，覆盖 17 大核心工程赛道。
+- 🛡️ **严格拒绝概念炒作**：全网严选 **857+** 个绑定真实公开开源源码版本的落地项目，覆盖 17 大核心工程赛道。
 
 ### 📊 架构分工对比：System 1 (Jev) vs System 2 (大推理模型)
 
@@ -50,7 +50,7 @@
 - ⚡ **毫秒级吸顶搜索与浮动过滤**：即便页面下滑，也可随时唤出浮动分类面板，支持多标签一键点选过滤。
 - 🔍 **100% 绑定固定源码**：所有收录项目均核验真实 commit SHA 与具体接入点，绝无空气包装与死链。
 
-> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **854 个精选项目**
+> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **857 个精选项目**
 
 由社区维护的 Jev 项目与架构雷达，收录具有公开源码与清晰集成逻辑的开源项目，帮助开发者快速探索和落地 System-1 决策架构。
 
@@ -85,13 +85,13 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [代码与图谱 (16)](https://logicrw.github.io/awesome-jev-projects/categories/codebase-graph-pathfinding/)
 - [上下文与记忆 (42)](https://logicrw.github.io/awesome-jev-projects/categories/context-gc-filter/)
 - [音乐与界面创作 (28)](https://logicrw.github.io/awesome-jev-projects/categories/creative-tools/)
-- [数据与搜索 (51)](https://logicrw.github.io/awesome-jev-projects/categories/data-search/)
+- [数据与搜索 (52)](https://logicrw.github.io/awesome-jev-projects/categories/data-search/)
 - [决策工具 (42)](https://logicrw.github.io/awesome-jev-projects/categories/decision-tools/)
 - [行业应用 (97)](https://logicrw.github.io/awesome-jev-projects/categories/domain-vertical-tools/)
 - [评测与观测 (29)](https://logicrw.github.io/awesome-jev-projects/categories/evaluation-observability/)
-- [游戏与实时决策 (56)](https://logicrw.github.io/awesome-jev-projects/categories/high-frequency-simulation/)
+- [游戏与实时决策 (57)](https://logicrw.github.io/awesome-jev-projects/categories/high-frequency-simulation/)
 - [MCP 与集成 (56)](https://logicrw.github.io/awesome-jev-projects/categories/mcp-integrations/)
-- [模型路由与降本 (69)](https://logicrw.github.io/awesome-jev-projects/categories/routing-cost-optimization/)
+- [模型路由与降本 (70)](https://logicrw.github.io/awesome-jev-projects/categories/routing-cost-optimization/)
 - [SDK 与决策框架 (133)](https://logicrw.github.io/awesome-jev-projects/categories/sdk-decision-frameworks/)
 - [SDK 与兼容接入 (6)](https://logicrw.github.io/awesome-jev-projects/categories/sdk-integrations/)
 - [安全与内容审核 (67)](https://logicrw.github.io/awesome-jev-projects/categories/security-guardrails/)
@@ -1376,6 +1376,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在哪一步做判断**: Jev 为每个候选图关系打分，判断其是否提供回答问题所需的事实或多跳中间链接。
   - **这个项目的用途**: 把语义判断接进已有的数据查询流程。
   - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/zilliztech/vector-graph-rag/) · 许可证: MIT
+
+- [**jev4pg**](https://github.com/Sheltercosmo/jev4pg) — 在 PostgreSQL 中使用 Jev Noul 原语进行语义查询过滤与门禁裁决。
+  - **Jev 在哪一步做判断**: JevBackend.infer 向端点发送状态和结构化问题，在 SQL 查询中执行 Noul 谓词过滤。
+  - **这个项目的用途**: 将语义决策下沉至 PostgreSQL 查询链路，保留完整的来源凭据和决策审计。
+  - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/sheltercosmo/jev4pg/) · 许可证: Apache-2.0
 
 - [**jev-semgrep**](https://github.com/uehaj/jev-semgrep) — 用 Jev 给每一行打“是否符合某含义”的分，可用 AND/OR/NOT 组合，并支持跨语言查询。
   - **Jev 在哪一步做判断**: 每批约 30 行，对每行向 \`jev-latest\` 发 Score 或 Noul，问它是否匹配给定含义。
@@ -2679,6 +2684,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **这个项目的用途**: 增加一组可记录、可对照的判断信号。
   - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/tomrichner/can-jev-bayes/) · 许可证: Apache-2.0
 
+- [**FlightBench**](https://github.com/AlperKartkaya/FlightBench) — 固定翼飞机着陆模拟器与基准测试，由 Jev Choice 输出副翼、升降舵、方向舵与油门的控制决策。
+  - **Jev 在哪一步做判断**: Jev 接收飞机状态并回答四个 Choice 问题，输出动作指令概率分布驱动 JSBSim 执行。
+  - **这个项目的用途**: 在高保真动力学模拟环境中对比 Jev、LLM 与经典控制器在连续动作决策上的表现。
+  - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/alperkartkaya/flightbench/) · 许可证: MIT
+
 - [**jev-charactor**](https://github.com/YichenBC/jev-charactor) — jev-charactor：读取当前状态，在可用动作中做选择。
   - **Jev 在哪一步做判断**: 读取当前状态，在可用动作中做选择。
   - **这个项目的用途**: 在连续交互中观察决策效果；频率依实际运行而定。
@@ -3049,6 +3059,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在哪一步做判断**: 三个 Score 衡量任务、推理和工具复杂度，再在可用模型上做 Choice；置信不足或 Jev 失败则保持当前模型。
   - **这个项目的用途**: 把模型选择做成可检查的闭集判断；Jev 不可用时不打断当前会话。
   - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/gargpratyush/jev-router/) · 许可证: MIT
+
+- [**mu**](https://github.com/qybaihe/mu) — 基于 pi 和 AionUi 构建的编程 Agent，在 38 处常规决策点使用 Jev 代替大模型。
+  - **Jev 在哪一步做判断**: 在输入预检、工具防注入、上下文保留等 38 处决策点使用 Choice、Score 和 Noul 原语裁决。
+  - **这个项目的用途**: 通过轻量级 Jev 原语接管高频常规决策，大幅降低大模型 Token 消耗与响应延迟。
+  - [项目详情与固定源码](https://logicrw.github.io/awesome-jev-projects/projects/qybaihe/mu/) · 许可证: MIT
 
 - [**vexjoy-agent**](https://github.com/notque/vexjoy-agent) — 给 VexJoy 的任务分派增加一条 Jev 路线。输入需求后，判断该选哪位专长 Agent、哪项技能和哪条工作流。
   - **Jev 在哪一步做判断**: 先判断是否需要路由，再从实际清单中选择候选；非法选择或调用失败交回原有流程。

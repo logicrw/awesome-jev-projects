@@ -72956,5 +72956,189 @@
       "issueBodySha256": "595af31afd7166257e4c729316049a334df1e7e7e0b3390729131ad7c4767d6f",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/112"
     }
+  },
+  {
+    "id": "sheltercosmo:jev4pg",
+    "name": "jev4pg",
+    "author": "Sheltercosmo",
+    "url": "https://github.com/Sheltercosmo/jev4pg",
+    "repo": "Sheltercosmo/jev4pg",
+    "repoId": 1383309982,
+    "category": "Data & Search",
+    "plainSummary": "在 PostgreSQL 中使用 Jev Noul 原语进行语义查询过滤与门禁裁决。",
+    "plainSummaryEn": "Semantic querying and gate decisions in PostgreSQL powered by Jev Noul predicates.",
+    "jevDecisionPoint": "JevBackend.infer 向端点发送状态和结构化问题，在 SQL 查询中执行 Noul 谓词过滤。",
+    "jevDecisionPointEn": "JevBackend.infer posts state and typed questions to evaluate Noul predicates during SQL query evaluation.",
+    "highlightBenefit": "将语义决策下沉至 PostgreSQL 查询链路，保留完整的来源凭据和决策审计。",
+    "highlightBenefitEn": "Pushes semantic decisions down into PostgreSQL query evaluation with full source evidence and audit trails.",
+    "tags": [
+      "database-vector",
+      "search-retrieval"
+    ],
+    "stars": 167,
+    "forks": 9,
+    "openIssues": 0,
+    "license": "Apache-2.0",
+    "createdAt": "2026-09-23T11:31:46Z",
+    "lastCommitAt": "2026-10-07T02:52:19Z",
+    "headSha": "511432a94be59423ebc834a1a890d50064ccb538",
+    "metadataFetchedAt": "2026-10-08T10:00:40.658Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/118739729?v=4",
+    "language": "Python",
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-08T10:00:40.658Z",
+    "summarySource": "human-reviewed",
+    "claimStatus": "模型依据固定版本源码关系见证自动裁决；未经本站运行、安全或性能验证。",
+    "claimStatusEn": "Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/Sheltercosmo/jev4pg/blob/511432a94be59423ebc834a1a890d50064ccb538/docs/PROVIDERS.md",
+        "note": "docs/PROVIDERS.md"
+      }
+    ],
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "511432a94be59423ebc834a1a890d50064ccb538",
+      "reviewedAt": "2026-10-08T10:00:40.658Z",
+      "files": [
+        {
+          "path": "docs/PROVIDERS.md",
+          "url": "https://github.com/Sheltercosmo/jev4pg/blob/511432a94be59423ebc834a1a890d50064ccb538/docs/PROVIDERS.md",
+          "hash": "a42404951c566571eb2322561295bd87e8771bc6",
+          "hashType": "sha256"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 113,
+      "issueBodySha256": "6c08c2df3e93b4a7098bc7b205f2439bc977d28b65b53ae1b17e8a786437d02d",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/113"
+    }
+  },
+  {
+    "id": "alperkartkaya:flightbench",
+    "name": "FlightBench",
+    "author": "AlperKartkaya",
+    "url": "https://github.com/AlperKartkaya/FlightBench",
+    "repo": "AlperKartkaya/FlightBench",
+    "repoId": 1395994656,
+    "category": "High-Frequency & Simulation",
+    "plainSummary": "固定翼飞机着陆模拟器与基准测试，由 Jev Choice 输出副翼、升降舵、方向舵与油门的控制决策。",
+    "plainSummaryEn": "Fixed-wing aircraft landing simulator and benchmark where Jev Choice outputs actuator commands.",
+    "jevDecisionPoint": "Jev 接收飞机状态并回答四个 Choice 问题，输出动作指令概率分布驱动 JSBSim 执行。",
+    "jevDecisionPointEn": "Jev receives aircraft states and solves four Choice questions, returning actuator probability distributions to JSBSim.",
+    "highlightBenefit": "在高保真动力学模拟环境中对比 Jev、LLM 与经典控制器在连续动作决策上的表现。",
+    "highlightBenefitEn": "Benchmarks Jev against LLMs and classical controllers in a high-fidelity flight dynamics simulation.",
+    "tags": [
+      "games-simulation",
+      "evaluation-benchmarks"
+    ],
+    "stars": 1,
+    "forks": 1,
+    "openIssues": 4,
+    "license": "MIT",
+    "createdAt": "2026-09-29T16:36:26Z",
+    "lastCommitAt": "2026-09-29T17:30:39Z",
+    "headSha": "6b1163942ed8e98c342a518900214464f7dce6da",
+    "metadataFetchedAt": "2026-10-08T10:00:40.658Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/114335677?v=4",
+    "language": "Python",
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-08T10:00:40.658Z",
+    "summarySource": "human-reviewed",
+    "claimStatus": "模型依据固定版本源码关系见证自动裁决；未经本站运行、安全或性能验证。",
+    "claimStatusEn": "Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/AlperKartkaya/FlightBench/blob/6b1163942ed8e98c342a518900214464f7dce6da/README.md",
+        "note": "README.md"
+      }
+    ],
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "6b1163942ed8e98c342a518900214464f7dce6da",
+      "reviewedAt": "2026-10-08T10:00:40.658Z",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/AlperKartkaya/FlightBench/blob/6b1163942ed8e98c342a518900214464f7dce6da/README.md",
+          "hash": "68da20d2d2906f016823a97deb70881cd87c0383fa1495a8d20a107f15a4ab82",
+          "hashType": "sha256"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 114,
+      "issueBodySha256": "68da20d2d2906f016823a97deb70881cd87c0383fa1495a8d20a107f15a4ab82",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/114"
+    }
+  },
+  {
+    "id": "qybaihe:mu",
+    "name": "mu",
+    "author": "qybaihe",
+    "url": "https://github.com/qybaihe/mu",
+    "repo": "qybaihe/mu",
+    "repoId": 1381412852,
+    "category": "Routing & Cost Optimization",
+    "plainSummary": "基于 pi 和 AionUi 构建的编程 Agent，在 38 处常规决策点使用 Jev 代替大模型。",
+    "plainSummaryEn": "A coding agent built on pi and AionUi whose routine calls at 38 decision points are made by Jev.",
+    "jevDecisionPoint": "在输入预检、工具防注入、上下文保留等 38 处决策点使用 Choice、Score 和 Noul 原语裁决。",
+    "jevDecisionPointEn": "Uses Choice, Score, and Noul at 38 decision points including input preflight, tool injection defense, and context GC.",
+    "highlightBenefit": "通过轻量级 Jev 原语接管高频常规决策，大幅降低大模型 Token 消耗与响应延迟。",
+    "highlightBenefitEn": "Offloads high-frequency routine decisions to lightweight Jev primitives, reducing token cost and latency.",
+    "tags": [
+      "coding-agents",
+      "context-compaction",
+      "security-guardrails"
+    ],
+    "stars": 448,
+    "forks": 45,
+    "openIssues": 1,
+    "license": "MIT",
+    "createdAt": "2026-09-22T11:56:05Z",
+    "lastCommitAt": "2026-10-08T08:30:39Z",
+    "headSha": "537d028f483eae210f049a922e9c8e473a1b005d",
+    "metadataFetchedAt": "2026-10-08T10:00:40.658Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/137127051?v=4",
+    "language": "TypeScript",
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-08T10:00:40.658Z",
+    "summarySource": "human-reviewed",
+    "claimStatus": "模型依据固定版本源码关系见证自动裁决；未经本站运行、安全或性能验证。",
+    "claimStatusEn": "Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/qybaihe/mu/blob/537d028f483eae210f049a922e9c8e473a1b005d/packages/kyrn-judge/src/providers/typesafe.ts",
+        "note": "packages/kyrn-judge/src/providers/typesafe.ts"
+      }
+    ],
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "537d028f483eae210f049a922e9c8e473a1b005d",
+      "reviewedAt": "2026-10-08T10:00:40.658Z",
+      "files": [
+        {
+          "path": "packages/kyrn-judge/src/providers/typesafe.ts",
+          "url": "https://github.com/qybaihe/mu/blob/537d028f483eae210f049a922e9c8e473a1b005d/packages/kyrn-judge/src/providers/typesafe.ts",
+          "hash": "a0ff28f44485fb61c8c7248b4e419c498d9e154fe7a3a6deb124374717665340",
+          "hashType": "sha256"
+        }
+      ]
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 115,
+      "issueBodySha256": "a0ff28f44485fb61c8c7248b4e419c498d9e154fe7a3a6deb124374717665340",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/115"
+    }
   }
 ]

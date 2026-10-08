@@ -4,7 +4,7 @@ The definitive community radar and directory for TypeSafe Jev and System-1 Agent
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 854
+Catalog entries: 857
 
 ## Install the Agent Skill
 
@@ -11979,3 +11979,42 @@ Open-weight Jev alternative that serves /v1/systemone locally, with calibrated N
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/samratduttaofficial/watersheep/
 - Source evidence: https://github.com/SamratDuttaOfficial/WaterSheep/blob/3ccf02b3839fd2d72e6fb29750488010c7d76360/README.md
 - Source evidence: https://github.com/SamratDuttaOfficial/WaterSheep/blob/3ccf02b3839fd2d72e6fb29750488010c7d76360/watersheep/cli.py
+
+## jev4pg
+
+Semantic querying and gate decisions in PostgreSQL powered by Jev Noul predicates.
+
+- Repository: https://github.com/Sheltercosmo/jev4pg
+- Category: Data & Search
+- Jev decision: JevBackend.infer posts state and typed questions to evaluate Noul predicates during SQL query evaluation.
+- Purpose: Pushes semantic decisions down into PostgreSQL query evaluation with full source evidence and audit trails.
+- Review scope: Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.
+- License: Apache-2.0
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/sheltercosmo/jev4pg/
+- Source evidence: https://github.com/Sheltercosmo/jev4pg/blob/511432a94be59423ebc834a1a890d50064ccb538/docs/PROVIDERS.md
+
+## FlightBench
+
+Fixed-wing aircraft landing simulator and benchmark where Jev Choice outputs actuator commands.
+
+- Repository: https://github.com/AlperKartkaya/FlightBench
+- Category: High-Frequency & Simulation
+- Jev decision: Jev receives aircraft states and solves four Choice questions, returning actuator probability distributions to JSBSim.
+- Purpose: Benchmarks Jev against LLMs and classical controllers in a high-fidelity flight dynamics simulation.
+- Review scope: Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/alperkartkaya/flightbench/
+- Source evidence: https://github.com/AlperKartkaya/FlightBench/blob/6b1163942ed8e98c342a518900214464f7dce6da/README.md
+
+## mu
+
+A coding agent built on pi and AionUi whose routine calls at 38 decision points are made by Jev.
+
+- Repository: https://github.com/qybaihe/mu
+- Category: Routing & Cost Optimization
+- Jev decision: Uses Choice, Score, and Noul at 38 decision points including input preflight, tool injection defense, and context GC.
+- Purpose: Offloads high-frequency routine decisions to lightweight Jev primitives, reducing token cost and latency.
+- Review scope: Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/qybaihe/mu/
+- Source evidence: https://github.com/qybaihe/mu/blob/537d028f483eae210f049a922e9c8e473a1b005d/packages/kyrn-judge/src/providers/typesafe.ts

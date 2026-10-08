@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/en/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#categories"><img src="https://img.shields.io/badge/Curated%20Projects-854%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#categories"><img src="https://img.shields.io/badge/Curated%20Projects-857%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@ When building autonomous agents, routing every small branching decision to a hea
 **TypeSafe Jev (System 1)** is purpose-built for fast, typed discrete decisions:
 - ⚡ **Sub-100ms Latency**: Delivers decisions in 50–100ms to keep agent loops snappy.
 - 🎯 **Native Typed Outputs**: Built-in primitives for `Choice`, `Score`, and `Noul` without fragile JSON regex parsing.
-- 🛡️ **Zero Vaporware**: 854+ projects rigorously anchored to verifiable, commit-pinned public open source across 17 real-world domains.
+- 🛡️ **Zero Vaporware**: 857+ projects rigorously anchored to verifiable, commit-pinned public open source across 17 real-world domains.
 
 ### 📊 Architecture Comparison: System 1 (Jev) vs System 2 (Reasoning LLMs)
 
@@ -50,7 +50,7 @@ When building autonomous agents, routing every small branching decision to a hea
 - ⚡ **Sticky Search & Floating Popover Filter**: Filter tags and categories anytime while scrolling via the anchored toolbar popover.
 - 🔍 **100% Commit-Pinned Code Evidence**: Every listed project links to immutable source files and explicit decision points.
 
-> **[Search and filter ↗](https://logicrw.github.io/awesome-jev-projects/en/)** · **854 curated projects**
+> **[Search and filter ↗](https://logicrw.github.io/awesome-jev-projects/en/)** · **857 curated projects**
 
 A community-maintained directory and radar for Jev, highlighting open-source projects with verified code and clear decision architectures.
 
@@ -85,13 +85,13 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [Code Navigation (16)](https://logicrw.github.io/awesome-jev-projects/en/categories/codebase-graph-pathfinding/)
 - [Context GC (42)](https://logicrw.github.io/awesome-jev-projects/en/categories/context-gc-filter/)
 - [Creative Tools (28)](https://logicrw.github.io/awesome-jev-projects/en/categories/creative-tools/)
-- [Data & Search (51)](https://logicrw.github.io/awesome-jev-projects/en/categories/data-search/)
+- [Data & Search (52)](https://logicrw.github.io/awesome-jev-projects/en/categories/data-search/)
 - [Decision Tools (42)](https://logicrw.github.io/awesome-jev-projects/en/categories/decision-tools/)
 - [Domain Tools (97)](https://logicrw.github.io/awesome-jev-projects/en/categories/domain-vertical-tools/)
 - [Evaluation & Observability (29)](https://logicrw.github.io/awesome-jev-projects/en/categories/evaluation-observability/)
-- [High-Frequency / Games (56)](https://logicrw.github.io/awesome-jev-projects/en/categories/high-frequency-simulation/)
+- [High-Frequency / Games (57)](https://logicrw.github.io/awesome-jev-projects/en/categories/high-frequency-simulation/)
 - [MCP & Integrations (56)](https://logicrw.github.io/awesome-jev-projects/en/categories/mcp-integrations/)
-- [Model Routing (69)](https://logicrw.github.io/awesome-jev-projects/en/categories/routing-cost-optimization/)
+- [Model Routing (70)](https://logicrw.github.io/awesome-jev-projects/en/categories/routing-cost-optimization/)
 - [SDK & Decision Frameworks (133)](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-decision-frameworks/)
 - [SDK Integrations (6)](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-integrations/)
 - [Security & Guardrails (67)](https://logicrw.github.io/awesome-jev-projects/en/categories/security-guardrails/)
@@ -1376,6 +1376,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Where Jev makes a decision**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Project details and fixed source](https://logicrw.github.io/awesome-jev-projects/en/projects/zilliztech/vector-graph-rag/) · License: MIT
+
+- [**jev4pg**](https://github.com/Sheltercosmo/jev4pg) — Semantic querying and gate decisions in PostgreSQL powered by Jev Noul predicates.
+  - **Where Jev makes a decision**: JevBackend.infer posts state and typed questions to evaluate Noul predicates during SQL query evaluation.
+  - **What this project offers**: Pushes semantic decisions down into PostgreSQL query evaluation with full source evidence and audit trails.
+  - [Project details and fixed source](https://logicrw.github.io/awesome-jev-projects/en/projects/sheltercosmo/jev4pg/) · License: Apache-2.0
 
 - [**jev-semgrep**](https://github.com/uehaj/jev-semgrep) — A semantic grep that scores each line with Jev against a meaning, including AND/OR/NOT and cross-language queries.
   - **Where Jev makes a decision**: Batches about thirty lines and asks jev-latest a Score or Noul per line for the stated meaning.
@@ -2679,6 +2684,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Project details and fixed source](https://logicrw.github.io/awesome-jev-projects/en/projects/tomrichner/can-jev-bayes/) · License: Apache-2.0
 
+- [**FlightBench**](https://github.com/AlperKartkaya/FlightBench) — Fixed-wing aircraft landing simulator and benchmark where Jev Choice outputs actuator commands.
+  - **Where Jev makes a decision**: Jev receives aircraft states and solves four Choice questions, returning actuator probability distributions to JSBSim.
+  - **What this project offers**: Benchmarks Jev against LLMs and classical controllers in a high-fidelity flight dynamics simulation.
+  - [Project details and fixed source](https://logicrw.github.io/awesome-jev-projects/en/projects/alperkartkaya/flightbench/) · License: MIT
+
 - [**jev-charactor**](https://github.com/YichenBC/jev-charactor) — Jev-Character: a TypeScript core for role-playing agents, autonomous game NPCs and AI towns. Agent memory, natural-language behavior authoring and programmatic dialogue, with a playable 2D multi-agent simulation.
   - **Where Jev makes a decision**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -3049,6 +3059,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Where Jev makes a decision**: Scores task, reasoning, and tool complexity, then chooses among the exact models the account can run; failures keep the current model.
   - **What this project offers**: Makes model choice an inspectable closed-set decision, and never blocks a prompt when Jev is down.
   - [Project details and fixed source](https://logicrw.github.io/awesome-jev-projects/en/projects/gargpratyush/jev-router/) · License: MIT
+
+- [**mu**](https://github.com/qybaihe/mu) — A coding agent built on pi and AionUi whose routine calls at 38 decision points are made by Jev.
+  - **Where Jev makes a decision**: Uses Choice, Score, and Noul at 38 decision points including input preflight, tool injection defense, and context GC.
+  - **What this project offers**: Offloads high-frequency routine decisions to lightweight Jev primitives, reducing token cost and latency.
+  - [Project details and fixed source](https://logicrw.github.io/awesome-jev-projects/en/projects/qybaihe/mu/) · License: MIT
 
 - [**vexjoy-agent**](https://github.com/notque/vexjoy-agent) — An optional Jev routing path that matches VexJoy requests to specialist Agents, skills and workflows.
   - **Where Jev makes a decision**: After deterministic routing guards, Jev judges the remaining candidates and required workflow components.

@@ -4,7 +4,7 @@ The definitive community radar and directory for TypeSafe Jev and System-1 Agent
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 854
+Catalog entries: 857
 
 ## Install the Agent Skill
 
@@ -37,13 +37,13 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [Codebase & Graph Pathfinding](https://logicrw.github.io/awesome-jev-projects/en/categories/codebase-graph-pathfinding/): 16
 - [Context GC & Filter](https://logicrw.github.io/awesome-jev-projects/en/categories/context-gc-filter/): 42
 - [Creative Tools](https://logicrw.github.io/awesome-jev-projects/en/categories/creative-tools/): 28
-- [Data & Search](https://logicrw.github.io/awesome-jev-projects/en/categories/data-search/): 51
+- [Data & Search](https://logicrw.github.io/awesome-jev-projects/en/categories/data-search/): 52
 - [Decision Tools](https://logicrw.github.io/awesome-jev-projects/en/categories/decision-tools/): 42
 - [Domain & Vertical Tools](https://logicrw.github.io/awesome-jev-projects/en/categories/domain-vertical-tools/): 97
 - [Evaluation & Observability](https://logicrw.github.io/awesome-jev-projects/en/categories/evaluation-observability/): 29
-- [High-Frequency & Simulation](https://logicrw.github.io/awesome-jev-projects/en/categories/high-frequency-simulation/): 56
+- [High-Frequency & Simulation](https://logicrw.github.io/awesome-jev-projects/en/categories/high-frequency-simulation/): 57
 - [MCP & Integrations](https://logicrw.github.io/awesome-jev-projects/en/categories/mcp-integrations/): 56
-- [Routing & Cost Optimization](https://logicrw.github.io/awesome-jev-projects/en/categories/routing-cost-optimization/): 69
+- [Routing & Cost Optimization](https://logicrw.github.io/awesome-jev-projects/en/categories/routing-cost-optimization/): 70
 - [SDK & Decision Frameworks](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-decision-frameworks/): 133
 - [SDK & Integrations](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-integrations/): 6
 - [Security & Guardrails](https://logicrw.github.io/awesome-jev-projects/en/categories/security-guardrails/): 67
