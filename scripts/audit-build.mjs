@@ -6,7 +6,7 @@ import { publicFields } from "./prepare-public-data.mjs";
 import { SITE, BASE, LOCALES, projectRoute } from "./site-content.mjs";
 const base = resolve(new URL("../dist/", import.meta.url).pathname);
 const forbidden =
-  /\b(?:github_pat_[A-Za-z0-9_]{30,}|gh[pousr]_[A-Za-z0-9]{30,}|sk-(?:proj-|ant-|or-v1-)?[A-Za-z0-9_-]{24,}|AIza[A-Za-z0-9_-]{35})\b|-----BEGIN (?:RSA |OPENSSH )?PRIVATE KEY-----|\b(?:GITHUB_TOKEN|GH_TOKEN|GH_MODELS_TOKEN|RADAR_GITHUB_TOKEN|MUSE_API_KEY)\b|\/Users\/[^\/\s]+\/(?:Documents|Projects|\.codex)/;
+  /\b(?:github_pat_[A-Za-z0-9_]{30,}|gh[pousr]_[A-Za-z0-9]{30,}|sk-(?:proj-|ant-|or-v1-)?[A-Za-z0-9_-]{24,}|AIza[A-Za-z0-9_-]{35})\b|-----BEGIN (?:RSA |OPENSSH )?PRIVATE KEY-----|\b(?:GITHUB_TOKEN|GH_TOKEN|GH_MODELS_TOKEN|RADAR_GITHUB_TOKEN|DEEPSEEK_API_KEY|MUSE_API_KEY)\b|\/Users\/[^\/\s]+\/(?:Documents|Projects|\.codex)/;
 const textExtensions = /\.(?:html|json|js|css|svg|txt)$/;
 async function walk(dir) {
   const paths = [];

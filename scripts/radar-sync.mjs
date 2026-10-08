@@ -131,8 +131,9 @@ export async function reviewRadarCandidate({
   const codeSources = inspection.codeSources ?? [];
   const fingerprint = createHash("sha256").update(JSON.stringify({
     policy: RADAR_REVIEW_VERSION, revision: configRevision,
-    model: process.env.MUSE_MODEL ?? "", endpoint: process.env.MUSE_ENDPOINT ?? "",
-    configured: Boolean(process.env.MUSE_API_KEY),
+    model: process.env.DEEPSEEK_MODEL ?? process.env.MUSE_MODEL ?? "",
+    endpoint: process.env.DEEPSEEK_ENDPOINT ?? process.env.MUSE_ENDPOINT ?? "",
+    configured: Boolean(process.env.DEEPSEEK_API_KEY || process.env.MUSE_API_KEY),
     sha: inspection.sha, files: codeSources.map(({ path, url, hash }) => ({ path, url, hash })),
     categories: taxonomy.map(({ category }) => category),
   })).digest("hex");

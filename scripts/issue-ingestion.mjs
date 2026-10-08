@@ -621,6 +621,7 @@ async function main() {
     if (modelsProbe) {
       if (process.env.GITHUB_EVENT_NAME !== "workflow_dispatch")
         throw new Error("Models probes require manual workflow dispatch");
+      delete process.env.DEEPSEEK_API_KEY;
       delete process.env.MUSE_API_KEY;
       delete process.env.GH_MODELS_TOKEN;
     }

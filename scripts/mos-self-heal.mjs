@@ -135,21 +135,33 @@ async function readBoundedResponse(response, signal, limit = 16_384) {
 }
 
 export async function consultMosForRepair({
-  token = process.env.MUSE_API_KEY,
-  endpoint = process.env.MUSE_ENDPOINT,
-  model = process.env.MUSE_MODEL,
+  token = process.env.DEEPSEEK_API_KEY || process.env.MUSE_API_KEY,
+  endpoint = process.env.DEEPSEEK_ENDPOINT || process.env.MUSE_ENDPOINT,
+  model = process.env.DEEPSEEK_MODEL || process.env.MUSE_MODEL,
   fetchImpl = fetch,
   timeoutMs = 25_000,
   ...failure
 }) {
   const fallback = heuristicDiagnosis(failure);
   if (!token || fallback.actions.length === 0) return fallback;
+  const isDeepSeek = Boolean(
+    endpoint?.includes("deepseek.com") ||
+    model?.includes("deepseek") ||
+    process.env.DEEPSEEK_API_KEY ||
+    (token && token.startsWith("sk-") && !token.startsWith("sk-or-"))
+  );
   const openrouter = endpoint ? endpoint === "https://openrouter.ai/api/v1/chat/completions" : token.startsWith("sk-or-");
-  const url = endpoint || (openrouter ? "https://openrouter.ai/api/v1/chat/completions" : "https://api.meta.ai/v1/chat/completions");
-  const expectedModel = openrouter ? "meta/muse-spark-1.3-contributor" : "muse-spark-1.3-contributor";
+  const url = endpoint || (isDeepSeek ? "https://api.deepseek.com/chat/completions" : openrouter ? "https://openrouter.ai/api/v1/chat/completions" : "https://api.meta.ai/v1/chat/completions");
+  const expectedModel = isDeepSeek ? (model || "deepseek-chat") : (openrouter ? "meta/muse-spark-1.3-contributor" : "muse-spark-1.3-contributor");
   // Do not send a credential to an arbitrary configured URL or silently switch
   // to another model/provider while reporting that MOS performed the repair.
-  if (!["https://api.meta.ai/v1/chat/completions", "https://openrouter.ai/api/v1/chat/completions"].includes(url) || (model && model !== expectedModel))
+  const allowedEndpoints = [
+    "https://api.meta.ai/v1/chat/completions",
+    "https://openrouter.ai/api/v1/chat/completions",
+    "https://api.deepseek.com/chat/completions",
+    "https://api.deepseek.com/v1/chat/completions",
+  ];
+  if (!allowedEndpoints.includes(url) || (model && model !== expectedModel))
     return { ...fallback, fallbackReason: "unsupported-model-config" };
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -159,6 +171,7 @@ export async function consultMosForRepair({
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({
         model: expectedModel, temperature: 0.1, max_tokens: 300,
+        response_format: { type: "json_object" },
         messages: [
           { role: "system", content: 'Select only from the supplied allowedActions for the structured validation symptoms. Return only JSON: {"actions":[...]}. No commands, prose or code.' },
           { role: "user", content: JSON.stringify({ ...diagnosticFacts(failure), allowedActions: fallback.actions }) },
@@ -171,7 +184,7 @@ export async function consultMosForRepair({
     if (!Array.isArray(plan.actions) || !plan.actions.length || plan.actions.length > 3 ||
         plan.actions.some((action) => !ACTIONS.has(action) || !fallback.actions.includes(action))) throw new Error("Invalid plan");
     // Never log model-authored prose (including workflow-command injection).
-    return { source: "mos-spark", model: expectedModel, diagnosis: fallback.diagnosis, actions: [...new Set(plan.actions)] };
+    return { source: isDeepSeek ? "deepseek" : "mos-spark", model: expectedModel, diagnosis: fallback.diagnosis, actions: [...new Set(plan.actions)] };
   } catch {
     return { ...fallback, fallbackReason: "provider-or-plan-failure" };
   } finally { clearTimeout(timer); }

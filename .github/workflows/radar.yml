@@ -43,9 +43,12 @@ jobs:
         env:
           RADAR_MODE: ${{ inputs.mode || 'full' }}
           GITHUB_TOKEN: ${{ secrets.RADAR_GITHUB_TOKEN || github.token }}
-          MUSE_API_KEY: ${{ secrets.MUSE_API_KEY }}
-          MUSE_ENDPOINT: ${{ secrets.MUSE_ENDPOINT || vars.MUSE_ENDPOINT || '' }}
-          MUSE_MODEL: ${{ secrets.MUSE_MODEL || vars.MUSE_MODEL || '' }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY || secrets.MUSE_API_KEY }}
+          DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || secrets.MUSE_ENDPOINT || vars.MUSE_ENDPOINT || '' }}
+          DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || secrets.MUSE_MODEL || vars.MUSE_MODEL || '' }}
+          MUSE_API_KEY: ${{ secrets.DEEPSEEK_API_KEY || secrets.MUSE_API_KEY }}
+          MUSE_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || secrets.MUSE_ENDPOINT || vars.MUSE_ENDPOINT || '' }}
+          MUSE_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || secrets.MUSE_MODEL || vars.MUSE_MODEL || '' }}
           RADAR_MAX_PAGES: "2"
           RADAR_MAX_CANDIDATES: "60"
       - name: Retain data snapshot before any dependencies run

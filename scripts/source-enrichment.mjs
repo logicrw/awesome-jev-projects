@@ -202,7 +202,7 @@ function canonicalTerms(text) {
 
 /** One factory per run: unusable/rate-limited Models endpoints are tried at most once. */
 export function createSummaryEnricher({
-  token = process.env.MUSE_API_KEY || process.env.GH_MODELS_TOKEN,
+  token = process.env.DEEPSEEK_API_KEY || process.env.MUSE_API_KEY || process.env.GH_MODELS_TOKEN,
   endpoint,
   model,
   source,
@@ -210,34 +210,50 @@ export function createSummaryEnricher({
   timeoutMs = 20000,
 } = {}) {
   let circuit = null;
+  const isDeepSeek = Boolean(
+    (token && token === process.env.DEEPSEEK_API_KEY) ||
+      process.env.DEEPSEEK_API_KEY ||
+      source === "deepseek" ||
+      endpoint?.includes("deepseek.com") ||
+      model?.includes("deepseek") ||
+      (token && token.startsWith("sk-") && !token.startsWith("sk-or-") && !token.startsWith("ghp_") && !token.startsWith("github_pat_"))
+  );
   const isMuse = Boolean(
-    (token && token === process.env.MUSE_API_KEY) ||
-      process.env.MUSE_API_KEY ||
-      source === "muse-spark" ||
-      endpoint?.includes("meta.ai") ||
-      endpoint?.includes("openrouter.ai") ||
-      model?.includes("muse") ||
-      token?.startsWith("muse-")
+    !isDeepSeek && (
+      (token && token === process.env.MUSE_API_KEY) ||
+        process.env.MUSE_API_KEY ||
+        source === "muse-spark" ||
+        endpoint?.includes("meta.ai") ||
+        endpoint?.includes("openrouter.ai") ||
+        model?.includes("muse") ||
+        token?.startsWith("muse-")
+    )
   );
   const resolvedEndpoint =
     endpoint ||
+    process.env.DEEPSEEK_ENDPOINT ||
     process.env.MUSE_ENDPOINT ||
     process.env.MODELS_URL ||
-    (isMuse
-      ? token?.startsWith("sk-or-")
-        ? "https://openrouter.ai/api/v1/chat/completions"
-        : "https://api.meta.ai/v1/chat/completions"
-      : MODELS_URL);
+    (isDeepSeek
+      ? "https://api.deepseek.com/chat/completions"
+      : isMuse
+        ? token?.startsWith("sk-or-")
+          ? "https://openrouter.ai/api/v1/chat/completions"
+          : "https://api.meta.ai/v1/chat/completions"
+        : MODELS_URL);
   const resolvedModel =
     model ||
+    process.env.DEEPSEEK_MODEL ||
     process.env.MUSE_MODEL ||
     process.env.MODELS_MODEL ||
-    (isMuse
-      ? token?.startsWith("sk-or-")
-        ? "meta/muse-spark-1.3-contributor"
-        : "muse-spark-1.3-contributor"
-      : "gpt-4o-mini");
-  const modelSource = source || (isMuse ? "muse-spark" : "github-models");
+    (isDeepSeek
+      ? "deepseek-chat"
+      : isMuse
+        ? token?.startsWith("sk-or-")
+          ? "meta/muse-spark-1.3-contributor"
+          : "muse-spark-1.3-contributor"
+        : "gpt-4o-mini");
+  const modelSource = source || (isDeepSeek ? "deepseek" : isMuse ? "muse-spark" : "github-models");
   return async function enrich({
     repo,
     readme = "",
@@ -503,7 +519,7 @@ function retryDelay(response, attempt, random, now) {
 
 /** A bounded classifier: no tools, free-text control fields, or authority fallback. */
 export function createSubmissionReviewer({
-  token = process.env.MUSE_API_KEY || process.env.GH_MODELS_TOKEN,
+  token = process.env.DEEPSEEK_API_KEY || process.env.MUSE_API_KEY || process.env.GH_MODELS_TOKEN,
   endpoint,
   model,
   source,
@@ -517,16 +533,32 @@ export function createSubmissionReviewer({
   let circuit = null;
   const attemptLimit = Number.isInteger(maxAttempts) ? Math.max(1, Math.min(3, maxAttempts)) : 3;
   const requestTimeout = Number.isFinite(timeoutMs) ? Math.max(1, Math.min(30000, timeoutMs)) : 30000;
-  const isMuse = Boolean(source === "muse-spark" || endpoint?.includes("meta.ai") ||
-    endpoint?.includes("openrouter.ai") || model?.includes("muse") || token?.startsWith("muse-") || token?.startsWith("sk-or-") ||
-    (token && token === process.env.MUSE_API_KEY));
-  const resolvedEndpoint = endpoint || process.env.MUSE_ENDPOINT || process.env.MODELS_URL ||
-    (isMuse ? token?.startsWith("sk-or-") ? "https://openrouter.ai/api/v1/chat/completions" :
+  const isDeepSeek = Boolean(
+    (token && token === process.env.DEEPSEEK_API_KEY) ||
+      process.env.DEEPSEEK_API_KEY ||
+      source === "deepseek" ||
+      endpoint?.includes("deepseek.com") ||
+      model?.includes("deepseek") ||
+      (token && token.startsWith("sk-") && !token.startsWith("sk-or-") && !token.startsWith("ghp_") && !token.startsWith("github_pat_"))
+  );
+  const isMuse = Boolean(
+    !isDeepSeek && (
+      source === "muse-spark" ||
+      endpoint?.includes("meta.ai") ||
+      endpoint?.includes("openrouter.ai") ||
+      model?.includes("muse") ||
+      token?.startsWith("muse-") ||
+      token?.startsWith("sk-or-") ||
+      (token && token === process.env.MUSE_API_KEY)
+    )
+  );
+  const resolvedEndpoint = endpoint || process.env.DEEPSEEK_ENDPOINT || process.env.MUSE_ENDPOINT || process.env.MODELS_URL ||
+    (isDeepSeek ? "https://api.deepseek.com/chat/completions" : isMuse ? token?.startsWith("sk-or-") ? "https://openrouter.ai/api/v1/chat/completions" :
       "https://api.meta.ai/v1/chat/completions" : MODELS_URL);
-  const resolvedModel = model || process.env.MUSE_MODEL || process.env.MODELS_MODEL ||
-    (isMuse ? token?.startsWith("sk-or-") ? "meta/muse-spark-1.3-contributor" :
+  const resolvedModel = model || process.env.DEEPSEEK_MODEL || process.env.MUSE_MODEL || process.env.MODELS_MODEL ||
+    (isDeepSeek ? "deepseek-chat" : isMuse ? token?.startsWith("sk-or-") ? "meta/muse-spark-1.3-contributor" :
       "muse-spark-1.3-contributor" : "gpt-4o-mini");
-  const modelSource = source || (isMuse ? "muse-spark" : "github-models");
+  const modelSource = source || (isDeepSeek ? "deepseek" : isMuse ? "muse-spark" : "github-models");
 
   return async function reviewSubmission({ codeSources = [], taxonomy = [] }) {
     const attempts = [];

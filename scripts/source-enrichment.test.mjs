@@ -516,6 +516,30 @@ test("MUSE Spark OpenRouter key routes to OpenRouter endpoint with referrer head
   assert.equal(result.enrichment.plainSummary.source, "muse-spark");
 });
 
+test("DeepSeek API routes to DeepSeek endpoint with deepseek-chat model and source", async () => {
+  let calledUrl = "";
+  let calledModel = "";
+  let calledAuth = "";
+  let sentPayload = null;
+  const enrich = createSummaryEnricher({
+    token: "sk-deepseek-test-key-12345",
+    fetchImpl: async (url, options) => {
+      calledUrl = url;
+      calledAuth = options.headers.Authorization;
+      sentPayload = JSON.parse(options.body);
+      calledModel = sentPayload.model;
+      return reply({ plainSummary: chinese, plainSummaryEn: english });
+    },
+  });
+  const result = await enrich({ repo: { ...repo, description: "" }, fallback });
+  assert.equal(calledUrl, "https://api.deepseek.com/chat/completions");
+  assert.equal(calledModel, "deepseek-chat");
+  assert.equal(calledAuth, "Bearer sk-deepseek-test-key-12345");
+  assert.equal(sentPayload.reasoning_effort, undefined);
+  assert.equal(result.enrichment.plainSummary.source, "deepseek");
+  assert.equal(result.enrichment.ai.status, "completed");
+});
+
 const sourceText = 'import { JevClient } from "@typesafe/jev";\nconst client = new JevClient();\nconst result = await client.choice({ state: input, options });\nconsole.log(result.answer);';
 const sourceFile = (text = sourceText, path = "src/client.ts") => ({
   path, text, hash: createHash("sha256").update(text).digest("hex"),
