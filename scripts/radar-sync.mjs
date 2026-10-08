@@ -525,8 +525,12 @@ export async function main() {
           if (full) add({ full_name: full, name: full.split("/")[1] });
         }
   }
-  if (process.env.RADAR_SOURCES !== "code")
-    for (const project of known) {
+  if (process.env.RADAR_SOURCES !== "code") {
+    const maxMetadataRefresh = Number(process.env.RADAR_MAX_METADATA_REFRESH) || 120;
+    const refreshTargets = [...known]
+      .sort((a, b) => (a.metadataFetchedAt ?? "").localeCompare(b.metadataFetchedAt ?? ""))
+      .slice(0, maxMetadataRefresh);
+    for (const project of refreshTargets) {
       const repo = normalizeRepo(project.url);
       if (!repo) {
         report.metadata.failed++;
@@ -546,6 +550,7 @@ export async function main() {
         console.log(`[metadata] ${repo}: ${e.message}`);
       }
     }
+  }
   report.sources.push({
     name: "Known repository metadata + latest commit",
     status:

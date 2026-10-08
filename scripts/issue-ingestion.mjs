@@ -529,7 +529,7 @@ export async function sendReviewFeedback({
     return { status: "invalid-receipt" };
   const terminal = {
     rejected: "rejected", duplicate: "rejected", "insufficient-evidence": "insufficient-evidence",
-    "invalid-output": "invalid-output", "provider-unavailable": "provider-unavailable",
+    "invalid-output": "invalid-output",
   }[prepared.status];
   if (!terminal) return { status: "not-needed" };
   const candidate = { ...(prepared.retryClaim ?? {}), issueNumber, bodySha: issueBodySha };
