@@ -30,6 +30,10 @@ on:
         description: Check local fallback (remote credentials intentionally disabled)
         type: boolean
         default: false
+      remote_probe:
+        description: Probe remote model endpoint with live secrets
+        type: boolean
+        default: false
 permissions: {}
 concurrency:
   group: ingest-issue-${{ github.event.issue.number || github.event.inputs.issue_number || github.run_id }}
@@ -82,6 +86,7 @@ jobs:
           MUSE_MODEL: ${{ secrets.MUSE_MODEL || vars.MUSE_MODEL || '' }}
           INGEST_ISSUE_NUMBER: ${{ inputs.issue_number || 0 }}
           INGEST_MODELS_PROBE: ${{ inputs.models_probe || false }}
+          INGEST_REMOTE_PROBE: ${{ inputs.remote_probe || false }}
           INGEST_REVIEWED_SHA: ${{ steps.source.outputs.sha }}
           INGEST_EXPECTED_BODY_SHA: ${{ inputs.body_sha || '' }}
           INGEST_RETRY_CLAIM_ID: ${{ inputs.retry_claim_id || '' }}

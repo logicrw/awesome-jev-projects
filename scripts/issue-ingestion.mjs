@@ -617,6 +617,7 @@ async function main() {
       await readFile(resolve(root, "radar/exclusions.json"), "utf8"),
     );
     const modelsProbe = process.env.INGEST_MODELS_PROBE === "true";
+    const remoteProbe = process.env.INGEST_REMOTE_PROBE === "true";
     if (modelsProbe) {
       if (process.env.GITHUB_EVENT_NAME !== "workflow_dispatch")
         throw new Error("Models probes require manual workflow dispatch");
@@ -639,6 +640,35 @@ async function main() {
         fallback: summarize(repo, "", taxonomy),
       });
       result = { status: "models-probe", enrichment: summary.enrichment };
+    } else if (remoteProbe) {
+      if (process.env.GITHUB_EVENT_NAME !== "workflow_dispatch")
+        throw new Error("Remote probes require manual workflow dispatch");
+      const sha = "a".repeat(40);
+      const text = "import typesafe\n\nclient = typesafe.Client()\nresult = client.choice(['left', 'right'], 'direction')\nprint(result)\n";
+      const hash = createHash("sha256").update(text).digest("hex");
+      const probeSources = [{
+        path: "src/probe.py",
+        text,
+        hash,
+        url: `https://github.com/logicrw/probe/blob/${sha}/src/probe.py`,
+      }];
+      const review = await reviewer({
+        repo: { full_name: "logicrw/probe", name: "probe" },
+        readme: "# Jev probe",
+        codeSources: probeSources,
+        taxonomy,
+      });
+      result = {
+        status: "remote-probe",
+        verified: review.verified,
+        reviewStatus: review.status,
+        reason: review.reason,
+        attempts: review.attempts?.map((a) => ({ attempt: a.attempt, status: a.status, httpStatus: a.httpStatus })),
+        usage: review.usage,
+      };
+      await atomicJSON(resultPath, result);
+      await output({ ready: "false", status: "remote-probe" });
+      return;
     } else {
       const number = Number(
         event.issue?.number ?? process.env.INGEST_ISSUE_NUMBER,
