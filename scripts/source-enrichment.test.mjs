@@ -535,8 +535,8 @@ test("DeepSeek API routes to DeepSeek endpoint with deepseek-flash model and sou
   const result = await enrich({ repo: { ...repo, description: "" }, fallback });
   assert.equal(calledUrl, "https://api.deepseek.com/chat/completions");
   assert.equal(calledModel, "deepseek-flash");
-  assert.equal(calledAuth, "Bearer sk-deepseek-test-key-12345");
-  assert.equal(sentPayload.reasoning_effort, undefined);
+  assert.equal(sentPayload.reasoning_effort, "none");
+  assert.deepEqual(sentPayload.thinking, { type: "disabled" });
   assert.equal(result.enrichment.plainSummary.source, "deepseek");
   assert.equal(result.enrichment.ai.status, "completed");
 });

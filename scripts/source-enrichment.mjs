@@ -369,6 +369,7 @@ export function createSummaryEnricher({
             }),
           },
         ],
+        ...(isDeepSeek ? { thinking: { type: "disabled" }, reasoning_effort: "none" } : {}),
       };
       if (isMuse && (resolvedModel.includes("muse") || resolvedModel.includes("o1") || resolvedModel.includes("o3"))) {
         requestBody.reasoning_effort = "low";
@@ -622,6 +623,7 @@ export function createSubmissionReviewer({
       model: resolvedModel, response_format: { type: "json_object" }, temperature: 0,
       max_tokens: REVIEW_BUDGET.outputTokens, messages,
       ...(isMuse && (resolvedModel.includes("muse") || resolvedModel.includes("o1") || resolvedModel.includes("o3")) ? { reasoning_effort: "low" } : {}),
+      ...(isDeepSeek ? { thinking: { type: "disabled" }, reasoning_effort: "none" } : {}),
     };
     let delay = 0;
     for (let attempt = 0; attempt < attemptLimit; attempt++) {
