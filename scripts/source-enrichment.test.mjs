@@ -5,6 +5,7 @@ import {
   createSummaryEnricher,
   createSubmissionReviewer,
   extractCodeWindow,
+  REVIEW_BUDGET,
 } from "./source-enrichment.mjs";
 
 const chinese = "用 Jev 为日志打分，只把与当前任务相关的内容留在上下文里。";
@@ -571,7 +572,7 @@ test("Muse Reviewer validates witness, keeps model identity, and enforces the co
       assert.equal(Object.hasOwn(requestBody, "tools"), false);
       assert.deepEqual(requestBody.messages.map((message) => message.role), ["system", "user"]);
       assert.ok(Buffer.byteLength(JSON.stringify(requestBody.messages)) <= 1450);
-      assert.equal(requestBody.max_tokens, 384);
+      assert.equal(requestBody.max_tokens, REVIEW_BUDGET.outputTokens);
       return reply(verdictForRequest(options));
     },
   });
