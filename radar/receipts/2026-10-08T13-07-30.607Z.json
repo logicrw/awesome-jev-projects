@@ -1,0 +1,1536 @@
+{
+  "lastAttemptAt": "2026-10-08T13:07:30.607Z",
+  "mode": "full",
+  "lastSuccessfulAt": null,
+  "status": "partial",
+  "sources": [
+    {
+      "name": "repositories: topic:jev fork:false",
+      "query": "topic:jev fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 2559,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: typesafe jev fork:false",
+      "query": "typesafe jev fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3650,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "repositories: typesafe-ai fork:false",
+      "query": "typesafe-ai fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 1562,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "repositories: jev-mcp fork:false",
+      "query": "jev-mcp fork:false",
+      "status": "bounded",
+      "count": 200,
+      "total": 422,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: jev decision fork:false",
+      "query": "jev decision fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 2356,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: \"TypeSafe AI\" in:readme fork:false",
+      "query": "\"TypeSafe AI\" in:readme fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8518,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "repositories: \"Jev API\" in:readme fork:false",
+      "query": "\"Jev API\" in:readme fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3798,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: topic:typesafe-ai fork:false",
+      "query": "topic:typesafe-ai fork:false",
+      "status": "bounded",
+      "count": 180,
+      "total": 580,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "repositories: topic:typesafe ai fork:false",
+      "query": "topic:typesafe ai fork:false",
+      "status": "bounded",
+      "count": 200,
+      "total": 330,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: \"api.typesafe.ai\" in:readme fork:false",
+      "query": "\"api.typesafe.ai\" in:readme fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3100,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"typesafe.ai\" \"jev\" in:readme fork:false",
+      "query": "\"typesafe.ai\" \"jev\" in:readme fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8247,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "repositories: \"from typesafe import jev\" in:readme fork:false",
+      "query": "\"from typesafe import jev\" in:readme fork:false",
+      "status": "ok",
+      "count": 1,
+      "total": 1,
+      "pages": 1,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: \"@typesafe/jev\" in:readme fork:false",
+      "query": "\"@typesafe/jev\" in:readme fork:false",
+      "status": "search-cap",
+      "count": 200,
+      "total": 6981,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "code: \"api.typesafe.ai\" in:file",
+      "query": "\"api.typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 29056,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "code: \"typesafe.ai\" in:file",
+      "query": "\"typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 49536,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "code: \"from typesafe import\" in:file",
+      "query": "\"from typesafe import\" in:file",
+      "status": "ok",
+      "count": 92,
+      "total": 92,
+      "pages": 1,
+      "firstPage": 1
+    },
+    {
+      "name": "code: \"@typesafe/jev\" in:file",
+      "query": "\"@typesafe/jev\" in:file",
+      "status": "ok",
+      "count": 55,
+      "total": 55,
+      "pages": 1,
+      "firstPage": 1
+    },
+    {
+      "name": "commits: \"typesafe.ai\"",
+      "query": "\"typesafe.ai\"",
+      "status": "search-cap",
+      "count": 200,
+      "total": 5995,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "commits: \"Jev\" \"AI\"",
+      "query": "\"Jev\" \"AI\"",
+      "status": "search-cap",
+      "count": 197,
+      "total": 472733,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "issues: \"typesafe.ai\" is:pr in:title,body",
+      "query": "\"typesafe.ai\" is:pr in:title,body",
+      "status": "bounded",
+      "count": 200,
+      "total": 373,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "issues: \"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "query": "\"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "status": "search-cap",
+      "count": 200,
+      "total": 21422,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "Known repository metadata + latest commit",
+      "status": "partial",
+      "count": 115
+    }
+  ],
+  "newProjects": 0,
+  "schedule": "0 */6 * * *",
+  "schedulerStatus": "active",
+  "submissionRepository": "logicrw/awesome-jev-projects",
+  "metadata": {
+    "ok": 115,
+    "failed": 5
+  },
+  "discovery": {
+    "candidates": 2425,
+    "checked": 60,
+    "rejected": 1,
+    "deferred": 2424
+  },
+  "runUrl": "https://github.com/logicrw/awesome-jev-projects/actions/runs/37781871833",
+  "finishedAt": "2026-10-08T13:33:20.816Z",
+  "totalProjects": 857,
+  "projectsSha256": "d139bece23255cb5058418b1d256e0529e28d3ec1841bf533914f49d2d9780e2",
+  "receipts": [
+    {
+      "repo": "jev-chat/jev-chat-jarvis",
+      "status": "blocked",
+      "reason": "http-error",
+      "cached": false,
+      "reviewDetails": {
+        "status": "http-error",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "http-error",
+            "usage": {
+              "status": "unknown"
+            },
+            "httpStatus": 401
+          }
+        ],
+        "budget": {
+          "inputUtf8Bytes": 1294,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 1
+        }
+      }
+    },
+    {
+      "repo": "mode-io/vllm-jev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1059,
+          "evidenceMaxBytes": 670,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "JamesANZ/JevPromptShield",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false,
+      "reviewDetails": {
+        "status": "insufficient-evidence",
+        "attempts": [],
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "0814wdwd/solo_jev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1311,
+          "evidenceMaxBytes": 660,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "SimpleJev/JevAny",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1384,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "deepdave98/jev-playground",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1373,
+          "evidenceMaxBytes": 655,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "madisonrickert/jev-permission-gate",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1323,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "columnar-tech/jevaro",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1415,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "nvkudva/ollajev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1272,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "ckorhonen/jev-lint",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1430,
+          "evidenceMaxBytes": 662,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "Oscar-dzy/Awesome-jev-papers",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false
+    },
+    {
+      "repo": "TianJinWeiBoss520/social-risk-qwen-jev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1384,
+          "evidenceMaxBytes": 665,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "JiaQiSJTU/CanITrustU-Jev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1390,
+          "evidenceMaxBytes": 653,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "qbeka/jev-job-search",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1411,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "mertkayacs/jevalt",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1354,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "ItsOdeLeo/JEV-MLX",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1404,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "bskkimm/JevSceneMiner",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1340,
+          "evidenceMaxBytes": 643,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "isthatdebbiej/jevgap",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1371,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "ttlequals0/MinusPodJev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1319,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "vicfei/awesome-jev-prompts",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false,
+      "reviewDetails": {
+        "status": "insufficient-evidence",
+        "attempts": [],
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "marceloatoledo/JEV-MCP-REST",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false,
+      "reviewDetails": {
+        "status": "insufficient-evidence",
+        "attempts": [],
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "kierandotai/jev-scout",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1371,
+          "evidenceMaxBytes": 660,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "lalalune/jevector",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1358,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "gitmanhimanshu/jev-context-firewall",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1435,
+          "evidenceMaxBytes": 650,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "promptgtm-shared/clay-jev-people-ranker",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1320,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "nextflow-io/nf-jev",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false
+    },
+    {
+      "repo": "joch/jevman",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1328,
+          "evidenceMaxBytes": 659,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "PenDraga/paperless-jev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1402,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "dfranco-projects/jev-guardbench",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1425,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "maxtrezzi/jev4s",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false
+    },
+    {
+      "repo": "seb4ez/jevguard-mcp",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1239,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "mywwave/cursor-jev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1369,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "mertkayacs/jevoss",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1336,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "silex-ai-lab/jev-runtime-observability",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1265,
+          "evidenceMaxBytes": 674,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "PiPyL/jev-zenfeed",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false,
+      "reviewDetails": {
+        "status": "insufficient-evidence",
+        "attempts": [],
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "takumi-golf/jev-fill-pdf",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1390,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "ingebyd/fast-jev-compaction-openrouter",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1263,
+          "evidenceMaxBytes": 666,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "exponen-agi/jev-playground",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1430,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "gleb-chipiga/nu_plugin_jev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1375,
+          "evidenceMaxBytes": 668,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "saloni-garg/jev-max",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1318,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "everettjf/ezjev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1146,
+          "evidenceMaxBytes": 652,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "nolindnaidoo/jevlint-le",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1387,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "Hoppin-Sorter/jev-router",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1373,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "Thingscorp/jev-crawlers",
+      "status": "rejected",
+      "reason": "repository already listed",
+      "cached": false
+    },
+    {
+      "repo": "00200200/jev-judge",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1402,
+          "evidenceMaxBytes": 672,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "JingHao-Leon/awesome-jev-apps",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1076,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "Umbylicus/umby-jev-stack",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1213,
+          "evidenceMaxBytes": 666,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "hectorj2f/jev-router",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1285,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "JawzoD3TH/JevApi",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1105,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "andrei10k/claude-jev-model-router",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1238,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "alexsasha2750/jev-ai",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false,
+      "reviewDetails": {
+        "status": "insufficient-evidence",
+        "attempts": [],
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "donvito/jev-dev",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1361,
+          "evidenceMaxBytes": 675,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "albertcas/jev-mail-filtering",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1396,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "danipl/opencode-jev",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false,
+      "reviewDetails": {
+        "status": "insufficient-evidence",
+        "attempts": [],
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "helikirmi2/codex-gemini-jev-bridge",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1391,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "vayungodara/jev-lint",
+      "status": "blocked",
+      "reason": "insufficient-evidence",
+      "cached": false,
+      "reviewDetails": {
+        "status": "insufficient-evidence",
+        "attempts": [],
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "moelahmady/jev-model-router",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1290,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "Makabeez/jev-news-bench",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1427,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "dansya-arsana/jev-harness",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1114,
+          "evidenceMaxBytes": 722,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    },
+    {
+      "repo": "vishivishvish/jev-typesafeai",
+      "status": "blocked",
+      "reason": "circuit-open",
+      "cached": false,
+      "reviewDetails": {
+        "status": "circuit-open",
+        "attempts": [],
+        "budget": {
+          "inputUtf8Bytes": 1430,
+          "evidenceMaxBytes": 658,
+          "outputTokenLimit": 384,
+          "totalTokenTarget": 2000,
+          "framingReserve": 128,
+          "counting": "utf8-byte-estimate",
+          "tokenizerVerified": false
+        },
+        "usage": {
+          "status": "unknown",
+          "reportedTotalTokens": 0,
+          "unknownAttempts": 0
+        }
+      }
+    }
+  ]
+}
