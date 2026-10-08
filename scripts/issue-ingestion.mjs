@@ -675,6 +675,7 @@ async function main() {
           categoryValue: a.categoryValue,
           verdictNull: a.verdictNull,
           generatedVerified: a.generatedVerified,
+          generated: a.generated,
         })),
         usage: review.usage,
       };

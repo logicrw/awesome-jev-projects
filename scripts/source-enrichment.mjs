@@ -686,6 +686,7 @@ export function createSubmissionReviewer({
           receipt.failureStage = "verdict-invalid";
           receipt.verdictNull = !verdict;
           receipt.generatedVerified = generated?.verified;
+          receipt.generated = generated;
           throw new SyntaxError("invalid-output");
         }
         receipt.status = "completed";
