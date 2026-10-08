@@ -338,7 +338,7 @@ export function createSummaryEnricher({
           },
         ],
       };
-      if (isMuse) {
+      if (isMuse && (resolvedModel.includes("muse") || resolvedModel.includes("o1") || resolvedModel.includes("o3"))) {
         requestBody.reasoning_effort = "low";
       }
       const response = await fetchImpl(resolvedEndpoint, {
@@ -573,7 +573,7 @@ export function createSubmissionReviewer({
     const requestBody = {
       model: resolvedModel, response_format: { type: "json_object" }, temperature: 0,
       max_tokens: REVIEW_BUDGET.outputTokens, messages,
-      ...(isMuse ? { reasoning_effort: "low" } : {}),
+      ...(isMuse && (resolvedModel.includes("muse") || resolvedModel.includes("o1") || resolvedModel.includes("o3")) ? { reasoning_effort: "low" } : {}),
     };
     let delay = 0;
     for (let attempt = 0; attempt < attemptLimit; attempt++) {
