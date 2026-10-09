@@ -27526,110 +27526,6 @@
     "pinned": false
   },
   {
-    "id": "morcoan:jevseek",
-    "name": "JevSeek",
-    "author": "morcoan",
-    "url": "https://github.com/morcoan/JevSeek",
-    "category": "Domain & Vertical Tools",
-    "plainSummary": "本地编码桌面与 CLI 智能体，将 Jev 的动作路由与 DeepSeek 的代码参数生成分层解耦协同。",
-    "jevDecisionPoint": "由 Jev 根据当前工作区状态与用户意图快速判定下一步工具类型，再交由大语言模型补全具体参数。",
-    "highlightBenefit": "结合了 Jev 的毫秒级离散路由能力与生成模型的强代码生成能力，降低端到端思考延迟并节省 Token 消耗。",
-    "claimStatus": "源码已核验。包含桌面 UI 桥接与双模型路由逻辑；端到端延迟与实际生成质量依赖本地与远程环境配置。",
-    "plainSummaryEn": "Local coding workspace and agent decoupling tool routing via Jev from detailed argument generation via DeepSeek.",
-    "jevDecisionPointEn": "Employs Jev to classify and select the next tool action based on execution state, delegating parameter generation to DeepSeek.",
-    "highlightBenefitEn": "Combines low-latency discrete routing with capable generative modeling, reducing overall prompt overhead and turn latency.",
-    "claimStatusEn": "Source code verified against pinned commit. Covers desktop bridge and routing logic; end-to-end latency depends on provider configuration.",
-    "plainSummaryJa": "ローカルコーディングデスクトップ環境およびエージェントであり、Jev によるツールルーティングと DeepSeek によるコード引数生成を分離協調させます。",
-    "jevDecisionPointJa": "実行状態と意図に基づき Jev が次のツールアクションを瞬時に選定し、詳細な引数生成のみを DeepSeek に委ねます。",
-    "highlightBenefitJa": "低遅延な離散ルーティングと高性能な生成モデルを組み合わせ、プロンプト消費とターン遅延を削減します。",
-    "claimStatusJa": "固定コミットのソースを確認済み。デスクトップブリッジと連携ロジックを含むが、総合性能は各環境の設定に依存します。",
-    "plainSummaryKo": "로컬 코딩 데스크톱 에이전트로 Jev의 도구 라우팅과 DeepSeek의 인자 생성을 계층화하여 결합합니다.",
-    "jevDecisionPointKo": "실행 상태와 사용자 의도에 따라 Jev가 다음 도구를 신속하게 선택하고 세부 파라미터 생성만 대규모 언어 모델에 위임합니다.",
-    "highlightBenefitKo": "지연 시간이 짧은 이산 라우팅과 강력한 생성 능력을 결합하여 턴당 지연 시간과 토큰 소모를 줄입니다.",
-    "claimStatusKo": "고정 커밋 기준 소스 확인 완료. 데스크톱 연동 및 라우팅 로직을 확인했으나 종합 지연 시간은 환경 설정에 따라 달라집니다.",
-    "tags": [
-      "coding-agents",
-      "desktop-os"
-    ],
-    "summarySource": "human-reviewed",
-    "stars": 3,
-    "forks": 0,
-    "openIssues": 0,
-    "license": "MIT",
-    "licenseStatus": "declared",
-    "createdAt": "2026-09-18T09:06:19Z",
-    "updatedAt": "2026-09-21T20:33:30Z",
-    "pushedAt": "2026-09-20T22:24:05Z",
-    "lastCommitAt": "2026-09-20T22:24:02Z",
-    "lastSyncedAt": "2026-10-09T05:32:51.181Z",
-    "metadataFetchedAt": "2026-10-09T05:32:51.181Z",
-    "metadataStatus": "ok",
-    "avatarUrl": "https://avatars.githubusercontent.com/u/254227521?v=4",
-    "language": "Python",
-    "topics": [
-      "coding-agent",
-      "deepseek",
-      "llm-agents",
-      "mcp",
-      "python",
-      "pywebview",
-      "react"
-    ],
-    "archived": true,
-    "headSha": "4abd336c5adf9e837bb6d636a20eb23644f36972",
-    "sourceUrl": "https://github.com/morcoan/JevSeek/blob/030d59114a03720783e839481a7814e7aecaad85/desktop.py#L1-L141",
-    "sourcePath": "desktop.py",
-    "evidenceLines": [
-      1,
-      141
-    ],
-    "verificationStatus": "source-verified",
-    "runtimeVerified": false,
-    "sourceReviewedAt": "2026-09-19T13:00:00.000000+00:00",
-    "evidence": [
-      {
-        "url": "https://github.com/morcoan/JevSeek/blob/030d59114a03720783e839481a7814e7aecaad85/desktop.py#L1-L141",
-        "note": "desktop.py (L1-L141)"
-      },
-      {
-        "url": "https://github.com/morcoan/JevSeek/blob/030d59114a03720783e839481a7814e7aecaad85/README.md",
-        "note": "README.md"
-      }
-    ],
-    "sourceVerification": {
-      "method": "source-review",
-      "sha": "030d59114a03720783e839481a7814e7aecaad85",
-      "reviewedAt": "2026-09-19T13:00:00.000000+00:00",
-      "files": [
-        {
-          "path": "desktop.py",
-          "url": "https://github.com/morcoan/JevSeek/blob/030d59114a03720783e839481a7814e7aecaad85/desktop.py#L1-L141",
-          "hash": "e2ba0589649e839d77a867ce1085c4032f5159cd8148fbf8c55aac88431de1fe",
-          "hashType": "sha256",
-          "lines": [
-            1,
-            141
-          ]
-        },
-        {
-          "path": "README.md",
-          "url": "https://github.com/morcoan/JevSeek/blob/030d59114a03720783e839481a7814e7aecaad85/README.md",
-          "hash": "964d064017db3bb8a5dbd637f1e8633f5b7ba492f68fdddf67a291ee8ea92f49",
-          "hashType": "sha256",
-          "lines": [
-            1,
-            30
-          ]
-        }
-      ]
-    },
-    "enrichment": {
-      "mode": "source-reviewed",
-      "reviewedAt": "2026-09-19T13:00:00.000000+00:00"
-    },
-    "pinned": false
-  },
-  {
     "id": "hev:reranker",
     "name": "reranker",
     "author": "hev",
@@ -48750,79 +48646,6 @@
     "pushedAt": "2026-09-23T20:29:01Z",
     "lastSyncedAt": "2026-10-02T22:29:30.480Z",
     "archived": false
-  },
-  {
-    "id": "nekowasabi:jev-routing",
-    "name": "jev-routing",
-    "repoId": 1375575737,
-    "author": "nekowasabi",
-    "url": "https://github.com/nekowasabi/jev-routing",
-    "category": "MCP & Integrations",
-    "plainSummary": "jev-routing：通过工具接口提供选择、评分或概率判断。",
-    "jevDecisionPoint": "通过工具接口提供选择、评分或概率判断。",
-    "jevDecisionPointEn": "Jev returns a structured decision for the local program; consult the source for the exact decision policy.",
-    "highlightBenefit": "让现有 Agent 通过通用接口使用 Jev。",
-    "highlightBenefitEn": "Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.",
-    "tags": [
-      "mcp-integrations",
-      "typed-decisions"
-    ],
-    "summarySource": "readme-extractive",
-    "claimStatus": "根据仓库简介与 README 自动提炼；决策机制为规则归类，待人工复核，未独立测试性能。",
-    "claimStatusEn": "Based on repository metadata and README with rule-based classification; pending human review, with no independent runtime or performance verification.",
-    "plainSummaryEn": "Go Jev harness for Claude Code, Codex, and Grok Build. No npx. Not an MCP server.",
-    "enrichment": {
-      "issueTextTrusted": true,
-      "ai": {
-        "attempted": false,
-        "status": "circuit-open",
-        "requestedFields": [
-          "plainSummary"
-        ],
-        "circuitReason": "timeout"
-      },
-      "plainSummary": {
-        "source": "rules"
-      },
-      "plainSummaryEn": {
-        "source": "repo-description"
-      }
-    },
-    "stars": 1,
-    "forks": 0,
-    "openIssues": 0,
-    "license": "MIT",
-    "createdAt": "2026-09-18T08:13:06Z",
-    "lastCommitAt": "2026-09-26T09:11:31Z",
-    "headSha": "7e18fa4af867217bcc422676c79dd1710da2f1ce",
-    "metadataFetchedAt": "2026-10-02T22:29:33.510Z",
-    "metadataStatus": "ok",
-    "avatarUrl": "https://avatars.githubusercontent.com/u/3657473?v=4",
-    "verificationStatus": "integration-detected",
-    "runtimeVerified": false,
-    "discoveredAt": "2026-09-22T21:04:52.715Z",
-    "evidence": [
-      {
-        "url": "https://github.com/nekowasabi/jev-routing/blob/feed3d9333e22c097e6bf54c35791eb2eaf1a37c/internal/jev/jev.go",
-        "note": "自动发现的 Jev 集成证据"
-      }
-    ],
-    "sourceVerification": {
-      "method": "bounded-source-heuristic",
-      "sha": "feed3d9333e22c097e6bf54c35791eb2eaf1a37c",
-      "files": [
-        {
-          "path": "internal/jev/jev.go",
-          "url": "https://github.com/nekowasabi/jev-routing/blob/feed3d9333e22c097e6bf54c35791eb2eaf1a37c/internal/jev/jev.go",
-          "hash": "425a988b41c100d198ddac09cf4118eececc569e0aedec63d0a527c75039bd6f"
-        }
-      ]
-    },
-    "sourceHash": "425a988b41c100d198ddac09cf4118eececc569e0aedec63d0a527c75039bd6f",
-    "updatedAt": "2026-09-26T09:21:02Z",
-    "pushedAt": "2026-09-26T09:20:58Z",
-    "lastSyncedAt": "2026-10-02T22:29:33.510Z",
-    "archived": true
   },
   {
     "id": "arpit-khandelwal:jev-linkedin-slop-filter",
@@ -72924,6 +72747,342 @@
       "issueNumber": 115,
       "issueBodySha256": "a0ff28f44485fb61c8c7248b4e419c498d9e154fe7a3a6deb124374717665340",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/115"
+    }
+  },
+  {
+    "id": "reticlehq:reticle",
+    "pinned": false,
+    "name": "reticle",
+    "author": "reticlehq",
+    "url": "https://github.com/reticlehq/reticle",
+    "repo": "reticlehq/reticle",
+    "repoId": 1265947881,
+    "category": "Evaluation & Observability",
+    "plainSummary": "面向 AI Coding Agent 的端到端真实感知与应用测试框架，在驱动应用运行时支持以 Jev 作为 Harness Driver 执行非生成式状态判定与断言。",
+    "plainSummaryEn": "An end-to-end runtime perception and verification framework for coding agents that drives real apps and supports Jev as the harness driver for non-generative assertions.",
+    "plainSummaryJa": "コーディング Agent 向けのランタイム検証フレームワーク。アプリを実際に操作しながら Jev を Harness Driver として利用し、非生成的な状態判定とアサーションを行う。",
+    "plainSummaryKo": "코딩 에이전트를 위한 런타임 검증 프레임워크로, 실제 실행 중인 앱을 구동하며 Jev를 Harness Driver로 활용해 비생성형 상태 판정과 단언을 수행합니다.",
+    "jevDecisionPoint": "Harness Driver 将界面状态评估转化为 Jev 类型化判断，决定下一步操作动作并核验预期结果是否吻合。",
+    "jevDecisionPointEn": "The harness driver translates UI state evaluation into Jev typed decisions, selecting the next action and verifying expected runtime outcomes.",
+    "jevDecisionPointJa": "Harness Driver が画面状態の評価を Jev の型付き判定に変換し、次のアクション選択と期待結果の照合を実行する。",
+    "jevDecisionPointKo": "Harness Driver가 화면 상태 평가를 Jev 형식화 판정으로 변환하여 다음 동작을 선택하고 기대 결과 부합 여부를 검증합니다.",
+    "highlightBenefit": "让 Agent 摆脱盲目猜想，在真实运行环境中使用低延迟 Jev 判定做闭环验收测试。",
+    "highlightBenefitEn": "Replaces blind assumptions with closed-loop verification in running environments using low-latency Jev judgments.",
+    "highlightBenefitJa": "生成モデルの推測任せを防ぎ、実稼働環境で低遅延な Jev 判定によるクローズドループ検証を実現する。",
+    "highlightBenefitKo": "생성 모델의 맹목적 추측을 방지하고 실제 구동 환경에서 저지연 Jev 판정을 통한 폐루프 검증을 제공합니다.",
+    "tags": [
+      "coding-agents",
+      "evaluation-benchmarks",
+      "typed-decisions"
+    ],
+    "stars": 1198,
+    "forks": 194,
+    "openIssues": 134,
+    "license": "Apache-2.0",
+    "licenseStatus": "confirmed",
+    "createdAt": "2026-06-11T07:53:01Z",
+    "updatedAt": "2026-10-09T07:41:42Z",
+    "pushedAt": "2026-10-09T07:11:28Z",
+    "lastCommitAt": "2026-10-09T07:01:12Z",
+    "lastSyncedAt": "2026-10-09T08:29:56.750Z",
+    "metadataFetchedAt": "2026-10-09T08:29:56.750Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/298235407?v=4",
+    "language": "TypeScript",
+    "topics": [
+      "agent-skills",
+      "agent-testing",
+      "agent-verification",
+      "automated-testing",
+      "jev"
+    ],
+    "archived": false,
+    "headSha": "178e5c0701e839af6af04ce599784d58e6b10d36",
+    "sourceUrl": "https://github.com/reticlehq/reticle/blob/178e5c0701e839af6af04ce599784d58e6b10d36/core/src/wire/constants/constants.ts",
+    "sourcePath": "core/src/wire/constants/constants.ts",
+    "evidenceLines": [
+      18,
+      35
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对固定版本公开源码中对 Jev API 与配置项的真实调用与驱动支持；本站未执行其全部测试套件。",
+    "claimStatusEn": "Source-level integration of Jev API driver constants and harness dispatch verified at pinned commit; full test suite was not run.",
+    "claimStatusJa": "固定コミットにて Jev API ドライバー定数およびディスパッチ実装を確認済み。テスト全実行は行っていません。",
+    "claimStatusKo": "고정 커밋에서 Jev API 드라이버 상수 및 디스패치 구현을 확인했습니다. 전체 테스트 실행은 수행하지 않았습니다.",
+    "evidence": [
+      {
+        "url": "https://github.com/reticlehq/reticle/blob/178e5c0701e839af6af04ce599784d58e6b10d36/core/src/wire/constants/constants.ts",
+        "note": "固定版本源码：Harness Driver 支持以 Jev API 驱动决策与预期核验"
+      },
+      {
+        "url": "https://github.com/reticlehq/reticle/blob/178e5c0701e839af6af04ce599784d58e6b10d36/README.md",
+        "note": "固定版本 README：Jev 风格机器级感知与测试核验"
+      }
+    ],
+    "sourceReviewedAt": "2026-10-09T08:29:56.750Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "178e5c0701e839af6af04ce599784d58e6b10d36",
+      "reviewedAt": "2026-10-09T08:29:56.750Z",
+      "files": [
+        {
+          "path": "core/src/wire/constants/constants.ts",
+          "url": "https://github.com/reticlehq/reticle/blob/178e5c0701e839af6af04ce599784d58e6b10d36/core/src/wire/constants/constants.ts"
+        }
+      ]
+    }
+  },
+  {
+    "id": "amantux:mcp-router",
+    "pinned": false,
+    "name": "mcp-router",
+    "author": "Amantux",
+    "url": "https://github.com/Amantux/mcp-router",
+    "repo": "Amantux/mcp-router",
+    "repoId": 1409870942,
+    "category": "MCP & Integrations",
+    "plainSummary": "基于 Jev System One 原语的开源 MCP 工具路由器，对海量 MCP 工具做去重与动态子集路由，支持边缘端或云端 Jev 端点决策。",
+    "plainSummaryEn": "An open-source, Jev-based MCP router that catalogs, deduplicates, and dynamically filters tools using single-pass System One decisions.",
+    "plainSummaryJa": "Jev System One プリミティブに基づくオープンソースの MCP ツールルーター。多数のツールから最適なサブセットを型付き決定で動的に絞り込む。",
+    "plainSummaryKo": "Jev System One 기반 오픈소스 MCP 라우터로, 수많은 도구 중 작업에 필요한 하위 집합을 단일 패스 판정으로 동적 라우팅합니다.",
+    "jevDecisionPoint": "通过 Jev 的 Choice / Score / Noul 类型化问答与校准概率，在单次前向传播中从候选工具池中选择最匹配当前意图的工具。",
+    "jevDecisionPointEn": "Uses Jev Choice, Score, and Noul typed questions to select the relevant tool subset in a single forward pass without generating text.",
+    "jevDecisionPointJa": "テキスト生成を行わず、Jev の Choice/Score/Noul 型付き判定と確率値を用いて候補ツールから最適なものを選択する。",
+    "jevDecisionPointKo": "텍스트 생성 없이 Jev의 Choice, Score, Noul 형식화 판정과 확률을 사용해 후보 도구 중 최적의 도구를 선택합니다.",
+    "highlightBenefit": "避免在 Agent 上下文窗口中塞入完整工具目录，显著降低 Token 消耗并杜绝模型幻觉产生不存在的工具名。",
+    "highlightBenefitEn": "Prevents flooding context windows with full tool catalogs, cutting token usage and preventing hallucinated tool calls.",
+    "highlightBenefitJa": "全ツール定義でコンテキストを圧迫するのを防ぎ、トークン消費を抑えながら存在しないツールの幻覚を排除する。",
+    "highlightBenefitKo": "전체 도구 카탈로그로 컨텍스트를 채우는 것을 방지하여 토큰을 절약하고 환각 도구 호출을 차단합니다.",
+    "tags": [
+      "mcp-integrations",
+      "llm-routing-cost",
+      "typed-decisions"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "Apache-2.0",
+    "licenseStatus": "confirmed",
+    "createdAt": "2026-10-08T06:48:34Z",
+    "updatedAt": "2026-10-09T07:18:35Z",
+    "pushedAt": "2026-10-09T07:18:31Z",
+    "lastCommitAt": "2026-10-09T07:18:30Z",
+    "lastSyncedAt": "2026-10-09T08:29:56.750Z",
+    "metadataFetchedAt": "2026-10-09T08:29:56.750Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/15953669?v=4",
+    "language": "Python",
+    "topics": [
+      "ai-agents",
+      "fastapi",
+      "jev",
+      "mcp",
+      "tool-routing"
+    ],
+    "archived": false,
+    "headSha": "881a6d5e9cade9179b69c60d8f9d7e1baec5953a",
+    "sourceUrl": "https://github.com/Amantux/mcp-router/blob/881a6d5e9cade9179b69c60d8f9d7e1baec5953a/README.md",
+    "sourcePath": "README.md",
+    "evidenceLines": [
+      10,
+      25
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对固定版本中基于 Jev/Laya 决策原语的路由架构与端点设计；本站未运行其本地数据库。",
+    "claimStatusEn": "Jev/Laya decision primitives and router architecture verified at pinned commit; local database was not executed.",
+    "claimStatusJa": "固定コミットにて Jev/Laya の決定プリミティブに基づくルーティング構造を確認済み。ローカル DB の実行検証は未実施。",
+    "claimStatusKo": "고정 커밋에서 Jev/Laya 결정 프리미티브 기반 라우팅 아키텍처를 확인했습니다. 로컬 DB 실행 검증은 수행하지 않았습니다.",
+    "evidence": [
+      {
+        "url": "https://github.com/Amantux/mcp-router/blob/881a6d5e9cade9179b69c60d8f9d7e1baec5953a/README.md",
+        "note": "固定版本源码与文档：基于 Jev System One（Choice/Score/Noul）原语的 MCP 动态工具路由器"
+      }
+    ],
+    "sourceReviewedAt": "2026-10-09T08:29:56.750Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "881a6d5e9cade9179b69c60d8f9d7e1baec5953a",
+      "reviewedAt": "2026-10-09T08:29:56.750Z",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Amantux/mcp-router/blob/881a6d5e9cade9179b69c60d8f9d7e1baec5953a/README.md"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bojansandhaus:jev-home-assistant-sentinel",
+    "pinned": false,
+    "name": "jev-home-assistant-sentinel",
+    "author": "bojansandhaus",
+    "url": "https://github.com/bojansandhaus/jev-home-assistant-sentinel",
+    "repo": "bojansandhaus/jev-home-assistant-sentinel",
+    "repoId": 1377448413,
+    "category": "Security & Guardrails",
+    "plainSummary": "面向 Home Assistant 智能家居系统的安全哨兵，以 Jev 链式适配器对自动化动作进行策略审查与状态确定性校验。",
+    "plainSummaryEn": "A safety boundary for AI-assisted Home Assistant decisions, pairing explicit policy checks with chained Jev decision adapters.",
+    "plainSummaryJa": "Home Assistant 向けの安全ガードレール。Jev アダプターチェーンを用いて自動化アクションのポリシー審査と決定論的検証を行う。",
+    "plainSummaryKo": "Home Assistant 스마트홈을 위한 안전 경계로, Jev 어댑터 체인을 통해 자동화 작업에 대한 정책 검토와 결정론적 상태 검증을 수행합니다.",
+    "jevDecisionPoint": "在执行高危家居动作前，由 Jev 对当前设备状态、指令危险度及策略符合性给出类型化二元准入（Noul）与评分判定。",
+    "jevDecisionPointEn": "Evaluates device states, command risks, and policy conformance with Jev Noul decisions and scores before executing sensitive actions.",
+    "jevDecisionPointJa": "危険な家電操作を実行する前に、Jev が機器状態とリスクを評価して型付き Noul 判定およびスコア判定を行う。",
+    "jevDecisionPointKo": "민감한 기기 제어 동작 전 Jev가 장치 상태, 위험도 및 정책 적합성을 평가하여 형식화 Noul 및 점수 판정을 내립니다.",
+    "highlightBenefit": "为可能造成物理危险的智能家居控制提供低延迟、防越狱的确定性安全屏障。",
+    "highlightBenefitEn": "Provides a low-latency, tamper-resistant safety boundary for smart home actions that could cause physical real-world hazards.",
+    "highlightBenefitJa": "物理的な事故につながりかねないスマートホーム操作に対し、低遅延で堅牢な決定論的セーフティネットを提供する。",
+    "highlightBenefitKo": "물리적 위험을 유발할 수 있는 스마트홈 제어 동작에 대해 저지연의 견고한 안전 방벽을 제공합니다.",
+    "tags": [
+      "security-guardrails",
+      "domain-workflows",
+      "typed-decisions"
+    ],
+    "stars": 1,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "MIT",
+    "licenseStatus": "confirmed",
+    "createdAt": "2026-09-19T17:38:41Z",
+    "updatedAt": "2026-10-09T07:27:14Z",
+    "pushedAt": "2026-10-09T07:27:15Z",
+    "lastCommitAt": "2026-10-09T07:27:09Z",
+    "lastSyncedAt": "2026-10-09T08:29:56.750Z",
+    "metadataFetchedAt": "2026-10-09T08:29:56.750Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/114113320?v=4",
+    "language": "Python",
+    "topics": [
+      "custom-integration",
+      "decision-model",
+      "home-assistant",
+      "jev",
+      "safety"
+    ],
+    "archived": false,
+    "headSha": "49a7eb63ac2a1713c5ce01e7df34171dca102e97",
+    "sourceUrl": "https://github.com/bojansandhaus/jev-home-assistant-sentinel/blob/49a7eb63ac2a1713c5ce01e7df34171dca102e97/sentinel/jev.py",
+    "sourcePath": "sentinel/jev.py",
+    "evidenceLines": [
+      1,
+      30
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对 sentinel/jev.py 中对 Jev API 的多后端适配器与链式回退实现；本站未连接实际 Home Assistant 实例。",
+    "claimStatusEn": "Chained Jev adapters and policy verification reviewed in sentinel/jev.py; live Home Assistant instances were not connected.",
+    "claimStatusJa": "sentinel/jev.py における Jev アダプター群およびチェーン実装を確認済み。実機連携テストは行っていません。",
+    "claimStatusKo": "sentinel/jev.py의 Jev 어댑터 체인 및 정책 검증 구현을 확인했습니다. 실제 Home Assistant 연동 테스트는 수행하지 않았습니다.",
+    "evidence": [
+      {
+        "url": "https://github.com/bojansandhaus/jev-home-assistant-sentinel/blob/49a7eb63ac2a1713c5ce01e7df34171dca102e97/sentinel/jev.py",
+        "note": "固定版本源码：多适配器 Jev 决策层（OpenRouterJev, ClefJev, LayaJev, ChainedJev）"
+      },
+      {
+        "url": "https://github.com/bojansandhaus/jev-home-assistant-sentinel/blob/49a7eb63ac2a1713c5ce01e7df34171dca102e97/README.md",
+        "note": "固定版本 README：智能家居 Home Assistant 的确定性安全防护网"
+      }
+    ],
+    "sourceReviewedAt": "2026-10-09T08:29:56.750Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "49a7eb63ac2a1713c5ce01e7df34171dca102e97",
+      "reviewedAt": "2026-10-09T08:29:56.750Z",
+      "files": [
+        {
+          "path": "sentinel/jev.py",
+          "url": "https://github.com/bojansandhaus/jev-home-assistant-sentinel/blob/49a7eb63ac2a1713c5ce01e7df34171dca102e97/sentinel/jev.py"
+        }
+      ]
+    }
+  },
+  {
+    "id": "kyaulabs:kairos",
+    "pinned": false,
+    "name": "kairos",
+    "author": "kyaulabs",
+    "url": "https://github.com/kyaulabs/kairos",
+    "repo": "kyaulabs/kairos",
+    "repoId": 1379296663,
+    "category": "Domain & Vertical Tools",
+    "plainSummary": "面向 Kraken 与 Alpaca 交易平台的 Python 交易机器人，在量化策略与订单风控中融合 Jev 快速决策与确定性规则。",
+    "plainSummaryEn": "An experimental Python trading bot for Kraken and Alpaca combining Jev-assisted strategy decisions with deterministic risk controls.",
+    "plainSummaryJa": "Kraken および Alpaca 向けの Python 自動取引ボット。Jev の迅速な戦略判断と決定論的リスク管理を統合。",
+    "plainSummaryKo": "Kraken 및 Alpaca를 위한 Python 트레이딩 봇으로, Jev 기반 전략 의사결정과 결정론적 리스크 관리를 결합합니다.",
+    "jevDecisionPoint": "根据实时盘口与技术指标状态，由 Jev 对市场行情紧迫度、多空方向及风险容忍度做出快速类型化判定。",
+    "jevDecisionPointEn": "Jev delivers fast typed decisions on market urgency, directional bias, and risk tolerance based on live orderbook states.",
+    "jevDecisionPointJa": "板情報とテクニカル指標に基づき、Jev が市場の緊急度、売買方向、許容リスクを型付き判定で迅速に評価する。",
+    "jevDecisionPointKo": "실시간 호가창과 기술 지표를 바탕으로 Jev가 시장 긴급도, 매매 방향성 및 리스크 허용도를 신속하게 형식화 판정합니다.",
+    "highlightBenefit": "将高成本的生成式分析替换为毫秒级 Jev 原语，配合硬编码风控限制，兼顾策略敏捷度与资金安全。",
+    "highlightBenefitEn": "Replaces heavy generative models with millisecond Jev primitives under hard risk constraints to balance agility and capital safety.",
+    "highlightBenefitJa": "重い生成モデルをミリ秒級の Jev プリミティブに置き換え、厳格なリスク制限下で俊敏性と資金安全性を両立。",
+    "highlightBenefitKo": "무거운 생성 모델 대신 밀리초 단위의 Jev 프리미티브를 사용하고 엄격한 리스크 한도를 적용해 민첩성과 자금 안전을 모두 확보합니다.",
+    "tags": [
+      "finance-quant",
+      "domain-workflows",
+      "typed-decisions"
+    ],
+    "stars": 1,
+    "forks": 0,
+    "openIssues": 0,
+    "license": "AGPL-3.0",
+    "licenseStatus": "confirmed",
+    "createdAt": "2026-09-21T07:43:40Z",
+    "updatedAt": "2026-10-09T07:34:42Z",
+    "pushedAt": "2026-10-09T07:40:40Z",
+    "lastCommitAt": "2026-10-09T07:34:36Z",
+    "lastSyncedAt": "2026-10-09T08:29:56.750Z",
+    "metadataFetchedAt": "2026-10-09T08:29:56.750Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/73140324?v=4",
+    "language": "Python",
+    "topics": [
+      "algorithmic-trading",
+      "cryptocurrency",
+      "jev",
+      "paper-trading",
+      "python"
+    ],
+    "archived": false,
+    "headSha": "699aa59329a143a389d1338d03a7d992e42f1e66",
+    "sourceUrl": "https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/kairos/clients.py",
+    "sourcePath": "kairos/clients.py",
+    "evidenceLines": [
+      1,
+      20
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对 kairos/clients.py 中对 Jev 接口的调用封装；本站未执行实盘交易，不构成任何投资建议。",
+    "claimStatusEn": "Jev API client implementation verified in kairos/clients.py; live trading was not executed and this is not financial advice.",
+    "claimStatusJa": "kairos/clients.py における Jev クライアント実装を確認済み。実取引は行っておらず、投資助言ではありません。",
+    "claimStatusKo": "kairos/clients.py의 Jev 클라이언트 구현을 확인했습니다. 실거래는 수행하지 않았으며 투자 조언이 아닙니다.",
+    "evidence": [
+      {
+        "url": "https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/kairos/clients.py",
+        "note": "固定版本源码：kairos/clients.py 中封装 TypeSafe Jev API 客户端"
+      },
+      {
+        "url": "https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/README.md",
+        "note": "固定版本说明：融合 Jev 快速决策策略与确定性风控的自动化交易机器人"
+      }
+    ],
+    "sourceReviewedAt": "2026-10-09T08:29:56.750Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "699aa59329a143a389d1338d03a7d992e42f1e66",
+      "reviewedAt": "2026-10-09T08:29:56.750Z",
+      "files": [
+        {
+          "path": "kairos/clients.py",
+          "url": "https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/kairos/clients.py"
+        }
+      ]
     }
   }
 ]

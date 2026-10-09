@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 854
+Catalog entries: 856
 
 ## Install the Agent Skill
 
@@ -40,13 +40,13 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [Data & Search](https://logicrw.github.io/awesome-jev-projects/en/categories/data-search/): 52
 - [Decision Tools](https://logicrw.github.io/awesome-jev-projects/en/categories/decision-tools/): 42
 - [Domain & Vertical Tools](https://logicrw.github.io/awesome-jev-projects/en/categories/domain-vertical-tools/): 97
-- [Evaluation & Observability](https://logicrw.github.io/awesome-jev-projects/en/categories/evaluation-observability/): 29
+- [Evaluation & Observability](https://logicrw.github.io/awesome-jev-projects/en/categories/evaluation-observability/): 30
 - [High-Frequency & Simulation](https://logicrw.github.io/awesome-jev-projects/en/categories/high-frequency-simulation/): 57
 - [MCP & Integrations](https://logicrw.github.io/awesome-jev-projects/en/categories/mcp-integrations/): 56
 - [Routing & Cost Optimization](https://logicrw.github.io/awesome-jev-projects/en/categories/routing-cost-optimization/): 70
 - [SDK & Decision Frameworks](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-decision-frameworks/): 132
 - [SDK & Integrations](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-integrations/): 6
-- [Security & Guardrails](https://logicrw.github.io/awesome-jev-projects/en/categories/security-guardrails/): 67
+- [Security & Guardrails](https://logicrw.github.io/awesome-jev-projects/en/categories/security-guardrails/): 68
 - [Voice & Conversation](https://logicrw.github.io/awesome-jev-projects/en/categories/voice-conversation/): 4
 
 ## Sponsorship · Paid placements

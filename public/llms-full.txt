@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 854
+Catalog entries: 856
 
 ## Install the Agent Skill
 
@@ -3940,20 +3940,6 @@ Software development framework for coding agents enhanced with Jev for dependenc
 - Source evidence: https://github.com/AkashPriyadarshii/jev-superpowers/blob/6ddc702c231fd33fdf04b1ab1c0cce96fd8d2a19/skills/systematic-debugging/condition-based-waiting-example.ts#L1-L159
 - Source evidence: https://github.com/AkashPriyadarshii/jev-superpowers/blob/6ddc702c231fd33fdf04b1ab1c0cce96fd8d2a19/README.md
 
-## JevSeek
-
-Local coding workspace and agent decoupling tool routing via Jev from detailed argument generation via DeepSeek.
-
-- Repository: https://github.com/morcoan/JevSeek
-- Category: Domain & Vertical Tools
-- Jev decision: Employs Jev to classify and select the next tool action based on execution state, delegating parameter generation to DeepSeek.
-- Purpose: Combines low-latency discrete routing with capable generative modeling, reducing overall prompt overhead and turn latency.
-- Review scope: Source code verified against pinned commit. Covers desktop bridge and routing logic; end-to-end latency depends on provider configuration.
-- License: MIT
-- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/morcoan/jevseek/
-- Source evidence: https://github.com/morcoan/JevSeek/blob/030d59114a03720783e839481a7814e7aecaad85/desktop.py#L1-L141
-- Source evidence: https://github.com/morcoan/JevSeek/blob/030d59114a03720783e839481a7814e7aecaad85/README.md
-
 ## reranker
 
 A Python reranker that packs a query and up to 30 candidates into one Jev state, with one Noul relevance question per document.
@@ -7633,19 +7619,6 @@ New to synthetic survey respondents? \[Start here\](#new-to-this-start-here). Fo
 - License: MIT
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/jjd-lab/jev-synthetic-survey/
 - Source evidence: https://github.com/jjd-lab/jev-synthetic-survey/blob/8dbb40db3a69e4d174b5962ffef3bdb8ee7e7a68/scripts/twin2k/jev_client.py
-
-## jev-routing
-
-Go Jev harness for Claude Code, Codex, and Grok Build. No npx. Not an MCP server.
-
-- Repository: https://github.com/nekowasabi/jev-routing
-- Category: MCP & Integrations
-- Jev decision: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-- Review scope: Based on repository metadata and README with rule-based classification; pending human review, with no independent runtime or performance verification.
-- License: MIT
-- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/nekowasabi/jev-routing/
-- Source evidence: https://github.com/nekowasabi/jev-routing/blob/feed3d9333e22c097e6bf54c35791eb2eaf1a37c/internal/jev/jev.go
 
 ## jev-linkedin-slop-filter
 
@@ -11979,3 +11952,58 @@ A coding agent built on pi and AionUi whose routine calls at 38 decision points 
 - License: MIT
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/qybaihe/mu/
 - Source evidence: https://github.com/qybaihe/mu/blob/537d028f483eae210f049a922e9c8e473a1b005d/packages/kyrn-judge/src/providers/typesafe.ts
+
+## reticle
+
+An end-to-end runtime perception and verification framework for coding agents that drives real apps and supports Jev as the harness driver for non-generative assertions.
+
+- Repository: https://github.com/reticlehq/reticle
+- Category: Evaluation & Observability
+- Jev decision: The harness driver translates UI state evaluation into Jev typed decisions, selecting the next action and verifying expected runtime outcomes.
+- Purpose: Replaces blind assumptions with closed-loop verification in running environments using low-latency Jev judgments.
+- Review scope: Source-level integration of Jev API driver constants and harness dispatch verified at pinned commit; full test suite was not run.
+- License: Apache-2.0
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/reticlehq/reticle/
+- Source evidence: https://github.com/reticlehq/reticle/blob/178e5c0701e839af6af04ce599784d58e6b10d36/core/src/wire/constants/constants.ts
+- Source evidence: https://github.com/reticlehq/reticle/blob/178e5c0701e839af6af04ce599784d58e6b10d36/README.md
+
+## mcp-router
+
+An open-source, Jev-based MCP router that catalogs, deduplicates, and dynamically filters tools using single-pass System One decisions.
+
+- Repository: https://github.com/Amantux/mcp-router
+- Category: MCP & Integrations
+- Jev decision: Uses Jev Choice, Score, and Noul typed questions to select the relevant tool subset in a single forward pass without generating text.
+- Purpose: Prevents flooding context windows with full tool catalogs, cutting token usage and preventing hallucinated tool calls.
+- Review scope: Jev/Laya decision primitives and router architecture verified at pinned commit; local database was not executed.
+- License: Apache-2.0
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/amantux/mcp-router/
+- Source evidence: https://github.com/Amantux/mcp-router/blob/881a6d5e9cade9179b69c60d8f9d7e1baec5953a/README.md
+
+## jev-home-assistant-sentinel
+
+A safety boundary for AI-assisted Home Assistant decisions, pairing explicit policy checks with chained Jev decision adapters.
+
+- Repository: https://github.com/bojansandhaus/jev-home-assistant-sentinel
+- Category: Security & Guardrails
+- Jev decision: Evaluates device states, command risks, and policy conformance with Jev Noul decisions and scores before executing sensitive actions.
+- Purpose: Provides a low-latency, tamper-resistant safety boundary for smart home actions that could cause physical real-world hazards.
+- Review scope: Chained Jev adapters and policy verification reviewed in sentinel/jev.py; live Home Assistant instances were not connected.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/bojansandhaus/jev-home-assistant-sentinel/
+- Source evidence: https://github.com/bojansandhaus/jev-home-assistant-sentinel/blob/49a7eb63ac2a1713c5ce01e7df34171dca102e97/sentinel/jev.py
+- Source evidence: https://github.com/bojansandhaus/jev-home-assistant-sentinel/blob/49a7eb63ac2a1713c5ce01e7df34171dca102e97/README.md
+
+## kairos
+
+An experimental Python trading bot for Kraken and Alpaca combining Jev-assisted strategy decisions with deterministic risk controls.
+
+- Repository: https://github.com/kyaulabs/kairos
+- Category: Domain & Vertical Tools
+- Jev decision: Jev delivers fast typed decisions on market urgency, directional bias, and risk tolerance based on live orderbook states.
+- Purpose: Replaces heavy generative models with millisecond Jev primitives under hard risk constraints to balance agility and capital safety.
+- Review scope: Jev API client implementation verified in kairos/clients.py; live trading was not executed and this is not financial advice.
+- License: AGPL-3.0
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/kyaulabs/kairos/
+- Source evidence: https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/kairos/clients.py
+- Source evidence: https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/README.md

@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-854%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-856%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：
 - ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。
 - 🎯 **原生确定性输出**：原生支持 `Choice`（多选一）、`Score`（打分）与 `Noul`（二元逻辑与概率），免去易碎的正则提取。
-- 🛡️ **严格拒绝概念炒作**：按材料收录 **854+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
+- 🛡️ **严格拒绝概念炒作**：按材料收录 **856+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
 
 ### 📊 架构分工对比：System 1 (Jev) vs System 2 (大推理模型)
 
@@ -50,7 +50,7 @@
 - ⚡ **毫秒级吸顶搜索与浮动过滤**：即便页面下滑，也可随时唤出浮动分类面板，支持多标签一键点选过滤。
 - 🔍 **固定版本材料**：查看条目关联的源码、SQL、文档或示例，并按条目标注的审查依据理解结论。
 
-> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **854 个精选项目**
+> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **856 个精选项目**
 
 由社区维护的 Jev 项目与资源目录，收录集成、基准测试、开发工具、研究与学习材料，并逐条展示关系、审查依据和许可事实。
 
@@ -88,13 +88,13 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [数据与搜索 (52)](https://logicrw.github.io/awesome-jev-projects/categories/data-search/)
 - [决策工具 (42)](https://logicrw.github.io/awesome-jev-projects/categories/decision-tools/)
 - [行业应用 (97)](https://logicrw.github.io/awesome-jev-projects/categories/domain-vertical-tools/)
-- [评测与观测 (29)](https://logicrw.github.io/awesome-jev-projects/categories/evaluation-observability/)
+- [评测与观测 (30)](https://logicrw.github.io/awesome-jev-projects/categories/evaluation-observability/)
 - [游戏与实时决策 (57)](https://logicrw.github.io/awesome-jev-projects/categories/high-frequency-simulation/)
 - [MCP 与集成 (56)](https://logicrw.github.io/awesome-jev-projects/categories/mcp-integrations/)
 - [模型路由与降本 (70)](https://logicrw.github.io/awesome-jev-projects/categories/routing-cost-optimization/)
 - [SDK 与决策框架 (132)](https://logicrw.github.io/awesome-jev-projects/categories/sdk-decision-frameworks/)
 - [SDK 与兼容接入 (6)](https://logicrw.github.io/awesome-jev-projects/categories/sdk-integrations/)
-- [安全与内容审核 (67)](https://logicrw.github.io/awesome-jev-projects/categories/security-guardrails/)
+- [安全与内容审核 (68)](https://logicrw.github.io/awesome-jev-projects/categories/security-guardrails/)
 - [语音与对话 (4)](https://logicrw.github.io/awesome-jev-projects/categories/voice-conversation/)
 
 ## 浏览器与桌面
@@ -2108,11 +2108,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **这个项目的用途**: 把行情特征、判断来源和分数放在一起，便于检查风险信号。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/jevbook/jevscan/) · 许可证: MIT
 
-- [**JevSeek**](https://github.com/morcoan/JevSeek) — 本地编码桌面与 CLI 智能体，将 Jev 的动作路由与 DeepSeek 的代码参数生成分层解耦协同。
-  - **Jev 在此条目的作用**: 由 Jev 根据当前工作区状态与用户意图快速判定下一步工具类型，再交由大语言模型补全具体参数。
-  - **这个项目的用途**: 结合了 Jev 的毫秒级离散路由能力与生成模型的强代码生成能力，降低端到端思考延迟并节省 Token 消耗。
-  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/morcoan/jevseek/) · 许可证: MIT
-
 - [**jevsume**](https://github.com/unownone/jevsume) — 给简历做一次结构化体检。既检查措辞、结构和机器可读性，也能对照具体职位描述，看这份简历是否匹配。
   - **Jev 在此条目的作用**: 对提取出的简历文本与职位要求逐项判断和打分，再由 Worker 汇总成页面里的评审结果。
   - **这个项目的用途**: 能保存输入、问题与输出，方便回看每次评审；没有 API key 时运行的是模拟结果。
@@ -2253,6 +2248,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **这个项目的用途**: 增加一组可记录、可对照的判断信号。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/timmikeladze/jevlang/) · 许可证: MIT
 
+- [**kairos**](https://github.com/kyaulabs/kairos) — 面向 Kraken 与 Alpaca 交易平台的 Python 交易机器人，在量化策略与订单风控中融合 Jev 快速决策与确定性规则。
+  - **Jev 在此条目的作用**: 根据实时盘口与技术指标状态，由 Jev 对市场行情紧迫度、多空方向及风险容忍度做出快速类型化判定。
+  - **这个项目的用途**: 将高成本的生成式分析替换为毫秒级 Jev 原语，配合硬编码风控限制，兼顾策略敏捷度与资金安全。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/kyaulabs/kairos/) · 许可证: AGPL-3.0
+
 - [**leadgenrationaivoiceagent**](https://github.com/sumitrevolt/leadgenrationaivoiceagent) — 营销与语音平台中的 TypeSafe 实验模块，用 Jev 为预设 Agent 角色选择专长标签。
   - **Jev 在此条目的作用**: 把角色资料与有限专长候选交给 Choice，代码再映射为能力标签。
   - **这个项目的用途**: 提供一个业务角色分类接入示例。
@@ -2295,6 +2295,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: 判断各项检查的适用性，满足阈值与限流条件时补充检查任务。
   - **这个项目的用途**: 记录模型、阈值、调用时间与选择原因，便于对照原流程。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/latitude-dev/latitude-llm/) · 许可证: MIT
+
+- [**reticle**](https://github.com/reticlehq/reticle) — 面向 AI Coding Agent 的端到端真实感知与应用测试框架，在驱动应用运行时支持以 Jev 作为 Harness Driver 执行非生成式状态判定与断言。
+  - **Jev 在此条目的作用**: Harness Driver 将界面状态评估转化为 Jev 类型化判断，决定下一步操作动作并核验预期结果是否吻合。
+  - **这个项目的用途**: 让 Agent 摆脱盲目猜想，在真实运行环境中使用低延迟 Jev 判定做闭环验收测试。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/reticlehq/reticle/) · 许可证: Apache-2.0
 
 - [**jev-review**](https://github.com/NiazMorshed2007/jev-review) — 供编码 Agent 使用的本地 MCP 代码质量检查器，返回多个维度的结构化评分。
   - **Jev 在此条目的作用**: Jev 对正确性、复杂度、测试和安全等维度评分，程序汇总优先改进项。
@@ -2972,11 +2977,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **这个项目的用途**: 让现有 Agent 通过通用接口使用 Jev。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/jiawei686/jev-review-mcp/) · 许可证: MIT
 
-- [**jev-routing**](https://github.com/nekowasabi/jev-routing) — jev-routing：通过工具接口提供选择、评分或概率判断。
-  - **Jev 在此条目的作用**: 通过工具接口提供选择、评分或概率判断。
-  - **这个项目的用途**: 让现有 Agent 通过通用接口使用 Jev。
-  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/nekowasabi/jev-routing/) · 许可证: MIT
-
 - [**jev-screen-mcp**](https://github.com/jiawei686/jev-screen-mcp) — 将文本转化为一个\*\*有类型的决策\*\* —— 无需冗长文本，宿主 agent 也无需了解任何 Jev API。
   - **Jev 在此条目的作用**: 通过工具接口提供选择、评分或概率判断。
   - **这个项目的用途**: 让现有 Agent 通过通用接口使用 Jev。
@@ -3001,6 +3001,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: 对调用方提供的 state 内容执行 noul 二值判断、choice 分类选择和 score 等级评分的类型化决策。
   - **这个项目的用途**: 让现有 Agent 通过通用接口使用 Jev。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/mattioofr/mcp-server-jev/) · 许可证: MIT
+
+- [**mcp-router**](https://github.com/Amantux/mcp-router) — 基于 Jev System One 原语的开源 MCP 工具路由器，对海量 MCP 工具做去重与动态子集路由，支持边缘端或云端 Jev 端点决策。
+  - **Jev 在此条目的作用**: 通过 Jev 的 Choice / Score / Noul 类型化问答与校准概率，在单次前向传播中从候选工具池中选择最匹配当前意图的工具。
+  - **这个项目的用途**: 避免在 Agent 上下文窗口中塞入完整工具目录，显著降低 Token 消耗并杜绝模型幻觉产生不存在的工具名。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/amantux/mcp-router/) · 许可证: Apache-2.0
 
 - [**openclaw-typesafe-ai**](https://github.com/Olli0103/openclaw-typesafe-ai) — OpenClaw 的独立社区插件，只注册一个需显式调用的 typesafe\_decide 工具。
   - **Jev 在此条目的作用**: 把调用者提供的状态和问题发到 TypeSafe，返回 Jev 结构化决策。
@@ -4353,6 +4358,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: 评估内容是否满足安全或证据要求，由本地策略放行或拦截。
   - **这个项目的用途**: 给现有流程增加可检查的判断环节。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/gavansmyth-arch/jev-chrome-extension/) · 许可证: 未声明许可
+
+- [**jev-home-assistant-sentinel**](https://github.com/bojansandhaus/jev-home-assistant-sentinel) — 面向 Home Assistant 智能家居系统的安全哨兵，以 Jev 链式适配器对自动化动作进行策略审查与状态确定性校验。
+  - **Jev 在此条目的作用**: 在执行高危家居动作前，由 Jev 对当前设备状态、指令危险度及策略符合性给出类型化二元准入（Noul）与评分判定。
+  - **这个项目的用途**: 为可能造成物理危险的智能家居控制提供低延迟、防越狱的确定性安全屏障。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/bojansandhaus/jev-home-assistant-sentinel/) · 许可证: MIT
 
 - [**jev-reasoning-navigator**](https://github.com/AndreuVM/jev-reasoning-navigator) — jev-reasoning-navigator：Jev 对候选推理块评估是否存在幻觉/循环、首个发散步骤位置、缺陷类型以及进度与新颖性评分。
   - **Jev 在此条目的作用**: Jev 对候选推理块评估是否存在幻觉/循环、首个发散步骤位置、缺陷类型以及进度与新颖性评分。

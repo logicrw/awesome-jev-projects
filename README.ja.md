@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/ja/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#カテゴリ"><img src="https://img.shields.io/badge/Curated%20Projects-854%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#カテゴリ"><img src="https://img.shields.io/badge/Curated%20Projects-856%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@ Agent を構築する際、すべての分岐判断を巨大な推論モデル�
 **TypeSafe Jev（System 1）** は、離散選択、スコアリング、真偽値判定に特化した軽量モデルです：
 - ⚡ **100ms 未満の高速応答**：50–100ms で判断を完了し、Agent の高速ループを維持します。
 - 🎯 **ネイティブな型安全出力**：`Choice`、`Score`、`Noul` を直接返し、壊れやすい正規表現パースが不要です。
-- 🛡️ **誇大広告を排除**：17 分野の 854+ 件のプロジェクトと資料を掲載し、説明資料と実装の根拠を区別します。
+- 🛡️ **誇大広告を排除**：17 分野の 856+ 件のプロジェクトと資料を掲載し、説明資料と実装の根拠を区別します。
 
 ### 📊 アーキテクチャ比較：System 1 (Jev) vs System 2 (巨大推論モデル)
 
@@ -50,7 +50,7 @@ Agent を構築する際、すべての分岐判断を巨大な推論モデル�
 - ⚡ **固定検索バーとフローティング絞り込み**：スクロール中も追従するツールバーから、いつでもカテゴリやタグで即座に絞り込み可能。
 - 🔍 **固定バージョンの資料**：リンク先のソース、SQL、説明、例を、各項目の確認根拠と併せて確認できます。
 
-> **[検索・絞り込み ↗](https://logicrw.github.io/awesome-jev-projects/ja/)** · **854 件の厳選プロジェクト**
+> **[検索・絞り込み ↗](https://logicrw.github.io/awesome-jev-projects/ja/)** · **856 件の厳選プロジェクト**
 
 Jev の連携、ベンチマーク、開発ツール、研究、学習資料を集めたコミュニティのカタログです。関係、確認の根拠、ライセンス情報を項目ごとに表示します。
 
@@ -88,13 +88,13 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [データ・検索 (52)](https://logicrw.github.io/awesome-jev-projects/ja/categories/data-search/)
 - [判断ツール (42)](https://logicrw.github.io/awesome-jev-projects/ja/categories/decision-tools/)
 - [分野別ツール (97)](https://logicrw.github.io/awesome-jev-projects/ja/categories/domain-vertical-tools/)
-- [評価・可観測性 (29)](https://logicrw.github.io/awesome-jev-projects/ja/categories/evaluation-observability/)
+- [評価・可観測性 (30)](https://logicrw.github.io/awesome-jev-projects/ja/categories/evaluation-observability/)
 - [ゲーム・リアルタイム判断 (57)](https://logicrw.github.io/awesome-jev-projects/ja/categories/high-frequency-simulation/)
 - [MCP・連携 (56)](https://logicrw.github.io/awesome-jev-projects/ja/categories/mcp-integrations/)
 - [モデルルーティング (70)](https://logicrw.github.io/awesome-jev-projects/ja/categories/routing-cost-optimization/)
 - [SDK・判断フレームワーク (132)](https://logicrw.github.io/awesome-jev-projects/ja/categories/sdk-decision-frameworks/)
 - [SDK・互換連携 (6)](https://logicrw.github.io/awesome-jev-projects/ja/categories/sdk-integrations/)
-- [安全対策・コンテンツ審査 (67)](https://logicrw.github.io/awesome-jev-projects/ja/categories/security-guardrails/)
+- [安全対策・コンテンツ審査 (68)](https://logicrw.github.io/awesome-jev-projects/ja/categories/security-guardrails/)
 - [音声・会話 (4)](https://logicrw.github.io/awesome-jev-projects/ja/categories/voice-conversation/)
 
 ## ブラウザ・デスクトップ
@@ -2108,11 +2108,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **このプロジェクトの用途**: 特徴量・判断元・スコアを並べて確認できる。
   - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/jevbook/jevscan/) · ライセンス: MIT
 
-- [**JevSeek**](https://github.com/morcoan/JevSeek) — ローカルコーディングデスクトップ環境およびエージェントであり、Jev によるツールルーティングと DeepSeek によるコード引数生成を分離協調させます。
-  - **この項目での Jev の役割**: 実行状態と意図に基づき Jev が次のツールアクションを瞬時に選定し、詳細な引数生成のみを DeepSeek に委ねます。
-  - **このプロジェクトの用途**: 低遅延な離散ルーティングと高性能な生成モデルを組み合わせ、プロンプト消費とターン遅延を削減します。
-  - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/morcoan/jevseek/) · ライセンス: MIT
-
 - [**jevsume**](https://github.com/unownone/jevsume) — 履歴書の文章・構成を確認し、特定の求人との適合も調べるアプリ。
   - **この項目での Jev の役割**: 抽出した履歴書を Jev が質問ごとに評価し、Worker が結果をまとめる。
   - **このプロジェクトの用途**: 入力と判断を記録し、個々のレビューを後で確認できる。
@@ -2253,6 +2248,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/timmikeladze/jevlang/) · ライセンス: MIT
 
+- [**kairos**](https://github.com/kyaulabs/kairos) — Kraken および Alpaca 向けの Python 自動取引ボット。Jev の迅速な戦略判断と決定論的リスク管理を統合。
+  - **この項目での Jev の役割**: 板情報とテクニカル指標に基づき、Jev が市場の緊急度、売買方向、許容リスクを型付き判定で迅速に評価する。
+  - **このプロジェクトの用途**: 重い生成モデルをミリ秒級の Jev プリミティブに置き換え、厳格なリスク制限下で俊敏性と資金安全性を両立。
+  - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/kyaulabs/kairos/) · ライセンス: AGPL-3.0
+
 - [**leadgenrationaivoiceagent**](https://github.com/sumitrevolt/leadgenrationaivoiceagent) — マーケティング・音声基盤内の TypeSafe 実験モジュールが、Agent 役割の専門ラベルを選ぶ。
   - **この項目での Jev の役割**: 役割情報と限定候補を Choice に送り、コードが能力ラベルへ対応付ける。
   - **このプロジェクトの用途**: 業務アプリでの役割分類の接続例を示す。
@@ -2295,6 +2295,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **この項目での Jev の役割**: 検査の必要性を判断し、しきい値と呼び出し制限を満たす場合に検査を追加する。
   - **このプロジェクトの用途**: モデル、しきい値、時間、選択理由を元の処理と対照できる。
   - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/latitude-dev/latitude-llm/) · ライセンス: MIT
+
+- [**reticle**](https://github.com/reticlehq/reticle) — コーディング Agent 向けのランタイム検証フレームワーク。アプリを実際に操作しながら Jev を Harness Driver として利用し、非生成的な状態判定とアサーションを行う。
+  - **この項目での Jev の役割**: Harness Driver が画面状態の評価を Jev の型付き判定に変換し、次のアクション選択と期待結果の照合を実行する。
+  - **このプロジェクトの用途**: 生成モデルの推測任せを防ぎ、実稼働環境で低遅延な Jev 判定によるクローズドループ検証を実現する。
+  - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/reticlehq/reticle/) · ライセンス: Apache-2.0
 
 - [**jev-review**](https://github.com/NiazMorshed2007/jev-review) — コーディング Agent に複数の品質スコアを返すローカル MCP レビューサーバー。
   - **この項目での Jev の役割**: Jev が正しさ・複雑度・テスト・セキュリティを採点し、改善項目を整理する。
@@ -2972,11 +2977,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/jiawei686/jev-review-mcp/) · ライセンス: MIT
 
-- [**jev-routing**](https://github.com/nekowasabi/jev-routing) — Go Jev harness for Claude Code, Codex, and Grok Build. No npx. Not an MCP server.
-  - **この項目での Jev の役割**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/nekowasabi/jev-routing/) · ライセンス: MIT
-
 - [**jev-screen-mcp**](https://github.com/jiawei686/jev-screen-mcp) — Single-purpose MCP server (one tool, one job): a content-moderation gate powered by TypeSafe Jev (System One decision model).
   - **この項目での Jev の役割**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -3001,6 +3001,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **この項目での Jev の役割**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/mattioofr/mcp-server-jev/) · ライセンス: MIT
+
+- [**mcp-router**](https://github.com/Amantux/mcp-router) — Jev System One プリミティブに基づくオープンソースの MCP ツールルーター。多数のツールから最適なサブセットを型付き決定で動的に絞り込む。
+  - **この項目での Jev の役割**: テキスト生成を行わず、Jev の Choice/Score/Noul 型付き判定と確率値を用いて候補ツールから最適なものを選択する。
+  - **このプロジェクトの用途**: 全ツール定義でコンテキストを圧迫するのを防ぎ、トークン消費を抑えながら存在しないツールの幻覚を排除する。
+  - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/amantux/mcp-router/) · ライセンス: Apache-2.0
 
 - [**openclaw-typesafe-ai**](https://github.com/Olli0103/openclaw-typesafe-ai) — 明示的に呼ぶ typesafe\_decide ツール一つを登録する独立した OpenClaw プラグイン。
   - **この項目での Jev の役割**: 呼び出し側の状態と質問を TypeSafe に送り、型付き Jev 判断を返す。
@@ -4353,6 +4358,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **この項目での Jev の役割**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **このプロジェクトの用途**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/gavansmyth-arch/jev-chrome-extension/) · ライセンス: ライセンス未記載
+
+- [**jev-home-assistant-sentinel**](https://github.com/bojansandhaus/jev-home-assistant-sentinel) — Home Assistant 向けの安全ガードレール。Jev アダプターチェーンを用いて自動化アクションのポリシー審査と決定論的検証を行う。
+  - **この項目での Jev の役割**: 危険な家電操作を実行する前に、Jev が機器状態とリスクを評価して型付き Noul 判定およびスコア判定を行う。
+  - **このプロジェクトの用途**: 物理的な事故につながりかねないスマートホーム操作に対し、低遅延で堅牢な決定論的セーフティネットを提供する。
+  - [詳細と固定バージョンの資料](https://logicrw.github.io/awesome-jev-projects/ja/projects/bojansandhaus/jev-home-assistant-sentinel/) · ライセンス: MIT
 
 - [**jev-reasoning-navigator**](https://github.com/AndreuVM/jev-reasoning-navigator) — En lugar de depender de heurísticas matemáticas frágiles o distancias vectoriales locales de coseno, \`JEV-Reasoning-Navigator\` utiliza \*\*TypeSafe AI (\`typesafe-sdk\`)\*\* como motor único y autoritativo de decisión cognitiva:
   - **この項目での Jev の役割**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.

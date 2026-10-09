@@ -84,5 +84,21 @@
     "reason": "已由维护者在前一版目录移除；避免自动扫描重新加入。",
     "source": "https://github.com/alxcrt/is-odd-jev",
     "reviewedAt": "2026-09-19T06:53:39.508919+00:00"
+  },
+  {
+    "repo": "morcoan/JevSeek",
+    "repoId": null,
+    "status": "maintainer-removed",
+    "reason": "已由维护者从目录移除：仓库已于 GitHub 归档（Archived）停止维护，避免自动扫描重新收录。",
+    "source": "https://github.com/morcoan/JevSeek",
+    "reviewedAt": "2026-10-09T08:29:56.736Z"
+  },
+  {
+    "repo": "nekowasabi/jev-routing",
+    "repoId": 1375575737,
+    "status": "maintainer-removed",
+    "reason": "已由维护者从目录移除：仓库已于 GitHub 归档（Archived）停止维护，避免自动扫描重新收录。",
+    "source": "https://github.com/nekowasabi/jev-routing",
+    "reviewedAt": "2026-10-09T08:29:56.736Z"
   }
 ]
