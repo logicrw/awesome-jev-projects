@@ -25,7 +25,7 @@ function sourceAPI(fixture){
   throw new Error(`Unexpected fixture read: ${path}`);
  };
 }
-for(const issueNumber of [111,113,114])test(`fixed #${issueNumber}: genuine materials reach the model and a source-backed scripted verdict is admitted`,async(t)=>{
+for(const issueNumber of [113,114])test(`fixed #${issueNumber}: genuine materials reach the model and a source-backed scripted verdict is admitted`,async(t)=>{
  const fixture=JSON.parse(await readFile(new URL(`./fixtures/historical/issue-${issueNumber}.json`,import.meta.url),'utf8'));
  const expected=gold[issueNumber];
  for(const file of fixture.files)assert.equal(createHash('sha256').update(file.text).digest('hex'),file.hash);
@@ -64,4 +64,23 @@ for(const issueNumber of [111,113,114])test(`fixed #${issueNumber}: genuine mate
  t.diagnostic(JSON.stringify({issue:issueNumber,commit:fixture.sourceCommit,decision:'admit',catalogKind:result.project.catalogKind,
   sourceBytes:fixture.files.reduce((n,f)=>n+Buffer.byteLength(f.text),0),requests:metrics,
   accounting:'scripted usage, not provider measurement',chargedTokens:result.budgetLedger.chargedTokens}));
+});
+
+test('fixed #111: pure prompt pattern library without executable Jev API integration is excluded',async(t)=>{
+ const fixture=JSON.parse(await readFile(new URL('./fixtures/historical/issue-111.json',import.meta.url),'utf8'));
+ const reviewer=createSubmissionReviewer({token:'offline-fixture',source:'deepseek',fetchImpl:async(_url,options)=>{
+  const verdict={target:'R1',decision:'exclude',catalogKind:'learning-resource',jevRelation:'discussed',
+   reviewBasis:'descriptive-material',claims:[],conflicts:[],need:null,category:null,
+   plainSummary:'纯提示词与问题设计模式列表，无代码级 JEV API 软件工程集成。',
+   plainSummaryEn:'Curated prompt pattern library without executable Jev API software integration.'};
+  return new Response(JSON.stringify({model:'deepseek-flash',choices:[{finish_reason:'stop',message:{content:JSON.stringify(verdict)}}],
+   usage:{prompt_tokens:480,completion_tokens:120,total_tokens:600}}));
+ }});
+ const result=await prepareSubmission({issue:{...fixture.issue,state:'open'},repository:'logicrw/awesome-jev-projects',projects:[],taxonomy,
+  api:sourceAPI(fixture),reviewer:input=>reviewer({...input,allowUnreserved:true}),
+  enrich:createSummaryEnricher({token:'fixture',fetchImpl:()=>assert.fail('no summary call on exclusion')})});
+ assert.equal(result.status,'rejected');
+ assert.equal(result.reasonCode,'model-rejected');
+ assert.equal(result.submittedRepository,'vicfei/awesome-jev-prompts');
+ t.diagnostic(JSON.stringify({issue:111,decision:'exclude',reason:result.reason}));
 });

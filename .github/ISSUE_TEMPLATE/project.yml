@@ -1,5 +1,5 @@
 name: 🚀 提交 Jev 开源项目 (Submit a Jev Project)
-description: 提交 Jev 相关实现、声明式工作流、教程或学习资源，由模型自动审查与分类
+description: 提交接入、实现或扩展 JEV API 的开源软件工程或工具，由模型自动审查与分类
 title: "[Project]: "
 labels: ["project-submission"]
 body:
@@ -8,8 +8,8 @@ body:
       value: |
         ### 🛰️ Awesome Jev 项目收录提交流程
         感谢向 **Awesome Jev 开源雷达** 贡献项目！
-        - **自动收录**：模型依据固定版本材料判断投稿意图、Jev 关联和项目类型，通过后自动写入目录并上线。材料可包括代码、SQL/DSL、工作流配置、README 和教程；收录不代表运行、性能或安全认证。
-        - **收录标准**：公开可访问的 GitHub 仓库；有独立用途的 fork 也可提交。模型区分实际接入、兼容实现与学习资源。许可证缺失会如实展示，不作为自动拒绝条件。
+        - **自动收录**：模型依据固定版本材料判断投稿意图、Jev 关联和项目类型，通过后自动写入目录并上线。收录不代表运行、性能或安全认证。
+        - **收录标准**：公开可访问的 GitHub 开源仓库，且在代码、工具链或运行时层面实质性接入、调用或实现 JEV API（如 SDK、/v1/systemone 接口、Agent/CLI 决策路由、仿真基准、兼容服务等）。纯提示词模板列表、教程笔记、外围文章或衍生书签列表不予收录。
         - *中英文均可提交 (Both English and Chinese are welcome)*。
 
   - type: input
@@ -34,13 +34,13 @@ body:
     id: primitives
     attributes:
       label: Jev Primitives used (使用的 Jev 核心原语)
-      description: 可选：项目或材料涉及哪些 Jev 原语？不使用 SDK 调用的学习资源也可提交。
+      description: 可选：项目在代码中使用了哪些 Jev 核心原语？
       multiple: true
       options:
         - "⚡ Choice (离散动作/分支多选一 · N-Pick-1)"
         - "🎯 Score (连续置信度打分 · Continuous Evaluation)"
         - "🛡️ Noul (二元门禁与安全拦截 · True/False Gate)"
-        - "教程、规格或学习资源 / Learning resource"
+        - "⚙️ Compatible Server / Runtime (兼容服务端或本地运行时)"
     validations:
       required: false
 

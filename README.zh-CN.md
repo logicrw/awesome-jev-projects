@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-857%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-854%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：
 - ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。
 - 🎯 **原生确定性输出**：原生支持 `Choice`（多选一）、`Score`（打分）与 `Noul`（二元逻辑与概率），免去易碎的正则提取。
-- 🛡️ **严格拒绝概念炒作**：按材料收录 **857+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
+- 🛡️ **严格拒绝概念炒作**：按材料收录 **854+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
 
 ### 📊 架构分工对比：System 1 (Jev) vs System 2 (大推理模型)
 
@@ -50,7 +50,7 @@
 - ⚡ **毫秒级吸顶搜索与浮动过滤**：即便页面下滑，也可随时唤出浮动分类面板，支持多标签一键点选过滤。
 - 🔍 **固定版本材料**：查看条目关联的源码、SQL、文档或示例，并按条目标注的审查依据理解结论。
 
-> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **857 个精选项目**
+> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **854 个精选项目**
 
 由社区维护的 Jev 项目与资源目录，收录集成、基准测试、开发工具、研究与学习材料，并逐条展示关系、审查依据和许可事实。
 
@@ -84,7 +84,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [分类与目录 (2)](https://logicrw.github.io/awesome-jev-projects/categories/classification-taxonomy/)
 - [代码与图谱 (16)](https://logicrw.github.io/awesome-jev-projects/categories/codebase-graph-pathfinding/)
 - [上下文与记忆 (42)](https://logicrw.github.io/awesome-jev-projects/categories/context-gc-filter/)
-- [音乐与界面创作 (28)](https://logicrw.github.io/awesome-jev-projects/categories/creative-tools/)
+- [音乐与界面创作 (26)](https://logicrw.github.io/awesome-jev-projects/categories/creative-tools/)
 - [数据与搜索 (52)](https://logicrw.github.io/awesome-jev-projects/categories/data-search/)
 - [决策工具 (42)](https://logicrw.github.io/awesome-jev-projects/categories/decision-tools/)
 - [行业应用 (97)](https://logicrw.github.io/awesome-jev-projects/categories/domain-vertical-tools/)
@@ -92,7 +92,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [游戏与实时决策 (57)](https://logicrw.github.io/awesome-jev-projects/categories/high-frequency-simulation/)
 - [MCP 与集成 (56)](https://logicrw.github.io/awesome-jev-projects/categories/mcp-integrations/)
 - [模型路由与降本 (70)](https://logicrw.github.io/awesome-jev-projects/categories/routing-cost-optimization/)
-- [SDK 与决策框架 (133)](https://logicrw.github.io/awesome-jev-projects/categories/sdk-decision-frameworks/)
+- [SDK 与决策框架 (132)](https://logicrw.github.io/awesome-jev-projects/categories/sdk-decision-frameworks/)
 - [SDK 与兼容接入 (6)](https://logicrw.github.io/awesome-jev-projects/categories/sdk-integrations/)
 - [安全与内容审核 (67)](https://logicrw.github.io/awesome-jev-projects/categories/security-guardrails/)
 - [语音与对话 (4)](https://logicrw.github.io/awesome-jev-projects/categories/voice-conversation/)
@@ -1209,11 +1209,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **这个项目的用途**: 把句子评分与对应视频片段对齐，便于逐段回看。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/chetaslua/jevmeter/) · 许可证: MIT
 
-- [**jev-cookbook**](https://github.com/datawhalechina/jev-cookbook) — ⚡ 适合中国宝宝的 Jev 入门教程｜手把手带你了解关于 Jev 的一切——Jupyter Notebook 轻松实验，从三种问题原语到 18 篇实战配方、语音智能家居、模型评测与本地微调，全面掌握 System One 判断模型的开发范式
-  - **Jev 在此条目的作用**: 在有限的素材或组件候选中选择，并由本地程序呈现结果。
-  - **这个项目的用途**: 保留可编辑的组成部分与决策过程。
-  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/datawhalechina/jev-cookbook/) · 许可证: 未声明许可
-
 - [**jev-paint**](https://github.com/achimala/jev-paint) — 把 Jev 的结构化判断接进程序；具体用途与决策流程请查看项目源码。
   - **Jev 在此条目的作用**: Jev 为每个网格像素点的颜色类别输出概率分布，决定画面的色彩、明暗与轮廓形态。
   - **这个项目的用途**: 保留可编辑的组成部分与决策过程。
@@ -1243,11 +1238,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: 监听演讲者实时转录文本，由 Jev 评估当前页面核心要点是否已讲述完毕，并触发页面跳转或停顿。
   - **这个项目的用途**: 摆脱物理翻页笔束缚，结合确定性规则与语义完成度判定，实现自然流畅的演示文稿演讲同步。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/harshil1712/slidepilot/) · 许可证: MIT
-
-- [**jev-cookbook**](https://github.com/paramjeetn/jev-cookbook) — jev-cookbook：在有限的素材或组件候选中选择，并由本地程序呈现结果。
-  - **Jev 在此条目的作用**: 在有限的素材或组件候选中选择，并由本地程序呈现结果。
-  - **这个项目的用途**: 保留可编辑的组成部分与决策过程。
-  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/paramjeetn/jev-cookbook/) · 许可证: MIT
 
 - [**ui-generator-instinct-jev**](https://github.com/joevidev/ui-generator-instinct-jev) — 描述想要的界面，Jev 从既有 shadcn/ui 组件、字段和样式中选择，应用负责渲染。
   - **Jev 在此条目的作用**: 将界面需求拆成选择和评分问题，结果映射到有限的组件目录。
@@ -3567,11 +3557,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: \*\*单文件证据（provider 接入与决策调用在同一源码文件中）/ Single-file evidence — provider wiring and the decision call live in the same file:\*\*
   - **这个项目的用途**: 把语义判断接到已有的命令行工作流。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/doeixd/discern/) · 许可证: MIT
-
-- [**learn-jev-end-to-end**](https://github.com/harshithsunku/learn-jev-end-to-end) — 这是一个免费的动手教程项目，用 12 个 Notebook 教你用 Jev 快脑加 LLM 慢脑构建 13 种 AI 工具。
-  - **Jev 在此条目的作用**: Jev 作为快脑负责邮件分类、诈骗判断、漏洞类型判定、安全放行/拦截等小型决策。
-  - **这个项目的用途**: 给现有流程增加可检查的判断环节。
-  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/harshithsunku/learn-jev-end-to-end/) · 许可证: MIT
 
 - [**super-jev**](https://github.com/Kevthetech143/super-jev) — 一个 TypeScript 决策执行框架，把证据、Jev 判断、允许的动作和结果记录串起来。
   - **Jev 在此条目的作用**: 提交类型化问题，校验答案后由领域规则选择注册工具，并检查权限与参数。

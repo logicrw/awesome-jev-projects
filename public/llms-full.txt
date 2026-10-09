@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 857
+Catalog entries: 854
 
 ## Install the Agent Skill
 
@@ -7751,19 +7751,6 @@ Browser use & computer use for coding agents, powered by TypeSafe Jev: calibrate
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/chenycl/jev-browser-skill/
 - Source evidence: https://github.com/ChenYCL/jev-browser-skill/blob/f6adcb0c0cf038e3071a0b9655b66fe961d92602/skills/jev-browser/lib/typesafe.mjs
 
-## jev-cookbook
-
-The complete cookbook for Jev by TypeSafe AI — 120+ use cases, 10 runnable examples, 4 composition patterns, and first-principles theory for the world's first System One AI model.
-
-- Repository: https://github.com/paramjeetn/jev-cookbook
-- Category: Creative Tools
-- Jev decision: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-- Review scope: Based on repository metadata and README with rule-based classification; pending human review, with no independent runtime or performance verification.
-- License: MIT
-- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/paramjeetn/jev-cookbook/
-- Source evidence: https://github.com/paramjeetn/jev-cookbook/blob/7d5cae66c36c7f24846e29a1807276a1ccaccce4/quickstart.py
-
 ## jev-model-router
 
 Routes prompts to the right Claude tier (Haiku/Sonnet/Opus) using TypeSafe's Jev model
@@ -8654,19 +8641,6 @@ Ask Jev is a Neo-Brutalism style web app where users enter everyday dilemmas and
 - License: License not declared
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/kuhung/ask-jev/
 - Source evidence: https://github.com/kuhung/ask-jev/blob/5a3855bbb09191abd0e0d01907f8b45911f0b47a/app/api/jev/route.ts
-
-## learn-jev-end-to-end
-
-\*\*Learn Jev end to end\*\* is a free, hands-on course. In 12 short notebooks you go from \*"what is Jev?"\* to building \*\*13 real AI tools\*\* with it: an email triage job, a scam-text detector, a code vulnerability hunter, an agent safety guard and more. You need \*\*one API key\*\*, and running the whole course costs \*\*less than $0.20\*\*.
-
-- Repository: https://github.com/harshithsunku/learn-jev-end-to-end
-- Category: SDK & Decision Frameworks
-- Jev decision: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-- Review scope: Based on repository metadata and README with rule-based classification; pending human review, with no independent runtime or performance verification.
-- License: MIT
-- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/harshithsunku/learn-jev-end-to-end/
-- Source evidence: https://github.com/harshithsunku/learn-jev-end-to-end/blob/663ea0b3dbc20d8bc10d74c71e62e2024746cb44/01_hello_jev.ipynb
 
 ## jev-browser
 
@@ -11328,19 +11302,6 @@ Suggesting Médula for the coding-agents domain. I'm the author.
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/joaquinruiz/medula/
 - Source evidence: https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/README.md
 - Source evidence: https://github.com/JoaquinRuiz/medula/blob/f59ab0e8de94f063a287dc41ddbf79bbfdc055db/medula/src/medula/decisores/jev.py
-
-## jev-cookbook
-
-This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
-
-- Repository: https://github.com/datawhalechina/jev-cookbook
-- Category: Creative Tools
-- Jev decision: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-- Review scope: Based on repository metadata and README with rule-based classification; pending human review, with no independent runtime or performance verification.
-- License: License not declared
-- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/datawhalechina/jev-cookbook/
-- Source evidence: https://github.com/datawhalechina/jev-cookbook/blob/6d0efb86c5673394bba50bb1c35ad10329e12890/main/01_%E8%AE%A4%E8%AF%86Jev/01_%E8%AE%A4%E8%AF%86Jev.ipynb
 
 ## jevlint
 
