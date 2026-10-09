@@ -68,7 +68,10 @@ interface ProjectRecord {
   tags: string[];
   stars: number | null;
   forks: number | null;
-  license: string | null;
+  license: string | null | { status: "identified" | "custom" | "undeclared"; spdx: string | null; name?: string; url?: string };
+  catalogKind?: "integration" | "benchmark" | "developer-tool" | "learning-resource" | "research" | "other";
+  jevRelation?: "implemented" | "described" | "discussed" | "unrelated" | "uncertain";
+  reviewBasis?: "implementation-material" | "descriptive-material" | "mixed";
   lastCommitAt: string | null;
   sourceReviewedAt?: string;
   pinned?: boolean;

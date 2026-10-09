@@ -1,5 +1,5 @@
 name: 🚀 提交 Jev 开源项目 (Submit a Jev Project)
-description: 提交使用 Jev 进行 System-1 架构决策的开源项目，自动进入雷达扫描与官网收录
+description: 提交 Jev 相关实现、声明式工作流、教程或学习资源，由模型自动审查与分类
 title: "[Project]: "
 labels: ["project-submission"]
 body:
@@ -8,8 +8,8 @@ body:
       value: |
         ### 🛰️ Awesome Jev 项目收录提交流程
         感谢向 **Awesome Jev 开源雷达** 贡献项目！
-        - **自动收录**：符合模板的投稿在通过固定版本源码检查后会自动写入目录并上线。检查是静态启发式（同一源码文件中的 provider 接入与决策调用），不是运行、性能或安全认证。
-        - **收录标准**：公开可访问仓库（不受理 fork）。仅有 `api.typesafe.ai` 字符串或 `const product = "jev"` 不能作为实现证据。许可证缺失会如实展示，不作为自动拒绝条件。
+        - **自动收录**：模型依据固定版本材料判断投稿意图、Jev 关联和项目类型，通过后自动写入目录并上线。材料可包括代码、SQL/DSL、工作流配置、README 和教程；收录不代表运行、性能或安全认证。
+        - **收录标准**：公开可访问的 GitHub 仓库；有独立用途的 fork 也可提交。模型区分实际接入、兼容实现与学习资源。许可证缺失会如实展示，不作为自动拒绝条件。
         - *中英文均可提交 (Both English and Chinese are welcome)*。
 
   - type: input
@@ -34,14 +34,15 @@ body:
     id: primitives
     attributes:
       label: Jev Primitives used (使用的 Jev 核心原语)
-      description: 您的项目主要使用了哪些 Jev 原语做决策？(可多选)
+      description: 可选：项目或材料涉及哪些 Jev 原语？不使用 SDK 调用的学习资源也可提交。
       multiple: true
       options:
         - "⚡ Choice (离散动作/分支多选一 · N-Pick-1)"
         - "🎯 Score (连续置信度打分 · Continuous Evaluation)"
         - "🛡️ Noul (二元门禁与安全拦截 · True/False Gate)"
+        - "教程、规格或学习资源 / Learning resource"
     validations:
-      required: true
+      required: false
 
   - type: dropdown
     id: category
@@ -73,7 +74,7 @@ body:
     id: tags
     attributes:
       label: Project Tags (项目场景标签，建议选 1~3 个)
-      description: 请选择最符合您项目技术特性的标签，网站将据此自动归类。
+      description: 标签仅作投稿线索，最终分类由模型依据仓库材料决定。
       multiple: true
       options:
         - "llm-routing-cost (模型路由与成本 / LLM Routing & Cost)"
@@ -102,8 +103,8 @@ body:
   - type: textarea
     id: decision
     attributes:
-      label: Where does Jev make a decision? (Jev 在哪里做决策 / 源码证据)
-      description: 请提供具体的源码文件路径或代码链接（例如 src/router.ts#L42），证明项目中真实调用了 Jev。
+      label: How does this relate to Jev? (Jev 关联与相关材料)
+      description: 请提供最相关的文件或章节链接，例如源码、SQL、DSL、工作流配置、README 代码块或教程，并说明它与 Jev 的关系。
       placeholder: "代码链接：https://github.com/owner/repo/blob/main/src/router.ts#L35\n决策说明：在进入 Agent 循环前，使用 Jev Choice 快速判断是否走高速通道。"
     validations:
       required: true
@@ -114,9 +115,9 @@ body:
       label: Submission Checklist (收录合规确认)
       description: 提交前请确认以下事项
       options:
-        - label: 该仓库是公开可访问的真实开源项目（非私有、非空壳/占位项目）
+        - label: 该仓库及提交的材料可公开访问
           required: true
-        - label: 仓库根目录或代码中包含声明清晰的开源协议（如 MIT、Apache-2.0、GPL 等）
-          required: true
-        - label: 我已知晓项目将由自动化流水线进行固定版本源码核查与自动归档
+        - label: 我已注明已知的许可证信息；若未知或未声明，允许目录如实标记
+          required: false
+        - label: 我已知晓项目将由模型进行固定版本材料审查、类型区分与自动归档
           required: true

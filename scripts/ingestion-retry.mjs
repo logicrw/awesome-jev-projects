@@ -1,19 +1,22 @@
 /** Bounded, revision-bound retry control records. Never executes submitted code. */
-import { appendFile } from "node:fs/promises";
+import { appendFile, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { createHash } from "node:crypto";
 import { createGitHubClient } from "./github-client.mjs";
-import { isSubmission } from "./submission-identity.mjs";
+import { isSubmission, githubRepositoryReferences } from "./submission-identity.mjs";
+import { reviewPolicyRevision } from "./review-policy.mjs";
+import { reserveControlBudgets, readRadarBudgetGrant, settleRadarBudgets } from "./radar-budget.mjs";
 
 export const MAX_RETRIES = 3;
 export const RETRY_LEASE_MS = 90 * 60 * 1000;
 const REPOSITORY = "logicrw/awesome-jev-projects";
 const BOT = "github-actions[bot]";
 const HASH = /^[a-f\d]{64}$/;
-const TERMINAL = new Set(["completed", "rejected", "insufficient-evidence", "provider-unavailable", "invalid-output", "exhausted", "superseded", "control-budget-exhausted"]);
+const TERMINAL = new Set(["completed", "rejected", "insufficient-evidence", "provider-unavailable", "invalid-output", "exhausted", "superseded", "control-budget-exhausted", "budget-exhausted"]);
 const NOTICES = {
   pending: "自动审核已排队，最多自动重新审核 3 次。",
+  "budget-exhausted": "本轮审查的模型预算已用尽或预留调用结果未知，已停止重复调用；这不表示项目不合格。",
   claimed: "自动重新审核已安排；成功收录仅在部署核验后通知。",
   "dispatch-unknown": "调度结果暂不确定，系统会核对当前任务；本次不会立即重复调度。",
   completed: "本轮自动审核已完成，收录及部署核验成功。",
@@ -31,7 +34,7 @@ function requireRepository(repository) {
   if (repository !== REPOSITORY) throw new Error("Unexpected retry repository");
 }
 function requireCandidate(candidate) {
-  if (!Number.isSafeInteger(candidate?.issueNumber) || candidate.issueNumber < 1 || !HASH.test(candidate.bodySha ?? ""))
+  if (!Number.isSafeInteger(candidate?.issueNumber) || candidate.issueNumber < 1 || !HASH.test(candidate.bodySha ?? "") || (candidate.titleSha && !HASH.test(candidate.titleSha)) || (candidate.reviewRevision && !HASH.test(candidate.reviewRevision)))
     throw new Error("Invalid retry candidate");
 }
 export function trustedRetryWriter(login, trustedWriter = process.env.INGEST_TRUSTED_WRITER) {
@@ -41,32 +44,35 @@ export function trustedRetryWriter(login, trustedWriter = process.env.INGEST_TRU
 }
 export function retryClaimId(candidate) {
   requireCandidate(candidate);
-  return bodyHash(`${candidate.issueNumber}:${candidate.bodySha}:${candidate.attempt}`);
+  return bodyHash(candidate.reviewRevision
+    ? `${candidate.issueNumber}:${candidate.bodySha}:${candidate.titleSha}:${candidate.reviewRevision}:${candidate.attempt}`
+    : `${candidate.issueNumber}:${candidate.bodySha}:${candidate.attempt}`);
 }
 function validRecord(record) {
   if (!record || typeof record !== "object" || Array.isArray(record)) return false;
-  const keys = ["version", "issueNumber", "bodySha", "attempt", "state", "claimId"];
+  const keys = ["version", "issueNumber", "bodySha", ...(record.version === 3 ? ["titleSha", "reviewRevision"] : []), "attempt", "state", "claimId"];
   if (Object.keys(record).some((key) => ![...keys, "notBefore"].includes(key)) || keys.some((key) => !Object.hasOwn(record, key))) return false;
   if (Object.hasOwn(record, "notBefore") && (typeof record.notBefore !== "string" || !Number.isFinite(Date.parse(record.notBefore)) || new Date(record.notBefore).toISOString() !== record.notBefore)) return false;
-  if (record.version !== 2 || !Number.isSafeInteger(record.issueNumber) || record.issueNumber < 1 || !HASH.test(record.bodySha ?? "") ||
+  if (![2, 3].includes(record.version) || (record.version === 3 && (!HASH.test(record.titleSha ?? "") || !HASH.test(record.reviewRevision ?? ""))) || !Number.isSafeInteger(record.issueNumber) || record.issueNumber < 1 || !HASH.test(record.bodySha ?? "") ||
       !Number.isInteger(record.attempt) || record.attempt < 0 || record.attempt > MAX_RETRIES || !Object.hasOwn(NOTICES, record.state)) return false;
   if (record.attempt === 0) return record.claimId === null && !["claimed", "dispatch-unknown"].includes(record.state);
   return record.claimId === retryClaimId(record) && record.state !== "pending";
 }
 export function renderRetryRecord(record) {
   if (!validRecord(record)) throw new Error("Invalid retry control record");
-  const canonical = { version: 2, issueNumber: record.issueNumber, bodySha: record.bodySha, attempt: record.attempt, state: record.state, claimId: record.claimId,
+  const canonical = { version: record.version, issueNumber: record.issueNumber, bodySha: record.bodySha,
+    ...(record.version === 3 ? { titleSha: record.titleSha, reviewRevision: record.reviewRevision } : {}), attempt: record.attempt, state: record.state, claimId: record.claimId,
     ...(record.notBefore ? { notBefore: record.notBefore } : {}) };
-  return `${NOTICES[record.state]}\n\n<!-- awesome-jev-retry:v2:${JSON.stringify(canonical)} -->`;
+  return `${NOTICES[record.state]}\n\n<!-- awesome-jev-retry:v${record.version}:${JSON.stringify(canonical)} -->`;
 }
 export function parseRetryRecord(comment, { issueNumber, trustedWriter } = {}) {
   if (!trustedRetryWriter(comment?.user?.login, trustedWriter)) return null;
   const text = String(comment.body ?? "");
-  const match = text.match(/\n\n<!-- awesome-jev-retry:v2:([^\n]+) -->$/);
+  const match = text.match(/\n\n<!-- awesome-jev-retry:v([23]):([^\n]+) -->$/);
   if (match) {
     try {
-      const record = JSON.parse(match[1]);
-      if (validRecord(record) && record.issueNumber === issueNumber && renderRetryRecord(record) === text)
+      const record = JSON.parse(match[2]);
+      if (record.version === Number(match[1]) && validRecord(record) && record.issueNumber === issueNumber && renderRetryRecord(record) === text)
         return { ...record, createdAt: Date.parse(comment.created_at) };
     } catch { /* Malformed or embedded prose is never control data. */ }
     return null;
@@ -88,7 +94,8 @@ export function retryRecord(comments, candidate, trustedWriter) {
   let current = null;
   for (const comment of comments) {
     const record = parseRetryRecord(comment, { issueNumber: candidate.issueNumber, trustedWriter });
-    if (!record || record.bodySha !== candidate.bodySha) continue;
+    if (!record || record.bodySha !== candidate.bodySha ||
+      (candidate.reviewRevision && (record.version !== 3 || record.reviewRevision !== candidate.reviewRevision || record.titleSha !== candidate.titleSha))) continue;
     if (current && TERMINAL.has(current.state)) continue;
     if (!current || TERMINAL.has(record.state) || record.attempt > current.attempt ||
         (record.attempt === current.attempt && !TERMINAL.has(current.state))) current = record;
@@ -137,10 +144,12 @@ async function readIssue(api, candidate) {
 }
 async function currentIssue(api, candidate) {
   const issue = await readIssue(api, candidate);
-  return issue?.state === "open" && bodyHash(issue.body) === candidate.bodySha ? issue : null;
+  return issue?.state === "open" && bodyHash(issue.body) === candidate.bodySha &&
+    (!candidate.titleSha || bodyHash(issue.title) === candidate.titleSha) ? issue : null;
 }
 async function writeRecord(api, candidate, state, attempt = candidate.attempt ?? 0, notBefore) {
-  const record = { version: 2, issueNumber: candidate.issueNumber, bodySha: candidate.bodySha, attempt, state,
+  const record = { version: candidate.reviewRevision ? 3 : 2, issueNumber: candidate.issueNumber, bodySha: candidate.bodySha,
+    ...(candidate.reviewRevision ? { titleSha: candidate.titleSha, reviewRevision: candidate.reviewRevision } : {}), attempt, state,
     claimId: attempt > 0 ? retryClaimId({ ...candidate, attempt }) : null, ...(notBefore ? { notBefore } : {}) };
   // POST is deliberately not retried on unknown responses. The next run reads back.
   await api(`/repos/${REPOSITORY}/issues/${candidate.issueNumber}/comments`, { method: "POST", body: { body: renderRetryRecord(record) } });
@@ -165,7 +174,7 @@ export async function markRetry({ api, candidate, trustedWriter = process.env.IN
   await writeRecord(api, candidate, prior?.state ?? "pending", prior?.attempt ?? 0, notBefore);
   return true;
 }
-export async function recoverRetry({ api, issueNumber, expectedBodySha, retryNotBefore, trustedWriter = process.env.INGEST_TRUSTED_WRITER, dryRun, repository = REPOSITORY }) {
+export async function recoverRetry({ api, issueNumber, expectedBodySha, expectedTitleSha, reviewRevision = reviewPolicyRevision(), retryNotBefore, trustedWriter = process.env.INGEST_TRUSTED_WRITER, dryRun, repository = REPOSITORY }) {
   requireRepository(repository);
   if (isDryRun(dryRun)) return false;
   if (!Number.isSafeInteger(issueNumber) || issueNumber < 1 || (expectedBodySha && !HASH.test(expectedBodySha)))
@@ -173,10 +182,10 @@ export async function recoverRetry({ api, issueNumber, expectedBodySha, retryNot
   const issue = await api(`/repos/${REPOSITORY}/issues/${issueNumber}`);
   if (issue.number !== issueNumber || issue.pull_request || issue.state !== "open" || !isSubmission(issue)) return false;
   const bodySha = bodyHash(issue.body);
-  if (expectedBodySha && bodySha !== expectedBodySha) return false;
-  return markRetry({ api, candidate: { issueNumber, bodySha, retryNotBefore }, trustedWriter, dryRun, repository });
+  if ((expectedBodySha && bodySha !== expectedBodySha) || (expectedTitleSha && bodyHash(issue.title) !== expectedTitleSha)) return false;
+  return markRetry({ api, candidate: { issueNumber, bodySha, titleSha: bodyHash(issue.title), reviewRevision, retryNotBefore }, trustedWriter, dryRun, repository });
 }
-export async function selectRetry({ api, now = Date.now, trustedWriter = process.env.INGEST_TRUSTED_WRITER, onWarning = (message) => console.warn(message) }) {
+export async function selectRetry({ api, now = Date.now, reviewRevision = reviewPolicyRevision(), trustedWriter = process.env.INGEST_TRUSTED_WRITER, onWarning = (message) => console.warn(message) }) {
   // Include closed issues so a withdrawn pending submission reaches a terminal state.
   const q = encodeURIComponent(`repo:${REPOSITORY} is:issue in:comments "awesome-jev-retry"`);
   const query = `/search/issues?q=${q}&sort=updated&order=asc&per_page=30`;
@@ -196,16 +205,29 @@ export async function selectRetry({ api, now = Date.now, trustedWriter = process
       // A formerly queued submission may have had its body withdrawn. Only a
       // genuine trusted control record authorizes reconciling that old revision.
       if (!isSubmission(live) && !comments.some((c) => parseRetryRecord(c, { issueNumber: issue.number, trustedWriter }))) continue;
-      const candidate = { issueNumber: issue.number, bodySha: bodyHash(live.body) };
+      const candidate = { issueNumber: issue.number, bodySha: bodyHash(live.body), titleSha: bodyHash(live.title), reviewRevision };
       const record = retryRecord(comments, candidate, trustedWriter);
       if (record && TERMINAL.has(record.state)) continue;
       const obsolete = comments.map((c) => parseRetryRecord(c, { issueNumber: issue.number, trustedWriter }))
-        .filter((r) => r && (r.bodySha !== candidate.bodySha || live.state !== "open"))
+        .filter((r) => r && (r.bodySha !== candidate.bodySha || live.state !== "open" || (r.version === 3 && (r.titleSha !== candidate.titleSha || r.reviewRevision !== reviewRevision))))
         .map((r) => retryRecord(comments, r, trustedWriter)).find((r) => r && !TERMINAL.has(r.state));
-      if (obsolete) return { issueNumber: issue.number, bodySha: obsolete.bodySha, attempt: obsolete.attempt, claimId: obsolete.claimId ?? "", action: "finish", state: "superseded" };
+      if (obsolete) return { issueNumber: issue.number, bodySha: obsolete.bodySha, ...(obsolete.version === 3 ? { titleSha: obsolete.titleSha, reviewRevision: obsolete.reviewRevision } : {}), attempt: obsolete.attempt, claimId: obsolete.claimId ?? "", action: "finish", state: "superseded" };
       if (!comments.historyComplete && live.state === "open" && isSubmission(live)) {
         const terminal = { ...candidate, attempt: MAX_RETRIES };
         return { ...terminal, claimId: retryClaimId(terminal), action: "finish", state: "control-budget-exhausted" };
+      }
+      if (process.env.REVIEW_PROVIDER_CONFIGURED === "false") continue;
+      const reconfigured = !record && comments.map((comment) => parseRetryRecord(comment, { issueNumber: issue.number, trustedWriter }))
+        .some((prior) => prior?.version === 3 && prior.state === "provider-unavailable" && prior.bodySha === candidate.bodySha &&
+          prior.titleSha === candidate.titleSha && prior.reviewRevision !== reviewRevision);
+      if (reconfigured) {
+        const next = { ...candidate, attempt: 1 };
+        return { ...next, claimId: retryClaimId(next), action: "review" };
+      }
+      const legacy = record ? null : retryRecord(comments.filter((comment) => parseRetryRecord(comment, { issueNumber: issue.number, trustedWriter })?.version === 2), { issueNumber: issue.number, bodySha: candidate.bodySha }, trustedWriter);
+      if (!record && legacy && !TERMINAL.has(legacy.state) && live.state === "open" && !leaseActive(legacy, now()) && !(Date.parse(legacy.notBefore) > now())) {
+        const migrated = { ...candidate, attempt: 1 };
+        return { ...migrated, claimId: retryClaimId(migrated), action: "review" };
       }
       if (!record || TERMINAL.has(record.state) || live.state !== "open" || leaseActive(record, now()) || Date.parse(record.notBefore) > now()) continue;
       if (record.attempt === MAX_RETRIES)
@@ -232,7 +254,14 @@ export async function claimRetry({ api, candidate, now = Date.now, trustedWriter
     if (await currentIssue(api, candidate)) await writeRecord(api, candidate, "control-budget-exhausted", MAX_RETRIES);
     return false;
   }
-  if (!record || TERMINAL.has(record.state) || record.attempt !== candidate.attempt - 1 || leaseActive(record, now()) || Date.parse(record.notBefore) > now()) return false;
+  const legacy = record ? null : retryRecord(comments.filter((comment) => parseRetryRecord(comment, { issueNumber: candidate.issueNumber, trustedWriter })?.version === 2), { issueNumber: candidate.issueNumber, bodySha: candidate.bodySha }, trustedWriter);
+  const reconfigured = !record && comments.map((comment) => parseRetryRecord(comment, { issueNumber: candidate.issueNumber, trustedWriter }))
+    .some((prior) => prior?.version === 3 && prior.state === "provider-unavailable" && prior.bodySha === candidate.bodySha &&
+      prior.titleSha === candidate.titleSha && prior.reviewRevision !== candidate.reviewRevision);
+  const migrating = !record && candidate.reviewRevision && candidate.attempt === 1 && (reconfigured ||
+    (legacy && !TERMINAL.has(legacy.state) && !leaseActive(legacy, now()) && !(Date.parse(legacy.notBefore) > now())));
+  if (process.env.REVIEW_PROVIDER_CONFIGURED === "false") return false;
+  if (!migrating && (!record || TERMINAL.has(record.state) || record.attempt !== candidate.attempt - 1 || leaseActive(record, now()) || Date.parse(record.notBefore) > now())) return false;
   if (!await currentIssue(api, candidate)) return false;
   await writeRecord(api, candidate, "claimed");
   return true;
@@ -240,6 +269,7 @@ export async function claimRetry({ api, candidate, now = Date.now, trustedWriter
 export async function validateRetryClaim({ api, candidate, now = Date.now, trustedWriter = process.env.INGEST_TRUSTED_WRITER, repository = REPOSITORY }) {
   requireRepository(repository);
   requireCandidate(candidate);
+  if (candidate.reviewRevision && candidate.reviewRevision !== reviewPolicyRevision()) return false;
   if (!Number.isInteger(candidate.attempt) || candidate.attempt < 1 || candidate.attempt > MAX_RETRIES || candidate.claimId !== retryClaimId(candidate)) return false;
   if (!await currentIssue(api, candidate)) return false;
   const comments = await readComments(api, candidate.issueNumber);
@@ -259,7 +289,7 @@ export async function settleRetry({ api, candidate, state, trustedWriter = proce
   if (!comments.historyComplete && (!record || !TERMINAL.has(record.state))) {
     if (state === "superseded" && record) {
       const live = await readIssue(api, candidate);
-      if (!live || (live.state === "open" && bodyHash(live.body) === candidate.bodySha)) return false;
+      if (!live || (live.state === "open" && bodyHash(live.body) === candidate.bodySha && (!candidate.titleSha || bodyHash(live.title) === candidate.titleSha) && (!candidate.reviewRevision || candidate.reviewRevision === reviewPolicyRevision()))) return false;
       await writeRecord(api, candidate, "superseded", MAX_RETRIES);
       return true;
     }
@@ -275,10 +305,63 @@ export async function settleRetry({ api, candidate, state, trustedWriter = proce
   const live = await readIssue(api, candidate);
   if (!live) return false;
   if (state === "superseded") {
-    if (live.state === "open" && bodyHash(live.body) === candidate.bodySha) return false;
+    if (live.state === "open" && bodyHash(live.body) === candidate.bodySha && (!candidate.titleSha || bodyHash(live.title) === candidate.titleSha) && (!candidate.reviewRevision || candidate.reviewRevision === reviewPolicyRevision())) return false;
   } else if (bodyHash(live.body) !== candidate.bodySha || (live.state !== "open" && state !== "completed")) return false;
   await writeRecord(api, candidate, state, record.attempt);
   return true;
+}
+export const reviewCaseId = (issueNumber, bodySha, titleSha = bodyHash(""), reviewRevision = reviewPolicyRevision()) => bodyHash(`issue:${issueNumber}:${bodySha}:${titleSha}:${reviewRevision}`);
+export async function reserveReviewBudget({ api, budgetApi = api, issueNumber, expectedBodySha, expectedTitleSha, expectedReviewRevision, existingProjects = [], runId, runAttempt = 1, trustedWriter = process.env.INGEST_TRUSTED_WRITER, dryRun }) {
+  if (isDryRun(dryRun)) return { allowed: false, status: "dry-run" };
+  if (!Number.isSafeInteger(issueNumber) || issueNumber < 1) throw new Error("Invalid model budget reservation identity");
+  const issue = await api(`/repos/${REPOSITORY}/issues/${issueNumber}`);
+  if (issue.number !== issueNumber || issue.pull_request || issue.state !== "open" || !isSubmission(issue)) return { allowed: false, status: "ignored" };
+  const candidate = { issueNumber, bodySha: bodyHash(issue.body), titleSha: bodyHash(issue.title), reviewRevision: reviewPolicyRevision() };
+  if ((expectedBodySha && expectedBodySha !== candidate.bodySha) || (expectedTitleSha && expectedTitleSha !== candidate.titleSha) || (expectedReviewRevision && expectedReviewRevision !== candidate.reviewRevision))
+    return { allowed: false, status: "superseded" };
+  const references = githubRepositoryReferences(`${issue.title ?? ""}\n${issue.body ?? ""}`).slice(0, 3);
+  const known = new Set(existingProjects.flatMap((project) => githubRepositoryReferences(project?.url ?? "")).map((name) => name.toLowerCase()));
+  const unlisted = references.filter((name) => !known.has(name.toLowerCase()));
+  if (references.length && !unlisted.length) return { allowed: false, localOnly: true, status: "already-listed", ...candidate };
+  const comments = await readComments(api, issueNumber);
+  const terminal = retryRecord(comments, candidate, trustedWriter);
+  if (process.env.REVIEW_PROVIDER_CONFIGURED === "false") {
+    if (terminal?.state !== "provider-unavailable" && await currentIssue(api, candidate))
+      await writeRecord(api, candidate, "provider-unavailable", terminal?.attempt ?? 0);
+    return { allowed: false, localOnly: true, status: "provider-unavailable", ...candidate };
+  }
+  if (terminal && TERMINAL.has(terminal.state)) return { allowed: false, status: terminal.state, ...candidate };
+  if (!comments.historyComplete) {
+    if (await currentIssue(api, candidate)) await writeRecord(api, candidate, "control-budget-exhausted", MAX_RETRIES);
+    return { allowed: false, status: "control-budget-exhausted", ...candidate };
+  }
+  // Multi-target attribution is provisional: use the same ordered references
+  // as ingestion, while the submitter and global daily caps remain hard bounds.
+  const submitted = unlisted[0];
+  if (!submitted) return { allowed: false, localOnly: true, status: "no-repository-reference", ...candidate };
+  const result = await reserveControlBudgets({ api: budgetApi, cases: [{ caseId: reviewCaseId(issueNumber, candidate.bodySha, candidate.titleSha, candidate.reviewRevision),
+    owner: Number.isSafeInteger(issue.user?.id) && issue.user.id > 0 ? `github-user:${issue.user.id}` : issue.user?.login, repository: submitted }], runId, runAttempt });
+  const granted = result.grants[0];
+  if (!granted) {
+    const denied = result.deferred[0];
+    if (denied?.retryNotBefore) await markRetry({ api, candidate: { ...candidate, retryNotBefore: denied.retryNotBefore }, trustedWriter });
+    else if (await currentIssue(api, candidate)) await writeRecord(api, candidate, "budget-exhausted", terminal?.attempt ?? 0);
+    return { allowed: false, status: denied?.status ?? "budget-exhausted", ...candidate };
+  }
+  return { allowed: true, status: "reserved", ...candidate, reservationId: granted.reservationId };
+}
+export async function readReviewBudgetGrant({ api, issueNumber, bodySha, titleSha = bodyHash(""), reviewRevision = reviewPolicyRevision(), reservationId, runId = process.env.GITHUB_RUN_ID,
+  runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT) }) {
+  const candidate = { issueNumber, bodySha, titleSha, reviewRevision };
+  requireCandidate(candidate);
+  if (!/^(?:\d{4}-\d{2}-\d{2}:)?[a-f\d]{64}$/.test(reservationId ?? "") || !await currentIssue(api, candidate)) return null;
+  return readRadarBudgetGrant({ api, caseId: reviewCaseId(issueNumber, bodySha, titleSha, reviewRevision), reservationId, runId, runAttempt });
+}
+export async function settleReviewBudget({ api, issueNumber, bodySha, titleSha = bodyHash(""), reviewRevision = reviewPolicyRevision(), reservationId, budgetLedger, accountingVerified = false,
+  runId = process.env.GITHUB_RUN_ID, runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT), dryRun }) {
+  if (isDryRun(dryRun)) return false;
+  requireCandidate({ issueNumber, bodySha });
+  return settleRadarBudgets({ api, receipts: [{ caseId: reviewCaseId(issueNumber, bodySha, titleSha, reviewRevision), reservationId, budgetLedger, accountingVerified }], runId, runAttempt });
 }
 async function output(values) {
   if (process.env.GITHUB_OUTPUT)
@@ -287,21 +370,38 @@ async function output(values) {
 async function main() {
   requireRepository(process.env.GITHUB_REPOSITORY);
   const mode = process.argv[2];
-  if (!["select", "mark", "recover", "claim", "finish"].includes(mode)) throw new Error("Invalid retry command");
+  if (!["select", "mark", "recover", "claim", "finish", "budget-reserve", "budget-settle"].includes(mode)) throw new Error("Invalid retry command");
   if (mode !== "select" && isDryRun(false)) { await output({ claimed: false }); console.log("Dry run: retry writes disabled"); return; }
   const token = process.env.GITHUB_TOKEN;
   if (!token) throw new Error("GITHUB_TOKEN is required");
   const api = createGitHubClient({ token, ...(mode === "select" ? {} : { writeRepository: REPOSITORY }) });
   const trustedWriter = process.env.INGEST_TRUSTED_WRITER;
+  const budgetApi = mode.startsWith("budget-") ? createGitHubClient({ token, writeRepository: REPOSITORY, writeScope: "budget" }) : null;
+  if (mode === "budget-reserve") {
+    const reserved = await reserveReviewBudget({ api, budgetApi, issueNumber: Number(process.env.INGEST_ISSUE_NUMBER),
+      expectedBodySha: process.env.INGEST_ISSUE_BODY_SHA || undefined, expectedTitleSha: process.env.INGEST_ISSUE_TITLE_SHA || undefined, expectedReviewRevision: process.env.INGEST_REVIEW_REVISION || undefined,
+      existingProjects: JSON.parse(await readFile(new URL("../src/data/projects.json", import.meta.url), "utf8")), runId: process.env.GITHUB_RUN_ID,
+      runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT || 1), trustedWriter });
+    await output({ allowed: reserved.allowed, local_only: reserved.localOnly === true, status: reserved.status, issue_number: reserved.issueNumber ?? "", body_sha: reserved.bodySha ?? "", title_sha: reserved.titleSha ?? "", review_revision: reserved.reviewRevision ?? "", reservation_id: reserved.reservationId ?? "" });
+    console.log(`Model budget: ${reserved.status}`); return;
+  }
+  if (mode === "budget-settle") {
+    const prepared = JSON.parse(await readFile(process.env.INGEST_RESULT_FILE, "utf8"));
+    if (prepared.budgetReservationId !== process.env.INGEST_BUDGET_RESERVATION_ID) throw new Error("Model budget receipt reservation mismatch");
+    const settled = await settleReviewBudget({ api: budgetApi, issueNumber: Number(process.env.INGEST_ISSUE_NUMBER), bodySha: process.env.INGEST_ISSUE_BODY_SHA, titleSha: process.env.INGEST_ISSUE_TITLE_SHA, reviewRevision: process.env.INGEST_REVIEW_REVISION,
+      reservationId: prepared.budgetReservationId, budgetLedger: prepared.budgetLedger,
+      accountingVerified: prepared.reviewDetails?.usage?.status === "reported" && !prepared.reviewDetails?.budget?.accountingOverrun, trustedWriter });
+    console.log(`Model budget: ${settled ? "settled" : "unchanged"}`); return;
+  }
   if (mode === "select") {
     const candidate = await selectRetry({ api, trustedWriter });
-    await output({ found: Boolean(candidate), issue_number: candidate?.issueNumber ?? "", body_sha: candidate?.bodySha ?? "", attempt: candidate?.attempt ?? "", claim_id: candidate?.claimId ?? "", action: candidate?.action ?? "", state: candidate?.state ?? "" });
+    await output({ found: Boolean(candidate), issue_number: candidate?.issueNumber ?? "", body_sha: candidate?.bodySha ?? "", title_sha: candidate?.titleSha ?? "", review_revision: candidate?.reviewRevision ?? "", attempt: candidate?.attempt ?? "", claim_id: candidate?.claimId ?? "", action: candidate?.action ?? "", state: candidate?.state ?? "" });
     console.log(candidate ? `Queued issue #${candidate.issueNumber}: ${candidate.action}, attempt ${candidate.attempt}/${MAX_RETRIES}` : "No eligible submission in the scanned queue window");
     return;
   }
-  const candidate = { issueNumber: Number(process.env.INGEST_ISSUE_NUMBER), bodySha: process.env.INGEST_ISSUE_BODY_SHA, attempt: Number(process.env.INGEST_RETRY_ATTEMPT), claimId: process.env.INGEST_RETRY_CLAIM_ID || undefined, retryNotBefore: process.env.INGEST_RETRY_NOT_BEFORE || undefined };
+  const candidate = { issueNumber: Number(process.env.INGEST_ISSUE_NUMBER), bodySha: process.env.INGEST_ISSUE_BODY_SHA, titleSha: process.env.INGEST_ISSUE_TITLE_SHA || undefined, reviewRevision: process.env.INGEST_REVIEW_REVISION || undefined, attempt: Number(process.env.INGEST_RETRY_ATTEMPT), claimId: process.env.INGEST_RETRY_CLAIM_ID || undefined, retryNotBefore: process.env.INGEST_RETRY_NOT_BEFORE || undefined };
   const args = { api, candidate, trustedWriter };
-  const changed = mode === "recover" ? await recoverRetry({ api, issueNumber: candidate.issueNumber, expectedBodySha: candidate.bodySha, retryNotBefore: candidate.retryNotBefore, trustedWriter })
+  const changed = mode === "recover" ? await recoverRetry({ api, issueNumber: candidate.issueNumber, expectedBodySha: candidate.bodySha, expectedTitleSha: candidate.titleSha, retryNotBefore: candidate.retryNotBefore, trustedWriter })
     : mode === "mark" ? await markRetry(args) : mode === "claim" ? await claimRetry(args) : await settleRetry({ ...args, state: process.env.INGEST_RETRY_STATE });
   await output({ claimed: changed });
   console.log(`${mode}: ${changed ? "recorded" : "already recorded or no longer eligible"}`);

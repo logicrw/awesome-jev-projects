@@ -7,6 +7,7 @@ import { createServer } from "vite";
 import { activeSponsors } from "../src/lib/sponsors.mjs";
 import { BASE, SITE, REPOSITORY, COPY, LOCALES, MACHINE_RESOURCES, machineDocuments, escapeHTML as e, safeJSON, localePrefix, projectRoute, categoryRoute, projectCopy, pageHead } from "./site-content.mjs";
 import { safePublicUrl } from "../src/lib/safe-url.mjs";
+import { licenseLabel, catalogLabels } from "../src/lib/catalog-contract.mjs";
 
 const analytics = await loadAnalytics();
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -54,7 +55,7 @@ async function emit(route, html, lastmod = latestReviewed, indexable = true) {
   pages.push({ route, lastmod, indexable });
 }
 function projectList(rows, locale) {
-  return `<ul class="static-project-list">${rows.map((p) => `<li><h2>${link(BASE + projectRoute(p.id, locale), p.name)}</h2><p class="static-owner">${e(p.author)} · ${e(categoryLabel(p.category, locale))}</p><p>${e(projectCopy(p, "plainSummary", locale))}</p></li>`).join("")}</ul>`;
+  return `<ul class="static-project-list">${rows.map((p) => `<li><h2>${link(BASE + projectRoute(p.id, locale), p.name)}</h2><p class="static-owner">${e(p.author)} · ${e(categoryLabel(p.category, locale))}${catalogLabels(p, locale).map(({ value }) => ` · ${e(value)}`).join("")}</p><p>${e(projectCopy(p, "plainSummary", locale))}</p></li>`).join("")}</ul>`;
 }
 function collectionSchema(locale, route, title, rows) {
   return { "@context": "https://schema.org", "@type": "CollectionPage", "@id": SITE + route, url: SITE + route, name: title, inLanguage: COPY[locale].lang,
@@ -89,11 +90,12 @@ try {
       const breadcrumbs = `<nav class="static-breadcrumb" aria-label="Breadcrumb">${link(BASE + route, "Awesome Jev")}<span>/</span>${link(BASE + categoryRoute(p.category, locale), categoryLabel(p.category, locale))}</nav>`;
       const schema = { "@context": "https://schema.org", "@graph": [
         { "@type": "WebPage", "@id": SITE + projectPath, url: SITE + projectPath, name: `${p.name} — Awesome Jev`, description: summary, inLanguage: c.lang, isPartOf: { "@id": SITE }, mainEntity: { "@id": SITE + projectPath + "#project" } },
-        { "@type": "SoftwareSourceCode", "@id": SITE + projectPath + "#project", name: p.name, description: summary, codeRepository: p.url },
+        { "@type": ["learning-resource", "research", "other"].includes(p.catalogKind) ? "CreativeWork" : "SoftwareSourceCode", "@id": SITE + projectPath + "#project", name: p.name, description: summary,
+          ...(["learning-resource", "research", "other"].includes(p.catalogKind) ? { url: p.url } : { codeRepository: p.url }) },
         { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Awesome Jev", item: SITE + route }, { "@type": "ListItem", position: 2, name: categoryLabel(p.category, locale), item: SITE + categoryRoute(p.category, locale) }, { "@type": "ListItem", position: 3, name: p.name, item: SITE + projectPath }] },
       ] };
       const repoHref = safePublicUrl(p.url);
-      const content = header(locale, (l) => projectRoute(p.id, l)) + `<main class="static-main project-document">${breadcrumbs}<h1>${e(p.name)}</h1><p class="static-owner">${e(p.author)}</p><p class="static-lede">${e(summary)}</p><div class="static-actions">${link(repoHref, c.source + " ↗", true, "static-primary")}${link(BASE + route + "?project=" + encodeURIComponent(p.id), c.explore)}</div><dl class="static-facts"><div><dt>${e(c.license)}</dt><dd>${e(p.license || c.unknown)}</dd></div><div><dt>GitHub Stars</dt><dd>${e(p.stars ?? "—")}</dd></div><div><dt>${e(c.date)}</dt><dd>${e(p.sourceReviewedAt?.slice(0,10) || "—")}</dd></div></dl><section><h2>${e(c.decision)}</h2><p>${e(projectCopy(p,"jevDecisionPoint",locale))}</p></section><section><h2>${e(c.benefit)}</h2><p>${e(projectCopy(p,"highlightBenefit",locale))}</p></section><section class="static-review"><h2>${e(c.limits)}</h2><p>${e(projectCopy(p,"claimStatus",locale))}</p></section><section><h2>${e(c.evidence)}</h2><ul class="static-evidence">${sourceLinks || `<li>${link(repoHref, c.source, true)}</li>`}</ul></section>${related.length ? `<section><h2>${e(c.related)}</h2>${projectList(related,locale)}</section>` : ""}</main>` + footer(locale);
+      const content = header(locale, (l) => projectRoute(p.id, l)) + `<main class="static-main project-document">${breadcrumbs}<h1>${e(p.name)}</h1><p class="static-owner">${e(p.author)}</p><p class="static-lede">${e(summary)}</p><div class="static-actions">${link(repoHref, c.source + " ↗", true, "static-primary")}${link(BASE + route + "?project=" + encodeURIComponent(p.id), c.explore)}</div><dl class="static-facts">${catalogLabels(p, locale).map(({ label, value }) => `<div><dt>${e(label)}</dt><dd>${e(value)}</dd></div>`).join("")}<div><dt>${e(c.license)}</dt><dd>${e(licenseLabel(p.license, locale, p.licenseStatus))}</dd></div><div><dt>GitHub Stars</dt><dd>${e(p.stars ?? "—")}</dd></div><div><dt>${e(c.date)}</dt><dd>${e(p.sourceReviewedAt?.slice(0,10) || "—")}</dd></div></dl><section><h2>${e(c.decision)}</h2><p>${e(projectCopy(p,"jevDecisionPoint",locale))}</p></section><section><h2>${e(c.benefit)}</h2><p>${e(projectCopy(p,"highlightBenefit",locale))}</p></section><section class="static-review"><h2>${e(c.limits)}</h2><p>${e(projectCopy(p,"claimStatus",locale))}</p></section><section><h2>${e(c.evidence)}</h2><ul class="static-evidence">${sourceLinks || `<li>${link(repoHref, c.source, true)}</li>`}</ul></section>${related.length ? `<section><h2>${e(c.related)}</h2>${projectList(related,locale)}</section>` : ""}</main>` + footer(locale);
       await emit(projectPath, frame({ locale, route: projectPath, title: `${p.name} — Jev · ${categoryLabel(p.category,locale)} | Awesome Jev`, description: summary.slice(0, 300), alternates: (l) => projectRoute(p.id, l), schema, content, indexable: p.catalogStatus !== "review-pending" }), p.sourceReviewedAt?.slice(0,10), p.catalogStatus !== "review-pending");
     }
   }

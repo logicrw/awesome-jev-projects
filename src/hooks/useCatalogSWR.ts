@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Project } from "../App";
+import { isLicenseValue, isCatalogClassification } from "../lib/catalog-contract.mjs";
 
 export const CATALOG_REVALIDATE_MS = 60_000;
 
@@ -27,7 +28,8 @@ export function validProject(x: unknown): x is Project {
           Number.isFinite(p[k as keyof Project]) &&
           Number(p[k as keyof Project]) >= 0),
     ) &&
-    ["license", "lastCommitAt", "createdAt"].every(
+    isLicenseValue(p.license) && isCatalogClassification(p) &&
+    ["lastCommitAt", "createdAt"].every(
       (k) =>
         p[k as keyof Project] === null ||
         typeof p[k as keyof Project] === "string",
@@ -81,9 +83,11 @@ export function catalogAddedCount(
 }
 
 export function catalogFingerprint(
-  rows: readonly Pick<Project, "id" | "stars" | "metadataFetchedAt">[],
+  rows: readonly (Pick<Project, "id" | "stars" | "metadataFetchedAt"> &
+    Partial<Pick<Project, "license" | "licenseStatus" | "catalogKind" | "jevRelation" | "reviewBasis">>)[],
 ): string {
-  return rows.map((project) => `${project.id}:${project.stars ?? ""}:${project.metadataFetchedAt ?? ""}`).join("\n");
+  return rows.map((project) => JSON.stringify([project.id, project.stars, project.metadataFetchedAt,
+    project.license, project.licenseStatus, project.catalogKind, project.jevRelation, project.reviewBasis])).join("\n");
 }
 
 export function shouldRevalidateCatalog(

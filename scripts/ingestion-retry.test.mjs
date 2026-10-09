@@ -2,17 +2,18 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
+import { reviewPolicyRevision } from "./review-policy.mjs";
 import { retryState, retryRecord, renderRetryRecord, retryClaimId, selectRetry, markRetry, recoverRetry, claimRetry, settleRetry, validateRetryClaim, MAX_RETRIES, RETRY_LEASE_MS } from "./ingestion-retry.mjs";
 
 const body = "## 项目仓库\nhttps://github.com/example/jev-tool";
 const hash = (v) => createHash("sha256").update(v).digest("hex");
-const candidate = { issueNumber: 12, bodySha: hash(body), attempt: 1 };
+const candidate = { issueNumber: 12, bodySha: hash(body), titleSha: hash(""), reviewRevision: reviewPolicyRevision(), attempt: 1 };
 candidate.claimId = retryClaimId(candidate);
 const issue = { number: 12, state: "open", body };
 const started = Date.parse("2026-10-03T00:00:00Z");
 function comment(attempt, state = attempt ? "claimed" : "pending", patch = {}) {
   const c = { ...candidate, attempt };
-  const record = { version: 2, issueNumber: c.issueNumber, bodySha: c.bodySha, attempt, state, claimId: attempt ? retryClaimId(c) : null };
+  const record = { version: 3, issueNumber: c.issueNumber, bodySha: c.bodySha, titleSha: c.titleSha, reviewRevision: c.reviewRevision, attempt, state, claimId: attempt ? retryClaimId(c) : null };
   return { user: { login: "github-actions[bot]" }, body: renderRetryRecord(record), created_at: new Date(started).toISOString(), ...patch };
 }
 function fixture({ comments = [], current = issue, search = { items: [issue], total_count: 1 }, reread } = {}) {
@@ -35,7 +36,7 @@ test("v2 records require trusted writer, complete template, exact revision and c
   assert.equal(retryState([comment(3, "claimed", {user:{login:"attacker"}})], candidate.bodySha, opts), -1);
   assert.equal(retryState([comment(0)], hash("edited"), opts), -1);
   assert.equal(retryState([comment(0, "pending", {body:`feedback: ${comment(3).body}`})], candidate.bodySha, opts), -1);
-  assert.equal(retryState([comment(0, "pending", {body:comment(0).body.replace('"version":2','"version":2,"extra":true')})], candidate.bodySha, opts), -1);
+  assert.equal(retryState([comment(0, "pending", {body:comment(0).body.replace('"version":3','"version":3,"extra":true')})], candidate.bodySha, opts), -1);
 });
 
 test("only explicitly configured PAT writers are trusted", async () => {
@@ -171,18 +172,43 @@ test("workflow carries revision and claim, forbids dry-run queue writes and uses
   assert.match(workflow,/retry_claim_id=\$CLAIM_ID/);
   assert.match(workflow,/body_sha=\$BODY_SHA/);
   assert.match(workflow,/INGEST_RETRY_STATE: dispatch-unknown/);
-  assert.doesNotMatch(workflow,/npm |contents: write|pull_request_target|secrets\./);
+  assert.doesNotMatch(workflow,/npm |contents: write|pull_request_target|API_KEY:/);
   const ingestion=await readFile(new URL("../.github/workflows/auto-ingest-issue.yml",import.meta.url),"utf8");
   const record=ingestion.split("  record-retry:\n")[1].split("  respond-feedback:\n")[0];
   assert.match(record,/!inputs\.dry_run/);
   assert.match(record,/GITHUB_TOKEN: \$\{\{ github\.token \}\}/);
   assert.match(record,/INGEST_DRY_RUN:/);
-  assert.match(record,/needs: \[review, validate, publish\]/);
+  assert.match(record,/!inputs\.remote_probe && !inputs\.models_probe/);
+  assert.match(record,/needs: \[reserve-budget, review, settle-budget, validate, publish\]/);
   for(const stage of ['review','validate','publish'])assert.ok(record.includes(`needs.${stage}.result == 'failure'`));
   assert.match(record,/ingestion-retry\.mjs recover/);
   assert.match(record,/github\.event\.issue\.number \|\| inputs\.issue_number/);
   const feedback=ingestion.split("  respond-feedback:\n")[1];
-  assert.match(feedback,/contains\(fromJSON\('\["rejected","duplicate","insufficient-evidence","invalid-output","provider-unavailable"\]'\), needs\.review\.outputs\.status\)/);
+  assert.match(feedback,/contains\(fromJSON\('\["rejected","duplicate","insufficient-evidence","invalid-output","provider-unavailable","budget-exhausted"\]'\), needs\.review\.outputs\.status\)/);
   assert.match(feedback,/!inputs\.dry_run/);
   assert.match(feedback,/GITHUB_TOKEN: \$\{\{ github\.token \}\}/);
+});
+
+
+test('a changed title invalidates a scheduled claim without spending or resetting it',async()=>{
+  const f=fixture({comments:[comment(0)],current:{...issue,title:'new target'}});
+  const prior={...candidate,titleSha:hash('old target')};prior.claimId=retryClaimId(prior);
+  assert.equal(await claimRetry({api:f.api,candidate:prior,now:at()}),false);
+  assert.equal(f.writes.length,0);
+});
+
+test('legacy terminal records do not veto a new title or policy epoch',async()=>{
+  const old={version:2,issueNumber:12,bodySha:candidate.bodySha,attempt:0,state:'rejected',claimId:null};
+  const f=fixture({comments:[{user:{login:'github-actions[bot]'},body:renderRetryRecord(old)}]});
+  assert.equal(await markRetry({api:f.api,candidate}),true);
+  const selected=await selectRetry({api:f.api,now:at()});
+  assert.equal(selected.reviewRevision,candidate.reviewRevision);
+  assert.equal(selected.attempt,1);
+});
+
+test('legacy active migration retains a provider not-before deadline',async()=>{
+  const old={version:2,issueNumber:12,bodySha:candidate.bodySha,attempt:0,state:'pending',claimId:null,notBefore:new Date(started+48*60*60*1000).toISOString()};
+  const f=fixture({comments:[{user:{login:'github-actions[bot]'},body:renderRetryRecord(old)}]});
+  assert.equal(await selectRetry({api:f.api,now:at()}),null);
+  assert.equal((await selectRetry({api:f.api,now:at(48*60*60*1000)})).reviewRevision,candidate.reviewRevision);
 });

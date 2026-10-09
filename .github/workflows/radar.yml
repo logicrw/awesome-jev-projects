@@ -10,11 +10,16 @@ on:
         options: [full, metadata-only]
         default: full
 permissions: {}
+env:
+  REVIEW_PROVIDER_CONFIGURED: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+  DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
+  DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
+  REVIEW_CONFIG_REVISION: ${{ vars.REVIEW_CONFIG_REVISION || vars.RADAR_REVIEW_REVISION || '' }}
 concurrency:
   group: ecosystem-radar
   cancel-in-progress: false
 jobs:
-  scan:
+  plan:
     if: github.repository == 'logicrw/awesome-jev-projects' && github.ref == 'refs/heads/main'
     permissions:
       contents: read
@@ -23,6 +28,7 @@ jobs:
     outputs:
       source_sha: ${{ steps.source.outputs.sha }}
       artifact_id: ${{ steps.snapshot.outputs.artifact-id }}
+      plan_id: ${{ steps.plan.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -36,19 +42,17 @@ jobs:
       - name: Discover projects and refresh metadata
         run: |
           if [ "$RADAR_MODE" = "metadata-only" ]; then
-            node scripts/radar-sync.mjs --metadata-only
+            node scripts/radar-sync.mjs --metadata-only --plan
           else
-            node scripts/radar-sync.mjs
+            node scripts/radar-sync.mjs --plan
           fi
         env:
+          RADAR_REVIEW_REVISION: ${{ vars.RADAR_REVIEW_REVISION || '' }}
+          RADAR_PLAN_FILE: ${{ runner.temp }}/radar-plan.json
           RADAR_MODE: ${{ inputs.mode || 'full' }}
+          DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
+          DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
           GITHUB_TOKEN: ${{ secrets.RADAR_GITHUB_TOKEN || github.token }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY || secrets.MUSE_API_KEY }}
-          DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || secrets.MUSE_ENDPOINT || vars.MUSE_ENDPOINT || '' }}
-          DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || secrets.MUSE_MODEL || vars.MUSE_MODEL || '' }}
-          MUSE_API_KEY: ${{ secrets.DEEPSEEK_API_KEY || secrets.MUSE_API_KEY }}
-          MUSE_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || secrets.MUSE_ENDPOINT || vars.MUSE_ENDPOINT || '' }}
-          MUSE_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || secrets.MUSE_MODEL || vars.MUSE_MODEL || '' }}
           RADAR_MAX_PAGES: "2"
           RADAR_MAX_CANDIDATES: "60"
       - name: Retain data snapshot before any dependencies run
@@ -63,6 +67,139 @@ jobs:
             radar/state.json
           retention-days: 14
           if-no-files-found: error
+      - name: Retain immutable material plan
+        id: plan
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: radar-plan-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/radar-plan.json
+          retention-days: 14
+          if-no-files-found: error
+  reserve-budget:
+    needs: plan
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      artifact_id: ${{ steps.grants.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          artifact-ids: ${{ needs.plan.outputs.plan_id }}
+          path: ${{ runner.temp }}/plan
+          merge-multiple: true
+      - name: Reserve before any paid model request
+        run: node scripts/radar-budget.mjs reserve
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RADAR_REVIEW_REVISION: ${{ vars.RADAR_REVIEW_REVISION || '' }}
+          RADAR_PLAN_FILE: ${{ runner.temp }}/plan/radar-plan.json
+          RADAR_GRANTS_FILE: ${{ runner.temp }}/radar-grants.json
+      - id: grants
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: radar-grants-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/radar-grants.json
+          retention-days: 14
+          if-no-files-found: error
+  scan:
+    needs: [plan, reserve-budget]
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    outputs:
+      source_sha: ${{ needs.plan.outputs.source_sha }}
+      artifact_id: ${{ steps.snapshot.outputs.artifact-id }}
+      budget_receipts_id: ${{ steps.budget-receipts.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          artifact-ids: ${{ needs.plan.outputs.artifact_id }}
+          path: ${{ runner.temp }}/candidate
+          merge-multiple: true
+      - run: node scripts/workflow-data.mjs radar "$RUNNER_TEMP/candidate"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          artifact-ids: ${{ needs.plan.outputs.plan_id }}
+          path: ${{ runner.temp }}/plan
+          merge-multiple: true
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          artifact-ids: ${{ needs.reserve-budget.outputs.artifact_id }}
+          path: ${{ runner.temp }}/grants
+          merge-multiple: true
+      - name: Review material using durable per-case grants
+        run: node scripts/radar-sync.mjs --review-plan
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
+          DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
+          RADAR_REVIEW_REVISION: ${{ vars.RADAR_REVIEW_REVISION || '' }}
+          RADAR_PLAN_FILE: ${{ runner.temp }}/plan/radar-plan.json
+          RADAR_GRANTS_FILE: ${{ runner.temp }}/grants/radar-grants.json
+          RADAR_BUDGET_RECEIPTS_FILE: ${{ runner.temp }}/radar-budget-receipts.json
+      - name: Retain partial budget receipts even if a later candidate fails
+        id: budget-receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: radar-budget-receipts-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/radar-budget-receipts.json
+          retention-days: 14
+          if-no-files-found: ignore
+      - name: Retain reviewed data snapshot
+        id: snapshot
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: radar-reviewed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            src/data/projects.json
+            src/data/radar.json
+            radar/receipts
+            radar/state.json
+          retention-days: 14
+          if-no-files-found: error
+  settle-budget:
+    needs: [plan, scan]
+    if: always() && needs.scan.outputs.budget_receipts_id != ''
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          artifact-ids: ${{ needs.scan.outputs.budget_receipts_id }}
+          path: ${{ runner.temp }}/receipts
+          merge-multiple: true
+      - run: node scripts/radar-budget.mjs settle
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RADAR_BUDGET_RECEIPTS_FILE: ${{ runner.temp }}/receipts/radar-budget-receipts.json
   validate:
     needs: scan
     permissions:

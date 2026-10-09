@@ -1,14 +1,15 @@
 /** Trusted workflow code only. Untrusted issues/READMEs are never executed. */
 import { createHash } from "node:crypto";
-import { readFile, writeFile, appendFile, mkdir } from "node:fs/promises";
+import { readFile, appendFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createGitHubClient } from "./github-client.mjs";
 import {
-  extractSubmittedRepository,
+  extractSubmittedRepositories,
   extractSubmittedCodePaths,
   inspectRepository,
-  codeCandidate,
+  collectAdditionalMaterials,
+  isReadableMaterialPath,
 } from "./project-source.mjs";
 import { inferCanonicalTags } from "../src/lib/tags.mjs";
 import {
@@ -17,8 +18,10 @@ import {
 } from "./source-enrichment.mjs";
 import { summarize, verifyIntegration, atomicJSON } from "./radar-sync.mjs";
 import { readAssetBundle, validateAssetBundle } from "./ingestion-assets.mjs";
-import { validateVerdict, resolveWitnessFiles } from "./evidence-bundle.mjs";
-import { settleRetry, validateRetryClaim } from "./ingestion-retry.mjs";
+import { validateVerdict, resolveMaterialRefs, resolveMaterialFiles } from "./evidence-bundle.mjs";
+import { licenseFactsFromRepo } from "../src/lib/catalog-contract.mjs";
+import { reviewPolicyRevision } from "./review-policy.mjs";
+import { settleRetry, validateRetryClaim, readReviewBudgetGrant } from "./ingestion-retry.mjs";
 import { isSubmission } from "./submission-identity.mjs";
 export { isSubmission } from "./submission-identity.mjs";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -28,7 +31,7 @@ export const bodyHash = (body) =>
     .update(body ?? "")
     .digest("hex");
 export const successComment =
-  "🎉 感谢提交！项目已通过 Jev 源码集成检查，并已成功收录至 Awesome Jev 探索雷达：https://logicrw.github.io/awesome-jev-projects/ 欢迎持续关注并推荐更多 Jev 优秀项目！";
+  "🎉 感谢提交！项目已通过 Jev 相关材料审查，并已成功收录至 Awesome Jev 探索雷达：https://logicrw.github.io/awesome-jev-projects/ 欢迎持续关注并推荐更多 Jev 优秀项目！";
 const OWNER_REPO = /^[a-z\d](?:[a-z\d-]{0,37}[a-z\d])?\/[a-z\d_.-]{1,100}$/i;
 function requireOwner(repository) {
   if (!OWNER_REPO.test(repository ?? ""))
@@ -54,204 +57,238 @@ function sameProject(a, b) {
   );
 }
 
+function matchesReviewedTitle(issue, hash, required = false) {
+  if (hash === undefined) return !required;
+  return /^[a-f\d]{64}$/.test(hash ?? "") && bodyHash(issue?.title) === hash;
+}
+function matchesReviewedIssue(issue, project) {
+  return bodyHash(issue?.body) === project.ingestion?.issueBodySha256 &&
+    matchesReviewedTitle(issue, project.ingestion?.issueTitleSha256, Boolean(project.catalogKind));
+}
+
 const REVIEW_MESSAGES = Object.freeze({
-  "invalid-submission": "投稿未提供唯一、有效的公开仓库地址。",
+  "invalid-submission": "未取得有效的公开 GitHub 仓库候选。",
   "structural-rejection": "仓库未满足公开性、身份或固定版本等基本收录条件。",
   "duplicate": "此仓库已在目录中，无需重复收录。",
-  "accepted": "模型与固定源码见证均通过校验。",
-  "model-rejected": "模型未确认可收录的 Jev 源码集成；本轮自动审查已结束。",
-  "insufficient-evidence": "本轮未取得可核验的实现源码与关系见证，自动审查已结束；有效源码变化或新代码线索可触发下一轮。",
+  "accepted": "模型已依据固定版本材料完成相关性与类型审查。",
+  "model-rejected": "模型判断本次内容不属于可收录的 Jev 相关投稿；本轮自动审查已结束。",
+  "insufficient-evidence": "当前材料不足以形成收录结论，本轮自动审查已结束；更新仓库材料或投稿说明后可触发下一轮。",
   "invalid-output": "模型输出未通过结构或证据引用校验，本轮自动审查已结束。",
   "provider-unavailable": "模型服务暂不可用，本轮未形成收录结论。",
   "transient-failure": "审查服务暂时不可用，将在限额内自动重试。",
+  "budget-exhausted": "本轮自动审查额度已用尽，未形成可发布的收录结论。",
 });
 function reviewMessage(code) {
   return REVIEW_MESSAGES[code] ?? REVIEW_MESSAGES["invalid-output"];
 }
-function reviewDiagnostics(review) {
+function publicReviewMetadata(value, maximum = 160) {
+  return typeof value === "string" && value.length <= maximum && /^[a-zA-Z0-9_./:-]+$/.test(value) &&
+    !/github_pat_|gh[pousr]_|sk-[A-Za-z\d_-]{16,}|AKIA[A-Z\d]{16}/.test(value) ? value : undefined;
+}
+function reviewDiagnostics(review, reviewRevision) {
   if (!review || typeof review !== "object") return undefined;
+  const attempts = Array.isArray(review.attempts) ? review.attempts.slice(0, 3).map((attempt) => ({
+    attempt: Number.isSafeInteger(attempt.attempt) ? attempt.attempt : 0,
+    ...(Number.isSafeInteger(attempt.phase) && attempt.phase >= 1 && attempt.phase <= 2 ? { phase: attempt.phase } : {}),
+    status: publicReviewMetadata(attempt.status, 40) ?? "unknown",
+    ...(Number.isInteger(attempt.httpStatus) ? { httpStatus: attempt.httpStatus } : {}),
+    ...Object.fromEntries(["requestDigest", "requestModel", "thinking", "reasoningEffort", "responseModel", "systemFingerprint"]
+      .filter((key) => publicReviewMetadata(attempt[key]))
+      .map((key) => [key, attempt[key]])),
+    usage: attempt.usage?.status === "reported" ? {
+      status: "reported",
+      ...Object.fromEntries(["promptTokens", "completionTokens", "totalTokens", "reasoningTokens", "cacheHitTokens", "cacheMissTokens"]
+        .filter((key) => Number.isSafeInteger(attempt.usage[key]) && attempt.usage[key] >= 0)
+        .map((key) => [key, attempt.usage[key]])),
+    } : { status: "unknown" },
+  })) : [];
   return {
-    status: typeof review.status === "string" ? review.status.slice(0, 40) : "invalid-output",
-    verified: review.verified === true ? true : review.verified === false ? false : null,
-    ...(Array.isArray(review.attempts) ? { attempts: review.attempts.slice(0, 3).map((attempt) => ({
-      attempt: Number.isSafeInteger(attempt.attempt) ? attempt.attempt : 0,
-      status: typeof attempt.status === "string" ? attempt.status.slice(0, 40) : "unknown",
-      ...(Number.isInteger(attempt.httpStatus) ? { httpStatus: attempt.httpStatus } : {}),
-      usage: attempt.usage?.status === "reported" ? {
-        status: "reported",
-        ...Object.fromEntries(["promptTokens", "completionTokens", "totalTokens", "reasoningTokens"]
-          .filter((key) => Number.isSafeInteger(attempt.usage[key]) && attempt.usage[key] >= 0)
-          .map((key) => [key, attempt.usage[key]])),
-      } : { status: "unknown" },
-    })) } : {}),
+    status: publicReviewMetadata(review.status, 40) ?? "invalid-output",
+    decision: ["admit", "exclude", "need-more"].includes(review.decision) ? review.decision : null,
+    reviewRevision, attempts,
+    ...Object.fromEntries(["source", "requestModel"].filter((key) => publicReviewMetadata(review[key])).map((key) => [key, review[key]])),
+    ...(review.budgetGrant ? { reservation: Object.fromEntries(["caseId", "reservationId"].filter((key) => publicReviewMetadata(review.budgetGrant[key])).map((key) => [key, review.budgetGrant[key]])) } : {}),
     ...(review.budget ? { budget: review.budget } : {}),
     ...(review.usage ? { usage: review.usage } : {}),
   };
 }
-function fixedSource(file, repo, sha) {
-  if (!file || typeof file.path !== "string" || !file.path ||
-      typeof file.text !== "string" || !file.text.trim() ||
-      !/^[a-f\d]{64}$/.test(file.hash ?? "") ||
-      bodyHash(file.text) !== file.hash || !/^[a-f\d]{40}$/.test(sha ?? "") ||
-      !codeCandidate({ path: file.path, type: "blob", size: Buffer.byteLength(file.text) })) return false;
+
+function fixedMaterialSource(file, target) {
+  if (!file || !isReadableMaterialPath(file.path) || typeof file.text !== "string" ||
+      !/^[a-f\d]{64}$/.test(file.hash ?? "") || bodyHash(file.text) !== file.hash ||
+      !/^[a-f\d]{40,64}$/.test(target.commit ?? "")) return false;
   try {
     const url = new URL(file.url);
     return url.origin === "https://github.com" && !url.search && !url.hash &&
       !url.username && !url.password &&
-      decodeURIComponent(url.pathname) === `/${repo.full_name}/blob/${sha}/${file.path}`;
+      decodeURIComponent(url.pathname) === `/${target.repository}/blob/${target.commit}/${file.path}`;
   } catch { return false; }
 }
+const VERDICT_FIELDS = ["target", "decision", "catalogKind", "jevRelation", "reviewBasis", "claims", "conflicts", "need", "category", "plainSummary", "plainSummaryEn"];
 export async function prepareSubmission({
   issue, repository, projects, taxonomy, exclusions = [], api, enrich, reviewer,
   inspect = inspectRepository, now = () => new Date().toISOString(), commentBody = "",
+  budgetLedger, budgetGrant, caseId, expectedReservationId, acquireEvidence,
+  reviewRevision = reviewPolicyRevision(),
 }) {
   requireOwner(repository);
+  let reviewInvoked = false;
   const finish = (status, reasonCode, extra = {}) => ({
     status, reasonCode, reason: reviewMessage(reasonCode),
-    issueNumber: issue?.number, issueBodySha: bodyHash(issue?.body),
-    needsEvidence: status === "insufficient-evidence", ...extra,
+    issueNumber: issue?.number, issueBodySha: bodyHash(issue?.body), issueTitleSha: bodyHash(issue?.title),
+    reviewContract: "material-v2", reviewRevision,
+    needsEvidence: status === "insufficient-evidence",
+    ...(!reviewInvoked && budgetLedger ? { budgetLedger } : {}), ...extra,
   });
   if (!Number.isSafeInteger(issue?.number) || issue.number < 1 || issue.pull_request || issue.state !== "open")
     return finish("ignored", "invalid-submission");
   if (!isSubmission(issue)) return finish("ignored", "invalid-submission");
-  const submitted = extractSubmittedRepository(issue.body);
-  if (!submitted || submitted.toLowerCase() === repository.toLowerCase())
-    return finish("rejected", "invalid-submission");
+  const submitted = extractSubmittedRepositories(issue.body, issue.title)
+    .filter((name) => name.toLowerCase() !== repository.toLowerCase()).slice(0, 3);
+  if (!submitted.length) return finish("rejected", "invalid-submission");
+  // A deployed result for the exact same submission is already authoritative; this only resumes its acknowledgement.
+  const resume = projects.find((project) => project.ingestion?.repository === repository &&
+    project.ingestion.issueNumber === issue.number && matchesReviewedIssue(issue, project) &&
+    submitted.some((name) => publicIdentity(project) === name.toLowerCase()));
+  if (resume) return finish("resume", "duplicate", { project: resume });
 
   let fullIssueText = [issue.body ?? "", commentBody].filter(Boolean).join("\n\n");
   if (typeof api === "function") {
     try {
       const comments = await api(`/repos/${repository}/issues/${issue.number}/comments?per_page=100`);
       if (Array.isArray(comments)) fullIssueText += "\n\n" + comments
-        .filter((c) => c.user?.type !== "Bot" && c.user?.login !== "github-actions[bot]")
-        .map((c) => typeof c.body === "string" ? c.body.slice(0, 16000) : "")
+        .filter((comment) => comment.user?.type !== "Bot" && comment.user?.login !== "github-actions[bot]")
+        .map((comment) => typeof comment.body === "string" ? comment.body.slice(0, 16000) : "")
         .join("\n\n");
-    } catch { /* Comment hints are optional; immutable repository evidence is authoritative. */ }
+    } catch { /* Hints are optional. They neither select a target nor grant admission. */ }
   }
-  const preferredPaths = extractSubmittedCodePaths(fullIssueText, submitted);
-  let result;
-  try {
-    result = await inspect({
-      api, repository: submitted, existingProjects: projects, exclusions,
-      verifyIntegration, requireCodeEvidence: true, semanticReview: true, preferredPaths,
-    });
-  } catch {
-    return finish("transient-retry", "transient-failure", { retryable: true, submittedRepository: submitted });
+  const snapshots = [];
+  for (const [index, name] of submitted.entries()) {
+    let inspection;
+    try {
+      inspection = await inspect({ api, repository: name, existingProjects: [], exclusions,
+        verifyIntegration, semanticReview: true, preferredPaths: extractSubmittedCodePaths(fullIssueText, name) });
+    } catch {
+      inspection = { status: "unavailable", reason: "transport-failure" };
+    }
+    const repo = inspection.repo;
+    const available = Boolean(repo?.private === false && Number.isSafeInteger(repo.id) && repo.id > 0 &&
+      /^[a-f\d]{40,64}$/.test(inspection.sha ?? "") && inspection.status === "inspected");
+    const target = {
+      id: `R${index + 1}`, repository: repo?.full_name ?? name,
+      repoId: Number.isSafeInteger(repo?.id) ? repo.id : null,
+      commit: available ? inspection.sha : null, available,
+      listed: projects.some((project) => (Number.isSafeInteger(repo?.id) && project.repoId === repo.id) || publicIdentity(project) === name.toLowerCase()),
+      ...(repo?.fork ? { fork: true, parent: repo.parent?.full_name ?? null } : {}),
+    };
+    const materialSources = available ? (inspection.sources ?? inspection.materialSources ?? inspection.codeSources ?? inspection.evidence?.files ?? []) : [];
+    const sources = materialSources.filter((source) => fixedMaterialSource(source, target))
+      .map((source) => ({ ...source, targetId: target.id, repoId: target.repoId, commit: target.commit }));
+    snapshots.push({ target, inspection, sources });
   }
-  if (result.status === "duplicate") {
-    const prior = projects.find((p) => p.ingestion?.repository === repository &&
-      p.ingestion.issueNumber === issue.number && p.ingestion.issueBodySha256 === bodyHash(issue.body) &&
-      (p.repoId === result.repo?.id || publicIdentity(p) === result.repo?.full_name?.toLowerCase()));
-    if (prior) return finish("resume", "duplicate", { project: prior });
-    return finish("duplicate", "duplicate", { submittedRepository: submitted });
-  }
-  const structuralRejections = new Set([
-    "invalid repository", "repository not found or inaccessible", "invalid repository metadata",
-    "repository is not public", "forks are not ingested", "repository already listed",
-    "repository is excluded by editorial review", "repository has no accessible commit",
-    "repository has no immutable commit",
-  ]);
-  if (result.status === "rejected" && structuralRejections.has(result.reason))
-    return finish("rejected", "structural-rejection", { submittedRepository: submitted });
+  const targets = snapshots.map(({ target }) => target);
+  const sources = snapshots.flatMap((snapshot) => snapshot.sources);
+  const details = { candidateRepositories: targets.map(({ id, repository, available }) => ({ id, repository, available })) };
+  if (targets.length && targets.every((target) => target.listed)) return finish("duplicate", "duplicate", details);
+  if (typeof reviewer !== "function") return finish("provider-unavailable", "provider-unavailable", details);
 
-  const { repo, sha, commits = [], readme = "" } = result;
-  const readmeFiles = result.readmeFiles ?? [];
-  const codeSources = (result.codeSources ?? result.evidence?.files ?? []).filter((file) =>
-    !readmeFiles.some((rf) => rf.path === file.path) &&
-    !/(?:^|\/)readme(?:\.[^/]*)?$/i.test(file.path ?? "") &&
-    fixedSource(file, repo, sha));
-  const details = { submittedRepository: submitted };
-  if (!repo || !codeSources.length)
-    return finish("insufficient-evidence", "insufficient-evidence", details);
-  if (typeof reviewer !== "function")
-    return finish("provider-unavailable", "provider-unavailable", details);
-
+  const supplement = acquireEvidence ?? (async ({ repository: name, commit, need, excludePaths }) =>
+    collectAdditionalMaterials({ api, repository: name, sha: commit, need, excludePaths }));
   let review;
-  try { review = await reviewer({ repo, readme, codeSources, taxonomy }); }
-  catch { return finish("transient-retry", "transient-failure", { ...details, retryable: true }); }
-  const diagnostics = reviewDiagnostics(review);
-  // A strict negative always vetoes L1, including syntactically plausible dead code.
-  if (review?.verified === false)
-    return finish("rejected", "model-rejected", { ...details, reviewDetails: diagnostics });
-  if (review?.verified !== true) {
+  try {
+    reviewInvoked = true;
+    review = await reviewer({ sources, targets, taxonomy, issue: { title: issue.title ?? "", body: issue.body ?? "" },
+      budgetLedger, budgetGrant, caseId, expectedReservationId,
+      ...(typeof supplement === "function" ? { acquireEvidence: async (request) => {
+        const snapshot = snapshots.find(({ target }) => target.id === request.targetId);
+        if (!snapshot?.target.available) return null;
+        const extra = await supplement({ ...request, repository: snapshot.target.repository,
+          repoId: snapshot.target.repoId, commit: snapshot.target.commit,
+          excludePaths: snapshot.sources.map(({ path }) => path) });
+        const added = (Array.isArray(extra) ? extra : extra?.sources ?? [])
+          .filter((source) => fixedMaterialSource(source, snapshot.target))
+          .map((source) => ({ ...source, targetId: snapshot.target.id, repoId: snapshot.target.repoId, commit: snapshot.target.commit }));
+        for (const source of added) {
+          if (!snapshot.sources.some((prior) => prior.path === source.path && prior.hash === source.hash)) {
+            snapshot.sources.push(source); sources.push(source);
+          }
+        }
+        return { targets, sources: [...sources] };
+      } } : {}),
+    });
+  } catch { return finish("transient-retry", "transient-failure", { ...details, retryable: true }); }
+  const diagnostics = reviewDiagnostics(review, reviewRevision);
+  const reviewMeta = { ...details, reviewDetails: diagnostics, ...(review?.budgetLedger ? { budgetLedger: review.budgetLedger } : {}) };
+  if (review?.status !== "completed") {
     if (review?.retryable === true) {
       const notBefore = Date.parse(review.retryNotBefore);
-      const retryNotBefore = Number.isFinite(notBefore) && notBefore > Date.now()
-        ? new Date(notBefore).toISOString() : undefined;
-      return finish("transient-retry", "transient-failure", { ...details, retryable: true, retryNotBefore, reviewDetails: diagnostics });
+      const retryNotBefore = Number.isFinite(notBefore) && notBefore > Date.now() ? new Date(notBefore).toISOString() : undefined;
+      return finish("transient-retry", "transient-failure", { ...reviewMeta, retryable: true, retryNotBefore });
     }
-    const status = review?.status === "insufficient-evidence" ? "insufficient-evidence" :
-      ["missing-token", "circuit-open", "http-error", "request-failed", "timeout"].includes(review?.status) ?
-        "provider-unavailable" : "invalid-output";
-    return finish(status, status, { ...details, reviewDetails: diagnostics });
+    const status = review?.status === "budget-not-reserved" ? "budget-exhausted" : ["insufficient-evidence", "budget-exhausted", "provider-unavailable", "dry-run"].includes(review?.status) ? review.status :
+      ["missing-token", "missing-provider-config", "invalid-provider-config", "circuit-open", "http-error", "request-failed", "timeout"].includes(review?.status) ? "provider-unavailable" : "invalid-output";
+    return finish(status, status, reviewMeta);
   }
-  if (review.status !== "completed")
-    return finish("invalid-output", "invalid-output", { ...details, reviewDetails: diagnostics });
-  // The bundle is built by trusted local reviewer code, never deserialized from model output.
-  // Revalidate its witness and bind every referenced source to the actual fixed snapshot.
   const bundle = review.evidenceBundle;
-  const raw = Object.fromEntries(["verified", "role", "witness", "reasonCode", "category", "plainSummary", "plainSummaryEn"]
-    .map((key) => [key, review[key]]));
+  const raw = Object.fromEntries(VERDICT_FIELDS.map((key) => [key, review[key]]));
   const verdict = bundle ? validateVerdict(raw, bundle, taxonomy) : null;
-  const implementationFiles = verdict ? resolveWitnessFiles(bundle, verdict) : [];
-  const witnessNodes = verdict ? [...new Set(Object.values(verdict.witness).flat())]
-    .map((id) => ({ id, ...bundle.nodeMap.get(id) })) : [];
-  if (!verdict || !implementationFiles.length || !witnessNodes.length || witnessNodes.some(({ source: file, startLine, endLine, ranges }) => {
-    if (!codeSources.some((source) => source.path === file.path && source.url === file.url && source.hash === file.hash && source.text === file.text)) return true;
-    const lineCount = file.text.split("\n").length;
-    if (!Number.isSafeInteger(startLine) || !Number.isSafeInteger(endLine) || startLine < 1 || endLine < startLine || endLine > lineCount ||
-        !Array.isArray(ranges) || !ranges.length || ranges.length > 100) return true;
-    let previous = 0;
-    return ranges.some((range) => {
-      if (!Array.isArray(range) || range.length !== 2 || !range.every(Number.isSafeInteger) || range[0] < startLine || range[1] > endLine || range[0] <= previous || range[1] < range[0]) return true;
-      previous = range[1];
-      return false;
-    });
-  }))
-    return finish("invalid-output", "invalid-output", { ...details, reviewDetails: diagnostics });
+  if (!verdict) return finish("invalid-output", "invalid-output", reviewMeta);
+  const snapshot = snapshots.find(({ target }) => target.id === verdict.target);
+  if (!snapshot) return finish("invalid-output", "invalid-output", reviewMeta);
+  const refs = resolveMaterialRefs(bundle, verdict);
+  const files = resolveMaterialFiles(bundle, verdict);
+  // All policy decisions belong to the model. This check only proves that the cited bytes
+  // came from the selected, locally fetched snapshot, including supplemental materials.
+  if (refs.some((ref) => {
+    const source = sources.find((item) => item.targetId === ref.targetId && item.path === ref.path && item.hash === ref.sourceSha256);
+    if (!source || ref.targetId !== verdict.target || ref.repoId !== snapshot.target.repoId || ref.commit !== snapshot.target.commit ||
+        source.url !== ref.url || !ref.span || !Number.isSafeInteger(ref.span.startByte) || !Number.isSafeInteger(ref.span.endByte)) return true;
+    const { startByte: start, endByte: end } = ref.span;
+    const bytes = Buffer.from(source.text, "utf8");
+    const base = source.readSpan?.startByte ?? 0;
+    return !Number.isSafeInteger(base) || base < 0 || start < base || end <= start || end > base + bytes.length ||
+      bodyHash(bytes.subarray(start - base, end - base)) !== ref.spanSha256;
+  })) return finish("invalid-output", "invalid-output", reviewMeta);
+  if (verdict.decision === "exclude") return finish("rejected", "model-rejected", { ...reviewMeta, submittedRepository: snapshot.target.repository });
+  if (verdict.decision === "need-more") return finish("insufficient-evidence", "insufficient-evidence", { ...reviewMeta, submittedRepository: snapshot.target.repository });
+  if (!snapshot.target.available || !refs.length || !files.length) return finish("invalid-output", "invalid-output", reviewMeta);
+  const { repo, sha, commits = [], readme = "" } = snapshot.inspection;
+  const existing = projects.find((project) => project.repoId === repo.id || publicIdentity(project) === repo.full_name.toLowerCase());
+  if (existing) return finish("duplicate", "duplicate", { ...reviewMeta, submittedRepository: repo.full_name });
 
   const baseSummary = {
-    category: verdict.category,
+    category: verdict.category, catalogKind: verdict.catalogKind, jevRelation: verdict.jevRelation, reviewBasis: verdict.reviewBasis,
     plainSummary: verdict.plainSummary, plainSummaryEn: verdict.plainSummaryEn,
     jevDecisionPoint: verdict.plainSummary, jevDecisionPointEn: verdict.plainSummaryEn,
-    highlightBenefit: "已定位固定版本的实现源码；尚无独立运行或性能验证。",
-    highlightBenefitEn: "Implementation evidence is pinned to a source revision; runtime and performance are not independently verified.",
-    tags: inferCanonicalTags({ category: verdict.category, tags: [] }),
-    summarySource: "ai-evidence-witness",
+    highlightBenefit: "材料已绑定固定版本；收录不代表独立运行或性能验证。",
+    highlightBenefitEn: "References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.",
+    tags: inferCanonicalTags({ category: verdict.category, tags: [] }), summarySource: "ai-material-review",
   };
-  const issueTrusted = Boolean(issue.user?.login && (issue.user.login.toLowerCase() === repo.owner?.login?.toLowerCase() ||
-    ["OWNER", "MEMBER", "COLLABORATOR"].includes(issue.author_association)));
-  const enriched = typeof enrich === "function" ? await enrich({
-    repo, readme, issueBody: issue.body ?? "", issueTrusted,
-    fallback: baseSummary, reviewed: { ...review, ...verdict, witnessValidated: true },
-  }) : baseSummary;
-  // Classification and summaries belong to the witness verdict; extractive copy cannot override them.
+  const enriched = typeof enrich === "function" ? await enrich({ repo, readme,
+    fallback: baseSummary, reviewed: { ...review, ...verdict, evidenceBundle: bundle, materialsValidated: true } }) : baseSummary;
   const { enrichment: _enrichment, ...editorial } = { ...enriched, ...baseSummary };
   const [author, name] = repo.full_name.split("/");
-  const files = [...new Map(witnessNodes.map(({ source }) => [source.path, source])).values()]
-    .map(({ path, url, hash }) => ({ path, url, hash }));
-  const evidenceNodes = witnessNodes.map(({ id, source, kind, startLine, endLine, ranges }) =>
-    ({ id, path: source.path, hash: source.hash, kind, startLine, endLine, ranges: ranges.map((range) => [...range]) }));
   const project = {
     id: `${author}:${name}`.toLowerCase(), name, author,
     url: `https://github.com/${repo.full_name}`, repoId: repo.id, ...editorial,
     stars: repo.stargazers_count, forks: repo.forks_count, openIssues: repo.open_issues_count,
-    license: repo.license?.spdx_id === "NOASSERTION" ? null : (repo.license?.spdx_id ?? null),
-    createdAt: repo.created_at, lastCommitAt: commits[0]?.commit?.committer?.date ?? null,
+    license: licenseFactsFromRepo(repo), createdAt: repo.created_at,
+    lastCommitAt: commits[0]?.commit?.committer?.date ?? null,
     headSha: sha, metadataFetchedAt: now(), metadataStatus: "ok", avatarUrl: repo.owner?.avatar_url,
-    verificationStatus: "integration-detected", runtimeVerified: false, discoveredAt: now(),
-    claimStatus: "模型依据固定版本源码关系见证自动裁决；未经本站运行、安全或性能验证。",
-    claimStatusEn: "Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.",
-    evidence: files.map(({ url }) => ({ url, note: "固定版本的实现源码见证" })),
-    sourceVerification: { method: "ai-evidence-witness-v1", sha, files, role: verdict.role, witness: verdict.witness,
-      nodes: evidenceNodes, implementationFiles: implementationFiles.map(({ path }) => path) },
-    ingestion: { repository, issueNumber: issue.number, issueBodySha256: bodyHash(issue.body),
+    verificationStatus: "material-reviewed", runtimeVerified: false, discoveredAt: now(),
+    claimStatus: "模型依据固定版本材料判断生态类型与 Jev 关联；未经本站独立运行、安全或性能验证。",
+    claimStatusEn: "A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.",
+    evidence: files.map(({ url }) => ({ url, note: "固定版本的相关材料" })),
+    sourceVerification: { method: "ai-material-review-v2", sha, files, materials: refs, reviewRevision,
+      model: { requested: publicReviewMetadata(review.requestModel) ?? null,
+        response: publicReviewMetadata(review.attempts?.at(-1)?.responseModel) ?? null,
+        systemFingerprint: publicReviewMetadata(review.attempts?.at(-1)?.systemFingerprint) ?? null },
+      decision: verdict.decision, catalogKind: verdict.catalogKind, jevRelation: verdict.jevRelation, reviewBasis: verdict.reviewBasis,
+      claims: verdict.claims, conflicts: verdict.conflicts },
+    ingestion: { repository, issueNumber: issue.number, issueBodySha256: bodyHash(issue.body), issueTitleSha256: bodyHash(issue.title), reviewRevision,
       issueUrl: `https://github.com/${repository}/issues/${issue.number}` },
   };
-  if (!project.evidence.length || !["plainSummary", "plainSummaryEn", "jevDecisionPoint", "highlightBenefit", "category"]
-    .every((key) => typeof project[key] === "string" && project[key].trim()) || !project.tags.length)
-    return finish("invalid-output", "invalid-output", { ...details, reviewDetails: diagnostics });
-  return finish("ready", "accepted", { project, reviewDetails: diagnostics });
+  return finish("ready", "accepted", { project, ...reviewMeta });
 }
 
 function decodeSnapshot(file) {
@@ -277,6 +314,7 @@ export async function publishSubmission({
   retryClaim = null,
   trustedWriter = process.env.INGEST_TRUSTED_WRITER,
   dryRun = process.env.INGEST_DRY_RUN === "true",
+  reviewRevision = reviewPolicyRevision(),
 }) {
   requireOwner(repository);
   if (dryRun || process.env.INGEST_DRY_RUN === "true") throw new Error("Dry-run publication is forbidden");
@@ -293,8 +331,16 @@ export async function publishSubmission({
     ingestion.issueNumber < 1
   )
     throw new Error("Invalid submission provenance");
+  if (project.catalogKind && !/^[a-f\d]{64}$/.test(ingestion.issueTitleSha256 ?? ""))
+    throw new Error("Material-reviewed projects require an exact Issue title hash");
+  if (project.catalogKind && !/^[a-f\d]{64}$/.test(ingestion.reviewRevision ?? ""))
+    throw new Error("Material-reviewed projects require an exact review policy revision");
+  if (ingestion.reviewRevision !== undefined && ingestion.reviewRevision !== reviewRevision)
+    return { status: "superseded", changed: false, retryable: false };
   if (retryClaim && (retryClaim.issueNumber !== ingestion.issueNumber ||
       retryClaim.bodySha !== ingestion.issueBodySha256 ||
+      ((project.catalogKind || retryClaim.titleSha) && retryClaim.titleSha !== ingestion.issueTitleSha256) ||
+      ((project.catalogKind || retryClaim.reviewRevision) && retryClaim.reviewRevision !== ingestion.reviewRevision) ||
       !await validateRetryClaim({ api, repository, candidate: retryClaim, trustedWriter })))
     return { status: "superseded", changed: false, retryable: false };
   const issue = await api(
@@ -303,7 +349,7 @@ export async function publishSubmission({
   if (
     issue.state !== "open" ||
     issue.pull_request ||
-    bodyHash(issue.body) !== ingestion.issueBodySha256
+    !matchesReviewedIssue(issue, project)
   )
     return {
       status: "changed",
@@ -340,7 +386,9 @@ export async function publishSubmission({
       if (existing) {
         const own = existing.ingestion?.repository === repository &&
           existing.ingestion.issueNumber === ingestion.issueNumber &&
-          existing.ingestion.issueBodySha256 === ingestion.issueBodySha256;
+          existing.ingestion.issueBodySha256 === ingestion.issueBodySha256 &&
+          (!project.catalogKind || (existing.ingestion.issueTitleSha256 === ingestion.issueTitleSha256 &&
+            existing.ingestion.reviewRevision === ingestion.reviewRevision));
         return { status: own ? "ingested" : "duplicate", changed: false };
       }
       const candidateContent = JSON.stringify([...current, project], null, 2) + "\n";
@@ -383,7 +431,7 @@ export async function publishSubmission({
     if (retryClaim && !await validateRetryClaim({ api, repository, candidate: retryClaim, trustedWriter }))
       return { status: "superseded", changed: false, retryable: false };
     const latestIssue = await api(`/repos/${repository}/issues/${ingestion.issueNumber}`);
-    if (latestIssue.state !== "open" || latestIssue.pull_request || bodyHash(latestIssue.body) !== ingestion.issueBodySha256)
+    if (latestIssue.state !== "open" || latestIssue.pull_request || !matchesReviewedIssue(latestIssue, project))
       return { status: "changed", reason: "issue changed before branch update", retryable: false };
     try {
       await api(refPath, { method: "PATCH", body: { sha: createdCommit, force: false } });
@@ -435,7 +483,7 @@ export async function acknowledgePublished({
   for (const issue of open) {
     const project = byIssue.get(issue.number);
     if (!project || issue.pull_request) continue;
-    if (bodyHash(issue.body) !== project.ingestion.issueBodySha256) {
+    if (!matchesReviewedIssue(issue, project)) {
       results.push({ issue: issue.number, status: "edited-after-review" });
       continue;
     }
@@ -474,7 +522,7 @@ export async function acknowledgePublished({
     if (
       latest.state !== "open" ||
       latest.pull_request ||
-      bodyHash(latest.body) !== project.ingestion.issueBodySha256
+      !matchesReviewedIssue(latest, project)
     ) {
       results.push({
         issue: issue.number,
@@ -501,7 +549,7 @@ export async function acknowledgePublished({
       }
     }
     await settleRetry({ api, repository, trustedWriter, dryRun,
-      candidate: { issueNumber: issue.number, bodySha: project.ingestion.issueBodySha256 }, state: "completed" });
+      candidate: { issueNumber: issue.number, bodySha: project.ingestion.issueBodySha256, titleSha: project.ingestion.issueTitleSha256, reviewRevision: project.ingestion.reviewRevision }, state: "completed" });
     await api(`/repos/${repository}/issues/${issue.number}`, {
       method: "PATCH",
       body: { state: "closed", state_reason: "completed" },
@@ -520,29 +568,42 @@ function trustedComment(comment, trustedWriter) {
 export async function sendReviewFeedback({
   api, repository, prepared, trustedWriter = process.env.INGEST_TRUSTED_WRITER,
   dryRun = process.env.INGEST_DRY_RUN === "true",
+  reviewRevision = reviewPolicyRevision(),
 }) {
   requireOwner(repository);
   if (dryRun || process.env.INGEST_DRY_RUN === "true") return { status: "dry-run" };
   const issueNumber = prepared?.issueNumber;
   const issueBodySha = prepared?.issueBodySha;
-  if (!Number.isSafeInteger(issueNumber) || issueNumber < 1 || !/^[a-f\d]{64}$/.test(issueBodySha ?? ""))
+  const issueTitleSha = prepared?.issueTitleSha;
+  const requiresTitle = prepared?.reviewContract === "material-v2" || Boolean(prepared?.project?.catalogKind);
+  if (!Number.isSafeInteger(issueNumber) || issueNumber < 1 || !/^[a-f\d]{64}$/.test(issueBodySha ?? "") ||
+      (requiresTitle && (!/^[a-f\d]{64}$/.test(issueTitleSha ?? "") || !/^[a-f\d]{64}$/.test(prepared.reviewRevision ?? ""))))
     return { status: "invalid-receipt" };
+  if (prepared.reviewRevision !== undefined && prepared.reviewRevision !== reviewRevision) return { status: "superseded" };
+  if (prepared.retryClaim && (prepared.retryClaim.issueNumber !== issueNumber || prepared.retryClaim.bodySha !== issueBodySha ||
+      ((requiresTitle || prepared.retryClaim.titleSha !== undefined) && prepared.retryClaim.titleSha !== issueTitleSha) ||
+      ((requiresTitle || prepared.retryClaim.reviewRevision !== undefined) && prepared.retryClaim.reviewRevision !== prepared.reviewRevision)))
+    return { status: "superseded" };
   const terminal = {
     rejected: "rejected", duplicate: "rejected", "insufficient-evidence": "insufficient-evidence",
     "invalid-output": "invalid-output",
   }[prepared.status];
   if (!terminal) return { status: "not-needed" };
-  const candidate = { ...(prepared.retryClaim ?? {}), issueNumber, bodySha: issueBodySha };
+  const candidate = { ...(prepared.retryClaim ?? {}), issueNumber, bodySha: issueBodySha,
+    ...(issueTitleSha ? { titleSha: issueTitleSha } : {}), ...(prepared.reviewRevision ? { reviewRevision: prepared.reviewRevision } : {}) };
   const path = `/repos/${repository}/issues/${issueNumber}`;
   const current = async () => {
     const issue = await api(path);
-    return issue.state === "open" && !issue.pull_request && bodyHash(issue.body) === issueBodySha ? issue : null;
+    return issue.state === "open" && !issue.pull_request && bodyHash(issue.body) === issueBodySha &&
+      matchesReviewedTitle(issue, issueTitleSha, requiresTitle) ? issue : null;
   };
   if (!await current()) return { status: "superseded" };
   if (prepared.retryClaim && !await validateRetryClaim({ api, repository, candidate, trustedWriter }))
     return { status: "superseded" };
   const reasonCode = Object.hasOwn(REVIEW_MESSAGES, prepared.reasonCode) ? prepared.reasonCode : "invalid-output";
-  const marker = `<!-- awesome-jev-review-feedback:v2:${issueNumber}:${issueBodySha}:${reasonCode} -->`;
+  const marker = issueTitleSha
+    ? `<!-- awesome-jev-review-feedback:v3:${issueNumber}:${issueBodySha}:${issueTitleSha}:${prepared.reviewRevision}:${reasonCode} -->`
+    : `<!-- awesome-jev-review-feedback:v2:${issueNumber}:${issueBodySha}:${reasonCode} -->`;
   const body = `**Awesome Jev 自动审查结果**\n\n${reviewMessage(reasonCode)}\n\n${marker}`;
   let exists = false;
   for (let page = 1; page <= 20; page++) {
@@ -654,30 +715,15 @@ async function main() {
         url: `https://github.com/logicrw/probe/blob/${sha}/src/probe.py`,
       }];
       const review = await reviewer({
-        repo: { full_name: "logicrw/probe", name: "probe" },
-        readme: "# Jev probe",
-        codeSources: probeSources,
+        targets: [{ id: "R1", repository: "logicrw/probe", repoId: 1, commit: sha, available: true, listed: false }],
+        sources: probeSources.map((source) => ({ ...source, targetId: "R1", repoId: 1, commit: sha })),
+        issue: { title: "Diagnostic fixture", body: "Classify this synthetic Jev integration for endpoint diagnostics." },
+        allowUnreserved: true, caseId: bodyHash("explicit-remote-diagnostic"),
         taxonomy,
       });
       result = {
-        status: "remote-probe",
-        verified: review.verified,
-        reviewStatus: review.status,
-        reason: review.reason,
-        attempts: review.attempts?.map((a) => ({
-          attempt: a.attempt,
-          status: a.status,
-          httpStatus: a.httpStatus,
-          failureStage: a.failureStage,
-          finishReason: a.finishReason,
-          contentLength: a.contentLength,
-          rawContentHead: a.rawContentHead,
-          categoryValue: a.categoryValue,
-          verdictNull: a.verdictNull,
-          generatedVerified: a.generatedVerified,
-          generated: a.generated,
-        })),
-        usage: review.usage,
+        status: "remote-probe", decision: review.decision,
+        reviewDetails: reviewDiagnostics(review, reviewPolicyRevision()), usage: review.usage,
       };
       await atomicJSON(resultPath, result);
       await output({ ready: "false", status: "remote-probe" });
@@ -689,20 +735,36 @@ async function main() {
       if (!Number.isSafeInteger(number) || number < 1)
         throw new Error("A positive issue number is required");
       const issue = await api(`/repos/${repository}/issues/${number}`);
+      const reviewRevision = reviewPolicyRevision();
       const retryClaim = process.env.INGEST_RETRY_CLAIM_ID ? {
         issueNumber: number, bodySha: process.env.INGEST_EXPECTED_BODY_SHA,
+        titleSha: process.env.INGEST_EXPECTED_TITLE_SHA, reviewRevision: process.env.INGEST_EXPECTED_REVIEW_REVISION,
         claimId: process.env.INGEST_RETRY_CLAIM_ID, attempt: Number(process.env.INGEST_RETRY_ATTEMPT),
       } : null;
       const expectedBody = process.env.INGEST_EXPECTED_BODY_SHA;
-      if ((expectedBody && expectedBody !== bodyHash(issue.body)) ||
+      const expectedTitle = process.env.INGEST_EXPECTED_TITLE_SHA;
+      const expectedRevision = process.env.INGEST_EXPECTED_REVIEW_REVISION;
+      if ((expectedBody && expectedBody !== bodyHash(issue.body)) || (expectedTitle && expectedTitle !== bodyHash(issue.title)) ||
+          (expectedRevision && expectedRevision !== reviewRevision) ||
           (retryClaim && !await validateRetryClaim({ api, repository, candidate: retryClaim, trustedWriter: process.env.INGEST_TRUSTED_WRITER }))) {
-        result = { status: "superseded", issueNumber: number, issueBodySha: bodyHash(issue.body), retryable: false };
+        result = { status: "superseded", issueNumber: number, issueBodySha: bodyHash(issue.body), issueTitleSha: bodyHash(issue.title), reviewRevision, reviewContract: "material-v2", retryable: false };
       } else {
+        const dryRun = process.env.INGEST_DRY_RUN === "true";
+        const reservationId = process.env.INGEST_BUDGET_RESERVATION_ID;
+        const grant = !dryRun && reservationId ? await readReviewBudgetGrant({
+          api, issueNumber: number, bodySha: bodyHash(issue.body), titleSha: bodyHash(issue.title), reviewRevision, reservationId,
+          trustedWriter: process.env.INGEST_TRUSTED_WRITER,
+        }) : null;
         result = await prepareSubmission({
-          issue, repository, projects, taxonomy, exclusions, api, enrich, reviewer,
+          issue, repository, projects, taxonomy, exclusions, api, enrich, reviewRevision,
+          reviewer: dryRun ? async () => ({ status: "dry-run", retryable: false }) :
+            grant ? reviewer : async () => ({ status: process.env.REVIEW_PROVIDER_CONFIGURED === "false" ? "provider-unavailable" : "budget-exhausted", retryable: false }),
+          budgetLedger: grant?.budgetLedger, budgetGrant: grant?.budgetGrant,
+          caseId: grant?.budgetLedger?.caseId, expectedReservationId: grant?.budgetGrant?.reservationId,
           commentBody: event.comment?.body ?? "",
         });
         if (retryClaim) result.retryClaim = retryClaim;
+        if (grant) result.budgetReservationId = reservationId;
       }
       if (result.status === "ready") {
         const withoutCurrent = projects.filter(
@@ -741,6 +803,8 @@ async function main() {
       retry: result.retryable === true,
       issue_number: issueNumber,
       issue_body_sha: issueBodySha,
+      issue_title_sha: result.issueTitleSha ?? result.project?.ingestion?.issueTitleSha256 ?? "",
+      review_revision: result.reviewRevision ?? result.project?.ingestion?.reviewRevision ?? "",
       retry_not_before: result.retryNotBefore ?? "",
     });
     console.log(
@@ -783,6 +847,8 @@ async function main() {
       retry: result.retryable === true,
       issue_number: prepared.project.ingestion.issueNumber,
       issue_body_sha: prepared.project.ingestion.issueBodySha256,
+      issue_title_sha: prepared.project.ingestion.issueTitleSha256 ?? "",
+      review_revision: prepared.project.ingestion.reviewRevision ?? "",
     });
     console.log(JSON.stringify(result));
     if (result.status === "changed") process.exitCode = 1;

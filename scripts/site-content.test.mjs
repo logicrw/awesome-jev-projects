@@ -38,8 +38,8 @@ test("banners and README documents strictly match canonical project count", asyn
   for (const bannerName of ["banner.svg", "banner-zh.svg", "banner-ja.svg", "banner-ko.svg"]) {
     const banner = await readFile(new URL(`public/${bannerName}`, root), "utf8");
     assert.ok(
-      banner.includes(`${expectedCount} VERIFIED REPOS`),
-      `Banner public/${bannerName} must show ${expectedCount} VERIFIED REPOS`
+      banner.includes(`${expectedCount} CATALOG ENTRIES`),
+      `Banner public/${bannerName} must show ${expectedCount} CATALOG ENTRIES`
     );
   }
 

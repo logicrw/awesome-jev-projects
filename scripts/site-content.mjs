@@ -1,3 +1,4 @@
+import { licenseLabel, catalogLabels } from "../src/lib/catalog-contract.mjs";
 export const SITE = "https://logicrw.github.io/awesome-jev-projects/";
 export const BASE = "/awesome-jev-projects/";
 export const REPOSITORY = "https://github.com/logicrw/awesome-jev-projects";
@@ -8,52 +9,52 @@ export const COPY = {
     title: "Awesome Jev — System-1 Agent 架构雷达",
     description: "查找 TypeSafe Jev 的开源项目、SDK、Agent 工具和集成示例。按场景浏览用途、Jev 决策点与固定版本源码，支持中文、English、日本語和한국어。",
     catalog: "完整项目目录", explore: "搜索与筛选", categories: "分类", source: "GitHub 仓库",
-    decision: "Jev 在哪一步做判断", benefit: "这个项目的用途", evidence: "源码与说明", limits: "核查范围",
+    decision: "Jev 在此条目的作用", benefit: "这个项目的用途", evidence: "源码与说明", limits: "核查范围",
     review: "目录核查", related: "同类项目", back: "返回目录", about: "关于 Awesome Jev",
-    aboutText: "由社区维护的 Jev 项目与架构雷达，收录具有公开源码与清晰集成逻辑的开源项目，帮助开发者快速探索和落地 System-1 决策架构。",
+    aboutText: "由社区维护的 Jev 项目与资源目录，收录集成、基准测试、开发工具、研究与学习材料，并逐条展示关系、审查依据和许可事实。",
     model: "Jev 是什么？", modelText: "Jev 是 TypeSafe 的决策模型。这里按实际接入方式整理选择、评分和概率判断等用途，并链接项目实现，方便你判断是否适合自己的任务。",
-    criteria: "怎样收录？", criteriaText: "优先收录公开开源、能清晰定位 Jev 实现逻辑的项目。未公开源码或无法核实的仓库不纳入主目录。Star 数反映社区关注热度。",
+    criteria: "怎样收录？", criteriaText: "依据公开仓库材料判断与 Jev 的关系及条目类型。源码、SQL、示例和说明材料均可作为审查材料；材料类型与许可分别标注，Star 数只反映关注热度。",
     submit: "提交项目", contact: "联系维护者", languages: "语言", date: "源码核查日期", license: "许可证", unknown: "未声明",
-    fallback: "中文或英文原文", noIndependent: "已核对公开源码与实际接入逻辑。",
+    fallback: "中文或英文原文", noIndependent: "请按条目标注的材料依据理解结论；收录不代表独立运行验证。",
   },
   en: {
     lang: "en", og: "en_US", suffix: "En", name: "English",
     title: "Awesome Jev — System-1 Agent Architecture Radar",
     description: "Find open-source TypeSafe Jev projects, SDKs, Agent tools and integration examples. Browse use cases, decision points and fixed-version source evidence in four languages.",
     catalog: "Complete project directory", explore: "Search and filter", categories: "Categories", source: "GitHub repository",
-    decision: "Where Jev makes a decision", benefit: "What this project offers", evidence: "Sources and implementation", limits: "Review scope",
+    decision: "Jev’s role in this entry", benefit: "What this project offers", evidence: "Sources and implementation", limits: "Review scope",
     review: "Catalog review", related: "Related projects", back: "Back to directory", about: "About Awesome Jev",
-    aboutText: "A community-maintained directory and radar for Jev, highlighting open-source projects with verified code and clear decision architectures.",
+    aboutText: "A community catalog of Jev integrations, benchmarks, developer tools, research, and learning resources, with per-entry relationships, review basis, and license facts.",
     model: "What is Jev?", modelText: "Jev is TypeSafe's decision model. This directory groups projects by how they use choices, scores and probability judgements, with implementation links to help you assess fit for your own task.",
-    criteria: "What gets listed?", criteriaText: "We prioritize open-source projects with clear Jev implementation evidence. Repositories without verifiable source code are excluded from the main directory.",
+    criteria: "What gets listed?", criteriaText: "Public repository material supports classification of the entry and its Jev relationship. Source, SQL, examples, and descriptive documents may all inform review; their basis and license facts are recorded separately. Stars indicate attention only.",
     submit: "Submit a project", contact: "Contact maintainer", languages: "Languages", date: "Source reviewed", license: "License", unknown: "Not declared",
-    fallback: "Original Chinese or English text", noIndependent: "Public sources and integration logic reviewed.",
+    fallback: "Original Chinese or English text", noIndependent: "Read each entry’s review basis; inclusion does not establish independent execution.",
   },
   ja: {
     lang: "ja", og: "ja_JP", suffix: "Ja", name: "日本語",
     title: "Awesome Jev — System-1 Agent アーキテクチャ",
     description: "TypeSafe Jev のオープンソースプロジェクト、SDK、Agent ツール、連携事例を検索。用途、判断を行う箇所、固定バージョンのソースを4言語で確認できます。",
     catalog: "全プロジェクト一覧", explore: "検索・絞り込み", categories: "カテゴリ", source: "GitHub リポジトリ",
-    decision: "Jev が判断する箇所", benefit: "このプロジェクトの用途", evidence: "ソースと実装", limits: "確認の範囲",
+    decision: "この項目での Jev の役割", benefit: "このプロジェクトの用途", evidence: "ソースと実装", limits: "確認の範囲",
     review: "掲載内容の確認", related: "同じカテゴリのプロジェクト", back: "一覧に戻る", about: "Awesome Jev について",
-    aboutText: "コミュニティによって運営される Jev プロジェクトカタログです。公開ソースコードと明確な設計を持つオープンソースプロジェクトを整理し、開発者のアーキテクチャ選定を支援します。",
+    aboutText: "Jev の連携、ベンチマーク、開発ツール、研究、学習資料を集めたコミュニティのカタログです。関係、確認の根拠、ライセンス情報を項目ごとに表示します。",
     model: "Jev とは？", modelText: "Jev は TypeSafe の判断モデルです。選択、スコア、確率判断を実際にどう使っているかでプロジェクトを分類し、用途に合うか確認できる実装リンクを掲載しています。",
-    criteria: "掲載基準は？", criteriaText: "Jev の実装箇所が確認できる公開プロジェクトを優先します。ソースコードが確認できないリポジトリは掲載対象外としています。",
+    criteria: "掲載基準は？", criteriaText: "公開リポジトリのソース、SQL、例、説明資料から、項目の種類と Jev との関係を判断します。資料の種類とライセンス情報は別に表示し、Star 数は注目度のみを示します。",
     submit: "プロジェクトを投稿", contact: "管理者に連絡", languages: "言語", date: "ソース確認日", license: "ライセンス", unknown: "記載なし",
-    fallback: "中国語または英語の原文", noIndependent: "公開ソースと連携ロジックを確認済み。",
+    fallback: "中国語または英語の原文", noIndependent: "各項目の確認根拠をご覧ください。掲載は独立した実行検証を意味しません。",
   },
   ko: {
     lang: "ko", og: "ko_KR", suffix: "Ko", name: "한국어",
     title: "Awesome Jev — System-1 Agent 아키텍처 레이더",
     description: "TypeSafe Jev 오픈 소스 프로젝트, SDK, Agent 도구와 연동 사례를 찾아보세요. 용도, 판단 지점, 고정 버전 소스 근거를 네 가지 언어로 제공합니다.",
     catalog: "전체 프로젝트 목록", explore: "검색 및 필터", categories: "분류", source: "GitHub 저장소",
-    decision: "Jev가 판단하는 지점", benefit: "프로젝트의 용도", evidence: "소스 및 구현", limits: "검토 범위",
+    decision: "이 항목에서 Jev의 역할", benefit: "프로젝트의 용도", evidence: "소스 및 구현", limits: "검토 범위",
     review: "목록 검토", related: "같은 분류의 프로젝트", back: "목록으로 돌아가기", about: "Awesome Jev 소개",
-    aboutText: "커뮤니티가 운영하는 Jev 프로젝트 디렉터리로, 공개 소스 코드와 명확한 결정 아키텍처를 갖춘 오픈소스 프로젝트를 선별하여 제공합니다.",
+    aboutText: "Jev 연동, 벤치마크, 개발 도구, 연구 및 학습 자료를 모은 커뮤니티 목록입니다. 항목별 관계, 검토 근거 및 라이선스 정보를 표시합니다.",
     model: "Jev란?", modelText: "Jev는 TypeSafe의 판단 모델입니다. 선택, 점수 및 확률 판단의 실제 활용 방식에 따라 프로젝트를 분류하고, 작업에 적합한지 확인할 수 있도록 구현 링크를 제공합니다.",
-    criteria: "수록 기준은?", criteriaText: "Jev 구현을 명확히 확인할 수 있는 오픈소스 프로젝트를 우선합니다. 소스 코드를 확인할 수 없는 저장소는 메인 목록에서 제외됩니다.",
+    criteria: "수록 기준은?", criteriaText: "공개 저장소의 소스, SQL, 예시, 설명 자료로 항목 유형과 Jev 관계를 판단합니다. 자료의 종류와 라이선스는 별도로 표시하며 Star 수는 관심도만 나타냅니다.",
     submit: "프로젝트 제출", contact: "관리자에게 연락", languages: "언어", date: "소스 확인일", license: "라이선스", unknown: "명시되지 않음",
-    fallback: "중국어 또는 영어 원문", noIndependent: "공개 소스와 연동 논리를 확인했습니다.",
+    fallback: "중국어 또는 영어 원문", noIndependent: "각 항목의 검토 근거를 확인하세요. 수록은 독립적인 실행 검증을 뜻하지 않습니다.",
   },
 };
 
@@ -123,10 +124,10 @@ export function paidPlacementMarkdown(partners, locale = "en") {
 
 export function machineDocuments(projects, partners) {
   const listed = projects.filter((project) => project.catalogStatus !== "review-pending");
-  const intro = `# Awesome Jev\n\nThe definitive community radar and directory for TypeSafe Jev and System-1 Agent architecture projects. Every listed project is verified against commit-pinned public open source code.\n\nWebsite: ${SITE}\nRepository: ${REPOSITORY}\nCatalog entries: ${listed.length}\n\n## Install the Agent Skill\n\n\`\`\`bash\n${INSTALL_COMMANDS.join("\n")}\n\`\`\`\n\n## Machine-readable resources\n${MACHINE_RESOURCES.map((path) => `- [${path}](${SITE + path})`).join("\n")}\n`;
+  const intro = `# Awesome Jev\n\nA community catalog for TypeSafe Jev and System-1 Agent architectures, including implementations, benchmarks, tools, research, and learning resources. Review basis and license facts are recorded per entry; inclusion does not establish independent runtime verification.\n\nWebsite: ${SITE}\nRepository: ${REPOSITORY}\nCatalog entries: ${listed.length}\n\n## Install the Agent Skill\n\n\`\`\`bash\n${INSTALL_COMMANDS.join("\n")}\n\`\`\`\n\n## Machine-readable resources\n${MACHINE_RESOURCES.map((path) => `- [${path}](${SITE + path})`).join("\n")}\n`;
   const languages = `\n## Language directories\n${LOCALES.map((l)=>`- [${{zh:"Chinese",en:"English",ja:"Japanese",ko:"Korean"}[l]}](${SITE+localePrefix(l)}catalog/)`).join("\n")}\n`;
   const categories = `\n## Categories\n${[...new Set(listed.map((p)=>p.category))].sort().map((category)=>`- [${markdownText(category)}](${SITE+categoryRoute(category,"en")}): ${listed.filter((p)=>p.category===category).length}`).join("\n")}\n`;
   const disclosure = "\n" + paidPlacementMarkdown(partners);
-  const full = listed.map((p)=>`## ${markdownText(p.name)}\n\n${markdownText(projectCopy(p,"plainSummary","en"))}\n\n- Repository: ${p.url}\n- Category: ${markdownText(p.category)}\n- Jev decision: ${markdownText(projectCopy(p,"jevDecisionPoint","en"))}\n- Purpose: ${markdownText(projectCopy(p,"highlightBenefit","en"))}\n- Review scope: ${markdownText(projectCopy(p,"claimStatus","en"))}\n- License: ${markdownText(p.license || "Not declared")}\n- Details: ${SITE+projectRoute(p.id,"en")}\n${(p.evidence??[]).slice(0,12).map((item)=>`- Source evidence: ${item.url}`).join("\n")}\n`).join("\n");
+  const full = listed.map((p)=>`## ${markdownText(p.name)}\n\n${markdownText(projectCopy(p,"plainSummary","en"))}\n\n- Repository: ${p.url}\n- Category: ${markdownText(p.category)}\n- Jev decision: ${markdownText(projectCopy(p,"jevDecisionPoint","en"))}\n- Purpose: ${markdownText(projectCopy(p,"highlightBenefit","en"))}\n- Review scope: ${markdownText(projectCopy(p,"claimStatus","en"))}\n- License: ${markdownText(licenseLabel(p.license, "en", p.licenseStatus))}${catalogLabels(p, "en").map(({label,value})=>`\n- ${markdownText(label)}: ${markdownText(value)}`).join("")}\n- Details: ${SITE+projectRoute(p.id,"en")}\n${(p.evidence??[]).slice(0,12).map((item)=>`- Source evidence: ${item.url}`).join("\n")}\n`).join("\n");
   return { llms: intro + languages + categories + disclosure, full: intro + languages + disclosure + "\n## Complete project catalog\n\n" + full };
 }

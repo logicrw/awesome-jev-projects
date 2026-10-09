@@ -1,12 +1,13 @@
 export type Locale = "zh" | "en" | "ja" | "ko";
 export const english: Record<string, string> = {
+  "公开可访问不代表授予使用、修改或分发许可。": "Public access does not grant permission to use, modify, or redistribute.",
   "生态入口": "Ecosystem",
   "显示与语言": "Appearance and language",
   "把思考留给大模型，": "Let LLMs think.",
   "把选择题交给 Jev。": "Let Jev choose.",
   "从社区源码里，查看 Jev 的接入方式与决策位置。": "See how Jev fits into Agent architectures, directly in community source code.",
   "把思考留给大模型，把选择题交给 Jev。": "Let LLMs think. Let Jev choose.",
-  "已审校条目": "Source-reviewed entries",
+  "已审校条目": "Reviewed entries",
   "已审校项目": "Verified projects",
   "架构分类": "Architecture categories",
   "主题标签": "Topics",
@@ -242,13 +243,14 @@ export const categoryEnglish: Record<string, string> = {
 };
 
 export const japanese: Record<string, string> = {
+  "公开可访问不代表授予使用、修改或分发许可。": "公開されているだけでは、利用・変更・再配布の許可を意味しません。",
   "生态入口": "エコシステム",
   "显示与语言": "表示と言語",
   "把思考留给大模型，": "思考は LLM に。",
   "把选择题交给 Jev。": "選択は Jev に。",
   "从社区源码里，查看 Jev 的接入方式与决策位置。": "コミュニティのソースから、Jev の組み込み方と判断する箇所を探す。",
   "把思考留给大模型，把选择题交给 Jev。": "思考は LLM に。選択は Jev に。",
-  "已审校条目": "ソース確認済み",
+  "已审校条目": "確認済みの項目",
   "已审校项目": "確認済みプロジェクト",
   "架构分类": "アーキテクチャ分類",
   "主题标签": "トピック",
@@ -443,13 +445,14 @@ export const japanese: Record<string, string> = {
   "对这个项目或 Jev 落地有想法？与维护者交流：": "このプロジェクトや Jev 活用についてメンテナーと交流：",
 };
 export const korean: Record<string, string> = {
+  "公开可访问不代表授予使用、修改或分发许可。": "공개 접근만으로 사용, 수정, 재배포가 허용되는 것은 아닙니다.",
   "生态入口": "생태계",
   "显示与语言": "표시 및 언어",
   "把思考留给大模型，": "생각은 LLM에.",
   "把选择题交给 Jev。": "선택은 Jev에.",
   "从社区源码里，查看 Jev 的接入方式与决策位置。": "커뮤니티 소스에서 Jev 연동 방식과 판단 지점을 살펴보세요.",
   "把思考留给大模型，把选择题交给 Jev。": "생각은 LLM에. 선택은 Jev에.",
-  "已审校条目": "소스 검토 완료",
+  "已审校条目": "검토한 항목",
   "已审校项目": "검토 완료 프로젝트",
   "架构分类": "아키텍처 분류",
   "主题标签": "주제",
@@ -739,10 +742,10 @@ const categoryTranslations: Record<string, Partial<Record<Locale, string>>> = {
 
 export const locales: Locale[] = ["en", "zh", "ja", "ko"];
 export const localeMeta: Record<Locale, { label: string; language: string; title: string; description: string }> = {
-  zh: { label: "简体中文", language: "zh-CN", title: "Awesome Jev — System-1 Agent 架构雷达", description: "社区维护的 System-1 Agent 架构雷达。按用途浏览 Jev 开源与公开源码项目，核对接入方式、许可证与固定版本源码。" },
-  en: { label: "English", language: "en", title: "Awesome Jev — System-1 Agent Architecture Radar", description: "A community-maintained radar for System-1 Agent architectures with Jev. Explore projects, SDKs and integrations with licenses and source evidence." },
-  ja: { label: "日本語", language: "ja", title: "Awesome Jev — System-1 Agent アーキテクチャ", description: "コミュニティ運営の System-1 Agent アーキテクチャ一覧。Jev の実装、ライセンスと固定バージョンのソースを用途別に確認できます。" },
-  ko: { label: "한국어", language: "ko", title: "Awesome Jev — System-1 Agent 아키텍처 레이더", description: "커뮤니티가 관리하는 System-1 Agent 아키텍처 레이더입니다. Jev 프로젝트, SDK, 연동 방식과 라이선스 및 소스 근거를 확인하세요." },
+  zh: { label: "简体中文", language: "zh-CN", title: "Awesome Jev — System-1 Agent 架构雷达", description: "社区维护的 System-1 Agent 架构雷达。按用途浏览 Jev 项目与学习资源，核对条目类型、材料依据和许可信息。" },
+  en: { label: "English", language: "en", title: "Awesome Jev — System-1 Agent Architecture Radar", description: "A community catalog for System-1 Agent architectures with Jev. Explore projects and learning resources with entry types, review basis, and license facts." },
+  ja: { label: "日本語", language: "ja", title: "Awesome Jev — System-1 Agent アーキテクチャ", description: "コミュニティ運営の System-1 Agent アーキテクチャ一覧。Jev のプロジェクトと学習資料を、種類、確認の根拠、ライセンス情報とともに確認できます。" },
+  ko: { label: "한국어", language: "ko", title: "Awesome Jev — System-1 Agent 아키텍처 레이더", description: "커뮤니티가 관리하는 System-1 Agent 아키텍처 목록입니다. Jev 프로젝트와 학습 자료의 유형, 검토 근거 및 라이선스 정보를 확인하세요." },
 };
 export function translate(text: string, locale: Locale): string {
   return ({ en: english, ja: japanese, ko: korean } as Partial<Record<Locale, Record<string, string>>>)[locale]?.[text] ?? text;

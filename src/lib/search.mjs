@@ -1,4 +1,5 @@
 import { tagSearchText } from './tags.mjs';
+import { licenseSpdx, catalogLabels } from './catalog-contract.mjs';
 
 const normalize = (value) => typeof value === 'string'
   ? value.normalize('NFKC').toLocaleLowerCase('en').replace(/[‐‑‒–—−]/gu, '-').replace(/\s+/gu, ' ').trim()
@@ -164,6 +165,7 @@ function makeDocument(project) {
     makeField(topics, 6, true), makeField(rawTags, 6, false), makeField(tags, 6, false),
     makeField(summaries, 4, true), makeField(decisions, 3, true),
     makeField(strings(project.language), 1, true), makeField(strings(project.category), 1, false),
+    makeField(['zh', 'en', 'ja', 'ko'].flatMap(locale => catalogLabels(project, locale).map(({ value }) => value)), 1, false),
   ];
   const content = [...summaries, ...decisions].map(normalize);
   return { project, names, author, url, urlSlug, urlTokens: [...new Set(words(path))], topics, content, fields,
@@ -398,7 +400,7 @@ export function matchesQuickFilter(project, mode = 'all', now = Date.now()) {
       && count(project.stars) >= 10 && count(project.stars) < 1000;
   }
   if (mode === 'commercial') {
-    return !['unconfirmed', 'custom', 'restricted'].includes(normalize(project.licenseStatus)) && permissiveLicenses.has(normalize(project.license));
+    return permissiveLicenses.has(normalize(licenseSpdx(project.license, project.licenseStatus)));
   }
   return mode === 'all';
 }

@@ -2,12 +2,16 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
+import { normalizeLicenseFacts, catalogKinds, jevRelations, reviewBases } from "../src/lib/catalog-contract.mjs";
 export const publicFields = [
   "id",
   "name",
   "author",
   "url",
   "category",
+  "catalogKind",
+  "jevRelation",
+  "reviewBasis",
   "plainSummary",
   "plainSummaryEn",
   "jevDecisionPoint",
@@ -82,6 +86,10 @@ export function publicProjects(rows) {
         .filter((key) => row[key] !== undefined && !searchMetadataFields.has(key))
         .map((key) => [key, row[key]]),
     );
+    if (project.license && typeof project.license === "object") project.license = normalizeLicenseFacts(project.license);
+    for (const [key, values] of Object.entries({ catalogKind: catalogKinds, jevRelation: jevRelations, reviewBasis: reviewBases })) {
+      if (project[key] !== undefined && !values.includes(project[key])) delete project[key];
+    }
     if (row.catalogStatus === "review-pending") {
       const pending = {
         "": ["此条目待复核，暂不作为已确认的 Jev 集成推荐。", "保留记录供追踪；请先查看复核原因与来源。"],
@@ -161,4 +169,3 @@ if (
   resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 )
   await preparePublicData();
-

@@ -100,8 +100,8 @@ test("same-file SDK or HTTP plus Jev model id still counts as implementation", a
   }
 });
 
-test("bare project/submit titles are not submissions without the template label or repository heading", () => {
-  assert.equal(isSubmission({ title: "Project help please", body: "https://github.com/a/b" }), false);
+test("free-format GitHub references reach intent review; bare non-candidate titles do not", () => {
+  assert.equal(isSubmission({ title: "Project help please", body: "https://github.com/a/b" }), true);
   assert.equal(isSubmission({ title: "Submit a patch", body: "" }), false);
   assert.equal(isSubmission({ title: "submit:", body: "" }), false);
   assert.equal(isSubmission({ title: "[Project] tool", body: "" }), true);
@@ -186,4 +186,3 @@ test("ingest and radar workflows no longer inject GH_MODELS_TOKEN and serialize 
   assert.match(ingest, /group:\s*ingest-issue/);
   assert.match(check, /node --test scripts\/\*\.test\.mjs/);
 });
-

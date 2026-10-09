@@ -1,3 +1,4 @@
+import type { LicenseValue, CatalogClassification } from './catalog-contract.mjs';
 /** Only textual properties are indexed; numeric source locations are ignored. */
 export interface SearchEvidence {
   readonly url?: string;
@@ -20,7 +21,7 @@ export interface SearchMetadata {
   readonly evidence?: readonly SearchEvidence[];
 }
 
-export interface SearchableProject {
+export interface SearchableProject extends CatalogClassification {
   id: string;
   name?: string;
   author?: string;
@@ -43,7 +44,7 @@ export interface SearchableProject {
   stars?: number | null;
   createdAt?: string | null;
   lastCommitAt?: string | null;
-  license?: string | null;
+  license?: LicenseValue;
   licenseStatus?: string;
 }
 /** Opaque index: construct with createProjectSearch, retain across queries. */

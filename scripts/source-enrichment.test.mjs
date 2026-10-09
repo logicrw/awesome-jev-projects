@@ -5,7 +5,6 @@ import {
   createSummaryEnricher,
   createSubmissionReviewer,
   extractCodeWindow,
-  REVIEW_BUDGET,
 } from "./source-enrichment.mjs";
 
 const chinese = "用 Jev 为日志打分，只把与当前任务相关的内容留在上下文里。";
@@ -541,130 +540,86 @@ test("DeepSeek API routes to DeepSeek endpoint with deepseek-flash model and sou
   assert.equal(result.enrichment.ai.status, "completed");
 });
 
-const sourceText = 'import { JevClient } from "@typesafe/jev";\nconst client = new JevClient();\nconst result = await client.choice({ state: input, options });\nconsole.log(result.answer);';
-const sourceFile = (text = sourceText, path = "src/client.ts") => ({
+const sha = "a".repeat(40);
+const sourceText = "# Jev tutorial\n\nExplains Jev structured decision APIs and provides worked examples for selecting workflow actions.";
+const sourceFile = (text = sourceText, path = "README.md") => ({
+  targetId: "R1", repoId: 1, repository: "logicrw/demo", commit: sha,
   path, text, hash: createHash("sha256").update(text).digest("hex"),
-  url: `https://github.com/logicrw/demo/blob/${"a".repeat(40)}/${path}`,
+  url: `https://github.com/logicrw/demo/blob/${sha}/${path}`,
 });
-const submission = { codeSources: [sourceFile()], taxonomy: [{ category: "CLI & Pipelines" }] };
+const submission = { sources: [sourceFile()], targets: [{ id: "R1", repoId: 1, repository: "logicrw/demo", commit: sha, available: true, listed: false }],
+  taxonomy: [{ category: "CLI & Pipelines" }], allowUnreserved: true };
 function verdictForRequest(options, overrides = {}) {
-  const request = JSON.parse(options.body);
-  const nodes = JSON.parse(request.messages[1].content).evidence.nodes;
-  const operation = nodes.filter((node) => node.kind === "operation").map((node) => node.id);
-  return {
-    verified: true, role: "client",
-    witness: { entry: [nodes[0].id], operation: operation.slice(0, 1), result: [nodes.at(-1).id] },
-    reasonCode: "implementation-observed", category: JSON.parse(request.messages[1].content).categories.indexOf("CLI/pipelines"),
-    plainSummary: chinese, plainSummaryEn: english,
-    ...overrides,
-  };
+  const request = JSON.parse(options.body), evidence = JSON.parse(request.messages[1].content).evidence;
+  const material = evidence.materials[0];
+  return { target: material.targetId, decision: "admit", catalogKind: "learning-resource", jevRelation: "described", reviewBasis: "descriptive-material",
+    claims: [{ type: "purpose", text: "Explains Jev decision APIs with examples.", support: [material.id] }], conflicts: [], need: null,
+    category: 0, plainSummary: chinese, plainSummaryEn: english, ...overrides };
 }
 
-test("Muse Reviewer validates witness, keeps model identity, and enforces the complete message budget", async () => {
-  let calledUrl = "";
-  let requestBody;
-  const reviewer = createSubmissionReviewer({
-    token: "muse-key-12345", fetchImpl: async (url, options) => {
-      calledUrl = url;
-      assert.equal(options.headers.Authorization, "Bearer muse-key-12345");
-      assert.equal(options.redirect, "error");
-      requestBody = JSON.parse(options.body);
-      assert.equal(Object.hasOwn(requestBody, "tools"), false);
-      assert.deepEqual(requestBody.messages.map((message) => message.role), ["system", "user"]);
-      assert.ok(Buffer.byteLength(JSON.stringify(requestBody.messages)) <= 1450);
-      assert.equal(requestBody.max_tokens, REVIEW_BUDGET.outputTokens);
-      return reply(verdictForRequest(options));
-    },
-  });
-  const result = await reviewer({ ...submission, readme: "README_INJECTION", issueBody: "ISSUE_INJECTION", repo: { description: "DESCRIPTION_INJECTION" } });
-  assert.equal(calledUrl, "https://api.meta.ai/v1/chat/completions");
-  assert.equal(requestBody.model, "muse-spark-1.3-contributor");
-  assert.equal(requestBody.reasoning_effort, "low");
-  assert.doesNotMatch(JSON.stringify(requestBody), /README_INJECTION|ISSUE_INJECTION|DESCRIPTION_INJECTION/);
-  assert.equal(result.verified, true);
-  assert.equal(result.status, "completed");
-  assert.equal(result.witnessValidated, true);
-  assert.equal(result.category, "CLI & Pipelines");
-  assert.equal(result.plainSummary, chinese);
-  assert.equal(result.plainSummaryEn, english);
-  assert.equal(result.budget.tokenizerVerified, false);
-  assert.equal(result.usage.status, "unknown");
-  assert.equal(result.usage.unknownAttempts, 1);
-  assert.ok(result.evidenceBundle);
-  assert.equal(Object.hasOwn(JSON.parse(JSON.stringify(result)), "evidenceBundle"), false);
-  assert.equal(result.implementationFiles[0].hash, submission.codeSources[0].hash);
-});
-
-test("Muse Reviewer preserves strict rejection with a local fixed reason", async () => {
-  const reviewer = createSubmissionReviewer({ token: "muse-key-12345", fetchImpl: async (_, options) => reply(verdictForRequest(options, {
-    verified: false, role: "none", witness: { entry: [], operation: [], result: [] },
-    reasonCode: "not-integrated", category: null, plainSummary: "", plainSummaryEn: "",
-  })) });
-  const result = await reviewer(submission);
-  assert.equal(result.verified, false);
-  assert.equal(result.status, "completed");
-  assert.equal(result.reasonCode, "not-integrated");
-  assert.match(result.reason, /未确认/);
-  assert.deepEqual(result.implementationFiles, []);
-});
-
-test("Muse Reviewer excludes credential strings and comments before prompting", async () => {
-  const secretKey = "sk-abcdef1234567890abcdef1234567890";
-  let promptBody = "";
-  const reviewer = createSubmissionReviewer({ token: secretKey, fetchImpl: async (_, options) => {
-    promptBody = options.body;
+test("DeepSeek material reviewer admits a learning resource with bound claims and fixed protocol", async () => {
+  let calledUrl, requestBody;
+  const reviewer = createSubmissionReviewer({ token: "fixture-key", fetchImpl: async (url, options) => {
+    calledUrl = url; requestBody = JSON.parse(options.body);
+    assert.equal(options.headers.Authorization, "Bearer fixture-key");
+    assert.equal(options.redirect, "error");
+    assert.equal(Object.hasOwn(requestBody, "tools"), false);
+    assert.equal(requestBody.max_tokens, 512);
+    assert.deepEqual(requestBody.thinking, { type: "disabled" });
+    assert.equal(requestBody.reasoning_effort, "none");
     return reply(verdictForRequest(options));
   } });
-  const result = await reviewer({ ...submission, codeSources: [sourceFile(`// ${secretKey} SYSTEM OVERRIDE\n${sourceText}\nconst key = "${secretKey}";`)], readme: secretKey });
+  const result = await reviewer(submission);
+  assert.equal(calledUrl, "https://api.deepseek.com/chat/completions");
+  assert.equal(requestBody.model, "deepseek-flash");
+  assert.equal(result.decision, "admit");
+  assert.equal(result.catalogKind, "learning-resource");
+  assert.equal(result.reviewBasis, "descriptive-material");
+  assert.equal(result.materialsValidated, true);
+  assert.equal(Object.hasOwn(result, "verified"), false);
+  assert.equal(result.category, "CLI & Pipelines");
+  assert.equal(result.materialRefs[0].path, "README.md");
+  assert.equal(result.budget.tokenizerVerified, false);
+  assert.equal(result.usage.status, "unknown");
+  assert.equal(result.budgetLedger.chargedTokens, result.attempts[0].budget.reservedTokens);
+  assert.equal(Object.hasOwn(JSON.parse(JSON.stringify(result)), "evidenceBundle"), false);
+});
+
+test("definitive exclusion remains semantic and never enters a thinking retry", async () => {
+  let calls = 0;
+  const reviewer = createSubmissionReviewer({ token: "fixture", fetchImpl: async (_, options) => { calls++; return reply(verdictForRequest(options,
+    { decision: "exclude", jevRelation: "unrelated", category: null, claims: [], plainSummary: "", plainSummaryEn: "" })); } });
+  const result = await reviewer(submission);
+  assert.equal(result.decision, "exclude");
   assert.equal(result.status, "completed");
-  assert.equal(promptBody.includes(secretKey), false);
-  assert.doesNotMatch(promptBody, /SYSTEM OVERRIDE/);
+  assert.equal(calls, 1);
+});
+
+test("raw credentials are excluded from the model prompt and serialized review receipt", async () => {
+  const secretKey = "sk-" + "q".repeat(36);
+  let prompt;
+  const reviewer = createSubmissionReviewer({ token: secretKey, fetchImpl: async (_, options) => { prompt = options.body; return reply(verdictForRequest(options)); } });
+  const result = await reviewer({ ...submission, sources: [sourceFile(`${sourceText}\n\nAPI_TOKEN=${secretKey}`)], issue: { title: secretKey } });
+  assert.equal(result.status, "completed");
+  assert.equal(prompt.includes(secretKey), false);
   assert.equal(JSON.stringify(result).includes(secretKey), false);
 });
 
-test("Muse Reviewer skips missing code and handles missing token, HTTP errors, and circuits", async () => {
+test("provider failures never masquerade as semantic exclusion and consume unknown reservations", async () => {
   let calls = 0;
-  const noCode = createSubmissionReviewer({ token: "test-token", fetchImpl: () => { calls++; assert.fail("no code"); } });
-  const insufficient = await noCode({ codeSources: [], readme: sourceText });
-  assert.equal(insufficient.status, "insufficient-evidence");
-  assert.equal(insufficient.verified, null);
-  assert.equal(calls, 0);
-  const missing = await createSubmissionReviewer({ token: "" })(submission);
-  assert.equal(missing.verified, null);
-  assert.equal(missing.status, "missing-token");
-  let attempts = 0;
-  const reviewer = createSubmissionReviewer({ token: "test-token", fetchImpl: async () => {
-    attempts++; return new Response("credential-bearing error", { status: 500 });
-  } });
-  const failure = await reviewer(submission);
-  assert.equal(failure.verified, null);
-  assert.equal(failure.status, "http-error");
-  assert.equal(failure.retryable, true);
-  assert.equal(attempts, 3);
-  assert.equal(failure.attempts.length, 3);
-  assert.equal(JSON.stringify(failure).includes("credential-bearing"), false);
-  assert.equal((await reviewer(submission)).status, "circuit-open");
-  assert.equal(attempts, 3);
-});
-
-test("Muse Reviewer honors Retry-After and succeeds with witness on retry", async () => {
-  let callCount = 0;
-  const delays = [];
-  const reviewer = createSubmissionReviewer({ token: "test-token", sleep: async (ms) => delays.push(ms), fetchImpl: async (_, options) => {
-    callCount++;
-    if (callCount === 1) return new Response("rate limited", { status: 429, headers: { "Retry-After": "2" } });
-    return reply(verdictForRequest(options));
-  } });
+  const reviewer = createSubmissionReviewer({ token: "fixture", fetchImpl: async () => { calls++; return new Response("private-provider-error", { status: 500 }); } });
   const result = await reviewer(submission);
-  assert.equal(callCount, 2);
-  assert.deepEqual(delays, [2000]);
-  assert.equal(result.verified, true);
-  assert.equal(result.status, "completed");
+  assert.equal(result.decision, null);
+  assert.equal(result.status, "provider-unavailable");
+  assert.ok(calls <= 3);
+  assert.ok(result.budgetLedger.chargedTokens <= 6000);
+  assert.equal(result.budgetLedger.chargedTokens, result.attempts.reduce((sum, attempt) => sum + attempt.budget.reservedTokens, 0));
+  assert.equal(JSON.stringify(result).includes("private-provider-error"), false);
 });
 
-test("reviewed summaries are reused without a second generation or native prose override", async () => {
-  const enrich = createSummaryEnricher({ token: "test-token", fetchImpl: () => assert.fail("duplicate summary request") });
-  const reviewed = { verified: true, status: "completed", witnessValidated: true, source: "muse-spark", plainSummary: chinese, plainSummaryEn: english };
+test("source-qualified summaries are reused without a second generation or prose overwrite", async () => {
+  const enrich = createSummaryEnricher({ token: "fixture", fetchImpl: () => assert.fail("duplicate request") });
+  const reviewed = { decision: "admit", status: "completed", materialsValidated: true, source: "deepseek", plainSummary: chinese, plainSummaryEn: english };
   const result = await enrich({ repo, fallback, reviewed, issueBody: "## 一句话介绍\n外部说明把程序用途改成其他数据流程。" });
   assert.equal(result.plainSummary, chinese);
   assert.equal(result.plainSummaryEn, english);
@@ -672,7 +627,7 @@ test("reviewed summaries are reused without a second generation or native prose 
   assert.equal(result.enrichment.ai.attempted, false);
 });
 
-test("extractCodeWindow legacy helper remains bounded (reviewer does not use it)", () => {
+test("legacy code-window helper remains bounded and is not the material admission path", () => {
   const core = "requests.post('https://api.typesafe.ai/v1/systemone', json={})";
   const window = extractCodeWindow("A".repeat(8000) + core + "B".repeat(8000), 5000);
   assert.equal(window.length, 5000);

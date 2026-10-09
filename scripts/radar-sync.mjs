@@ -10,8 +10,11 @@ import {
   createSummaryEnricher,
   createSubmissionReviewer,
 } from "./source-enrichment.mjs";
-import { inspectRepository, hasOpenRouterJevSource, codeCandidate } from "./project-source.mjs";
-import { validateVerdict, resolveWitnessFiles } from "./evidence-bundle.mjs";
+import { inspectRepository, collectAdditionalMaterials, hasOpenRouterJevSource } from "./project-source.mjs";
+import { validateVerdict, resolveMaterialRefs, resolveMaterialFiles } from "./evidence-bundle.mjs";
+import { licenseFactsFromRepo } from "../src/lib/catalog-contract.mjs";
+import { reviewPolicyRevision } from "./review-policy.mjs";
+import { radarCaseId, readRadarBudgetGrant } from "./radar-budget.mjs";
 
 /** Manual/editorial copy must survive metadata sync. Keep existing statuses; curated is the same class. */
 export const PROTECTED_SUMMARY_SOURCES = Object.freeze([
@@ -120,104 +123,116 @@ export async function enrichCandidateSummary(repo, readme, fallbackSummary) {
 }
 export const summarizeWithGitHubModels = enrichCandidateSummary;
 
-const RADAR_REVIEW_VERSION = "witness-v1";
 const MAX_REVIEW_ATTEMPTS = 3;
-const VERDICT_FIELDS = ["verified", "role", "reasonCode", "category", "plainSummary", "plainSummaryEn", "witness"];
-/** One semantic gate for radar discovery. The heuristic result never grants admission. */
-export async function reviewRadarCandidate({
-  inspection, taxonomy, reviewer = reviewCandidate, previousState = {},
-  now = new Date().toISOString(), configRevision = process.env.RADAR_REVIEW_REVISION ?? "",
-}) {
-  const codeSources = inspection.codeSources ?? [];
-  const fingerprint = createHash("sha256").update(JSON.stringify({
-    policy: RADAR_REVIEW_VERSION, revision: configRevision,
-    model: process.env.DEEPSEEK_MODEL ?? process.env.MUSE_MODEL ?? "",
-    endpoint: process.env.DEEPSEEK_ENDPOINT ?? process.env.MUSE_ENDPOINT ?? "",
-    configured: Boolean(process.env.DEEPSEEK_API_KEY || process.env.MUSE_API_KEY),
-    sha: inspection.sha, files: codeSources.map(({ path, url, hash }) => ({ path, url, hash })),
+const VERDICT_FIELDS = ["target", "decision", "catalogKind", "jevRelation", "reviewBasis", "claims", "conflicts", "need", "category", "plainSummary", "plainSummaryEn"];
+export function radarReviewFingerprint(inspection, taxonomy, configRevision = process.env.REVIEW_CONFIG_REVISION ?? process.env.RADAR_REVIEW_REVISION ?? "") {
+  const sources = inspection.sources ?? [];
+  const targets = inspection.targets ?? [{ id: "R1", repository: inspection.repo?.full_name, repoId: inspection.repo?.id ?? null,
+    commit: inspection.sha ?? null, available: Boolean(inspection.repo && inspection.sha), listed: false }];
+  return createHash("sha256").update(JSON.stringify({
+    policyRevision: reviewPolicyRevision({ configRevision }),
+    targets, files: sources.map(({ targetId, path, url, hash }) => ({ targetId, path, url, hash })),
     categories: taxonomy.map(({ category }) => category),
   })).digest("hex");
+}
+export function radarNeedsSemanticReview({ inspection, taxonomy, previousState = {}, now = new Date().toISOString(), configRevision }) {
+  if (inspection.status !== "inspected") return false;
+  if (previousState.fingerprint !== radarReviewFingerprint(inspection, taxonomy, configRevision)) return true;
+  return !["rejected", "blocked", "retry-exhausted", "insufficient-evidence", "budget-exhausted"].includes(previousState.status) &&
+    !(previousState.status === "deferred" && Date.parse(previousState.nextAttemptAt) > Date.parse(now));
+}
+/** The model makes the semantic decision; local checks bind its citations to inspected material. */
+export async function reviewRadarCandidate({
+  inspection, taxonomy, reviewer = reviewCandidate, previousState = {},
+  now = new Date().toISOString(), configRevision = process.env.REVIEW_CONFIG_REVISION ?? process.env.RADAR_REVIEW_REVISION ?? "",
+  budgetLedger, budgetGrant, expectedReservationId, acquireEvidence,
+}) {
+  const sources = [...(inspection.sources ?? [])];
+  const targets = inspection.targets ?? [{ id: "R1", repository: inspection.repo?.full_name,
+    repoId: inspection.repo?.id ?? null, commit: inspection.sha ?? null, available: Boolean(inspection.repo && inspection.sha), listed: false }];
+  const fingerprint = radarReviewFingerprint(inspection, taxonomy, configRevision);
   const prior = previousState.fingerprint === fingerprint ? previousState : {};
-  if (["rejected", "blocked", "retry-exhausted"].includes(prior.status) ||
-      (prior.status === "deferred" && Date.parse(prior.nextAttemptAt) > Date.parse(now))) {
+  if (!radarNeedsSemanticReview({ inspection, taxonomy, previousState, now, configRevision }) && inspection.status === "inspected")
     return { status: prior.status, reason: prior.reason, cached: true, state: { ...prior, checkedAt: now } };
-  }
   let reviewDetails;
   const finish = (status, reason, extra = {}) => ({
     status, reason, ...(reviewDetails ? { reviewDetails } : {}), ...extra,
     state: { fingerprint, checkedAt: now, status, reason, attempts: prior.attempts ?? 0, ...extra.state },
   });
-  if (inspection.status !== "inspected" || !inspection.repo || !inspection.sha) {
+  if (inspection.status !== "inspected" || !inspection.repo || !inspection.sha)
     return finish("rejected", inspection.reason ?? "source-inspection-rejected");
-  }
-  if (!codeSources.length) return finish("blocked", "insufficient-evidence");
   const attempts = (prior.attempts ?? 0) + 1;
   const nextAttemptAt = (notBefore) => new Date(Math.max(
     Date.parse(now) + 6 * 60 * 60 * 1000 * 2 ** (attempts - 1),
     Number.isFinite(Date.parse(notBefore)) ? Date.parse(notBefore) : 0,
   )).toISOString();
   let reviewed;
-  try { reviewed = await reviewer({ codeSources, taxonomy }); }
+  const acquireScoped = typeof acquireEvidence === "function" ? async (request) => {
+    const acquired = await acquireEvidence(request);
+    const extras = Array.isArray(acquired) ? acquired : acquired?.sources ?? [];
+    const accepted = extras.filter((source) => {
+      const target = targets.find((entry) => entry.id === source.targetId);
+      return target?.available === true && typeof source.text === "string" && createHash("sha256").update(source.text).digest("hex") === source.hash &&
+        source.url === `https://github.com/${target.repository}/blob/${target.commit}/${source.path.split("/").map(encodeURIComponent).join("/")}`;
+    });
+    sources.push(...accepted);
+    return accepted;
+  } : undefined;
+  try { reviewed = await reviewer({ sources, targets, taxonomy, acquireEvidence: acquireScoped,
+    budgetLedger: budgetLedger ?? prior.budgetLedger, budgetGrant, expectedReservationId, caseId: budgetLedger?.caseId ?? prior.budgetLedger?.caseId }); }
   catch { reviewed = { retryable: true, status: "request-failed" }; }
-  // Provider diagnostics contain only locally built status/budget/usage facts, never source or model prose.
-  reviewDetails = { status: reviewed?.status ?? "missing-response", attempts: reviewed?.attempts ?? [],
-    budget: reviewed?.budget, usage: reviewed?.usage };
-  if (!reviewed || reviewed.verified === null || typeof reviewed.verified !== "boolean") {
+  reviewDetails = { reviewRevision: reviewPolicyRevision({ configRevision }),
+    requestModel: typeof reviewed?.requestModel === "string" && /^[a-zA-Z0-9_./:-]{1,120}$/.test(reviewed.requestModel) ? reviewed.requestModel : undefined,
+    source: ["deepseek", "muse-spark", "github-models"].includes(reviewed?.source) ? reviewed.source : undefined,
+    status: reviewed?.status ?? "missing-response", attempts: reviewed?.attempts ?? [],
+    budget: reviewed?.budget, budgetLedger: reviewed?.budgetLedger, usage: reviewed?.usage };
+  const state = { attempts, ...(reviewed?.budgetLedger ? { budgetLedger: reviewed.budgetLedger } : {}) };
+  if (!reviewed || reviewed.status !== "completed") {
     const retryable = !reviewed || reviewed.retryable === true;
     const reason = typeof reviewed?.status === "string" && /^[a-z0-9-]{1,40}$/.test(reviewed.status)
       ? reviewed.status : "review-unavailable";
-    const status = retryable ? attempts >= MAX_REVIEW_ATTEMPTS ? "retry-exhausted" : "deferred" : "blocked";
-    return finish(status, reason, { state: { attempts, ...(status === "deferred" ? {
-      nextAttemptAt: nextAttemptAt(reviewed?.retryNotBefore),
-    } : {}) } });
+    const status = reason === "budget-exhausted" ? "budget-exhausted"
+      : retryable ? attempts >= MAX_REVIEW_ATTEMPTS ? "retry-exhausted" : "deferred" : "blocked";
+    return finish(status, reason, { state: { ...state, ...(status === "deferred" ? { nextAttemptAt: nextAttemptAt(reviewed?.retryNotBefore) } : {}) } });
   }
-  const payload = Object.fromEntries(VERDICT_FIELDS.map((key) => [key, reviewed[key]]));
-  let verdict, implementationFiles, witnessNodes;
+  let verdict, materials, files;
   try {
-    verdict = validateVerdict(payload, reviewed.evidenceBundle, taxonomy);
-    implementationFiles = verdict?.verified ? resolveWitnessFiles(reviewed.evidenceBundle, verdict) : [];
-    witnessNodes = verdict?.verified ? [...new Set(Object.values(verdict.witness).flat())]
-      .map((id) => ({ id, ...reviewed.evidenceBundle.nodeMap.get(id) })) : [];
+    verdict = validateVerdict(Object.fromEntries(VERDICT_FIELDS.map((key) => [key, reviewed[key]])), reviewed.evidenceBundle, taxonomy);
+    materials = verdict ? resolveMaterialRefs(reviewed.evidenceBundle, verdict) : [];
+    files = verdict ? resolveMaterialFiles(reviewed.evidenceBundle, verdict) : [];
+    if (!verdict || materials.some((material) => {
+      const manifest = reviewed.evidenceBundle.sourceMap.get(material.id);
+      const target = targets.find((entry) => entry.id === material.targetId);
+      return !manifest || !target || target.available !== true || target.commit !== material.commit || target.repoId !== material.repoId ||
+        !sources.some((source) => source.path === manifest.path && source.url === manifest.url && source.hash === manifest.hash && source.text === manifest.text &&
+          JSON.stringify(source.readSpan ?? { startByte: 0, endByte: Buffer.byteLength(source.text) }) === JSON.stringify(manifest.readSpan) &&
+          (source.originalBytes == null || source.originalBytes === manifest.originalBytes) &&
+          createHash("sha256").update(source.text).digest("hex") === source.hash) ||
+        manifest.url !== `https://github.com/${target.repository}/blob/${target.commit}/${manifest.path.split("/").map(encodeURIComponent).join("/")}`;
+    })) verdict = null;
   } catch { verdict = null; }
-  if (reviewed.status !== "completed" || !verdict || (verdict.verified && (!reviewed.witnessValidated || !implementationFiles?.length ||
-      !witnessNodes?.length || witnessNodes.some(({ source, startLine, endLine, ranges }) =>
-        !codeSources.some((candidate) =>
-        source.path === candidate.path && source.url === candidate.url && source.hash === candidate.hash &&
-        source.text === candidate.text && createHash("sha256").update(candidate.text).digest("hex") === candidate.hash) ||
-        !/^[a-f\d]{40}$/.test(inspection.sha) ||
-        !codeCandidate({ path: source.path, type: "blob", size: Buffer.byteLength(source.text) }) ||
-        source.url !== `https://github.com/${inspection.repo.full_name}/blob/${inspection.sha}/${source.path.split("/").map(encodeURIComponent).join("/")}` ||
-        !Number.isSafeInteger(startLine) || !Number.isSafeInteger(endLine) || startLine < 1 || endLine < startLine ||
-        endLine > source.text.split("\n").length || !Array.isArray(ranges) || !ranges.length ||
-        ranges.some((range) => !Array.isArray(range) || range.length !== 2 ||
-          !Number.isSafeInteger(range[0]) || !Number.isSafeInteger(range[1]) ||
-          range[0] < startLine || range[1] < range[0] || range[1] > endLine))))) {
-    const status = attempts >= MAX_REVIEW_ATTEMPTS ? "retry-exhausted" : "deferred";
-    return finish(status, "invalid-witness", { state: { attempts, ...(status === "deferred" ? {
-      nextAttemptAt: nextAttemptAt(),
-    } : {}) } });
-  }
-  if (!verdict.verified) return finish("rejected", verdict.reasonCode, { state: { attempts } });
-  const baseSummary = {
-    category: verdict.category,
+  if (!verdict) return finish(attempts >= MAX_REVIEW_ATTEMPTS ? "retry-exhausted" : "deferred", "invalid-material-reference", {
+    state: { ...state, ...(attempts < MAX_REVIEW_ATTEMPTS ? { nextAttemptAt: nextAttemptAt() } : {}) },
+  });
+  if (verdict.decision === "exclude") return finish("rejected", "model-excluded", { state });
+  if (verdict.decision === "need-more") return finish("insufficient-evidence", verdict.need ?? "material-needed", { state });
+  const target = targets.find((entry) => entry.id === verdict.target);
+  if (!target || target.available !== true || !/^[a-f\d]{40}$/.test(target.commit ?? ""))
+    return finish("blocked", "target-unavailable", { state });
+  const summary = {
+    category: verdict.category, catalogKind: verdict.catalogKind, jevRelation: verdict.jevRelation, reviewBasis: verdict.reviewBasis,
     plainSummary: verdict.plainSummary, plainSummaryEn: verdict.plainSummaryEn,
     jevDecisionPoint: verdict.plainSummary, jevDecisionPointEn: verdict.plainSummaryEn,
-    highlightBenefit: "已定位固定版本的实现源码；尚无独立运行或性能验证。",
-    highlightBenefitEn: "Implementation evidence is pinned to a source revision; runtime and performance are not independently verified.",
-    tags: inferCanonicalTags({ category: verdict.category, tags: [] }),
-    summarySource: "ai-evidence-witness",
+    highlightBenefit: "依据固定版本材料整理；未独立验证运行效果或性能。",
+    highlightBenefitEn: "Described from pinned material; runtime behavior and performance are not independently verified.",
+    tags: inferCanonicalTags({ category: verdict.category, tags: [] }), summarySource: "ai-material-review",
   };
-  // Reuse the checked summaries without reading native prose or making a second request.
-  const { enrichment: _diagnostics, ...enriched } = await enrichSummary({ reviewed, fallback: baseSummary });
-  const files = [...new Map(witnessNodes.map(({ source }) => [source.path, source])).values()]
-    .map(({ path, url, hash }) => ({ path, url, hash }));
-  const nodes = witnessNodes.map(({ id, source, kind, startLine, endLine, ranges }) =>
-    ({ id, path: source.path, hash: source.hash, kind, startLine, endLine, ranges: ranges.map((range) => [...range]) }));
-  return finish("accepted", verdict.reasonCode, {
-    reviewed: { ...reviewed, ...verdict }, implementationFiles,
-    sourceVerification: { method: "ai-evidence-witness-v1", sha: inspection.sha, files, role: verdict.role,
-      witness: verdict.witness, nodes, implementationFiles: implementationFiles.map(({ path }) => path) },
-    summary: { ...enriched, ...baseSummary }, state: { attempts },
+  return finish("accepted", "model-admitted", {
+    reviewed: { ...reviewed, ...verdict }, target,
+    sourceVerification: { method: "ai-material-review-v1", reviewRevision: reviewPolicyRevision({ configRevision }), caseRevision: fingerprint, sha: target.commit, target: verdict.target,
+      catalogKind: verdict.catalogKind, jevRelation: verdict.jevRelation, reviewBasis: verdict.reviewBasis,
+      files, materials, claims: verdict.claims, conflicts: verdict.conflicts },
+    summary, state,
   });
 }
 
@@ -308,10 +323,7 @@ export function refreshMetadata(
     Object.assign(refreshed, {
       forks: meta.forks_count,
       openIssues: meta.open_issues_count,
-      license:
-        meta.license?.spdx_id === "NOASSERTION"
-          ? null
-          : (meta.license?.spdx_id ?? null),
+      license: licenseFactsFromRepo(meta),
       headSha: commits[0]?.sha ?? null,
       createdAt: meta.created_at,
       avatarUrl: meta.owner?.avatar_url,
@@ -334,9 +346,114 @@ export async function atomicJSON(path, value) {
   await writeFile(tmp, JSON.stringify(value, null, 2) + "\n");
   await rename(tmp, path);
 }
+async function projectFromMaterialDecision({ api, decision, inspection, started }) {
+  const { reviewed, summary, target } = decision;
+  const repo = target.repository === inspection.repo.full_name ? inspection.repo : await api(`/repos/${target.repository}`);
+  if (repo.private !== false || repo.id !== target.repoId || repo.full_name !== target.repository)
+    throw new Error("Reviewed target identity changed before catalog admission");
+  const sha = target.commit;
+  const commits = target.repository === inspection.repo.full_name ? inspection.commits : [];
+  const sourceUrl = decision.sourceVerification.files[0]?.url ?? `https://github.com/${target.repository}/tree/${sha}`;
+  const sourceHash = createHash("sha256").update(JSON.stringify(decision.sourceVerification.materials)).digest("hex");
+  const project = {
+    id: `${repo.owner.login}:${repo.name}`.toLowerCase(),
+    name: repo.name,
+    repoId: repo.id,
+    author: repo.owner.login,
+    url: repo.html_url,
+    ...summary,
+    stars: repo.stargazers_count,
+    forks: repo.forks_count,
+    openIssues: repo.open_issues_count,
+    license: licenseFactsFromRepo(repo),
+    createdAt: repo.created_at,
+    lastCommitAt: commits[0]?.commit.committer.date ?? null,
+    headSha: sha,
+    metadataFetchedAt: new Date().toISOString(),
+    metadataStatus: "ok",
+    avatarUrl: repo.owner.avatar_url,
+    verificationStatus: "material-reviewed",
+    runtimeVerified: false,
+    discoveredAt: started,
+    claimStatus: "模型依据固定版本材料判断收录类型与 Jev 关系；未经本站运行、安全或性能验证。",
+    claimStatusEn: "Model classification identifies the entry type and Jev relationship from pinned material; runtime, security and performance are not independently verified.",
+    evidence: decision.sourceVerification.files.map(({ url }) => ({ url, note: "固定版本的审查材料" })),
+    sourceVerification: decision.sourceVerification,
+    sourceHash,
+  };
+  return project;
+}
+
+async function reviewPlannedRadar() {
+  const plan = JSON.parse(await readFile(process.env.RADAR_PLAN_FILE, "utf8"));
+  const authorization = JSON.parse(await readFile(process.env.RADAR_GRANTS_FILE, "utf8"));
+  if (plan.version !== 1 || !Array.isArray(plan.cases) || plan.cases.length > 250 ||
+      new Set(plan.cases.map((entry) => entry.caseId)).size !== plan.cases.length || authorization.version !== 1 || !Array.isArray(authorization.grants))
+    throw new Error("Invalid immutable radar review plan");
+  const api = createGitHubClient({ token: process.env.GITHUB_TOKEN });
+  const known = JSON.parse(await readFile(resolve(root, "src/data/projects.json"), "utf8"));
+  const state = JSON.parse(await readFile(resolve(root, "radar/state.json"), "utf8"));
+  const report = JSON.parse(await readFile(resolve(root, "src/data/radar.json"), "utf8"));
+  const taxonomy = JSON.parse(await readFile(resolve(root, "src/data/taxonomy.json"), "utf8"));
+  const receipts = [], budgetReceipts = [], started = new Date().toISOString();
+  for (const entry of plan.cases) {
+    if (entry.reviewRevision !== radarReviewFingerprint(entry.inspection, taxonomy) || entry.caseId !== radarCaseId(entry.inspection, entry.reviewRevision))
+      throw new Error("Radar plan case or policy changed");
+    const authorized = authorization.grants.find((grant) => grant.caseId === entry.caseId);
+    if (!authorized) {
+      const denied = authorization.deferred?.find((value) => value.caseId === entry.caseId);
+      state[entry.full] = { ...entry.previousState, checkedAt: started,
+        status: denied?.status === "provider-unavailable" ? "provider-unavailable" : denied?.retryNotBefore ? "deferred" : "budget-exhausted", reason: denied?.status ?? "budget-not-authorized",
+        ...(denied?.retryNotBefore ? { nextAttemptAt: denied.retryNotBefore } : {}) };
+      receipts.push({ repo: entry.full, status: state[entry.full].status, reason: state[entry.full].reason }); continue;
+    }
+    const grant = await readRadarBudgetGrant({ api, caseId: entry.caseId, reservationId: authorized.reservationId,
+      runId: process.env.GITHUB_RUN_ID, runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT) });
+    if (!grant) {
+      state[entry.full] = { ...entry.previousState, checkedAt: started, status: "budget-exhausted", reason: "reservation-not-current" };
+      receipts.push({ repo: entry.full, status: "budget-exhausted" }); continue;
+    }
+    const acquireEvidence = async ({ targetId, need }) => {
+      const target = entry.inspection.targets?.find((candidate) => candidate.id === targetId);
+      if (!target?.available || !target.commit) return [];
+      const acquired = await collectAdditionalMaterials({ api, repository: target.repository, sha: target.commit, need,
+        excludePaths: entry.inspection.sources.filter((source) => !source.targetId || source.targetId === targetId).map((source) => source.path),
+        inventory: targetId === "R1" ? entry.inspection.sourceInventory : undefined, maxFiles: 3, maxTotalBytes: 192 * 1024 });
+      return acquired.sources.map((source) => ({ ...source, targetId, repoId: target.repoId, commit: target.commit }));
+    };
+    const decision = await reviewRadarCandidate({ inspection: entry.inspection, taxonomy, previousState: entry.previousState,
+      now: started, ...grant, expectedReservationId: authorized.reservationId, acquireEvidence });
+    state[entry.full] = decision.state;
+    budgetReceipts.push({ caseId: entry.caseId, reservationId: authorized.reservationId,
+      budgetLedger: decision.cached ? grant.budgetLedger : decision.reviewDetails?.budgetLedger,
+      accountingVerified: decision.reviewDetails?.usage?.status === "reported" && !decision.reviewDetails?.budget?.accountingOverrun });
+    // Persist each local receipt before unrelated later cases can fail. Remote
+    // settlement is separate; a missing receipt never releases its reservation.
+    await atomicJSON(process.env.RADAR_BUDGET_RECEIPTS_FILE, budgetReceipts);
+    if (decision.status !== "accepted") { receipts.push({ repo: entry.full, status: decision.status, reason: decision.reason }); continue; }
+    const project = await projectFromMaterialDecision({ api, decision, inspection: entry.inspection, started });
+    if (!known.some((row) => row.repoId === project.repoId)) { known.push(project); report.newProjects++; }
+    receipts.push({ repo: entry.full, status: "accepted", sourceVerification: decision.sourceVerification, reviewDetails: decision.reviewDetails });
+  }
+  report.finishedAt = new Date().toISOString(); report.totalProjects = known.length;
+  report.discovery.deferred += receipts.filter((receipt) => !["accepted", "rejected"].includes(receipt.status)).length;
+  report.discovery.rejected += receipts.filter((receipt) => receipt.status === "rejected").length;
+  report.status = receipts.some((receipt) => !["accepted", "rejected"].includes(receipt.status)) ? "partial" : report.status;
+  report.projectsSha256 = createHash("sha256").update(JSON.stringify(known, null, 2) + "\n").digest("hex");
+  await atomicJSON(resolve(root, "src/data/projects.json"), known);
+  await atomicJSON(resolve(root, "src/data/radar.json"), report);
+  await atomicJSON(resolve(root, "radar/state.json"), state);
+  await atomicJSON(resolve(root, `radar/receipts/${started.replaceAll(":", "-")}.json`), { ...report, receipts });
+  await atomicJSON(process.env.RADAR_BUDGET_RECEIPTS_FILE, budgetReceipts);
+}
+
 export async function main() {
   const started = new Date().toISOString();
   const args = new Set(process.argv.slice(2));
+  if (args.has("--review-plan")) return reviewPlannedRadar();
+  const planOnly = args.has("--plan");
+  const plan = { version: 1, cases: [] };
+  if (!planOnly && !args.has("--metadata-only")) throw new Error("Full radar reviews require the plan/reserve/review workflow");
   const metadataOnly = args.has("--metadata-only");
   const token = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN;
   const maxPages = Math.min(
@@ -461,7 +578,7 @@ export async function main() {
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
-  const excluded = new Set(exclusions.map((x) => x.repo.toLowerCase()));
+  const excluded = new Set(exclusions.filter((entry) => ["maintainer-removed", "policy-blocked"].includes(entry.status)).map((entry) => entry.repo.toLowerCase()));
   const byRepo = new Map(
     known.map((p) => [normalizeRepo(p.url)?.toLowerCase(), p]),
   );
@@ -471,7 +588,6 @@ export async function main() {
     if (
       !full ||
       repo.private ||
-      repo.fork ||
       excluded.has(full.toLowerCase()) ||
       byRepo.has(full.toLowerCase()) ||
       full.toLowerCase() === report.submissionRepository.toLowerCase()
@@ -487,19 +603,19 @@ export async function main() {
   if (!metadataOnly) {
     if (process.env.RADAR_SOURCES !== "code")
       for (const q of [
-        "topic:jev fork:false",
-        "typesafe jev fork:false",
-        "typesafe-ai fork:false",
-        "jev-mcp fork:false",
-        "jev decision fork:false",
-        '\"TypeSafe AI\" in:readme fork:false',
-        '\"Jev API\" in:readme fork:false',
-        "topic:typesafe-ai fork:false",
-        "topic:typesafe ai fork:false",
-        '"api.typesafe.ai" in:readme fork:false',
-        '"typesafe.ai" "jev" in:readme fork:false',
-        '"from typesafe import jev" in:readme fork:false',
-        '"@typesafe/jev" in:readme fork:false',
+        "topic:jev fork:true",
+        "typesafe jev fork:true",
+        "typesafe-ai fork:true",
+        "jev-mcp fork:true",
+        "jev decision fork:true",
+        '\"TypeSafe AI\" in:readme fork:true',
+        '\"Jev API\" in:readme fork:true',
+        "topic:typesafe-ai fork:true",
+        "topic:typesafe ai fork:true",
+        '"api.typesafe.ai" in:readme fork:true',
+        '"typesafe.ai" "jev" in:readme fork:true',
+        '"from typesafe import jev" in:readme fork:true',
+        '"@typesafe/jev" in:readme fork:true',
       ])
         for (const repo of await search("repositories", q)) add(repo);
     for (const q of [
@@ -585,74 +701,22 @@ export async function main() {
         existingProjects: known,
         exclusions,
         verifyIntegration,
-        requireCodeEvidence: true,
+        requireCodeEvidence: false,
         semanticReview: true,
         preferredPaths: [...candidate.paths],
       });
-      const nativeReadmes = inspection.readmeFiles ?? [];
-      const decision = await reviewRadarCandidate({ inspection, taxonomy, previousState, now: started });
-      reviewState[full] = decision.state;
-      if (decision.status !== "accepted") {
-        receipts.push({ repo: full, status: decision.status, reason: decision.reason, cached: decision.cached === true,
-          reviewDetails: decision.reviewDetails });
-        if (decision.status === "rejected") report.discovery.rejected++;
-        else report.discovery.deferred++;
+      if (planOnly) {
+        if (inspection.status === "inspected" && inspection.repo && inspection.sha) {
+          if (radarNeedsSemanticReview({ inspection, taxonomy, previousState, now: started }))
+            plan.cases.push({ caseId: radarCaseId(inspection, radarReviewFingerprint(inspection, taxonomy)), reviewRevision: radarReviewFingerprint(inspection, taxonomy),
+              full, inspection, previousState, needsSemanticReview: true });
+          else {
+            reviewState[full] = { ...previousState, checkedAt: started };
+            receipts.push({ repo: full, status: previousState.status, reason: previousState.reason, cached: true });
+          }
+        } else receipts.push({ repo: full, status: inspection.status, reason: inspection.reason });
         continue;
       }
-
-      const { repo, commits, sha } = inspection;
-      const { implementationFiles, reviewed, summary } = decision;
-      const implementation = implementationFiles[0];
-      if (!implementation) throw new Error("No immutable implementation evidence");
-      const sourceContent = implementation.text;
-      const sourceUrl = implementation.url;
-      const project = {
-        id: `${repo.owner.login}:${repo.name}`.toLowerCase(),
-        name: repo.name,
-        repoId: repo.id,
-        author: repo.owner.login,
-        url: repo.html_url,
-        ...summary,
-        stars: repo.stargazers_count,
-        forks: repo.forks_count,
-        openIssues: repo.open_issues_count,
-        license:
-          repo.license?.spdx_id === "NOASSERTION"
-            ? null
-            : (repo.license?.spdx_id ?? null),
-        createdAt: repo.created_at,
-        lastCommitAt: commits[0]?.commit.committer.date ?? null,
-        headSha: sha,
-        metadataFetchedAt: new Date().toISOString(),
-        metadataStatus: "ok",
-        avatarUrl: repo.owner.avatar_url,
-        verificationStatus: "integration-detected",
-        runtimeVerified: false,
-        discoveredAt: started,
-        claimStatus: "模型依据固定版本源码关系见证自动裁决；未经本站运行、安全或性能验证。",
-        claimStatusEn: "Model classification is supported by immutable source witnesses; runtime, security and performance are not independently verified.",
-        evidence: decision.sourceVerification.files.map(({ url }) => ({ url, note: "固定版本的实现源码见证" })),
-        sourceVerification: decision.sourceVerification,
-        sourceHash: createHash("sha256").update(sourceContent).digest("hex"),
-      };
-      known.push(project);
-      byRepo.set(full.toLowerCase(), project);
-      report.newProjects++;
-      receipts.push({
-        repo: full,
-        status: "accepted",
-        sourceUrl,
-        sourceHash: project.sourceHash,
-        reason: decision.reason,
-        role: reviewed.role,
-        reviewDetails: decision.reviewDetails,
-        readmeSources: nativeReadmes.map(({ path, url, hash }) => ({
-          path,
-          url,
-          hash,
-        })),
-      });
-      console.log(`[new] ${full} → ${project.category}`);
     } catch (e) {
       reviewState[full] = { ...previousState, checkedAt: started };
       receipts.push({ repo: full, status: "error", error: e.message });
@@ -675,6 +739,7 @@ export async function main() {
     report.lastSuccessfulAt = new Date().toISOString();
   report.finishedAt = new Date().toISOString();
   report.totalProjects = known.length;
+  if (planOnly) await atomicJSON(process.env.RADAR_PLAN_FILE, plan);
   await atomicJSON(resolve(root, "radar/state.json"), reviewState);
   report.projectsSha256 = createHash("sha256")
     .update(JSON.stringify(known, null, 2) + "\n")

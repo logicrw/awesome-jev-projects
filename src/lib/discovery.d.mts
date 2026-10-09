@@ -1,9 +1,10 @@
-export interface DiscoverableProject {
+import type { LicenseValue, CatalogClassification } from './catalog-contract.mjs';
+export interface DiscoverableProject extends CatalogClassification {
   id: string;
   stars?: number | null;
   catalogStatus?: string;
   licenseStatus?: string;
-  license?: string | null;
+  license?: LicenseValue;
   url?: string;
 }
 export function eligibleProjects<T extends DiscoverableProject>(projects: readonly T[]): T[];

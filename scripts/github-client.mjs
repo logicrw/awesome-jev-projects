@@ -1,5 +1,81 @@
 /** Serialized GitHub requests; remote repository content is never executed. */
+import { createHash } from "node:crypto";
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** Scan bounded raw bytes without retaining the whole document. Returned windows
+ * keep absolute byte spans; a complete scan may also attest the full content hash. */
+async function materialWindows(response, maximum) {
+  if (!Number.isSafeInteger(maximum) || maximum < 1 || maximum > 10_485_760 || !response.body?.getReader)
+    throw Object.assign(new Error("Invalid material scan budget"), { code: "RESPONSE_BUDGET" });
+  const reader = response.body.getReader(), digest = createHash("sha256");
+  const width = 16384, overlap = 512, retained = [], qualifications = [];
+  const declaredLength = Number(response.headers?.get("content-length"));
+  const midpoint = Number.isSafeInteger(declaredLength) && declaredLength > 0 ? Math.min(maximum, declaredLength) / 2 : maximum / 2;
+  let pending = Buffer.alloc(0), offset = 0, scannedBytes = 0, complete = false, first = null, last = null, middle = null;
+  const capture = (buffer, start) => {
+    let trim = 0;
+    while (trim < buffer.length && (buffer[trim] & 0xc0) === 0x80) trim++;
+    let text;
+    try { text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(buffer.subarray(trim), { stream: true }); }
+    catch { return; }
+    if (!text || text.includes("\0")) return;
+    const entry = { text, startByte: start + trim, endByte: start + trim + Buffer.byteLength(text) };
+    first ??= entry; last = entry;
+    if (!middle && entry.startByte <= midpoint && entry.endByte >= midpoint) middle = entry;
+    if (/mock|stub|placeholder|not implemented|limitation|not production|仅供示例|尚未实现|限制|非生产/i.test(text)) {
+      if (qualifications.length < 2) qualifications.push(entry);
+      else qualifications[1] = entry;
+    }
+    if (/jev|typesafe|system.?one|\bnoul\b|\bchoice\b|CREATE\s+(?:OR\s+REPLACE\s+)?FUNCTION/i.test(text)) {
+      if (retained.length < 2) retained.push(entry);
+      else retained[1] = entry;
+    }
+  };
+  try {
+    while (scannedBytes < maximum) {
+      const part = await reader.read();
+      if (part.done) { complete = true; break; }
+      const value = Buffer.from(part.value).subarray(0, maximum - scannedBytes);
+      digest.update(value); scannedBytes += value.length;
+      pending = Buffer.concat([pending, value]);
+      while (pending.length >= width) {
+        capture(pending.subarray(0, width), offset);
+        pending = pending.subarray(width - overlap); offset += width - overlap;
+      }
+    }
+    if (pending.length) capture(pending, offset);
+  } finally { reader.cancel().catch(() => {}); reader.releaseLock(); }
+  const windows = [...new Map([first, ...retained, ...qualifications, middle, last].filter(Boolean)
+    .map((window) => [`${window.startByte}:${window.endByte}`, window])).values()].sort((a,b)=>a.startByte-b.startByte);
+  return { windows, scannedBytes, complete, contentSha256: complete ? digest.digest("hex") : null };
+}
+
+async function boundedResponse(response, maximum, raw, truncate) {
+  const fail = () => Object.assign(new Error("GitHub response exceeds bounded material budget"), { code: "RESPONSE_BUDGET" });
+  if (!Number.isSafeInteger(maximum) || maximum < 1 || maximum > 10_000_000) throw fail();
+  if (!truncate && Number(response.headers?.get("content-length")) > maximum) {
+    response.body?.cancel().catch(() => {}); throw fail();
+  }
+  if (!response.body?.getReader) throw fail();
+  const reader = response.body.getReader();
+  const chunks = []; let size = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (size + value.byteLength > maximum) {
+        if (!truncate) throw fail();
+        chunks.push(Buffer.from(value).subarray(0, maximum - size)); size = maximum; break;
+      }
+      chunks.push(Buffer.from(value)); size += value.byteLength;
+      if (truncate && size === maximum) break;
+    }
+  } finally { reader.cancel().catch(() => {}); reader.releaseLock(); }
+  const bytes = Buffer.concat(chunks);
+  // Streaming TextDecoder drops only an incomplete trailing UTF-8 codepoint on a bounded prefix.
+  const text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: raw }).decode(bytes, { stream: truncate });
+  return raw ? text : JSON.parse(text);
+}
 
 function retryAfterMs(value, now) {
   if (!value) return 0;
@@ -12,6 +88,7 @@ function retryAfterMs(value, now) {
 export function createGitHubClient({
   token,
   writeRepository,
+  writeScope = "repository",
   fetchImpl = fetch,
   now = Date.now,
   sleep = pause,
@@ -21,6 +98,7 @@ export function createGitHubClient({
 } = {}) {
   if (writeRepository && !/^[a-z\d][a-z\d-]{0,38}\/[a-z\d_.-]{1,100}$/i.test(writeRepository))
     throw new Error("Invalid GitHub write repository");
+  if (!["repository", "budget"].includes(writeScope)) throw new Error("Invalid GitHub write scope");
   let queue = Promise.resolve();
   let nextRequest = 0;
   let nextSearch = 0;
@@ -29,7 +107,7 @@ export function createGitHubClient({
 
   async function request(
     path,
-    { search = false, code = false, raw = false, method = "GET", body } = {},
+    { search = false, code = false, raw = false, method = "GET", body, responseBytes, truncate = false, sampleMaterials = false } = {},
   ) {
     // A run-wide circuit avoids hammering every remaining repository after the
     // bounded retry allowance has been exhausted. The next run starts fresh.
@@ -72,11 +150,25 @@ export function createGitHubClient({
       body.tree.some((e) => e?.path === "src/data/projects.json") &&
       new Set(body.tree.map((e) => e?.path)).size === body.tree.length &&
       body.tree.every(isSafeEntry);
+    const safeBudgetTree = sha(body?.base_tree) && Array.isArray(body?.tree) && body.tree.length >= 1 && body.tree.length <= 100 &&
+      new Set(body.tree.map((entry) => entry?.path)).size === body.tree.length &&
+      body.tree.every((entry) => {
+        const match = /^radar\/review-budget-cases\/([a-f\d]{2})\/([a-f\d]{64})\.json$/.exec(entry?.path ?? "");
+        return (entry?.path === "radar/review-budget.json" || (match && match[1] === match[2].slice(0, 2))) &&
+          entry.mode === "100644" && entry.type === "blob" && entry.sha === undefined && typeof entry.content === "string" &&
+          Buffer.byteLength(entry.content) <= (match ? 8192 : 2_000_000);
+      }) && body.tree.reduce((sum, entry) => sum + Buffer.byteLength(entry.content), 0) <= 2_000_000;
     const safeBlob = method === "POST" && relative === "git/blobs" &&
       (body?.encoding === "base64" || body?.encoding === "utf-8") &&
       typeof body?.content === "string" &&
       Buffer.byteLength(body.content) <= 30_000_000;
-    const allowedWrite = relative && !parsed.search && (
+    const budgetWrite = relative && !parsed.search && (
+      (method === "POST" && relative === "git/trees" && safeBudgetTree) ||
+      (method === "POST" && relative === "git/commits" && sha(body?.tree) && body?.parents?.length === 1 && sha(body.parents[0])) ||
+      (method === "POST" && relative === "git/refs" && body?.ref === "refs/heads/ingestion-budget" && sha(body.sha)) ||
+      (method === "PATCH" && relative === "git/refs/heads/ingestion-budget" && body?.force === false && sha(body.sha))
+    );
+    const allowedWrite = writeScope === "budget" ? budgetWrite : relative && !parsed.search && (
       safeBlob ||
       (method === "POST" && relative === "git/trees" && safeTree) ||
       (method === "POST" && relative === "git/commits" && sha(body?.tree) &&
@@ -157,6 +249,10 @@ export function createGitHubClient({
         attempt--;
         continue;
       }
+      if (response.ok && raw && sampleMaterials)
+        return materialWindows(response, responseBytes);
+      if (response.ok && responseBytes !== undefined)
+        return boundedResponse(response, responseBytes, raw, truncate === true && raw === true);
       if (response.ok)
         return response.status === 204
           ? null

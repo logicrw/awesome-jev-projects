@@ -2,11 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
+import { reviewPolicyRevision } from "../scripts/review-policy.mjs";
 import { parseRetryRecord, renderRetryRecord, retryClaimId, retryRecord, selectRetry, markRetry, claimRetry, settleRetry } from "../scripts/ingestion-retry.mjs";
 const body="repository: https://github.com/logicrw/example";
 const bodySha=createHash("sha256").update(body).digest("hex");
-const candidate={issueNumber:12,bodySha,attempt:3};
-const record={version:2,...candidate,state:"claimed",claimId:retryClaimId(candidate)};
+const titleSha=createHash("sha256").update("").digest("hex");
+const reviewRevision=reviewPolicyRevision();
+const candidate={issueNumber:12,bodySha,titleSha,reviewRevision,attempt:3};
+const record={version:3,...candidate,state:"claimed",claimId:retryClaimId(candidate)};
 const c=(body,login="github-actions[bot]")=>({user:{login},body,created_at:"2026-10-03T00:00:00Z"});
 
 test("model-prose markers and untrusted whole-record copies cannot poison control state",()=>{
@@ -27,9 +30,9 @@ test("legacy migration requires full exact machine template and explicitly trust
 
 function floodedFixture({lateState='pending',earlyState='claimed'}={}){
   const first={...record,state:earlyState};
-  const late={version:2,issueNumber:12,bodySha,attempt:0,state:lateState,claimId:null};
+  const late={version:3,issueNumber:12,bodySha,titleSha,reviewRevision,attempt:0,state:lateState,claimId:null};
   const rows=[c(renderRetryRecord(first)),...Array.from({length:600},()=>c('ordinary comment','attacker')),c(renderRetryRecord(late))];
-  const second={version:2,issueNumber:13,bodySha,attempt:0,state:'pending',claimId:null};
+  const second={version:3,issueNumber:13,bodySha,titleSha,reviewRevision,attempt:0,state:'pending',claimId:null};
   const reads=[],writes=[];
   const api=async(path,options={})=>{
     if(options.method){writes.push(options);rows.push(c(options.body.body));return{};}
@@ -59,10 +62,10 @@ test('a buried attempt 3 cannot be reset by a partial history or late pending ma
 
 test('mark and claim fail closed with an observable terminal when old state cannot be proven',async()=>{
   const f=floodedFixture();
-  assert.equal(await markRetry({api:f.api,candidate:{issueNumber:12,bodySha}}),true);
+  assert.equal(await markRetry({api:f.api,candidate:{issueNumber:12,bodySha,titleSha,reviewRevision}}),true);
   assert.equal(parseRetryRecord(c(f.writes[0].body.body),{issueNumber:12}).state,'control-budget-exhausted');
   const g=floodedFixture();
-  const next={issueNumber:12,bodySha,attempt:1};next.claimId=retryClaimId(next);
+  const next={issueNumber:12,bodySha,titleSha,reviewRevision,attempt:1};next.claimId=retryClaimId(next);
   assert.equal(await claimRetry({api:g.api,candidate:next}),false);
   assert.equal(parseRetryRecord(c(g.writes[0].body.body),{issueNumber:12}).state,'control-budget-exhausted');
 });
@@ -70,7 +73,7 @@ test('mark and claim fail closed with an observable terminal when old state cann
 test('a recent trusted terminal is sufficient and earlier/later attempts cannot override it',async()=>{
   const f=floodedFixture({lateState:'rejected'});
   assert.equal((await selectRetry({api:f.api,now:()=>0})).issueNumber,13);
-  assert.equal(await markRetry({api:f.api,candidate:{issueNumber:12,bodySha}}),false);
+  assert.equal(await markRetry({api:f.api,candidate:{issueNumber:12,bodySha,titleSha,reviewRevision}}),false);
   const terminal={...record,attempt:0,state:'rejected',claimId:null};
   assert.equal(retryRecord([c(renderRetryRecord(terminal)),c(renderRetryRecord(record))],candidate).state,'rejected');
   assert.equal(retryRecord([c(renderRetryRecord(record)),c(renderRetryRecord(terminal))],candidate).state,'rejected');

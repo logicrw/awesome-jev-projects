@@ -11,6 +11,12 @@ const enriched: readonly (SearchableProject & SearchMetadata & { extra: number }
 const index = createProjectSearch(enriched);
 const extra: number = searchProjects(index, 'deepseek')[0].extra;
 void extra;
+const licensed: SearchableProject = { id: 'resource', license: { status: 'identified', spdx: 'MIT' },
+  catalogKind: 'learning-resource', jevRelation: 'discussed', reviewBasis: 'descriptive-material' };
+searchProjects(createProjectSearch([licensed]), 'learning resource');
+// @ts-expect-error Custom license facts cannot claim an identified SPDX identifier.
+const contradictory: SearchableProject = { id: 'invalid', license: { status: 'custom', spdx: 'MIT' } };
+void contradictory;
 // @ts-expect-error Queries remain strings, never an untyped options object.
 searchProjects(index, { query: 'deepseek' });
 // @ts-expect-error The existing required stable ID contract remains enforced.

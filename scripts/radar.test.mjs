@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { buildEvidenceBundle } from "./evidence-bundle.mjs";
-import { normalizeRepo, verifyIntegration, summarize, refreshMetadata, isProtectedSummarySource, PROTECTED_SUMMARY_SOURCES, reviewRadarCandidate } from "./radar-sync.mjs";
+import { normalizeRepo, verifyIntegration, summarize, refreshMetadata, isProtectedSummarySource, PROTECTED_SUMMARY_SOURCES, reviewRadarCandidate, radarNeedsSemanticReview, radarReviewFingerprint } from "./radar-sync.mjs";
 const taxonomy = JSON.parse(
   await readFile(new URL("../src/data/taxonomy.json", import.meta.url), "utf8"),
 );
@@ -313,192 +313,125 @@ test("verifyIntegration recognizes multi-language typesafe packages and imports"
   assert.equal(verifyIntegration({ name: "jev-rs" }, rust).verified, true);
 });
 
-function witnessFixture() {
-  const sha = "a".repeat(40);
-  const text = 'import {JevClient} from "jev";\nconst client = new JevClient();\nconst result = client.choice(input);\nreturn result;';
-  const source = {
-    path: "src/client.js", text,
-    hash: createHash("sha256").update(text).digest("hex"),
-    url: `https://github.com/logicrw/review-fixture/blob/${sha}/src/client.js`,
-  };
-  const evidenceBundle = buildEvidenceBundle({ codeSources: [source] });
-  const id = evidenceBundle.modelData.nodes.find((node) => node.kind === "operation").id;
-  const inspection = {
-    status: "inspected", sha, repo: { id: 1, name: "review-fixture", full_name: "logicrw/review-fixture" }, codeSources: [source],
-    // A positive legacy heuristic must have no authority over the semantic verdict.
-    evidence: { verified: true, implementationFiles: [source], files: [source] },
-  };
-  const verdict = {
-    status: "completed", verified: true, role: "client", reasonCode: "implementation-observed",
-    category: taxonomy[0].category, plainSummary: "源码使用结构化选择接口处理输入。",
-    plainSummaryEn: "The source processes input through a structured choice interface.",
-    witness: { entry: [id], operation: [id], result: [id] },
-    evidenceBundle, witnessValidated: true,
-  };
+function materialFixture(path = "README.md", text = "# Jev learning guide\nExplains Choice, Score and Noul with a worked decision table.") {
+  const sha = "a".repeat(40), repository = "logicrw/review-fixture";
+  const source = { targetId: "R1", repoId: 1, path, text, hash: createHash("sha256").update(text).digest("hex"),
+    url: `https://github.com/${repository}/blob/${sha}/${path}` };
+  const targets = [{ id: "R1", repository, repoId: 1, commit: sha, available: true, listed: false }];
+  const evidenceBundle = buildEvidenceBundle({ sources: [source], targets });
+  const id = [...evidenceBundle.materialMap.keys()][0];
+  const inspection = { status: "inspected", sha, repo: { id: 1, name: "review-fixture", full_name: repository }, sources: [source], targets,
+    codeSources: [], evidence: { verified: false, implementationFiles: [] } };
+  const verdict = { status: "completed", target: "R1", decision: "admit", catalogKind: "learning-resource", jevRelation: "discussed",
+    reviewBasis: "descriptive-material", claims: [{ type: "purpose", text: "提供 Jev 决策原语学习材料。", support: [id] }],
+    conflicts: [], need: null, category: taxonomy[0].category, plainSummary: "介绍 Jev 决策原语的学习材料。",
+    plainSummaryEn: "Learning material explaining Jev decision primitives.", evidenceBundle };
   return { inspection, verdict, source };
 }
 
-test("radar cannot promote legacy matches after a model rejection or missing response", async () => {
-  const { inspection, verdict } = witnessFixture();
-  const rejected = await reviewRadarCandidate({ inspection, taxonomy, reviewer: async () => ({
-    ...verdict, verified: false, role: "none", reasonCode: "not-integrated", category: null,
-    plainSummary: "", plainSummaryEn: "", witness: { entry: [], operation: [], result: [] },
-  }) });
-  assert.equal(rejected.status, "rejected");
-  const missing = await reviewRadarCandidate({ inspection, taxonomy, reviewer: async () => null });
-  assert.equal(missing.status, "deferred");
-  assert.equal(missing.implementationFiles, undefined);
-});
-
-test("radar admission resolves the model witness against the exact inspected sources", async () => {
-  const { inspection, verdict, source } = witnessFixture();
-  const accepted = await reviewRadarCandidate({ inspection, taxonomy, reviewer: async () => verdict });
-  assert.equal(accepted.status, "accepted");
-  assert.deepEqual(accepted.implementationFiles, [source]);
-  assert.equal(accepted.reviewed.category, verdict.category);
-  assert.equal(accepted.reviewed.plainSummary, verdict.plainSummary);
-  assert.equal(accepted.summary.category, verdict.category);
-  assert.equal(accepted.summary.plainSummary, verdict.plainSummary);
-  assert.equal(accepted.summary.plainSummaryEn, verdict.plainSummaryEn);
-  assert.equal(accepted.summary.summarySource, "ai-evidence-witness");
-  assert.ok(accepted.summary.tags.length > 0);
-  assert.match(accepted.summary.highlightBenefit, /尚无独立运行或性能验证/);
-
-  const fabricated = await reviewRadarCandidate({ inspection, taxonomy, reviewer: async () => ({
-    ...verdict, witness: { ...verdict.witness, operation: ["invented"] },
-  }) });
-  assert.equal(fabricated.status, "deferred");
-  assert.equal(fabricated.reason, "invalid-witness");
-
-  const substituted = await reviewRadarCandidate({
-    inspection: { ...inspection, codeSources: [{ ...source, text: "return false;" }] },
-    taxonomy, reviewer: async () => verdict,
-  });
-  assert.equal(substituted.status, "deferred");
-  assert.equal(substituted.reason, "invalid-witness");
-});
-
-test("radar cannot relabel uninspected legacy acceptance as semantic verification", async () => {
-  const { inspection, verdict } = witnessFixture();
-  let calls = 0;
-  const decision = await reviewRadarCandidate({
-    inspection: { ...inspection, status: "accepted" }, taxonomy,
-    reviewer: async () => { calls++; return verdict; },
-  });
-  assert.equal(decision.status, "rejected");
-  assert.equal(calls, 0);
-});
-
-test("radar transient attempts stop after three cycles and restart on new evidence", async () => {
-  const { inspection } = witnessFixture();
-  let calls = 0;
-  const reviewer = async () => { calls++; return { verified: null, status: "timeout", retryable: true }; };
-  const base = { inspection, taxonomy, reviewer };
-  const first = await reviewRadarCandidate({ ...base, now: "2026-10-03T00:00:00Z" });
-  assert.equal(first.status, "deferred");
-  const cooling = await reviewRadarCandidate({ ...base, previousState: first.state, now: "2026-10-03T01:00:00Z" });
-  assert.equal(cooling.cached, true);
-  assert.equal(calls, 1);
-  const second = await reviewRadarCandidate({ ...base, previousState: first.state, now: "2026-10-03T06:00:00Z" });
-  const third = await reviewRadarCandidate({ ...base, previousState: second.state, now: "2026-10-03T18:00:00Z" });
-  assert.equal(third.status, "retry-exhausted");
-  const stopped = await reviewRadarCandidate({ ...base, previousState: third.state, now: "2026-10-10T18:00:00Z" });
-  assert.equal(stopped.status, "retry-exhausted");
-  assert.equal(stopped.cached, true);
-  assert.equal(calls, 3);
-  const changed = await reviewRadarCandidate({
-    ...base, inspection: { ...inspection, sha: "b".repeat(40) }, previousState: third.state, now: "2026-10-10T18:00:00Z",
-  });
-  assert.equal(changed.status, "deferred");
-  assert.equal(changed.state.attempts, 1);
-  assert.equal(calls, 4);
-  assert.equal(JSON.stringify(changed.state).includes(inspection.codeSources[0].text), false);
-});
-
-test("radar records permanent provider failure without repeated paid attempts", async () => {
-  const { inspection } = witnessFixture();
-  let calls = 0;
-  const reviewer = async () => { calls++; return { verified: null, status: "http-unauthorized", retryable: false }; };
-  const first = await reviewRadarCandidate({ inspection, taxonomy, reviewer });
-  assert.equal(first.status, "blocked");
-  const cached = await reviewRadarCandidate({ inspection, taxonomy, reviewer, previousState: first.state });
-  assert.equal(cached.cached, true);
-  assert.equal(calls, 1);
-  await reviewRadarCandidate({ inspection, taxonomy, reviewer, previousState: first.state, configRevision: "reconfigured" });
-  assert.equal(calls, 2);
-});
-
-test("radar respects provider Retry-After beyond its scheduled backoff", async () => {
-  const { inspection } = witnessFixture();
-  let calls = 0;
-  const reviewer = async () => { calls++; return {
-    verified: null, status: "http-error", retryable: true,
-    retryNotBefore: "2026-10-04T00:00:00Z",
-  }; };
-  const first = await reviewRadarCandidate({ inspection, taxonomy, reviewer, now: "2026-10-03T00:00:00Z" });
-  assert.equal(first.state.nextAttemptAt, "2026-10-04T00:00:00.000Z");
-  const delayed = await reviewRadarCandidate({
-    inspection, taxonomy, reviewer, previousState: first.state, now: "2026-10-03T18:00:00Z",
-  });
-  assert.equal(delayed.cached, true);
-  assert.equal(calls, 1);
-});
-
-test("radar persists all cross-file witness nodes and immutable line ranges through JSON", async () => {
-  const { inspection, verdict, source } = witnessFixture();
-  const text = 'export const input = { candidates: ["safe"] };\nexport const resultField = "answer";';
-  const context = { path: "src/definitions.js", text,
-    hash: createHash("sha256").update(text).digest("hex"),
-    url: `https://github.com/logicrw/review-fixture/blob/${inspection.sha}/src/definitions.js` };
-  const sources = [source, context];
-  const evidenceBundle = buildEvidenceBundle({ codeSources: sources });
-  const nodes = [...evidenceBundle.nodeMap];
-  const operationId = nodes.find(([, node]) => node.source.path === source.path)[0];
-  const contextId = nodes.find(([, node]) => node.source.path === context.path)[0];
-  const witness = { entry: [contextId], operation: [operationId], result: [contextId] };
-  const accepted = await reviewRadarCandidate({
-    inspection: { ...inspection, codeSources: sources }, taxonomy,
-    reviewer: async () => ({ ...verdict, evidenceBundle, witness }),
-  });
-  assert.equal(accepted.status, "accepted");
-  const restored = JSON.parse(JSON.stringify(accepted.sourceVerification));
-  assert.deepEqual(restored.implementationFiles, [source.path]);
-  assert.deepEqual(new Set(restored.files.map(({ path }) => path)), new Set(sources.map(({ path }) => path)));
-  for (const id of new Set(Object.values(restored.witness).flat())) {
-    const node = restored.nodes.find((entry) => entry.id === id);
-    const file = restored.files.find((entry) => entry.path === node.path);
-    const original = sources.find((entry) => entry.path === node.path);
-    assert.equal(node.hash, original.hash);
-    assert.equal(file.hash, original.hash);
-    assert.equal(file.url, original.url);
-    assert.deepEqual(node.ranges, evidenceBundle.nodeMap.get(id).ranges);
-    assert.ok(node.startLine >= 1 && node.endLine <= original.text.split("\n").length);
-    assert.equal(Object.hasOwn(file, "text"), false);
-    assert.equal(Object.hasOwn(node, "source"), false);
-  }
-
-  const substituted = { ...context, text: context.text + '\nexport const override = "unreviewed";' };
-  substituted.hash = createHash("sha256").update(substituted.text).digest("hex");
-  const substitutedBundle = buildEvidenceBundle({ codeSources: [source, substituted] });
-  for (const slot of ["entry", "result"]) {
-    const decision = await reviewRadarCandidate({
-      inspection: { ...inspection, codeSources: sources }, taxonomy,
-      reviewer: async () => ({ ...verdict, evidenceBundle: substitutedBundle,
-        witness: { entry: [operationId], operation: [operationId], result: [operationId], [slot]: [contextId] } }),
-    });
-    assert.equal(decision.status, "deferred", slot);
-    assert.equal(decision.reason, "invalid-witness", slot);
+test("radar admits README and SQL material according to model kind without a code operation gate", async () => {
+  for (const [path,text,kind,basis] of [["README.md",undefined,"learning-resource","descriptive-material"],["query.sql","SELECT jev_score(candidate) FROM decisions;","integration","implementation-material"]]) {
+    const { inspection, verdict } = materialFixture(path,text);
+    let calls=0;
+    const result=await reviewRadarCandidate({ inspection,taxonomy,reviewer:async(input)=>{
+      calls++;assert.deepEqual(input.sources,inspection.sources);assert.equal(Object.hasOwn(input,'codeSources'),false);
+      return {...verdict,catalogKind:kind,reviewBasis:basis};
+    }});
+    assert.equal(result.status,"accepted");assert.equal(calls,1);
+    assert.equal(result.summary.catalogKind,kind);assert.equal(result.summary.reviewBasis,basis);
+    assert.equal(result.summary.plainSummary,verdict.plainSummary);
+    assert.equal(result.summary.summarySource,"ai-material-review");
+    assert.ok(result.sourceVerification.materials[0].spanSha256);
+    assert.equal(Object.hasOwn(result.sourceVerification.materials[0],'text'),false);
   }
 });
 
-test("radar rejects a witness from a different fixed repository revision", async () => {
-  const { inspection, verdict, source } = witnessFixture();
-  const foreign = { ...source, url: source.url.replace(inspection.sha, "b".repeat(40)) };
-  const evidenceBundle = buildEvidenceBundle({ codeSources: [foreign] });
-  const decision = await reviewRadarCandidate({
-    inspection: { ...inspection, codeSources: [foreign] }, taxonomy,
-    reviewer: async () => ({ ...verdict, evidenceBundle }),
-  });
-  assert.equal(decision.status, "deferred");
-  assert.equal(decision.reason, "invalid-witness");
+test("radar preserves model exclusion and need-more without legacy heuristic fallback", async () => {
+  const {inspection,verdict}=materialFixture();
+  for(const decision of ['exclude','need-more']){
+    const result=await reviewRadarCandidate({inspection:{...inspection,evidence:{verified:true}},taxonomy,
+      reviewer:async()=>({...verdict,decision,need:decision==='need-more'?'backend':null})});
+    assert.equal(result.status,decision==='exclude'?'rejected':'insufficient-evidence');
+  }
+  const missing=await reviewRadarCandidate({inspection,taxonomy,reviewer:async()=>null});
+  assert.equal(missing.status,'deferred');
+});
+
+test("radar binds every referenced material to the exact inspected source and target revision", async () => {
+  const {inspection,verdict,source}=materialFixture();
+  const invalid=await reviewRadarCandidate({inspection,taxonomy,reviewer:async()=>({...verdict,claims:[{type:'purpose',text:'测试',support:['invented']}]})});
+  assert.equal(invalid.reason,'invalid-material-reference');
+  const changed=await reviewRadarCandidate({inspection:{...inspection,sources:[{...source,text:'substituted'}]},taxonomy,reviewer:async()=>verdict});
+  assert.equal(changed.reason,'invalid-material-reference');
+  const foreign=await reviewRadarCandidate({inspection:{...inspection,targets:[{...inspection.targets[0],commit:'b'.repeat(40)}]},taxonomy,reviewer:async()=>verdict});
+  assert.equal(foreign.reason,'invalid-material-reference');
+});
+
+test("radar handles an empty code list and unavailable targets semantically", async () => {
+  const {inspection,verdict}=materialFixture();let calls=0;
+  const excluded=await reviewRadarCandidate({inspection:{...inspection,sources:[]},taxonomy,reviewer:async()=>{
+    calls++;const evidenceBundle=buildEvidenceBundle({sources:[],targets:inspection.targets});
+    return {...verdict,decision:'need-more',need:'definition',claims:[],evidenceBundle};
+  }});
+  assert.equal(calls,1);assert.equal(excluded.status,'insufficient-evidence');
+});
+
+test("radar transient retries are bounded, cache exact material epochs and retain provider delays", async () => {
+  const {inspection}=materialFixture();let calls=0;
+  const reviewer=async()=>{calls++;return{status:'http-error',retryable:true,retryNotBefore:'2026-10-05T00:00:00Z'};};
+  const first=await reviewRadarCandidate({inspection,taxonomy,reviewer,now:'2026-10-03T00:00:00Z'});
+  assert.equal(first.state.nextAttemptAt,'2026-10-05T00:00:00.000Z');
+  assert.equal((await reviewRadarCandidate({inspection,taxonomy,reviewer,previousState:first.state,now:'2026-10-04T00:00:00Z'})).cached,true);
+  const second=await reviewRadarCandidate({inspection,taxonomy,reviewer,previousState:first.state,now:'2026-10-05T00:00:00Z'});
+  const third=await reviewRadarCandidate({inspection,taxonomy,reviewer,previousState:second.state,now:'2026-10-06T00:00:00Z'});
+  assert.equal(third.status,'retry-exhausted');assert.equal(calls,3);
+  const changed={...inspection,targets:[{...inspection.targets[0],commit:'b'.repeat(40)}]};
+  assert.equal((await reviewRadarCandidate({inspection:changed,taxonomy,reviewer,previousState:third.state,now:'2026-10-07T00:00:00Z'})).state.attempts,1);
+});
+
+test("radar passes durable grants without resetting ledger and reuses the model summaries", async () => {
+  const{inspection,verdict}=materialFixture();
+  const ledger={version:1,caseId:'f'.repeat(64),limitTokens:6000,chargedTokens:2500,httpAttempts:1,semanticRounds:1};
+  const grant={reservationId:'e'.repeat(64),grantTokens:3500};
+  const result=await reviewRadarCandidate({inspection,taxonomy,budgetLedger:ledger,budgetGrant:grant,expectedReservationId:grant.reservationId,
+    reviewer:async(input)=>{assert.deepEqual(input.budgetLedger,ledger);assert.deepEqual(input.budgetGrant,grant);return{...verdict,budgetLedger:{...ledger,chargedTokens:4000,httpAttempts:2,semanticRounds:2}};}});
+  assert.equal(result.status,'accepted');assert.equal(result.state.budgetLedger.chargedTokens,4000);
+});
+
+test('radar supplements a fixed target and validates the newly fetched material rather than the original slice alone', async()=>{
+  const {inspection,verdict}=materialFixture();
+  const text='backend: Jev-compatible decisions\nmodel: local-example';
+  const source={targetId:'R1',repoId:1,path:'config/backend.yaml',text,hash:createHash('sha256').update(text).digest('hex'),
+    url:`https://github.com/logicrw/review-fixture/blob/${inspection.sha}/config/backend.yaml`};
+  const accepted=await reviewRadarCandidate({inspection,taxonomy,acquireEvidence:async()=>[source],reviewer:async(input)=>{
+    const extras=await input.acquireEvidence({targetId:'R1',need:'backend'});
+    const evidenceBundle=buildEvidenceBundle({sources:extras,targets:inspection.targets});
+    const id=[...evidenceBundle.materialMap.keys()][0];
+    return{...verdict,reviewBasis:'mixed',claims:[{type:'mechanism',text:'材料声明了兼容决策后端。',support:[id]}],evidenceBundle};
+  }});
+  assert.equal(accepted.status,'accepted');
+  assert.equal(accepted.sourceVerification.files[0].path,'config/backend.yaml');
+});
+
+
+test('radar planning skips cached terminal and cooling cases before any budget reservation',()=>{
+  const{inspection}=materialFixture();
+  const fingerprint=radarReviewFingerprint(inspection,taxonomy);
+  for(const status of ['rejected','blocked','retry-exhausted','insufficient-evidence','budget-exhausted'])
+    assert.equal(radarNeedsSemanticReview({inspection,taxonomy,previousState:{fingerprint,status}}),false);
+  assert.equal(radarNeedsSemanticReview({inspection,taxonomy,previousState:{fingerprint,status:'deferred',nextAttemptAt:'2099-01-01T00:00:00Z'}}),false);
+  assert.equal(radarNeedsSemanticReview({inspection,taxonomy,previousState:{fingerprint:'changed',status:'rejected'}}),true);
+});
+
+
+test('accepted radar artifacts retain policy and bounded model receipts without prompt or raw output',async()=>{
+  const{inspection,verdict}=materialFixture();
+  const result=await reviewRadarCandidate({inspection,taxonomy,reviewer:async()=>({...verdict,source:'deepseek',requestModel:'deepseek-flash',
+    attempts:[{attempt:1,phase:1,requestDigest:'a'.repeat(64),thinking:'disabled',usage:{status:'reported',totalTokens:1000}}]})});
+  assert.match(result.sourceVerification.reviewRevision,/^[a-f0-9]{64}$/);
+  assert.match(result.sourceVerification.caseRevision,/^[a-f0-9]{64}$/);
+  assert.equal(result.reviewDetails.requestModel,'deepseek-flash');
+  assert.equal(result.reviewDetails.attempts[0].requestDigest,'a'.repeat(64));
+  assert.equal(Object.hasOwn(result.reviewDetails,'messages'),false);
+  assert.equal(Object.hasOwn(result.reviewDetails,'rawOutput'),false);
 });

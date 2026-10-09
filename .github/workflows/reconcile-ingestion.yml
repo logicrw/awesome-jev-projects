@@ -4,6 +4,11 @@ on:
     - cron: "17,47 * * * *"
   workflow_dispatch:
 permissions: {}
+env:
+  REVIEW_PROVIDER_CONFIGURED: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+  DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
+  DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
+  REVIEW_CONFIG_REVISION: ${{ vars.REVIEW_CONFIG_REVISION || vars.RADAR_REVIEW_REVISION || '' }}
 concurrency:
   group: reconcile-queued-submissions
   cancel-in-progress: false
@@ -19,6 +24,8 @@ jobs:
       found: ${{ steps.queue.outputs.found }}
       issue_number: ${{ steps.queue.outputs.issue_number }}
       body_sha: ${{ steps.queue.outputs.body_sha }}
+      title_sha: ${{ steps.queue.outputs.title_sha }}
+      review_revision: ${{ steps.queue.outputs.review_revision }}
       attempt: ${{ steps.queue.outputs.attempt }}
       claim_id: ${{ steps.queue.outputs.claim_id }}
       action: ${{ steps.queue.outputs.action }}
@@ -65,6 +72,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           INGEST_ISSUE_NUMBER: ${{ needs.select.outputs.issue_number }}
           INGEST_ISSUE_BODY_SHA: ${{ needs.select.outputs.body_sha }}
+          INGEST_ISSUE_TITLE_SHA: ${{ needs.select.outputs.title_sha }}
+          INGEST_REVIEW_REVISION: ${{ needs.select.outputs.review_revision }}
           INGEST_RETRY_ATTEMPT: ${{ needs.select.outputs.attempt }}
           INGEST_RETRY_CLAIM_ID: ${{ needs.select.outputs.claim_id }}
           INGEST_TRUSTED_WRITER: ${{ vars.INGEST_TRUSTED_WRITER || '' }}
@@ -75,6 +84,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           INGEST_ISSUE_NUMBER: ${{ needs.select.outputs.issue_number }}
           INGEST_ISSUE_BODY_SHA: ${{ needs.select.outputs.body_sha }}
+          INGEST_ISSUE_TITLE_SHA: ${{ needs.select.outputs.title_sha }}
+          INGEST_REVIEW_REVISION: ${{ needs.select.outputs.review_revision }}
           INGEST_RETRY_ATTEMPT: ${{ needs.select.outputs.attempt }}
           INGEST_RETRY_CLAIM_ID: ${{ needs.select.outputs.claim_id }}
           INGEST_RETRY_STATE: ${{ needs.select.outputs.state }}
@@ -85,11 +96,13 @@ jobs:
         run: >-
           gh workflow run auto-ingest-issue.yml --repo "$GITHUB_REPOSITORY"
           --ref main -f "issue_number=$ISSUE_NUMBER" -f dry_run=false
-          -f "body_sha=$BODY_SHA" -f "retry_claim_id=$CLAIM_ID" -f "retry_attempt=$RETRY_ATTEMPT"
+          -f "body_sha=$BODY_SHA" -f "title_sha=$TITLE_SHA" -f "review_revision=$REVIEW_REVISION" -f "retry_claim_id=$CLAIM_ID" -f "retry_attempt=$RETRY_ATTEMPT"
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE_NUMBER: ${{ needs.select.outputs.issue_number }}
           BODY_SHA: ${{ needs.select.outputs.body_sha }}
+          TITLE_SHA: ${{ needs.select.outputs.title_sha }}
+          REVIEW_REVISION: ${{ needs.select.outputs.review_revision }}
           CLAIM_ID: ${{ needs.select.outputs.claim_id }}
           RETRY_ATTEMPT: ${{ needs.select.outputs.attempt }}
       - name: Record unknown dispatch outcome without immediate redispatch
@@ -99,6 +112,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           INGEST_ISSUE_NUMBER: ${{ needs.select.outputs.issue_number }}
           INGEST_ISSUE_BODY_SHA: ${{ needs.select.outputs.body_sha }}
+          INGEST_ISSUE_TITLE_SHA: ${{ needs.select.outputs.title_sha }}
+          INGEST_REVIEW_REVISION: ${{ needs.select.outputs.review_revision }}
           INGEST_RETRY_ATTEMPT: ${{ needs.select.outputs.attempt }}
           INGEST_RETRY_CLAIM_ID: ${{ needs.select.outputs.claim_id }}
           INGEST_RETRY_STATE: dispatch-unknown

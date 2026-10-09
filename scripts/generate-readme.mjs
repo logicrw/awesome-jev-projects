@@ -3,6 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import ts from "typescript";
 import { activeSponsors } from "../src/lib/sponsors.mjs";
+import { licenseLabel, catalogLabels } from "../src/lib/catalog-contract.mjs";
 import { COPY, LOCALES, SITE, REPOSITORY, localePrefix, projectRoute, categoryRoute, projectCopy, escapeHTML, paidPlacementMarkdown, machineDocuments, MACHINE_RESOURCES, SKILL_COPIES, INSTALL_COMMANDS } from "./site-content.mjs";
 const root = new URL("../", import.meta.url);
 const projects = publicProjects(JSON.parse(await readFile(new URL("src/data/projects.json", root), "utf8")));
@@ -14,28 +15,28 @@ const md = (text) => String(text ?? "").replace(/[\\`*_[\]<>]/g, (s) => `\\${s}`
 const text = {
   zh: {
     count: "个精选项目",
-    public: "各项目遵循原仓库的开源许可证；特殊或未声明许可已单独注明。",
-    scope: "所有条目均已核对公开源码与实际决策逻辑，便于参考与选型。协议兼容实现会明确注明底层模型。",
+    public: "许可按原仓库记录为已识别、自定义或未声明；公开可访问不等于获得使用、修改或分发许可。",
+    scope: "目录包含集成项目、基准测试、开发工具、研究与学习资源。新条目标注与 Jev 的关系和审查依据；实现材料与说明材料分别呈现，收录不代表独立运行或性能验证。",
     development: "本地开发",
     workflow: "自动化与安全机制",
-    flow: "网站为纯静态架构，不收集敏感凭据，所有展示数据均来自公开开源代码。Actions 采用短期仓库 Token，最小权限运行，不执行第三方未核验代码。",
-    submission: "欢迎提交项目！请提供仓库地址、简要用途以及 Jev 在代码中的实际决策逻辑位置。",
+    flow: "网站展示公开仓库材料，不收集访问者凭据。Actions 按任务划分权限，不执行投稿仓库代码。",
+    submission: "欢迎提交项目或学习资源！请提供仓库地址、简要用途，以及相关说明、源码、SQL 或示例材料的位置。",
     policies: "收录与安全说明",
-    details: "项目详情与固定源码",
+    details: "条目详情与固定版本材料",
     readme: "生成四语 README",
     review: "本轮目录审核记录",
     warning: "发现安全问题请勿在公开 Issue 中粘贴 Token、私钥或其他凭据。"
   },
   en: {
     count: "curated projects",
-    public: "Projects follow their respective open-source licenses; unstated licenses are noted individually.",
-    scope: "Entries are linked to commit-pinned source code and specific decision points for easy reference. Compatible implementations clearly identify their underlying model.",
+    public: "Licenses are recorded as identified, custom, or undeclared. Public access alone does not grant permission to use, modify, or redistribute.",
+    scope: "The catalog includes integrations, benchmarks, developer tools, research, and learning resources. New entries distinguish their Jev relationship and implementation or descriptive review material. Inclusion does not establish independent runtime or performance verification.",
     development: "Local development",
     workflow: "Automation and security boundaries",
-    flow: "The website serves static data and handles no credentials. Actions use short-lived repository tokens with least privilege, and submitted code is never executed directly.",
-    submission: "Submissions are welcome! Please provide the repository URL, core use case, and code location of the Jev decision logic.",
+    flow: "The static website presents public repository material and collects no visitor credentials. Actions separate permissions by task and do not execute submitted repository code.",
+    submission: "Projects and learning resources are welcome. Provide the repository URL, use case, and relevant documentation, source, SQL, or example material.",
     policies: "Editorial and security notes",
-    details: "Project details and fixed source",
+    details: "Entry details and fixed-version material",
     readme: "Generate four-language READMEs",
     review: "Catalog audit record",
     warning: "Never paste tokens, private keys or other credentials into public security reports."
@@ -43,13 +44,13 @@ const text = {
   ja: {
     count: "件の厳選プロジェクト",
     public: "利用条件は各プロジェクトのライセンスに従います。独自または未記載のライセンスは個別に表示しています。",
-    scope: "すべての項目で公開ソースと具体的な判断箇所を確認しており、技術選定の参考として活用できます。互換実装は基盤モデルを明記しています。",
+    scope: "連携プロジェクト、ベンチマーク、開発ツール、研究、学習資料を掲載します。新しい項目は Jev との関係と確認資料の種類を表示します。掲載は独立した動作・性能検証を意味しません。",
     development: "ローカル開発",
     workflow: "自動化とセキュリティの境界",
-    flow: "サイトは静的データのみを配信し、認証情報を扱いません。Actions は短期 Token と最小権限で実行され、外部コードを直接実行することはありません。",
-    submission: "プロジェクトの推薦を歓迎します。リポジトリ URL、用途、Jev の実装箇所を添えてお送りください。",
+    flow: "静的サイトは公開リポジトリの資料を表示し、訪問者の認証情報を収集しません。Actions はタスクごとに権限を分け、投稿されたリポジトリのコードを実行しません。",
+    submission: "プロジェクトや学習資料を推薦できます。リポジトリ URL、用途、関連する説明・ソース・SQL・例をお送りください。",
     policies: "掲載基準とセキュリティ",
-    details: "詳細と固定バージョンのソース",
+    details: "詳細と固定バージョンの資料",
     readme: "4言語の README を生成",
     review: "掲載内容の確認記録",
     warning: "公開の問題報告に Token、秘密鍵などの認証情報を貼り付けないでください。"
@@ -57,13 +58,13 @@ const text = {
   ko: {
     count: "개 엄선 프로젝트",
     public: "각 프로젝트의 라이선스를 따르며, 맞춤 라이선스나 미명시 라이선스는 개별 표기되어 있습니다.",
-    scope: "모든 항목은 공개 소스와 구체적인 판단 지점을 확인하여 기술 검토에 바로 참고할 수 있도록 구성했습니다. 호환 구현은 기반 모델을 명시합니다.",
+    scope: "연동 프로젝트, 벤치마크, 개발 도구, 연구 및 학습 자료를 수록합니다. 새 항목에는 Jev와의 관계 및 구현·설명 자료의 검토 근거를 표시합니다. 수록은 독립적인 실행이나 성능 검증을 뜻하지 않습니다.",
     development: "로컬 개발",
     workflow: "자동화 및 보안 경계",
-    flow: "사이트는 정적 데이터만 제공하며 자격 증명을 다루지 않습니다. Actions는 단기 Token과 최소 권한으로 실행되며 외부 코드를 직접 실행하지 않습니다.",
-    submission: "프로젝트 제보를 환영합니다! 저장소 주소, 핵심 용도, Jev 연동 코드 위치를 함께 전달해 주세요.",
+    flow: "정적 사이트는 공개 저장소 자료를 표시하고 방문자의 자격 증명을 수집하지 않습니다. Actions는 작업별 권한을 분리하며 제출된 저장소 코드를 실행하지 않습니다.",
+    submission: "프로젝트와 학습 자료를 제보할 수 있습니다. 저장소 주소, 용도와 관련 설명, 소스, SQL 또는 예시 자료를 알려 주세요.",
     policies: "수록 기준 및 보안 안내",
-    details: "상세 설명 및 고정 버전 소스",
+    details: "상세 설명 및 고정 버전 자료",
     readme: "네 언어의 README 생성",
     review: "목록 검토 기록",
     warning: "공개 문제 보고에 Token, 개인 키 또는 기타 자격 증명을 붙여 넣지 마세요."
@@ -123,10 +124,10 @@ for (const locale of LOCALES) {
     ko: "💡 **왜 Jev와 System-1 결정 아키텍처인가?**"
   }[locale];
   const whyBody = {
-    zh: `构建自主智能体（Agent）时，如果把每一个分支选项都交给秒级响应的大推理模型（System 2），不仅**延迟高、成本高**，而且极易发生上下文漂移。\n\n**TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：\n- ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。\n- 🎯 **原生确定性输出**：原生支持 \`Choice\`（多选一）、\`Score\`（打分）与 \`Noul\`（二元逻辑与概率），免去易碎的正则提取。\n- 🛡️ **严格拒绝概念炒作**：全网严选 **${projects.length}+** 个绑定真实公开开源源码版本的落地项目，覆盖 ${categories.length} 大核心工程赛道。`,
-    en: `When building autonomous agents, routing every small branching decision to a heavy reasoning model (System 2) incurs seconds of latency, runaway token costs, and context drift.\n\n**TypeSafe Jev (System 1)** is purpose-built for fast, typed discrete decisions:\n- ⚡ **Sub-100ms Latency**: Delivers decisions in 50–100ms to keep agent loops snappy.\n- 🎯 **Native Typed Outputs**: Built-in primitives for \`Choice\`, \`Score\`, and \`Noul\` without fragile JSON regex parsing.\n- 🛡️ **Zero Vaporware**: ${projects.length}+ projects rigorously anchored to verifiable, commit-pinned public open source across ${categories.length} real-world domains.`,
-    ja: `Agent を構築する際、すべての分岐判断を巨大な推論モデル（System 2）に委ねると、数秒の遅延と高いコスト、文脈ドリフトが発生します。\n\n**TypeSafe Jev（System 1）** は、離散選択、スコアリング、真偽値判定に特化した軽量モデルです：\n- ⚡ **100ms 未満の高速応答**：50–100ms で判断を完了し、Agent の高速ループを維持します。\n- 🎯 **ネイティブな型安全出力**：\`Choice\`、\`Score\`、\`Noul\` を直接返し、壊れやすい正規表現パースが不要です。\n- 🛡️ **誇大広告を排除**：${categories.length} の実用分野にわたる ${projects.length}+ 件の検証済みオープンソースコードのみを厳選掲載しています。`,
-    ko: `에이전트를 구축할 때 모든 일상적인 분기 결정을 거대 추론 모델(System 2)에 맡기면 수 초의 지연 시간과 높은 비용, 문맥 왜곡이 발생합니다。\n\n**TypeSafe Jev (System 1)**는 빠른 타입 안전 결정을 위해 제작된 경량 모델입니다:\n- ⚡ **100ms 미만 초고속 응답**: 50–100ms 내에 결정을 내려 에이전트 루프의 민첩성을 유지합니다.\n- 🎯 **네이티브 타입 출력**: \`Choice\`, \`Score\`, \`Noul\`을 지원하여 취약한 JSON 정규식 파싱이 필요 없습니다.\n- 🛡️ **과대 광고 배제**: ${categories.length}개 실제 엔지니어링 영역에 걸쳐 공개 소스 커밋이 검증된 ${projects.length}+개 프로젝트만을 엄선했습니다.`
+    zh: `构建自主智能体（Agent）时，如果把每一个分支选项都交给秒级响应的大推理模型（System 2），不仅**延迟高、成本高**，而且极易发生上下文漂移。\n\n**TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：\n- ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。\n- 🎯 **原生确定性输出**：原生支持 \`Choice\`（多选一）、\`Score\`（打分）与 \`Noul\`（二元逻辑与概率），免去易碎的正则提取。\n- 🛡️ **严格拒绝概念炒作**：按材料收录 **${projects.length}+** 个项目与资源，覆盖 ${categories.length} 个用途分类，并区分材料说明与实现证据。`,
+    en: `When building autonomous agents, routing every small branching decision to a heavy reasoning model (System 2) incurs seconds of latency, runaway token costs, and context drift.\n\n**TypeSafe Jev (System 1)** is purpose-built for fast, typed discrete decisions:\n- ⚡ **Sub-100ms Latency**: Delivers decisions in 50–100ms to keep agent loops snappy.\n- 🎯 **Native Typed Outputs**: Built-in primitives for \`Choice\`, \`Score\`, and \`Noul\` without fragile JSON regex parsing.\n- 🛡️ **Zero Vaporware**: ${projects.length}+ projects and resources across ${categories.length} categories, distinguishing descriptive material from implementation evidence.`,
+    ja: `Agent を構築する際、すべての分岐判断を巨大な推論モデル（System 2）に委ねると、数秒の遅延と高いコスト、文脈ドリフトが発生します。\n\n**TypeSafe Jev（System 1）** は、離散選択、スコアリング、真偽値判定に特化した軽量モデルです：\n- ⚡ **100ms 未満の高速応答**：50–100ms で判断を完了し、Agent の高速ループを維持します。\n- 🎯 **ネイティブな型安全出力**：\`Choice\`、\`Score\`、\`Noul\` を直接返し、壊れやすい正規表現パースが不要です。\n- 🛡️ **誇大広告を排除**：${categories.length} 分野の ${projects.length}+ 件のプロジェクトと資料を掲載し、説明資料と実装の根拠を区別します。`,
+    ko: `에이전트를 구축할 때 모든 일상적인 분기 결정을 거대 추론 모델(System 2)에 맡기면 수 초의 지연 시간과 높은 비용, 문맥 왜곡이 발생합니다。\n\n**TypeSafe Jev (System 1)**는 빠른 타입 안전 결정을 위해 제작된 경량 모델입니다:\n- ⚡ **100ms 미만 초고속 응답**: 50–100ms 내에 결정을 내려 에이전트 루프의 민첩성을 유지합니다.\n- 🎯 **네이티브 타입 출력**: \`Choice\`, \`Score\`, \`Noul\`을 지원하여 취약한 JSON 정규식 파싱이 필요 없습니다.\n- 🛡️ **과대 광고 배제**: ${categories.length}개 분야의 ${projects.length}+개 프로젝트와 자료를 수록하며 설명 자료와 구현 근거를 구분합니다.`
   }[locale];
 
   const comparisonTable = {
@@ -173,22 +174,22 @@ for (const locale of LOCALES) {
 
 - 🎰 **实体机械卡牌分发仓**：探索 Jev 原生决策点，支持连击抽卡计数与**逢 10 抽全屏粒子大烟花（💥 嘣！）**。
 - ⚡ **毫秒级吸顶搜索与浮动过滤**：即便页面下滑，也可随时唤出浮动分类面板，支持多标签一键点选过滤。
-- 🔍 **100% 绑定固定源码**：所有收录项目均核验真实 commit SHA 与具体接入点，绝无空气包装与死链。`,
+- 🔍 **固定版本材料**：查看条目关联的源码、SQL、文档或示例，并按条目标注的审查依据理解结论。`,
     en: `### 🎮 Key Interactive Features
 
 - 🎰 **Tactile Gacha Dispatcher**: Discover discrete decision points with real-time streak counting and **10-draw fireworks celebrations (💥 BOOM!)**.
 - ⚡ **Sticky Search & Floating Popover Filter**: Filter tags and categories anytime while scrolling via the anchored toolbar popover.
-- 🔍 **100% Commit-Pinned Code Evidence**: Every listed project links to immutable source files and explicit decision points.`,
+- 🔍 **Fixed-Version Material**: Inspect linked source, SQL, documentation, or examples together with each entry’s review basis.`,
     ja: `### 🎮 主なインタラクティブ機能
 
 - 🎰 **物理カードディスペンサー**：Jev の判断箇所をランダムに発見。ドロー数のカウントと**10連ごとの花火演出（💥 BOOM!）**に対応。
 - ⚡ **固定検索バーとフローティング絞り込み**：スクロール中も追従するツールバーから、いつでもカテゴリやタグで即座に絞り込み可能。
-- 🔍 **100% コミット固定のソース検証**：全プロジェクトが公開ソースコードの具体的な判断行と直接リンクしています。`,
+- 🔍 **固定バージョンの資料**：リンク先のソース、SQL、説明、例を、各項目の確認根拠と併せて確認できます。`,
     ko: `### 🎮 주요 인터랙티브 기능
 
 - 🎰 **피지컬 카드 디스펜서**: 실시간 연속 뽑기 카운트와 **10회 연속 축하 불꽃놀이 (💥 BOOM!)**로 Jev 결정 지점을 탐색합니다.
 - ⚡ **고정 검색바 및 플로팅 필터**: 페이지를 스크롤하는 중에도 툴바에서 언제든지 태그와 카테고리를 즉시 필터링할 수 있습니다.
-- 🔍 **100% 커밋 고정 소스 검증**: 수록된 모든 프로젝트는 공개 소스 코드의 구체적인 결정 지점과 직접 연결됩니다.`
+- 🔍 **고정 버전 자료**: 연결된 소스, SQL, 설명, 예시와 각 항목의 검토 근거를 함께 확인할 수 있습니다.`
   };
 
   const submissionTip = {
@@ -224,9 +225,10 @@ for (const locale of LOCALES) {
     const rows=projects.filter(p=>p.category===category).sort((a,b)=>(b.stars??0)-(a.stars??0)||a.name.localeCompare(b.name));
     for(const p of rows){
       out+=`- [**${md(p.name)}**](${p.url}) — ${md(projectCopy(p,'plainSummary',locale))}\n`;
+      for (const { label, value } of catalogLabels(p, locale)) out+=`  - **${md(label)}**: ${md(value)}\n`;
       out+=`  - **${c.decision}**: ${md(projectCopy(p,'jevDecisionPoint',locale))}\n`;
       out+=`  - **${c.benefit}**: ${md(projectCopy(p,'highlightBenefit',locale))}\n`;
-      out+=`  - [${t.details}](${SITE+projectRoute(p.id,locale)}) · ${c.license}: ${md(p.license||c.unknown)}\n\n`;
+      out+=`  - [${t.details}](${SITE+projectRoute(p.id,locale)}) · ${c.license}: ${md(licenseLabel(p.license,locale,p.licenseStatus))}\n\n`;
     }
   }
   out+=`## ${t.development}\n\nNode.js 22+\n\n\`\`\`bash\nnpm ci --ignore-scripts\nnpm run dev\nnpm test\nnpm run build\nnpm run build:readme\n\`\`\`\n\n## ${t.workflow}\n\n${t.flow}\n\n## ${additions[locale].privacy}\n\n${additions[locale].privacyText}\n\n## ${c.submit}\n\n${t.submission}\n\n[${c.submit}](${REPOSITORY}/issues/new?template=project.yml)\n\n## ${t.policies}\n\n- [${t.review}](docs/catalog-review-2026-09-19.md)\n- [Security](SECURITY.md)\n\n${t.warning}\n\nMIT © [logicrw](https://github.com/logicrw) · [X @0xLogicrw](https://x.com/0xLogicrw) — directory code only; project licenses are separate.\n`;
@@ -345,7 +347,7 @@ for (const locale of LOCALES) {
 
     <g transform="translate(-75, 95)">
       <rect width="150" height="24" rx="12" fill="#182216" stroke="#41543a" stroke-width="1"/>
-      <text x="75" y="16" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#d7fa91">${projects.length} VERIFIED REPOS</text>
+      <text x="75" y="16" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#d7fa91">${projects.length} CATALOG ENTRIES</text>
     </g>
   </g>
 </svg>\n`;

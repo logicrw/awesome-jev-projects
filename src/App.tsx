@@ -58,6 +58,8 @@ import { eligibleProjects } from "./lib/discovery.mjs";
 import { sponsorCopy } from "./lib/sponsors.mjs";
 import { resolveTagId, tagLabel, tagDescription, tagOptions } from "./lib/tags.mjs";
 import { createProjectSearch, searchProjects, browseSort, matchesQuickFilter } from "./lib/search.mjs";
+import { licenseLabel, normalizeLicenseFacts, catalogLabels } from "./lib/catalog-contract.mjs";
+import type { LicenseValue, CatalogClassification } from "./lib/catalog-contract.mjs";
 import {
   useCatalogSWR,
   CATALOG_REVALIDATE_MS,
@@ -100,7 +102,7 @@ export {
   type ExplorerState,
 };
 
-export type Project = {
+export type Project = CatalogClassification & {
   language?: string | null;
   id: string;
   name: string;
@@ -114,7 +116,7 @@ export type Project = {
   stars: number | null;
   forks: number | null;
   openIssues: number | null;
-  license: string | null;
+  license: LicenseValue;
   licenseStatus?: "unconfirmed" | "declared" | "confirmed" | "custom";
   lastCommitAt: string | null;
   createdAt: string | null;
@@ -974,7 +976,7 @@ function App({ initialProjects, initialLocale, initialDay }: AppProps = {}) {
             <span className="stat-value">
               {projects.length.toString().padStart(2, "0")}
             </span>
-            <span>{t("已审校项目")}</span>
+            <span>{t("已审校条目")}</span>
           </div>
           <div>
             <span className="stat-value">
@@ -1379,11 +1381,11 @@ function App({ initialProjects, initialLocale, initialDay }: AppProps = {}) {
                     <div className="card-category">
                       <Icon size={13} />
                       {label(p.category)}
-                      {p.license ? (
-                        <span className="license-note" title={`${t("开源协议")}: ${p.license}`}>{p.license}</span>
-                      ) : (
-                        <span className="license-note is-unconfirmed" title={t("代码已公开开源，作者暂未指定标准许可证文件")}>{t("暂无开源协议")}</span>
-                      )}
+                      <span className={`license-note${normalizeLicenseFacts(p.license, p.licenseStatus).status === "identified" ? "" : " is-unconfirmed"}`}
+                        title={t("公开可访问不代表授予使用、修改或分发许可。")}>{licenseLabel(p.license, locale, p.licenseStatus)}</span>
+                      {catalogLabels(p, locale).map(({ field, label: fact, value }) => (
+                        <span key={field} className="auto-label" title={`${fact}: ${value}`}>{value}</span>
+                      ))}
                       {p.summarySource === "readme-extractive" && (
                         <span className="auto-label">{t("来源摘要")}</span>
                       )}
@@ -1847,20 +1849,17 @@ function App({ initialProjects, initialLocale, initialDay }: AppProps = {}) {
               <dd>{format(active.openIssues)}</dd>
             </div>
             <div>
-              <dt>{t("开源协议")}</dt>
+              <dt>{t("许可证")}</dt>
               <dd>
-                {active.licenseStatus === "unconfirmed" || !active.license ? (
-                  <>
-                    <span>{t("暂无开源协议")}</span>
-                    <span className="license-hint">
-                      {" ("}{t("代码公开可用，未附带标准 LICENSE 文件")}{")"}
-                    </span>
-                  </>
-                ) : (
-                  active.license
+                <span>{licenseLabel(active.license, locale, active.licenseStatus)}</span>
+                {normalizeLicenseFacts(active.license, active.licenseStatus).status !== "identified" && (
+                  <span className="license-hint">{" ("}{t("公开可访问不代表授予使用、修改或分发许可。")}{")"}</span>
                 )}
               </dd>
             </div>
+            {catalogLabels(active, locale).map(({ field, label: fact, value }) => (
+              <div key={field}><dt>{fact}</dt><dd>{value}</dd></div>
+            ))}
             <div>
               <dt>{t("最近提交")}</dt>
               <dd>{date(active.lastCommitAt, locale)}</dd>

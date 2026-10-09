@@ -125,7 +125,7 @@ const root = resolve(base, "..");
 for (const bannerName of ["banner.svg", "banner-zh.svg", "banner-ja.svg", "banner-ko.svg"]) {
   const distBanner = await readFile(join(base, bannerName), "utf8");
   const publicBanner = await readFile(join(root, "public", bannerName), "utf8");
-  const expectedText = `${projects.length} VERIFIED REPOS`;
+  const expectedText = `${projects.length} CATALOG ENTRIES`;
   assert.ok(distBanner.includes(expectedText), `dist/${bannerName} count mismatch: expected "${expectedText}"`);
   assert.ok(publicBanner.includes(expectedText), `public/${bannerName} count mismatch: expected "${expectedText}"`);
 }

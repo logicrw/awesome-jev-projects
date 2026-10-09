@@ -1,3 +1,4 @@
+import { normalizeLicenseFacts } from './catalog-contract.mjs';
 const DAY_MS = 86_400_000;
 const declaredLicenses = new Set([
   'MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'PostgreSQL',
@@ -10,9 +11,9 @@ const declaredLicenses = new Set([
 const compare = (a, b) => a < b ? -1 : a > b ? 1 : 0;
 const stars = (project) => Number.isFinite(project.stars) && project.stars >= 0 ? project.stars : null;
 // Resolve conflicting duplicate IDs consistently for all selection-relevant metadata.
-const selectionKey = (project) => JSON.stringify([stars(project), project.licenseStatus ?? '', project.license ?? '', project.url ?? '']);
+const selectionKey = (project) => JSON.stringify([stars(project), project.licenseStatus ?? '', normalizeLicenseFacts(project.license, project.licenseStatus), project.url ?? '']);
 
-/** Source-reviewed entries only. Stars are attention signals, never a quality rating. */
+/** Active catalog entries only. Stars are attention signals, never a quality rating. */
 export function eligibleProjects(projects) {
   const candidates = projects.filter((project) => project && typeof project.id === 'string'
     && project.id.trim() && project.catalogStatus !== 'review-pending');
@@ -82,8 +83,12 @@ export function dailyProject(projects, day) {
   const dayNumber = epochDay(day);
   const eligible = eligibleProjects(projects);
   if (!eligible.length) return null;
-  const longTail = eligible.filter((project) => stars(project) >= 20 && stars(project) <= 50
-    && ['confirmed', 'declared'].includes(project.licenseStatus) && declaredLicenses.has(project.license));
+  const longTail = eligible.filter((project) => {
+    const license = normalizeLicenseFacts(project.license, project.licenseStatus);
+    const declared = typeof project.license === 'object' && project.license !== null
+      ? license.status === 'identified' : ['confirmed', 'declared'].includes(project.licenseStatus);
+    return stars(project) >= 20 && stars(project) <= 50 && declared && declaredLicenses.has(license.spdx);
+  });
   const smaller = eligible.filter((project) => stars(project) !== null && stars(project) < 1000);
   const pool = longTail.length ? longTail : smaller.length ? smaller : eligible;
   const index = ((dayNumber + poolHash(pool)) % pool.length + pool.length) % pool.length;

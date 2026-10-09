@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { posix } from "node:path";
 import { normalizeRepository } from "../src/lib/submission.mjs";
 import { resolveTagId } from "../src/lib/tags.mjs";
+import { githubRepositoryReferences } from "./submission-identity.mjs";
 
 const MAX_README_BYTES = 90_000;
 const MAX_FILE_BYTES = 120_000;
@@ -72,6 +73,7 @@ export function extractSubmittedRepository(issueBody) {
     if (heading) {
       const title = heading[1]
         .replace(/[*_]/g, "")
+        .replace(/\s*[（(][^）)]*[）)]\s*$/, "")
         .replace(/[:：]\s*$/, "")
         .trim();
       current = REPOSITORY_FIELD.test(title) ? [] : null;
@@ -85,6 +87,17 @@ export function extractSubmittedRepository(issueBody) {
   return uniqueRepository([
     body.replace(/^\s*(?:```|~~~)[\s\S]*?^\s*(?:```|~~~).*$/gm, ""),
   ]);
+}
+
+/** Candidate IDs, not an admission decision. The model resolves at most three targets. */
+export function extractSubmittedRepositories(issueBody = "", issueTitle = "") {
+  if (typeof issueBody !== "string" || typeof issueTitle !== "string" || issueBody.length > 100_000) return [];
+  const explicit = extractSubmittedRepository(issueBody);
+  const all = [explicit, ...githubRepositoryReferences(issueTitle), ...githubRepositoryReferences(issueBody)]
+    .filter(Boolean);
+  const unique = new Map();
+  for (const repo of all) if (!unique.has(repo.toLowerCase())) unique.set(repo.toLowerCase(), repo);
+  return [...unique.values()].slice(0, 3);
 }
 
 function splitTagsLine(line) {
@@ -217,6 +230,7 @@ export function extractSubmittedCategory(issueBody, taxonomy = []) {
 /** Extract explicit repository code paths linked in the issue text or comments. */
 export function extractSubmittedCodePaths(text, repository) {
   if (typeof text !== "string" || !repository) return [];
+  text = text.slice(0, 100_000);
   const paths = new Set();
   const escaped = repository.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const blobRegex = new RegExp(
@@ -245,7 +259,116 @@ export function extractSubmittedCodePaths(text, repository) {
     }
   }
 
-  return [...paths];
+  // SQL/DSL/configuration and unknown text suffixes are equally useful hints.
+  for (const match of text.matchAll(/`([^`\n\r]{1,600})`/g)) {
+    const candidate = match[1].replace(/(?::\d+(?:-\d+)?|#L\d+(?:-L?\d+)?)$/, "");
+    if (isReadableMaterialPath(candidate) && /[/.]/.test(candidate)) paths.add(candidate);
+  }
+  return [...paths].slice(0, 16);
+}
+
+/** Path safety is independent of source language, directory conventions or value. */
+export function isReadableMaterialPath(path) {
+  return typeof path === "string" && path.length <= 600 &&
+    !/^\/|[\\\u0000-\u001f\u007f?#]/u.test(path) &&
+    path.split("/").every((part) => part && part !== "." && part !== "..") &&
+    !/(?:^|\/)(?:\.git|\.env(?:\.[^/]*)?|id_rsa|id_ed25519)(?:\/|$)/i.test(path);
+}
+
+export function materialCandidate(entry) {
+  return entry?.type === "blob" && entry.mode !== "120000" && isReadableMaterialPath(entry.path) &&
+    (entry.size === undefined || (Number.isSafeInteger(entry.size) && entry.size >= 0)) &&
+    !/\.(?:png|jpe?g|gif|webp|ico|avif|woff2?|ttf|otf|zip|gz|xz|zst|tar|pdf|exe|dll|so|dylib|bin|mp[34]|mov|wav|safetensors|onnx|pt|pth)$/i.test(entry.path);
+}
+
+export function isPersistentExclusion(entry) {
+  return ["maintainer-removed", "policy-blocked"].includes(entry?.status);
+}
+
+function materialForm(path) {
+  if (/\.(?:md|mdx|rst|txt)$/i.test(path)) return "prose";
+  if (/\.sql$/i.test(path)) return "sql";
+  if (/\.(?:json|ya?ml|toml|ini|conf|cfg|xml)$/i.test(path)) return "config";
+  return "source";
+}
+
+function materialRank(entry, need = "") {
+  const p = entry.path;
+  return Number(/(?:^|\/)readme(?:\.[^/]*)?$/i.test(p)) * 40 +
+    Number(/jev|typesafe|providers?|controllers?|evaluators?/i.test(p)) * 30 +
+    Number(need === "configuration" && /config|provider|\.sql$|\.ya?ml$|\.toml$/i.test(p)) * 25 +
+    Number(need === "usage-example" && /readme|docs|example|tutorial|usage/i.test(p)) * 25 +
+    Number(need === "backend" && /backend|provider|model|evaluat|controller/i.test(p)) * 25 -
+    Number(/(?:^|\/)(?:node_modules|vendor|dist|build|generated|\.git)(?:\/|$)/i.test(p)) * 50;
+}
+
+/** Bounded immutable text collection. File names affect ordering, never semantic admission. */
+export async function collectAdditionalMaterials({ api, repository, sha, need = "", excludePaths = [],
+  preferredPaths = [], maxFiles = 3, maxTotalBytes = 262144, maxScanBytes = 10_485_760, inventory } = {}) {
+  if (!REPO.test(repository ?? "") || !SHA.test(sha ?? "") || typeof api !== "function")
+    throw new Error("Invalid fixed material snapshot");
+  let tree = inventory;
+  if (!tree) {
+    try { tree = await api(`/repos/${repository}/git/trees/${sha}?recursive=1`, { responseBytes: 2_000_000 }); }
+    catch (error) {
+      if (error.status !== 404 && error.code !== "RESPONSE_BUDGET") throw error;
+      // A huge/truncated tree is a coverage limit, not a verdict. Root materials
+      // still give the model a view of the project without unbounded traversal.
+      const root = await api(`/repos/${repository}/contents?ref=${sha}`, { responseBytes: 200_000 });
+      tree = { tree: (Array.isArray(root) ? root : []).filter((file) => file.type === "file")
+        .map((file) => ({ ...file, type: "blob" })), truncated: true };
+    }
+  }
+  const excluded = new Set(excludePaths);
+  const hints = new Set(preferredPaths.filter(isReadableMaterialPath).slice(0, 16));
+  const entries = (tree.tree ?? []).slice(0, 15000).filter((entry) => materialCandidate(entry) && !excluded.has(entry.path));
+  const rank = (a, b) => materialRank(b, need) - materialRank(a, need) || a.path.localeCompare(b.path);
+  const nominated = entries.filter((entry) => hints.has(entry.path)).sort(rank);
+  const discovered = entries.filter((entry) => !hints.has(entry.path)).sort(rank);
+  const limit = Math.max(1, Math.min(8, maxFiles));
+  const hintLimit = Math.min(Math.floor(limit / 2), nominated.length);
+  const selected = [...nominated.slice(0, hintLimit), ...discovered.slice(0, limit - hintLimit)];
+  if (selected.length < limit) selected.push(...nominated.slice(hintLimit, hintLimit + limit - selected.length));
+  const sources = [];
+  let used = 0, scanned = 0;
+  const unread = [];
+  for (const entry of selected) {
+    if (used + Math.min(entry.size ?? 65536, 65536) > maxTotalBytes) { unread.push(entry.path); continue; }
+    try {
+      const endpoint = `/repos/${repository}/contents/${pathPart(entry.path)}?ref=${sha}`;
+      const large = (entry.size ?? 0) > 65536;
+      if (large) {
+        const scanLimit = Math.min(maxScanBytes - scanned, 10_485_760);
+        if (scanLimit <= 0) { unread.push(entry.path); continue; }
+        const sampled = await api(endpoint, { raw: true, responseBytes: scanLimit, sampleMaterials: true });
+        if (!sampled || !Number.isSafeInteger(sampled.scannedBytes) || sampled.scannedBytes < 0 || sampled.scannedBytes > scanLimit ||
+            !Array.isArray(sampled.windows) || sampled.windows.length > 7) { unread.push(entry.path); continue; }
+        scanned += sampled.scannedBytes;
+        for (const window of sampled.windows) {
+          if (typeof window.text !== "string" || window.text.includes("\0") || !Number.isSafeInteger(window.startByte) || window.startByte < 0 ||
+              window.endByte !== window.startByte + Buffer.byteLength(window.text) || window.endByte > entry.size ||
+              Buffer.byteLength(window.text) > 16384 || used + Buffer.byteLength(window.text) > maxTotalBytes) continue;
+          used += Buffer.byteLength(window.text);
+          sources.push({ ...sourceFile(repository, sha, entry.path, window.text), form: materialForm(entry.path),
+            partial: true, originalBytes: entry.size, readSpan: { startByte: window.startByte, endByte: window.endByte },
+            blobOid: entry.sha ?? null, contentSha256: sampled.complete ? sampled.contentSha256 : null });
+        }
+        if (!sampled.complete) unread.push(entry.path);
+        continue;
+      }
+      const file = await api(endpoint, { responseBytes: 100_000 });
+      if (!large && ((file.type && file.type !== "file") || (file.path && file.path !== entry.path))) { unread.push(entry.path); continue; }
+      const text = decodeFile(file, 65536);
+      if (text === null || !text.trim() || used + Buffer.byteLength(text) > maxTotalBytes) { unread.push(entry.path); continue; }
+      used += Buffer.byteLength(text);
+      sources.push({ ...sourceFile(repository, sha, entry.path, text), form: materialForm(entry.path) });
+    } catch (error) {
+      if (error.status === 404 || error.code === "RESPONSE_BUDGET") { unread.push(entry.path); continue; }
+      throw error;
+    }
+  }
+  return { sources, inventory: tree, coverage: { bytesRead: used, scannedBytes: scanned, truncatedTree: Boolean(tree.truncated),
+    candidateCount: entries.length, omitted: Math.max(0, entries.length - sources.length), unread } };
 }
 
 function safePath(value) {
@@ -550,7 +673,7 @@ export async function inspectRepository({
     canonicalRepository(repository) !== repository
   )
     return { status: "rejected", reason: "invalid repository" };
-  if (typeof verifyIntegration !== "function")
+  if (!semanticReview && typeof verifyIntegration !== "function")
     throw new TypeError("verifyIntegration is required");
   let repo;
   try {
@@ -576,14 +699,14 @@ export async function inspectRepository({
     (repo.visibility && repo.visibility !== "public")
   )
     return { status: "rejected", reason: "repository is not public" };
-  if (repo.fork === true)
+  if (!semanticReview && repo.fork === true)
     return { status: "rejected", reason: "forks are not ingested", repo };
   const names = new Set([repository.toLowerCase(), canonical.toLowerCase()]);
   if (
     existingProjects.some((project) => identityMatches(project, names, repo.id))
   )
     return { status: "duplicate", reason: "repository already listed", repo };
-  if (exclusions.some((project) => identityMatches(project, names, repo.id)))
+  if (exclusions.some((project) => (!semanticReview || isPersistentExclusion(project)) && identityMatches(project, names, repo.id)))
     return {
       status: "rejected",
       reason: "repository is excluded by editorial review",
@@ -608,6 +731,17 @@ export async function inspectRepository({
       reason: "repository has no immutable commit",
       repo,
     };
+  if (semanticReview) {
+    const collected = await collectAdditionalMaterials({ api, repository: canonical, sha, preferredPaths, maxFiles: 8 });
+    const sources = collected.sources.map((source) => ({ ...source, repoId: repo.id, repository: canonical, commit: sha }));
+    const readmeFiles = sources.filter((source) => /(?:^|\/)readme(?:\.[^/]*)?$/i.test(source.path));
+    return { status: "inspected", repo, sha, commits, sources, materialSources: sources,
+      sourceInventory: collected.inventory, coverage: collected.coverage,
+      readme: readmeFiles.map((source) => source.text).join("\n\n"), readmeFiles,
+      // Compatibility view only; neither this nor implementationFiles is an admission gate.
+      codeSources: sources.filter((source) => codeCandidate({ ...source, type: "blob", size: Buffer.byteLength(source.text) })),
+      evidence: { verified: false, reason: "semantic review required", files: sources, implementationFiles: [] } };
+  }
   let readme = "";
   let readmePath = "README.md";
   try {
