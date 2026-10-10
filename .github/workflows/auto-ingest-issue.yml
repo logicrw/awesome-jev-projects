@@ -47,6 +47,7 @@ env:
   REVIEW_PROVIDER_CONFIGURED: ${{ secrets.DEEPSEEK_API_KEY != '' }}
   DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
   DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
+  TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY || '' }}
   REVIEW_CONFIG_REVISION: ${{ vars.REVIEW_CONFIG_REVISION || vars.RADAR_REVIEW_REVISION || '' }}
 concurrency:
   group: ingest-issue-${{ github.event.issue.number || github.event.inputs.issue_number || github.run_id }}
@@ -134,6 +135,7 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
           DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY || '' }}
           INGEST_ISSUE_NUMBER: ${{ inputs.issue_number || 0 }}
           INGEST_MODELS_PROBE: ${{ inputs.models_probe || false }}
           INGEST_REMOTE_PROBE: ${{ inputs.remote_probe || false }}

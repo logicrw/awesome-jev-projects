@@ -110,6 +110,7 @@ function reviewDiagnostics(review, reviewRevision) {
     ...(review.budgetGrant ? { reservation: Object.fromEntries(["caseId", "reservationId"].filter((key) => publicReviewMetadata(review.budgetGrant[key])).map((key) => [key, review.budgetGrant[key]])) } : {}),
     ...(review.budget ? { budget: review.budget } : {}),
     ...(review.usage ? { usage: review.usage } : {}),
+    ...(review.jevGate ? { jevGate: review.jevGate } : {}),
   };
 }
 
@@ -685,6 +686,8 @@ async function main() {
       delete process.env.DEEPSEEK_API_KEY;
       delete process.env.MUSE_API_KEY;
       delete process.env.GH_MODELS_TOKEN;
+      delete process.env.TYPESAFE_API_KEY;
+      delete process.env.JEV_API_KEY;
     }
     const enrich = createSummaryEnricher(modelsProbe ? { token: "" } : {});
     const reviewer = createSubmissionReviewer(modelsProbe ? { token: "" } : {});

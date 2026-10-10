@@ -14,6 +14,7 @@ env:
   REVIEW_PROVIDER_CONFIGURED: ${{ secrets.DEEPSEEK_API_KEY != '' }}
   DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
   DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
+  TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY || '' }}
   REVIEW_CONFIG_REVISION: ${{ vars.REVIEW_CONFIG_REVISION || vars.RADAR_REVIEW_REVISION || '' }}
 concurrency:
   group: ecosystem-radar
@@ -151,6 +152,7 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_ENDPOINT: ${{ secrets.DEEPSEEK_ENDPOINT || vars.DEEPSEEK_ENDPOINT || '' }}
           DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL || vars.DEEPSEEK_MODEL || '' }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY || '' }}
           RADAR_REVIEW_REVISION: ${{ vars.RADAR_REVIEW_REVISION || '' }}
           RADAR_PLAN_FILE: ${{ runner.temp }}/plan/radar-plan.json
           RADAR_GRANTS_FILE: ${{ runner.temp }}/grants/radar-grants.json

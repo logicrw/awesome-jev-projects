@@ -1,5 +1,6 @@
 import { buildEvidenceBundle, validateVerdict, resolveMaterialRefs, resolveMaterialFiles } from "./evidence-bundle.mjs";
 import { REVIEW_BUDGET, requestBudget, requestDigest, createBudgetAccount, remainingTokens, reserveRequest, settleRequest } from "./review-budget.mjs";
+import { evaluateCandidateWithJev } from "./jev-decision.mjs";
 export { REVIEW_BUDGET } from "./review-budget.mjs";
 /** Source text is data, never instructions. Enrichment cannot change repository identity or proof. */
 const MODELS_URL = "https://models.inference.ai.azure.com/chat/completions";
@@ -11,9 +12,10 @@ const DECISION_HEADING = /jev.*(?:决策|decision)|where.*jev/i;
 const NON_SUMMARY_HEADING =
   /^(?:(?:github|project)\s+)?(?:repo(?:sitory)?|evidence|implementation|references?)$|^(?:项目仓库|仓库地址|仓库|证据|实现|参考资料|决策点)$/i;
 
-function redact(value, token = "") {
+function redact(value, token = "", extraToken = "") {
   let text = typeof value === "string" ? value : "";
   if (token) text = text.split(token).join("[REDACTED]");
+  if (extraToken) text = text.split(extraToken).join("[REDACTED]");
   return text
     .replace(
       /-----BEGIN [\w ]*PRIVATE KEY-----[\s\S]*?(?:-----END [\w ]*PRIVATE KEY-----|$)/g,
@@ -522,6 +524,9 @@ export function createSubmissionReviewer({
   endpoint, model, source, fetchImpl = fetch, timeoutMs = 30000, maxAttempts = 3,
   random = Math.random, now = Date.now, countInputTokens,
   sleep = (ms) => process.env.NODE_TEST_CONTEXT ? Promise.resolve() : new Promise((r) => setTimeout(r, ms)),
+  typesafeApiKey = process.env.TYPESAFE_API_KEY || process.env.JEV_API_KEY,
+  typesafeEndpoint = process.env.TYPESAFE_ENDPOINT || process.env.JEV_ENDPOINT,
+  jevFetchImpl,
 } = {}) {
   let circuit = null;
   const attemptLimit = Number.isInteger(maxAttempts) ? Math.max(1, Math.min(3, maxAttempts)) : 3;
@@ -560,12 +565,14 @@ export function createSubmissionReviewer({
     sources = [], targets = [], taxonomy = [], issue = {}, acquireEvidence,
     budgetLedger, budgetGrant, caseId, expectedReservationId, allowUnreserved = false,
   } = {}) {
+    let jevGateResult = null;
     const attempts = [];
     const account = createBudgetAccount({ budgetLedger, budgetGrant,
       caseId: caseId || (allowUnreserved ? `review:${requestDigest(targets)}` : undefined), expectedReservationId, allowUnreserved });
     const result = (status, extra = {}) => ({
       decision: null, status, retryable: false, reason: status, attempts,
       source: modelSource, requestModel: resolvedModel,
+      ...(jevGateResult ? { jevGate: jevGateResult } : {}),
       budgetLedger: account ? { ...account.ledger } : null,
       budgetGrant: account ? { ...account.grant } : null,
       budget: { limitTokens: 6000, durableReservation: account?.durableReservation ?? false,
@@ -633,6 +640,53 @@ export function createSubmissionReviewer({
       }
       return null;
     };
+    if (typesafeApiKey) {
+      const candidateState = {
+        repository: initialTargets[0]?.repository,
+        intent,
+        evidenceCount: available.length,
+        evidenceFiles: available.slice(0, 5).map((s) => ({
+          path: s.path,
+          sample: boundedText(s.text ?? "", 600),
+        })),
+      };
+      try {
+        jevGateResult = await evaluateCandidateWithJev({
+          state: candidateState,
+          apiKey: typesafeApiKey,
+          endpoint: typesafeEndpoint,
+          fetchImpl: jevFetchImpl ?? (typesafeEndpoint ? fetchImpl : fetch),
+          timeoutMs: 6000,
+        });
+      } catch (err) {
+        jevGateResult = { status: "fallback", reason: "unexpected-error", error: err?.message };
+      }
+
+      if (jevGateResult?.isRejected === true) {
+        const packed = await makeBundle(1, available);
+        if (packed) {
+          const excludeVerdict = {
+            target: initialTargets[0].id,
+            decision: "exclude",
+            catalogKind: "other",
+            jevRelation: "unrelated",
+            reviewBasis: "implementation-material",
+            claims: [],
+            conflicts: [],
+            need: null,
+            category: null,
+            plainSummary: "",
+            plainSummaryEn: "",
+          };
+          const validated = validateVerdict(excludeVerdict, packed.bundle, taxonomy);
+          if (validated) {
+            const finished = finish(validated, packed.bundle, "jev-gate-rejected");
+            finished.jevGate = jevGateResult;
+            return finished;
+          }
+        }
+      }
+    }
     for (let phase = 1; phase <= 2; phase++) {
       const packed = await makeBundle(phase, available);
       if (!packed) return result("insufficient-evidence", { reason: prior ? "followup-budget-exhausted" : "material-budget-unavailable" });
@@ -742,6 +796,7 @@ export function createSubmissionReviewer({
     function finish(verdict, bundle, reason = verdict.decision) {
       const completed = result("completed", { ...verdict, reason, materialsValidated: true,
         materialRefs: resolveMaterialRefs(bundle, verdict), materialFiles: resolveMaterialFiles(bundle, verdict) });
+      if (jevGateResult) completed.jevGate = jevGateResult;
       Object.defineProperty(completed, "evidenceBundle", { value: bundle });
       return completed;
     }

@@ -633,3 +633,81 @@ test("legacy code-window helper remains bounded and is not the material admissio
   assert.equal(window.length, 5000);
   assert.equal(window.includes(core), true);
 });
+
+test("Jev System One early rejection short-circuits before any LLM tokens are consumed", async () => {
+  let llmCalls = 0;
+  const reviewer = createSubmissionReviewer({
+    token: "fixture-deepseek",
+    typesafeApiKey: "fixture-jev-key",
+    jevFetchImpl: async () => new Response(JSON.stringify({
+      model: "jev-latest",
+      answers: {
+        is_genuine_jev: { noul: 0.05 },
+        category_choice: { choice: "Other", confidence: 0.1 },
+        integration_depth: { score: 0 },
+      },
+    }), { status: 200, headers: { "Content-Type": "application/json" } }),
+    fetchImpl: async () => {
+      llmCalls++;
+      throw new Error("DeepSeek must not be called when Jev short-circuits");
+    },
+  });
+
+  const result = await reviewer(submission);
+  assert.equal(llmCalls, 0);
+  assert.equal(result.status, "completed");
+  assert.equal(result.decision, "exclude");
+  assert.equal(result.reason, "jev-gate-rejected");
+  assert.equal(result.jevGate.status, "ok");
+  assert.equal(result.jevGate.isRejected, true);
+  assert.equal(result.jevGate.probability, 0.05);
+});
+
+test("Jev System One admission gate forwards genuine candidates to DeepSeek with metadata", async () => {
+  let llmCalls = 0;
+  const reviewer = createSubmissionReviewer({
+    token: "fixture-deepseek",
+    typesafeApiKey: "fixture-jev-key",
+    jevFetchImpl: async () => new Response(JSON.stringify({
+      model: "jev-latest",
+      answers: {
+        is_genuine_jev: { noul: 0.95 },
+        category_choice: { choice: "CLI & Pipelines", confidence: 0.92 },
+        integration_depth: { score: 2 },
+      },
+    }), { status: 200, headers: { "Content-Type": "application/json" } }),
+    fetchImpl: async (_, options) => {
+      llmCalls++;
+      return reply(verdictForRequest(options));
+    },
+  });
+
+  const result = await reviewer(submission);
+  assert.equal(llmCalls, 1);
+  assert.equal(result.status, "completed");
+  assert.equal(result.decision, "admit");
+  assert.equal(result.jevGate.status, "ok");
+  assert.equal(result.jevGate.isGenuine, true);
+  assert.equal(result.jevGate.probability, 0.95);
+  assert.equal(result.jevGate.category, "CLI & Pipelines");
+});
+
+test("Jev System One fallback on network error smoothly falls through to DeepSeek without failure", async () => {
+  let llmCalls = 0;
+  const reviewer = createSubmissionReviewer({
+    token: "fixture-deepseek",
+    typesafeApiKey: "fixture-jev-key",
+    jevFetchImpl: async () => new Response("Gateway error", { status: 502 }),
+    fetchImpl: async (_, options) => {
+      llmCalls++;
+      return reply(verdictForRequest(options));
+    },
+  });
+
+  const result = await reviewer(submission);
+  assert.equal(llmCalls, 1);
+  assert.equal(result.status, "completed");
+  assert.equal(result.decision, "admit");
+  assert.equal(result.jevGate.status, "fallback");
+  assert.equal(result.jevGate.reason, "http-error-502");
+});
