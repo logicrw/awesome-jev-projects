@@ -527,7 +527,7 @@ function sanitizeJevGate(gate) {
     ...(typeof gate.isRejected === "boolean" ? { isRejected: gate.isRejected } : {}),
     ...(typeof gate.probability === "number" && Number.isFinite(gate.probability) ? { probability: gate.probability } : {}),
     ...(typeof gate.category === "string" ? { category: gate.category } : {}),
-    ...(Number.isInteger(gate.depthScore) ? { depthScore: gate.depthScore } : {}),
+    ...(typeof gate.depthScore === "number" && Number.isFinite(gate.depthScore) ? { depthScore: Math.round(gate.depthScore * 100) / 100 } : {}),
     ...(Number.isInteger(gate.httpStatus) ? { httpStatus: gate.httpStatus } : {}),
   };
 }
