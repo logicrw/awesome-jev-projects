@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-856%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-859%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：
 - ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。
 - 🎯 **原生确定性输出**：原生支持 `Choice`（多选一）、`Score`（打分）与 `Noul`（二元逻辑与概率），免去易碎的正则提取。
-- 🛡️ **严格拒绝概念炒作**：按材料收录 **856+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
+- 🛡️ **严格拒绝概念炒作**：按材料收录 **859+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
 
 ### 📊 架构分工对比：System 1 (Jev) vs System 2 (大推理模型)
 
@@ -50,7 +50,7 @@
 - ⚡ **毫秒级吸顶搜索与浮动过滤**：即便页面下滑，也可随时唤出浮动分类面板，支持多标签一键点选过滤。
 - 🔍 **固定版本材料**：查看条目关联的源码、SQL、文档或示例，并按条目标注的审查依据理解结论。
 
-> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **856 个精选项目**
+> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **859 个精选项目**
 
 由社区维护的 Jev 项目与资源目录，收录集成、基准测试、开发工具、研究与学习材料，并逐条展示关系、审查依据和许可事实。
 
@@ -79,11 +79,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 
 ## 分类
 
-- [浏览器与桌面 (54)](https://logicrw.github.io/awesome-jev-projects/categories/browser-os-action/)
-- [命令行与流水线 (102)](https://logicrw.github.io/awesome-jev-projects/categories/cli-pipelines/)
+- [浏览器与桌面 (55)](https://logicrw.github.io/awesome-jev-projects/categories/browser-os-action/)
+- [命令行与流水线 (103)](https://logicrw.github.io/awesome-jev-projects/categories/cli-pipelines/)
 - [分类与目录 (2)](https://logicrw.github.io/awesome-jev-projects/categories/classification-taxonomy/)
 - [代码与图谱 (16)](https://logicrw.github.io/awesome-jev-projects/categories/codebase-graph-pathfinding/)
-- [上下文与记忆 (42)](https://logicrw.github.io/awesome-jev-projects/categories/context-gc-filter/)
+- [上下文与记忆 (43)](https://logicrw.github.io/awesome-jev-projects/categories/context-gc-filter/)
 - [音乐与界面创作 (26)](https://logicrw.github.io/awesome-jev-projects/categories/creative-tools/)
 - [数据与搜索 (52)](https://logicrw.github.io/awesome-jev-projects/categories/data-search/)
 - [决策工具 (42)](https://logicrw.github.io/awesome-jev-projects/categories/decision-tools/)
@@ -153,6 +153,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: Jev 根据用户指令、当前应用窗口和编号后的可操作目标列表，选择下一步应执行的操作及其目标控件。
   - **这个项目的用途**: 让界面选择与执行分开，便于检查每一步。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/savka777/jev-use/) · 许可证: MIT
+
+- [**fastbrowse**](https://github.com/agent-labs-dev/fastbrowse) — 极速网页交互 Agent：由 Jev 从页面 DOM 元素中单次决策选取操作动作，大模型负责规划与引用式回答验证。
+  - **Jev 在此条目的作用**: 根据当前 DOM 结构与目标，在单次前向请求中由 Jev 选择点击或聚焦的目标元素及交互方式。
+  - **这个项目的用途**: 把页面控件选择与繁重的文本生成解耦，大幅降低每步浏览动作的时延与 Token 开销。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/agent-labs-dev/fastbrowse/) · 许可证: MIT
 
 - [**jev-voice**](https://github.com/kevinbadi/jev-voice) — 通过本地语音识别加一次 Jev 选择调用来打开应用、输入、搜索和操控 macOS 的语音助手。
   - **Jev 在此条目的作用**: Jev 从语音转录文本和当前屏幕可观察元素中选择要执行的操作类型及其目标参数。
@@ -396,6 +401,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: Jev 对每个输入单元（行、段落、函数、diff hunk）判断是否符合用户自然语言描述，返回概率后由本地阈值过滤。
   - **这个项目的用途**: 把语义判断接到已有的命令行工作流。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/keltokhy/jgrep/) · 许可证: MIT
+
+- [**skillranker**](https://github.com/Dicklesworthstone/skillranker) — 面向 Coding Agent（如 Claude Code）的 Rust CLI 工具，通过 Jev 类型化决策评估实时会话上下文并对候选 Skills 进行排序选路。
+  - **Jev 在此条目的作用**: Jev 评估 Agent 当前上下文与各可用 Skill 的匹配度，在单次判定中返回带置信度的类型化选择与概率分布。
+  - **这个项目的用途**: 把大模型盲目搜寻工具替换为毫秒级 Jev 判定，内建防越界校验与本地反馈环路，大幅加速 Agent 执行节奏。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/dicklesworthstone/skillranker/) · 许可证: 自定义许可
 
 - [**jev-shell-history**](https://github.com/mrnugget/jev-shell-history) — 类似于 Fish 终端样式的 Zsh 历史命令建议工具，利用 Jev 对已有历史记录根据当前上下文进行智能打分排序。
   - **Jev 在此条目的作用**: 将当前敲入的命令前缀与本地 Zsh 历史候选组装为 Jev 请求，由 Jev 评估最佳补全项，仅做行内建议而不自动执行。
@@ -995,6 +1005,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: Jev 负责判定记忆类型与关系、选择检索图视图并分配遍历预算、为候选打分以及评估证据是否充分以决定停止或继续扩展检索。
   - **这个项目的用途**: 把语义判断接到已有的命令行工作流。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/libingzheren/jev-mem/) · 许可证: MIT
+
+- [**jevmem**](https://github.com/Avinash-jetwani/jevmem) — Claude Code 会话记忆管理工具，利用 Jev 对会话中的规则与决策进行类型化过滤并持久化为结构化仓库记忆。
+  - **Jev 在此条目的作用**: Jev 对聊天记录中的每个技术点判断其是否属于可沉淀的项目长效规则、架构约束或已作废方案。
+  - **这个项目的用途**: 防止 Agent 每次新会话重复踩坑，利用零文本生成开销的 Jev 判定自动提炼高信噪比上下文记忆。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/avinash-jetwani/jevmem/) · 许可证: MIT
 
 - [**Winnow**](https://github.com/GhalebDweikat/winnow) — 给 Claude Code 的长日志装一道筛子。暂时不相关的内容先藏起来，想看时还能完整找回。
   - **Jev 在此条目的作用**: 逐块判断 Read、Bash、Grep 输出是否有用；保留相关或不确定内容，隐藏高置信度无关块。
@@ -3040,9 +3055,9 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **这个项目的用途**: 把语义匹配与最终派工规则分开。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/kunchenguid/firstmate/) · 许可证: MIT
 
-- [**hermes-jev-skills**](https://github.com/kerpopule/hermes-jev-skills) — 该仓库为 Hermes Agent 提供基于 Jev 的八个 SKILL.md 技能，负责模型路由、记忆筛选、转录压缩、技能选择以及计算机和浏览器操作决策。
-  - **Jev 在此条目的作用**: Jev 决定每一轮用哪个模型、加载哪个技能、保留哪些记忆片段与对话轮次，以及下一步 GUI/浏览器操作。
-  - **这个项目的用途**: 按任务分配模型资源；具体成本收益需看项目测试。
+- [**hermes-jev-skills**](https://github.com/kerpopule/hermes-jev-skills) — 面向 Hermes、Claude Code 与 Codex 的 Jev 决策工具箱，实现模型选路、记忆压缩与 Skill 动态调度的轻量判定。
+  - **Jev 在此条目的作用**: 对 Agent 当前任务难度与上下文状态，通过 Jev 的 Choice / Score / Noul 做出非生成式类型化选路与剪枝判定。
+  - **这个项目的用途**: 用严格有界的 Jev 判定替代不稳定的 Prompt 选路，统一支持 TypeSafe 原生、OpenRouter 与 Venice 端点。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/kerpopule/hermes-jev-skills/) · 许可证: MIT
 
 - [**atomic**](https://github.com/bastani-inc/atomic) — Atomic 编程 Agent 的可选 Jev 决策后端，为路由等流程提供受限的结构化选择。

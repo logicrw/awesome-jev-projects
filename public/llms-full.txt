@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 856
+Catalog entries: 859
 
 ## Install the Agent Skill
 
@@ -5309,16 +5309,17 @@ Ranks text along a plain-English criterion using pairwise Jev Noul comparisons a
 
 ## hermes-jev-skills
 
-Jev-powered model routing, memory, compaction, skill selection, computer and browser use for Hermes agents (also Claude Code and Codex)
+Jev-powered decision toolkit for Hermes, Claude Code, and Codex providing model routing, memory compaction, and dynamic skill selection.
 
 - Repository: https://github.com/kerpopule/hermes-jev-skills
 - Category: Routing & Cost Optimization
-- Jev decision: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-- Review scope: Based on repository metadata and README with rule-based classification; pending human review, with no independent runtime or performance verification.
+- Jev decision: Uses Jev Choice, Score, and Noul questions to execute non-generative typed routing and pruning for agent tasks.
+- Purpose: Replaces flaky prompt-based routing with bounded Jev decisions, supporting TypeSafe, OpenRouter, and Venice backends.
+- Review scope: Multi-provider Jev System One client implementation verified in jevkit/client.py; all agent tool hooks were not executed.
 - License: MIT
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/kerpopule/hermes-jev-skills/
-- Source evidence: https://github.com/kerpopule/hermes-jev-skills/blob/29e64b57026eb040b355c260a2480015bd459611/jevkit/client.py
+- Source evidence: https://github.com/kerpopule/hermes-jev-skills/blob/b22a21f365720cb7cf06f9b229c095176b39cdb9/jevkit/client.py
+- Source evidence: https://github.com/kerpopule/hermes-jev-skills/blob/b22a21f365720cb7cf06f9b229c095176b39cdb9/README.md
 
 ## jev-skill-suggester
 
@@ -12007,3 +12008,45 @@ An experimental Python trading bot for Kraken and Alpaca combining Jev-assisted 
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/kyaulabs/kairos/
 - Source evidence: https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/kairos/clients.py
 - Source evidence: https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/README.md
+
+## skillranker
+
+A standalone Rust CLI powered by TypeSafe Jev that ranks agent skills for the next step using live session context, with local safeguards and feedback.
+
+- Repository: https://github.com/Dicklesworthstone/skillranker
+- Category: CLI & Pipelines
+- Jev decision: Jev evaluates the agent live context against available skills, returning calibrated typed choices and probabilities in a single pass.
+- Purpose: Replaces slow generative skill searches with millisecond Jev decisions, backed by local safety bounds and feedback loops.
+- Review scope: Native Rust implementation of Jev client codecs and admission policy verified in src/jev/mod.rs; license contains a custom rider.
+- License: Custom license
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/dicklesworthstone/skillranker/
+- Source evidence: https://github.com/Dicklesworthstone/skillranker/blob/85216b0aad550acf047375fe65159e00cb31ce2e/src/jev/mod.rs
+- Source evidence: https://github.com/Dicklesworthstone/skillranker/blob/85216b0aad550acf047375fe65159e00cb31ce2e/README.md
+
+## fastbrowse
+
+A fast browser agent: Jev picks each action from DOM elements on the page, an LLM plans, and claims cite verifiable page quotes.
+
+- Repository: https://github.com/agent-labs-dev/fastbrowse
+- Category: Browser & OS Action
+- Jev decision: Jev selects the target DOM element and interaction type in a single request based on current page state and goal.
+- Purpose: Decouples element selection from heavy text generation, slashing latency and token usage for each browsing step.
+- Review scope: TypeSafe Jev transport and action selection verified in src/fastbrowse/clients/typesafe.py; browser test suite was not run.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/agent-labs-dev/fastbrowse/
+- Source evidence: https://github.com/agent-labs-dev/fastbrowse/blob/307c30218e41bb785000171f97197b2f828a7721/src/fastbrowse/clients/typesafe.py
+- Source evidence: https://github.com/agent-labs-dev/fastbrowse/blob/307c30218e41bb785000171f97197b2f828a7721/README.md
+
+## jevmem
+
+A Claude Code memory manager that uses Jev to filter decisions and rules from chat history into durable, per-repo memory.
+
+- Repository: https://github.com/Avinash-jetwani/jevmem
+- Category: Context GC & Filter
+- Jev decision: Jev evaluates conversation points to classify durable architectural rules, constraints, or discarded approaches.
+- Purpose: Prevents agents from repeating past mistakes across sessions by extracting high-signal context memory without generative overhead.
+- Review scope: Jev API contract and proxy integration reviewed in scripts/jev-outage-proxy.mjs; full session replays were not run.
+- License: MIT
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/avinash-jetwani/jevmem/
+- Source evidence: https://github.com/Avinash-jetwani/jevmem/blob/b5bcffe008db16a3897e05059d2c5a19cd559992/scripts/jev-outage-proxy.mjs
+- Source evidence: https://github.com/Avinash-jetwani/jevmem/blob/b5bcffe008db16a3897e05059d2c5a19cd559992/README.md

@@ -70,14 +70,6 @@
     "reviewedAt": "2026-09-19T06:53:39.508919+00:00"
   },
   {
-    "repo": "Dicklesworthstone/skillranker",
-    "repoId": 1374059973,
-    "status": "quarantine",
-    "reason": "固定 SHA 的 LICENSE 含针对特定主体的限制性 rider，不是普通 MIT；按开源目录许可范围暂缓收录，不代表功能质量差。",
-    "source": "https://github.com/Dicklesworthstone/skillranker/blob/29490ec5c4831d7f08b0ceefd16cd717a9d761a5/README.md",
-    "reviewedAt": "2026-09-19T06:53:39.508919+00:00"
-  },
-  {
     "repo": "alxcrt/is-odd-jev",
     "repoId": null,
     "status": "maintainer-removed",

@@ -35808,75 +35808,89 @@
   },
   {
     "id": "kerpopule:hermes-jev-skills",
+    "pinned": false,
     "name": "hermes-jev-skills",
-    "repoId": 1376380583,
     "author": "kerpopule",
     "url": "https://github.com/kerpopule/hermes-jev-skills",
+    "repo": "kerpopule/hermes-jev-skills",
+    "repoId": 1376380583,
     "category": "Routing & Cost Optimization",
-    "plainSummary": "该仓库为 Hermes Agent 提供基于 Jev 的八个 SKILL.md 技能，负责模型路由、记忆筛选、转录压缩、技能选择以及计算机和浏览器操作决策。",
-    "jevDecisionPoint": "Jev 决定每一轮用哪个模型、加载哪个技能、保留哪些记忆片段与对话轮次，以及下一步 GUI/浏览器操作。",
-    "jevDecisionPointEn": "Jev returns a structured decision for the local program; consult the source for the exact decision policy.",
-    "highlightBenefit": "按任务分配模型资源；具体成本收益需看项目测试。",
-    "highlightBenefitEn": "Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.",
+    "plainSummary": "面向 Hermes、Claude Code 与 Codex 的 Jev 决策工具箱，实现模型选路、记忆压缩与 Skill 动态调度的轻量判定。",
+    "plainSummaryEn": "Jev-powered decision toolkit for Hermes, Claude Code, and Codex providing model routing, memory compaction, and dynamic skill selection.",
+    "plainSummaryJa": "Hermes や Claude Code 向けの Jev 決定ツールキット。モデル選路、メモリ要約、Skill 選択を軽量判定で実現。",
+    "plainSummaryKo": "Hermes, Claude Code, Codex를 위한 Jev 결정 툴킷으로 모델 라우팅, 메모리 압축, 동적 Skill 선택을 경량 판정으로 구현합니다.",
+    "jevDecisionPoint": "对 Agent 当前任务难度与上下文状态，通过 Jev 的 Choice / Score / Noul 做出非生成式类型化选路与剪枝判定。",
+    "jevDecisionPointEn": "Uses Jev Choice, Score, and Noul questions to execute non-generative typed routing and pruning for agent tasks.",
+    "jevDecisionPointJa": "Agent のタスク難易度と文脈に基づき、Jev の Choice/Score/Noul を用いて非生成的な型付きルーティングを実行する。",
+    "jevDecisionPointKo": "에이전트 작업 난이도와 컨텍스트를 바탕으로 Jev의 Choice, Score, Noul을 사용해 비생성형 라우팅과 프루닝을 수행합니다.",
+    "highlightBenefit": "用严格有界的 Jev 判定替代不稳定的 Prompt 选路，统一支持 TypeSafe 原生、OpenRouter 与 Venice 端点。",
+    "highlightBenefitEn": "Replaces flaky prompt-based routing with bounded Jev decisions, supporting TypeSafe, OpenRouter, and Venice backends.",
+    "highlightBenefitJa": "不安定な Prompt ルーティングを有界な Jev 決定に置き換え、複数プロバイダーのエンドポイントに対応。",
+    "highlightBenefitKo": "불안정한 프롬프트 라우팅을 유계의 Jev 판정으로 대체하고 TypeSafe, OpenRouter, Venice 엔드포인트를 통일 지원합니다.",
     "tags": [
       "llm-routing-cost",
+      "coding-agents",
       "typed-decisions"
     ],
-    "summarySource": "readme-extractive",
-    "claimStatus": "根据仓库简介与 README 自动提炼；决策机制为规则归类，待人工复核，未独立测试性能。",
-    "claimStatusEn": "Based on repository metadata and README with rule-based classification; pending human review, with no independent runtime or performance verification.",
-    "plainSummaryEn": "Jev-powered model routing, memory, compaction, skill selection, computer and browser use for Hermes agents (also Claude Code and Codex)",
-    "enrichment": {
-      "issueTextTrusted": true,
-      "ai": {
-        "attempted": true,
-        "status": "completed",
-        "requestedFields": [
-          "plainSummary"
-        ]
-      },
-      "plainSummary": {
-        "source": "muse-spark"
-      },
-      "plainSummaryEn": {
-        "source": "repo-description"
-      }
-    },
-    "stars": 997,
-    "forks": 96,
-    "openIssues": 1,
+    "stars": 1064,
+    "forks": 108,
+    "openIssues": 2,
     "license": "MIT",
+    "licenseStatus": "confirmed",
     "createdAt": "2026-09-18T20:01:29Z",
-    "lastCommitAt": "2026-10-02T10:20:14Z",
-    "headSha": "4e9b3677a9d482d661419441782589883634cfe3",
-    "metadataFetchedAt": "2026-10-02T22:20:48.424Z",
-    "metadataStatus": "ok",
+    "updatedAt": "2026-10-10T00:37:16Z",
+    "pushedAt": "2026-10-09T10:24:59Z",
+    "lastCommitAt": "2026-10-09T10:20:48Z",
+    "lastSyncedAt": "2026-10-10T01:49:28.694Z",
+    "metadataFetchedAt": "2026-10-10T01:49:28.694Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/26120791?v=4",
-    "verificationStatus": "integration-detected",
+    "language": "Python",
+    "topics": [
+      "agent-skills",
+      "claude-code",
+      "codex",
+      "hermes",
+      "jev",
+      "llm-routing"
+    ],
+    "archived": false,
+    "headSha": "b22a21f365720cb7cf06f9b229c095176b39cdb9",
+    "sourceUrl": "https://github.com/kerpopule/hermes-jev-skills/blob/b22a21f365720cb7cf06f9b229c095176b39cdb9/jevkit/client.py",
+    "sourcePath": "jevkit/client.py",
+    "evidenceLines": [
+      1,
+      35
+    ],
+    "verificationStatus": "source-verified",
     "runtimeVerified": false,
-    "discoveredAt": "2026-09-21T04:15:51.723Z",
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对 jevkit/client.py 中对 Jev System One 端点的多提供商适配与严格响应校验实现；本站未执行所有 Agent 工具钩子。",
+    "claimStatusEn": "Multi-provider Jev System One client implementation verified in jevkit/client.py; all agent tool hooks were not executed.",
+    "claimStatusJa": "jevkit/client.py におけるマルチプロバイダー Jev クライアント実装を確認済み。全ツールフックの実行検証は未実施。",
+    "claimStatusKo": "jevkit/client.py의 멀티 프로바이더 Jev 클라이언트 구현을 확인했습니다. 전체 에이전트 훅 실행 검증은 수행하지 않았습니다.",
     "evidence": [
       {
-        "url": "https://github.com/kerpopule/hermes-jev-skills/blob/29e64b57026eb040b355c260a2480015bd459611/jevkit/client.py",
-        "note": "自动发现的 Jev 集成证据"
+        "url": "https://github.com/kerpopule/hermes-jev-skills/blob/b22a21f365720cb7cf06f9b229c095176b39cdb9/jevkit/client.py",
+        "note": "固定版本源码：jevkit/client.py 中封装严格校验的 TypeSafe Jev 客户端"
+      },
+      {
+        "url": "https://github.com/kerpopule/hermes-jev-skills/blob/b22a21f365720cb7cf06f9b229c095176b39cdb9/README.md",
+        "note": "固定版本说明：面向 Coding Agent 的 Jev 决策与路由工具集"
       }
     ],
+    "sourceReviewedAt": "2026-10-10T01:49:28.694Z",
     "sourceVerification": {
-      "method": "bounded-source-heuristic",
-      "sha": "29e64b57026eb040b355c260a2480015bd459611",
+      "method": "source-review",
+      "sha": "b22a21f365720cb7cf06f9b229c095176b39cdb9",
+      "reviewedAt": "2026-10-10T01:49:28.694Z",
       "files": [
         {
           "path": "jevkit/client.py",
-          "url": "https://github.com/kerpopule/hermes-jev-skills/blob/29e64b57026eb040b355c260a2480015bd459611/jevkit/client.py",
-          "hash": "f6968b9d72301d4afc6b8c0a1b23271d3337427d3a164ade8dfec17f62acabe4"
+          "url": "https://github.com/kerpopule/hermes-jev-skills/blob/b22a21f365720cb7cf06f9b229c095176b39cdb9/jevkit/client.py"
         }
       ]
-    },
-    "sourceHash": "f6968b9d72301d4afc6b8c0a1b23271d3337427d3a164ade8dfec17f62acabe4",
-    "updatedAt": "2026-10-02T17:30:40Z",
-    "pushedAt": "2026-10-02T10:24:25Z",
-    "lastSyncedAt": "2026-10-02T22:20:48.424Z",
-    "archived": false
+    }
   },
   {
     "id": "win4r:jev-skill-suggester",
@@ -73081,6 +73095,263 @@
         {
           "path": "kairos/clients.py",
           "url": "https://github.com/kyaulabs/kairos/blob/699aa59329a143a389d1338d03a7d992e42f1e66/kairos/clients.py"
+        }
+      ]
+    }
+  },
+  {
+    "id": "dicklesworthstone:skillranker",
+    "pinned": false,
+    "name": "skillranker",
+    "author": "Dicklesworthstone",
+    "url": "https://github.com/Dicklesworthstone/skillranker",
+    "repo": "Dicklesworthstone/skillranker",
+    "repoId": 1374059973,
+    "category": "CLI & Pipelines",
+    "plainSummary": "面向 Coding Agent（如 Claude Code）的 Rust CLI 工具，通过 Jev 类型化决策评估实时会话上下文并对候选 Skills 进行排序选路。",
+    "plainSummaryEn": "A standalone Rust CLI powered by TypeSafe Jev that ranks agent skills for the next step using live session context, with local safeguards and feedback.",
+    "plainSummaryJa": "Coding Agent（Claude Code 等）向けの Rust 製 CLI。Jev の型付き判定を用いてセッション文脈を評価し、最適な Skill を選定・ランク付けする。",
+    "plainSummaryKo": "코딩 에이전트를 위한 Rust 기반 CLI 도구로, Jev 형식화 판정을 통해 실시간 세션 컨텍스트를 평가하고 후보 Skill의 순위를 매겨 선택합니다.",
+    "jevDecisionPoint": "Jev 评估 Agent 当前上下文与各可用 Skill 的匹配度，在单次判定中返回带置信度的类型化选择与概率分布。",
+    "jevDecisionPointEn": "Jev evaluates the agent live context against available skills, returning calibrated typed choices and probabilities in a single pass.",
+    "jevDecisionPointJa": "Jev が Agent のリアルタイム文脈と各 Skill の適合度を評価し、確率分布を伴う型付き選択を返す。",
+    "jevDecisionPointKo": "Jev가 에이전트의 실시간 컨텍스트와 사용 가능한 Skill의 적합성을 평가하여 확률 분포와 함께 형식화된 결정을 반환합니다.",
+    "highlightBenefit": "把大模型盲目搜寻工具替换为毫秒级 Jev 判定，内建防越界校验与本地反馈环路，大幅加速 Agent 执行节奏。",
+    "highlightBenefitEn": "Replaces slow generative skill searches with millisecond Jev decisions, backed by local safety bounds and feedback loops.",
+    "highlightBenefitJa": "生成モデルによる時間のかかるツール探索をミリ秒級の Jev 判定に置き換え、実行速度を劇的に向上させる。",
+    "highlightBenefitKo": "생성 모델의 느린 도구 탐색을 밀리초 단위의 Jev 판정으로 대체하고 로컬 안전 가드를 통해 실행 속도를 대폭 개선합니다.",
+    "tags": [
+      "cli-git-gates",
+      "coding-agents",
+      "typed-decisions"
+    ],
+    "stars": 131,
+    "forks": 11,
+    "openIssues": 2,
+    "license": "MIT (Restricted)",
+    "licenseStatus": "custom",
+    "createdAt": "2026-09-17T06:58:19Z",
+    "updatedAt": "2026-10-10T01:43:13Z",
+    "pushedAt": "2026-10-10T01:43:10Z",
+    "lastCommitAt": "2026-10-10T01:43:03Z",
+    "lastSyncedAt": "2026-10-10T01:49:28.694Z",
+    "metadataFetchedAt": "2026-10-10T01:49:28.694Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/35050222?v=4",
+    "language": "Rust",
+    "topics": [
+      "agent-skills",
+      "ai-agents",
+      "claude-code",
+      "cli",
+      "developer-tools",
+      "jev",
+      "rust"
+    ],
+    "archived": false,
+    "headSha": "85216b0aad550acf047375fe65159e00cb31ce2e",
+    "sourceUrl": "https://github.com/Dicklesworthstone/skillranker/blob/85216b0aad550acf047375fe65159e00cb31ce2e/src/jev/mod.rs",
+    "sourcePath": "src/jev/mod.rs",
+    "evidenceLines": [
+      1,
+      35
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对 src/jev/mod.rs 中对 TypeSafe Jev API 请求编码、端点校验与判定准入的原生 Rust 实现；其许可证含自定义限制附加条款。",
+    "claimStatusEn": "Native Rust implementation of Jev client codecs and admission policy verified in src/jev/mod.rs; license contains a custom rider.",
+    "claimStatusJa": "src/jev/mod.rs における Jev クライアント実装および判定ポリシーを確認済み。ライセンスにはカスタム条件が含まれます。",
+    "claimStatusKo": "src/jev/mod.rs의 Jev 클라이언트 구현 및 판정 정책을 확인했습니다. 라이선스에 사용자 정의 조건이 포함되어 있습니다.",
+    "evidence": [
+      {
+        "url": "https://github.com/Dicklesworthstone/skillranker/blob/85216b0aad550acf047375fe65159e00cb31ce2e/src/jev/mod.rs",
+        "note": "固定版本源码：原生 Rust 实现 TypeSafe Jev 请求编码与判定准入"
+      },
+      {
+        "url": "https://github.com/Dicklesworthstone/skillranker/blob/85216b0aad550acf047375fe65159e00cb31ce2e/README.md",
+        "note": "固定版本说明：基于 Jev 实时会话上下文的 Agent Skill 排序 CLI"
+      }
+    ],
+    "sourceReviewedAt": "2026-10-10T01:49:28.694Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "85216b0aad550acf047375fe65159e00cb31ce2e",
+      "reviewedAt": "2026-10-10T01:49:28.694Z",
+      "files": [
+        {
+          "path": "src/jev/mod.rs",
+          "url": "https://github.com/Dicklesworthstone/skillranker/blob/85216b0aad550acf047375fe65159e00cb31ce2e/src/jev/mod.rs"
+        }
+      ]
+    }
+  },
+  {
+    "id": "agent-labs-dev:fastbrowse",
+    "pinned": false,
+    "name": "fastbrowse",
+    "author": "agent-labs-dev",
+    "url": "https://github.com/agent-labs-dev/fastbrowse",
+    "repo": "agent-labs-dev/fastbrowse",
+    "repoId": 1374627765,
+    "category": "Browser & OS Action",
+    "plainSummary": "极速网页交互 Agent：由 Jev 从页面 DOM 元素中单次决策选取操作动作，大模型负责规划与引用式回答验证。",
+    "plainSummaryEn": "A fast browser agent: Jev picks each action from DOM elements on the page, an LLM plans, and claims cite verifiable page quotes.",
+    "plainSummaryJa": "高速ブラウザ Agent。Jev がページ要素からアクションを即座に選択し、LLM が計画策定と引用付き回答を行う。",
+    "plainSummaryKo": "초고속 브라우저 에이전트로, Jev가 페이지의 DOM 요소에서 동작을 선택하고 LLM이 계획 및 인용 기반 응답을 담당합니다.",
+    "jevDecisionPoint": "根据当前 DOM 结构与目标，在单次前向请求中由 Jev 选择点击或聚焦的目标元素及交互方式。",
+    "jevDecisionPointEn": "Jev selects the target DOM element and interaction type in a single request based on current page state and goal.",
+    "jevDecisionPointJa": "現在の DOM 構造と目標に基づき、Jev がクリック対象要素と操作種別を 1 リクエストで判定する。",
+    "jevDecisionPointKo": "현재 DOM 구조와 목표를 바탕으로 Jev가 한 번의 요청으로 조작 대상 요소와 상호작용 방식을 결정합니다.",
+    "highlightBenefit": "把页面控件选择与繁重的文本生成解耦，大幅降低每步浏览动作的时延与 Token 开销。",
+    "highlightBenefitEn": "Decouples element selection from heavy text generation, slashing latency and token usage for each browsing step.",
+    "highlightBenefitJa": "要素選択と重いテキスト生成を分離し、ブラウジング動作のレイテンシとトークン消費を大幅に削減。",
+    "highlightBenefitKo": "요소 선택과 텍스트 생성을 분리하여 브라우징 각 단계의 지연 시간과 토큰 소모를 크게 줄입니다.",
+    "tags": [
+      "browser-automation",
+      "typed-decisions",
+      "coding-agents"
+    ],
+    "stars": 114,
+    "forks": 14,
+    "openIssues": 18,
+    "license": "MIT",
+    "licenseStatus": "confirmed",
+    "createdAt": "2026-09-17T15:11:57Z",
+    "updatedAt": "2026-10-10T00:30:04Z",
+    "pushedAt": "2026-10-10T00:29:59Z",
+    "lastCommitAt": "2026-10-10T00:29:59Z",
+    "lastSyncedAt": "2026-10-10T01:49:28.694Z",
+    "metadataFetchedAt": "2026-10-10T01:49:28.694Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/270777357?v=4",
+    "language": "Python",
+    "topics": [
+      "ai-agents",
+      "browser-automation",
+      "fastbrowse",
+      "jev",
+      "python"
+    ],
+    "archived": false,
+    "headSha": "307c30218e41bb785000171f97197b2f828a7721",
+    "sourceUrl": "https://github.com/agent-labs-dev/fastbrowse/blob/307c30218e41bb785000171f97197b2f828a7721/src/fastbrowse/clients/typesafe.py",
+    "sourcePath": "src/fastbrowse/clients/typesafe.py",
+    "evidenceLines": [
+      1,
+      30
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对 src/fastbrowse/clients/typesafe.py 中实现的 TypeSafe Jev 传输与动作选择逻辑；本站未执行其端到端浏览器自动化套件。",
+    "claimStatusEn": "TypeSafe Jev transport and action selection verified in src/fastbrowse/clients/typesafe.py; browser test suite was not run.",
+    "claimStatusJa": "src/fastbrowse/clients/typesafe.py の Jev 連携実装を確認済み。ブラウザ実環境テストは未実施。",
+    "claimStatusKo": "src/fastbrowse/clients/typesafe.py의 Jev 연동 구현을 확인했습니다. 브라우저 실환경 테스트는 수행하지 않았습니다.",
+    "evidence": [
+      {
+        "url": "https://github.com/agent-labs-dev/fastbrowse/blob/307c30218e41bb785000171f97197b2f828a7721/src/fastbrowse/clients/typesafe.py",
+        "note": "固定版本源码：src/fastbrowse/clients/typesafe.py 中 TypeSafeJevClient 传输层"
+      },
+      {
+        "url": "https://github.com/agent-labs-dev/fastbrowse/blob/307c30218e41bb785000171f97197b2f828a7721/README.md",
+        "note": "固定版本说明：基于 Jev 快速动作决策的网页交互 Agent"
+      }
+    ],
+    "sourceReviewedAt": "2026-10-10T01:49:28.694Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "307c30218e41bb785000171f97197b2f828a7721",
+      "reviewedAt": "2026-10-10T01:49:28.694Z",
+      "files": [
+        {
+          "path": "src/fastbrowse/clients/typesafe.py",
+          "url": "https://github.com/agent-labs-dev/fastbrowse/blob/307c30218e41bb785000171f97197b2f828a7721/src/fastbrowse/clients/typesafe.py"
+        }
+      ]
+    }
+  },
+  {
+    "id": "avinash-jetwani:jevmem",
+    "pinned": false,
+    "name": "jevmem",
+    "author": "Avinash-jetwani",
+    "url": "https://github.com/Avinash-jetwani/jevmem",
+    "repo": "Avinash-jetwani/jevmem",
+    "repoId": 1381397567,
+    "category": "Context GC & Filter",
+    "plainSummary": "Claude Code 会话记忆管理工具，利用 Jev 对会话中的规则与决策进行类型化过滤并持久化为结构化仓库记忆。",
+    "plainSummaryEn": "A Claude Code memory manager that uses Jev to filter decisions and rules from chat history into durable, per-repo memory.",
+    "plainSummaryJa": "Claude Code の対話記憶管理ツール。Jev の型付き判定でルールや決定事項を抽出し、リポジトリ記憶として保存する。",
+    "plainSummaryKo": "Claude Code 대화 메모리 관리 도구로, Jev를 사용해 대화 내역에서 규칙과 결정을 필터링하여 저장소 메모리로 영구 보관합니다.",
+    "jevDecisionPoint": "Jev 对聊天记录中的每个技术点判断其是否属于可沉淀的项目长效规则、架构约束或已作废方案。",
+    "jevDecisionPointEn": "Jev evaluates conversation points to classify durable architectural rules, constraints, or discarded approaches.",
+    "jevDecisionPointJa": "Jev が対話内容を評価し、永続化すべきアーキテクチャ規則や制約、廃案を型付き判定で分類する。",
+    "jevDecisionPointKo": "Jev가 대화 내용을 평가하여 영구 보존할 아키텍처 규칙, 제약 조건 또는 폐기된 접근법을 형식화 분류합니다.",
+    "highlightBenefit": "防止 Agent 每次新会话重复踩坑，利用零文本生成开销的 Jev 判定自动提炼高信噪比上下文记忆。",
+    "highlightBenefitEn": "Prevents agents from repeating past mistakes across sessions by extracting high-signal context memory without generative overhead.",
+    "highlightBenefitJa": "セッションをまたぐ同じミスの繰り返しを防ぎ、生成コストをかけずに高シグナルな記憶を自動抽出する。",
+    "highlightBenefitKo": "세션 간 동일한 실수를 방지하며, 생성 비용 없이 고순도 컨텍스트 메모리를 자동으로 추출합니다.",
+    "tags": [
+      "context-compaction",
+      "coding-agents",
+      "typed-decisions"
+    ],
+    "stars": 121,
+    "forks": 8,
+    "openIssues": 5,
+    "license": "MIT",
+    "licenseStatus": "confirmed",
+    "createdAt": "2026-09-22T11:47:24Z",
+    "updatedAt": "2026-10-09T23:45:14Z",
+    "pushedAt": "2026-10-09T22:05:51Z",
+    "lastCommitAt": "2026-10-09T16:26:38Z",
+    "lastSyncedAt": "2026-10-10T01:49:28.694Z",
+    "metadataFetchedAt": "2026-10-10T01:49:28.694Z",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/56384605?v=4",
+    "language": "TypeScript",
+    "topics": [
+      "claude-code",
+      "context-engineering",
+      "jev",
+      "memory",
+      "typesafe"
+    ],
+    "archived": false,
+    "headSha": "b5bcffe008db16a3897e05059d2c5a19cd559992",
+    "sourceUrl": "https://github.com/Avinash-jetwani/jevmem/blob/b5bcffe008db16a3897e05059d2c5a19cd559992/scripts/jev-outage-proxy.mjs",
+    "sourcePath": "scripts/jev-outage-proxy.mjs",
+    "evidenceLines": [
+      1,
+      25
+    ],
+    "verificationStatus": "source-verified",
+    "runtimeVerified": false,
+    "metadataStatus": "ok",
+    "summarySource": "human-reviewed",
+    "claimStatus": "已核对 scripts/jev-outage-proxy.mjs 及 Claude 插件中与 Jev API 的端到端交互契约；本站未执行其全部会话回放。",
+    "claimStatusEn": "Jev API contract and proxy integration reviewed in scripts/jev-outage-proxy.mjs; full session replays were not run.",
+    "claimStatusJa": "scripts/jev-outage-proxy.mjs における Jev 連携契約を確認済み。全セッション再生の検証は未実施。",
+    "claimStatusKo": "scripts/jev-outage-proxy.mjs의 Jev API 연동 계약을 확인했습니다. 전체 세션 재생 검증은 수행하지 않았습니다.",
+    "evidence": [
+      {
+        "url": "https://github.com/Avinash-jetwani/jevmem/blob/b5bcffe008db16a3897e05059d2c5a19cd559992/scripts/jev-outage-proxy.mjs",
+        "note": "固定版本源码：scripts/jev-outage-proxy.mjs 中 Jev API 代理与契约测试"
+      },
+      {
+        "url": "https://github.com/Avinash-jetwani/jevmem/blob/b5bcffe008db16a3897e05059d2c5a19cd559992/README.md",
+        "note": "固定版本说明：基于 Jev 决策持久化 Claude Code 规则与记忆"
+      }
+    ],
+    "sourceReviewedAt": "2026-10-10T01:49:28.694Z",
+    "sourceVerification": {
+      "method": "source-review",
+      "sha": "b5bcffe008db16a3897e05059d2c5a19cd559992",
+      "reviewedAt": "2026-10-10T01:49:28.694Z",
+      "files": [
+        {
+          "path": "scripts/jev-outage-proxy.mjs",
+          "url": "https://github.com/Avinash-jetwani/jevmem/blob/b5bcffe008db16a3897e05059d2c5a19cd559992/scripts/jev-outage-proxy.mjs"
         }
       ]
     }
