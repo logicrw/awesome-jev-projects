@@ -518,13 +518,27 @@ function boundedText(value, maxBytes) {
 }
 const publicIdentity = (value) => typeof value === "string" && /^[a-zA-Z0-9_./:-]{1,160}$/.test(value) ? value : null;
 
+function sanitizeJevGate(gate) {
+  if (!gate || typeof gate !== "object") return null;
+  return {
+    status: typeof gate.status === "string" ? gate.status : "unknown",
+    ...(typeof gate.reason === "string" ? { reason: gate.reason } : {}),
+    ...(typeof gate.isGenuine === "boolean" ? { isGenuine: gate.isGenuine } : {}),
+    ...(typeof gate.isRejected === "boolean" ? { isRejected: gate.isRejected } : {}),
+    ...(typeof gate.probability === "number" && Number.isFinite(gate.probability) ? { probability: gate.probability } : {}),
+    ...(typeof gate.category === "string" ? { category: gate.category } : {}),
+    ...(Number.isInteger(gate.depthScore) ? { depthScore: gate.depthScore } : {}),
+    ...(Number.isInteger(gate.httpStatus) ? { httpStatus: gate.httpStatus } : {}),
+  };
+}
+
 /** Two semantic rounds, at most three HTTP requests, inside a caller-owned grant. */
 export function createSubmissionReviewer({
   token: configuredToken,
   endpoint, model, source, fetchImpl = fetch, timeoutMs = 30000, maxAttempts = 3,
   random = Math.random, now = Date.now, countInputTokens,
   sleep = (ms) => process.env.NODE_TEST_CONTEXT ? Promise.resolve() : new Promise((r) => setTimeout(r, ms)),
-  typesafeApiKey = process.env.TYPESAFE_API_KEY || process.env.JEV_API_KEY,
+  typesafeApiKey = process.env.NODE_TEST_CONTEXT ? "" : (process.env.TYPESAFE_API_KEY || process.env.JEV_API_KEY || ""),
   typesafeEndpoint = process.env.TYPESAFE_ENDPOINT || process.env.JEV_ENDPOINT,
   jevFetchImpl,
 } = {}) {
@@ -643,11 +657,11 @@ export function createSubmissionReviewer({
     if (typesafeApiKey) {
       const candidateState = {
         repository: initialTargets[0]?.repository,
-        intent,
+        intent: redact(intent, token, typesafeApiKey),
         evidenceCount: available.length,
         evidenceFiles: available.slice(0, 5).map((s) => ({
           path: s.path,
-          sample: boundedText(s.text ?? "", 600),
+          sample: boundedText(redact(s.text ?? "", token, typesafeApiKey), 600),
         })),
       };
       try {
@@ -659,10 +673,10 @@ export function createSubmissionReviewer({
           timeoutMs: 6000,
         });
       } catch (err) {
-        jevGateResult = { status: "fallback", reason: "unexpected-error", error: err?.message };
+        jevGateResult = { status: "fallback", reason: "unexpected-error" };
       }
 
-      if (jevGateResult?.isRejected === true) {
+      if (initialTargets.length === 1 && jevGateResult?.isRejected === true) {
         const packed = await makeBundle(1, available);
         if (packed) {
           const excludeVerdict = {
@@ -670,7 +684,7 @@ export function createSubmissionReviewer({
             decision: "exclude",
             catalogKind: "other",
             jevRelation: "unrelated",
-            reviewBasis: "implementation-material",
+            reviewBasis: "descriptive-material",
             claims: [],
             conflicts: [],
             need: null,
@@ -681,7 +695,7 @@ export function createSubmissionReviewer({
           const validated = validateVerdict(excludeVerdict, packed.bundle, taxonomy);
           if (validated) {
             const finished = finish(validated, packed.bundle, "jev-gate-rejected");
-            finished.jevGate = jevGateResult;
+            finished.jevGate = sanitizeJevGate(jevGateResult);
             return finished;
           }
         }
@@ -796,7 +810,7 @@ export function createSubmissionReviewer({
     function finish(verdict, bundle, reason = verdict.decision) {
       const completed = result("completed", { ...verdict, reason, materialsValidated: true,
         materialRefs: resolveMaterialRefs(bundle, verdict), materialFiles: resolveMaterialFiles(bundle, verdict) });
-      if (jevGateResult) completed.jevGate = jevGateResult;
+      if (jevGateResult) completed.jevGate = sanitizeJevGate(jevGateResult);
       Object.defineProperty(completed, "evidenceBundle", { value: bundle });
       return completed;
     }

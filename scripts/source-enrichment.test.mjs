@@ -711,3 +711,86 @@ test("Jev System One fallback on network error smoothly falls through to DeepSee
   assert.equal(result.jevGate.status, "fallback");
   assert.equal(result.jevGate.reason, "http-error-502");
 });
+
+test("Jev System One does not make requests and leaves jevGate unset when unconfigured", async () => {
+  let jevCalls = 0;
+  const reviewer = createSubmissionReviewer({
+    token: "fixture-deepseek",
+    typesafeApiKey: "",
+    jevFetchImpl: async () => {
+      jevCalls++;
+      throw new Error("Jev must not be called when typesafeApiKey is empty");
+    },
+    fetchImpl: async (_, options) => reply(verdictForRequest(options)),
+  });
+
+  const result = await reviewer(submission);
+  assert.equal(jevCalls, 0);
+  assert.equal(result.status, "completed");
+  assert.equal(result.decision, "admit");
+  assert.equal(result.jevGate, undefined);
+});
+
+test("Jev candidate state redacts secret tokens from source samples and intent", async () => {
+  const secretKey = "sk-" + "z".repeat(36);
+  let capturedState = null;
+  const reviewer = createSubmissionReviewer({
+    token: "fixture-deepseek",
+    typesafeApiKey: "fixture-jev-key",
+    jevFetchImpl: async (_, options) => {
+      const payload = JSON.parse(options.body);
+      capturedState = payload.state;
+      return new Response(JSON.stringify({
+        model: "jev-latest",
+        answers: { is_genuine_jev: { noul: 0.9 } },
+      }), { status: 200, headers: { "Content-Type": "application/json" } });
+    },
+    fetchImpl: async (_, options) => reply(verdictForRequest(options)),
+  });
+
+  const sourceWithSecret = sourceFile(`${sourceText}\n\nSECRET_KEY=${secretKey}`);
+  const result = await reviewer({
+    ...submission,
+    sources: [sourceWithSecret],
+    issue: { title: `Audit ${secretKey}`, body: `Please check ${secretKey}` },
+  });
+
+  assert.equal(result.status, "completed");
+  assert.ok(capturedState);
+  assert.equal(JSON.stringify(capturedState).includes(secretKey), false);
+  assert.ok(JSON.stringify(capturedState).includes("[REDACTED]"));
+});
+
+test("Jev System One early exclusion is bypassed when multiple targets are submitted", async () => {
+  let llmCalls = 0;
+  const multiTargets = [
+    { id: "R1", repository: "logicrw/repo-one", repoId: 1, commit: "a".repeat(40), available: true, listed: false },
+    { id: "R2", repository: "logicrw/repo-two", repoId: 2, commit: "b".repeat(40), available: true, listed: false },
+  ];
+  const multiSources = [
+    { targetId: "R1", repository: "logicrw/repo-one", repoId: 1, commit: "a".repeat(40), path: "README.md", url: `https://github.com/logicrw/repo-one/blob/${"a".repeat(40)}/README.md`, text: "One", hash: createHash("sha256").update("One").digest("hex") },
+    { targetId: "R2", repository: "logicrw/repo-two", repoId: 2, commit: "b".repeat(40), path: "README.md", url: `https://github.com/logicrw/repo-two/blob/${"b".repeat(40)}/README.md`, text: "Two", hash: createHash("sha256").update("Two").digest("hex") },
+  ];
+
+  const reviewer = createSubmissionReviewer({
+    token: "fixture-deepseek",
+    typesafeApiKey: "fixture-jev-key",
+    jevFetchImpl: async () => new Response(JSON.stringify({
+      model: "jev-latest",
+      answers: { is_genuine_jev: { noul: 0.05 } },
+    }), { status: 200, headers: { "Content-Type": "application/json" } }),
+    fetchImpl: async (_, options) => {
+      llmCalls++;
+      return reply(verdictForRequest(options));
+    },
+  });
+
+  const result = await reviewer({
+    ...submission,
+    targets: multiTargets,
+    sources: multiSources,
+  });
+
+  // Multiple targets must not be unconditionally excluded by R1's score; DeepSeek receives them
+  assert.equal(llmCalls, 1);
+});

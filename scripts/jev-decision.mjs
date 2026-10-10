@@ -78,6 +78,22 @@ export async function evaluateCandidateWithJev({
     };
   }
 
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(endpoint);
+    if (parsedUrl.protocol !== "https:" || parsedUrl.username || parsedUrl.password) {
+      return {
+        status: "fallback",
+        reason: "invalid-endpoint",
+      };
+    }
+  } catch {
+    return {
+      status: "fallback",
+      reason: "invalid-endpoint",
+    };
+  }
+
   const payload = {
     model,
     state,
@@ -88,6 +104,7 @@ export async function evaluateCandidateWithJev({
     const signal = AbortSignal.timeout(timeoutMs);
     const response = await fetchImpl(endpoint, {
       method: "POST",
+      redirect: "error",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
@@ -97,6 +114,7 @@ export async function evaluateCandidateWithJev({
     });
 
     if (!response.ok) {
+      response.body?.cancel().catch(() => {});
       return {
         status: "fallback",
         reason: `http-error-${response.status}`,

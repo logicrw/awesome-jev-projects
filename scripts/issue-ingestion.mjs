@@ -85,6 +85,22 @@ function publicReviewMetadata(value, maximum = 160) {
   return typeof value === "string" && value.length <= maximum && /^[a-zA-Z0-9_./:-]+$/.test(value) &&
     !/github_pat_|gh[pousr]_|sk-[A-Za-z\d_-]{16,}|AKIA[A-Z\d]{16}/.test(value) ? value : undefined;
 }
+function safeJevGateDiagnostics(gate) {
+  if (!gate || typeof gate !== "object") return undefined;
+  const status = publicReviewMetadata(gate.status, 30);
+  if (!status) return undefined;
+  return {
+    status,
+    ...(publicReviewMetadata(gate.reason, 60) ? { reason: publicReviewMetadata(gate.reason, 60) } : {}),
+    ...(typeof gate.isGenuine === "boolean" ? { isGenuine: gate.isGenuine } : {}),
+    ...(typeof gate.isRejected === "boolean" ? { isRejected: gate.isRejected } : {}),
+    ...(typeof gate.probability === "number" && Number.isFinite(gate.probability) ? { probability: gate.probability } : {}),
+    ...(publicReviewMetadata(gate.category, 60) ? { category: publicReviewMetadata(gate.category, 60) } : {}),
+    ...(Number.isInteger(gate.depthScore) ? { depthScore: gate.depthScore } : {}),
+    ...(Number.isInteger(gate.httpStatus) ? { httpStatus: gate.httpStatus } : {}),
+  };
+}
+
 function reviewDiagnostics(review, reviewRevision) {
   if (!review || typeof review !== "object") return undefined;
   const attempts = Array.isArray(review.attempts) ? review.attempts.slice(0, 3).map((attempt) => ({
@@ -110,7 +126,7 @@ function reviewDiagnostics(review, reviewRevision) {
     ...(review.budgetGrant ? { reservation: Object.fromEntries(["caseId", "reservationId"].filter((key) => publicReviewMetadata(review.budgetGrant[key])).map((key) => [key, review.budgetGrant[key]])) } : {}),
     ...(review.budget ? { budget: review.budget } : {}),
     ...(review.usage ? { usage: review.usage } : {}),
-    ...(review.jevGate ? { jevGate: review.jevGate } : {}),
+    ...(safeJevGateDiagnostics(review.jevGate) ? { jevGate: safeJevGateDiagnostics(review.jevGate) } : {}),
   };
 }
 
