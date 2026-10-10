@@ -44860,26 +44860,27 @@
     "url": "https://github.com/zilliztech/vector-graph-rag",
     "repoId": 1150388285,
     "category": "Data & Search",
-    "plainSummary": "该项目从文档中抽取三元组并将实体与关系存为 Milvus 向量，通过向量检索、子图扩展和单次 LLM 重排回答多跳问题，并提供可选的 Jev 重排器。",
-    "jevDecisionPoint": "Jev 为每个候选图关系打分，判断其是否提供回答问题所需的事实或多跳中间链接。",
-    "jevDecisionPointEn": "Jev returns a structured decision for the local program; consult the source for the exact decision policy.",
-    "highlightBenefit": "把语义判断接进已有的数据查询流程。",
-    "highlightBenefitEn": "Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.",
+    "plainSummary": "基于 Milvus 的图向量混合检索库，采用两阶段 Jev 关系选择与全文段落重排序回答多跳问题，在 MuSiQue 与 2Wiki 基准评测中平均 Recall@5 达 86.07%。",
+    "jevDecisionPoint": "Jev Noul 判定首先在图谱中筛选候选关系，随后结合向量召回候选集对完整源文档段落进行重排序，兼顾多跳推理与全文证据相关性。",
+    "jevDecisionPointEn": "Jev Noul judgments first filter graph relations, then rerank full source passages alongside vector-search candidates to balance multi-hop reasoning with passage-level evidence.",
+    "highlightBenefit": "在 MuSiQue (76.78%) 与 2Wiki (95.35%) 达到对比基线最高的 86.07% Recall@5，处于质量-延迟帕累托前沿。",
+    "highlightBenefitEn": "Reaches 86.07% average Recall@5 (76.78% MuSiQue, 95.35% 2Wiki) on the quality–latency Pareto frontier across compared baselines.",
     "tags": [
       "search-retrieval",
-      "classification-ranking"
+      "database-vector",
+      "evaluation-benchmarks"
     ],
     "summarySource": "readme-extractive",
     "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
     "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
-    "plainSummaryEn": "Graph RAG with pure vector search, achieving SOTA performance in multi-hop reasoning scenarios.",
-    "stars": 253,
-    "forks": 39,
-    "openIssues": 4,
+    "plainSummaryEn": "Milvus-based multi-hop retrieval library with two-stage Jev relation selection and full-passage reranking, achieving 86.07% average Recall@5 on MuSiQue and 2Wiki.",
+    "stars": 255,
+    "forks": 40,
+    "openIssues": 3,
     "license": "MIT",
     "createdAt": "2026-02-05T08:10:39Z",
-    "lastCommitAt": "2026-10-02T09:10:30Z",
-    "headSha": "07acd794e2fc9ae14f34a0389db8e8a8e1079d2b",
+    "lastCommitAt": "2026-10-09T10:07:25Z",
+    "headSha": "e32c077ccde8c577f9335b7966ebf22d46e18334",
     "metadataFetchedAt": "2026-10-02T22:27:04.512Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18416694?v=4",
@@ -44888,38 +44889,40 @@
     "discoveredAt": "2026-09-22T10:57:57.462Z",
     "evidence": [
       {
-        "url": "https://github.com/zilliztech/vector-graph-rag/blob/656bdf2182ab137e1cc8f5bce9a6a84f507116d6/README.md",
-        "note": "固定版本的 Jev 集成与说明来源"
+        "url": "https://github.com/zilliztech/vector-graph-rag/blob/e32c077ccde8c577f9335b7966ebf22d46e18334/src/vector_graph_rag/llm/jev.py",
+        "note": "两阶段 Jev 关系选择与段落重排序实现源码"
       },
       {
-        "url": "https://github.com/zilliztech/vector-graph-rag/blob/656bdf2182ab137e1cc8f5bce9a6a84f507116d6/src/vector_graph_rag/llm/jev.py",
-        "note": "固定版本的 Jev 集成与说明来源"
+        "url": "https://github.com/zilliztech/vector-graph-rag/blob/e32c077ccde8c577f9335b7966ebf22d46e18334/evaluation/jev/two-stage/README.md",
+        "note": "两阶段 Jev 评测报告 (Recall@5 达到 86.07%，质量-延迟 Pareto 前沿)"
       }
     ],
     "sourceVerification": {
       "method": "bounded-source-heuristic",
-      "sha": "656bdf2182ab137e1cc8f5bce9a6a84f507116d6",
+      "sha": "e32c077ccde8c577f9335b7966ebf22d46e18334",
       "files": [
         {
-          "path": "README.md",
-          "url": "https://github.com/zilliztech/vector-graph-rag/blob/656bdf2182ab137e1cc8f5bce9a6a84f507116d6/README.md",
-          "hash": "af016150234450607b7af4b1692e60284b32cf4990aa6cef461e9f6ddeab2778"
+          "path": "src/vector_graph_rag/llm/jev.py",
+          "url": "https://github.com/zilliztech/vector-graph-rag/blob/e32c077ccde8c577f9335b7966ebf22d46e18334/src/vector_graph_rag/llm/jev.py",
+          "hash": "63a9892b7acf5a4251ebe46c8ca2f6f3f1380955332c848cedf54bbbc5f135c2"
         },
         {
-          "path": "src/vector_graph_rag/llm/jev.py",
-          "url": "https://github.com/zilliztech/vector-graph-rag/blob/656bdf2182ab137e1cc8f5bce9a6a84f507116d6/src/vector_graph_rag/llm/jev.py",
-          "hash": "4b4a5b42963e3a189a8e6ccaad4010ade86e3ac4664febef76872f92c07887f8"
+          "path": "evaluation/jev/two-stage/README.md",
+          "url": "https://github.com/zilliztech/vector-graph-rag/blob/e32c077ccde8c577f9335b7966ebf22d46e18334/evaluation/jev/two-stage/README.md",
+          "hash": "0ee246542c3a25c27d610ea17e09e1ba9bc63efa598f57a64154a0c59ac50024"
         }
       ]
     },
     "ingestion": {
       "repository": "logicrw/awesome-jev-projects",
-      "issueNumber": 64,
-      "issueBodySha256": "7511419de9b97c25e10099d1bf65f808b8c3e13a6362dd51ccaf25471bbb1488",
-      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/64"
+      "issueNumber": 118,
+      "issueBodySha256": "5034f17709fc25fc83970a99392c71fcb998b856463eb8856a7ac3c50e16f09f",
+      "issueTitleSha256": "19c21f350c0fac7ffdb4f0d59ea704d1dbbe236b5f5bb0d9f760ea7bd9cc21dc",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/118",
+      "originalIssueNumber": 64
     },
-    "updatedAt": "2026-10-02T09:10:36Z",
-    "pushedAt": "2026-10-02T09:10:30Z",
+    "updatedAt": "2026-10-10T01:16:57Z",
+    "pushedAt": "2026-10-09T10:07:25Z",
     "lastSyncedAt": "2026-10-02T22:27:04.512Z",
     "archived": false
   },

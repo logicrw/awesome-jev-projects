@@ -1377,9 +1377,9 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **这个项目的用途**: 保留链接、摘要、可调整过滤条件和来源失败提示。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/superagents-lab/jev-search/) · 许可证: MIT
 
-- [**vector-graph-rag**](https://github.com/zilliztech/vector-graph-rag) — 该项目从文档中抽取三元组并将实体与关系存为 Milvus 向量，通过向量检索、子图扩展和单次 LLM 重排回答多跳问题，并提供可选的 Jev 重排器。
-  - **Jev 在此条目的作用**: Jev 为每个候选图关系打分，判断其是否提供回答问题所需的事实或多跳中间链接。
-  - **这个项目的用途**: 把语义判断接进已有的数据查询流程。
+- [**vector-graph-rag**](https://github.com/zilliztech/vector-graph-rag) — 基于 Milvus 的图向量混合检索库，采用两阶段 Jev 关系选择与全文段落重排序回答多跳问题，在 MuSiQue 与 2Wiki 基准评测中平均 Recall@5 达 86.07%。
+  - **Jev 在此条目的作用**: Jev Noul 判定首先在图谱中筛选候选关系，随后结合向量召回候选集对完整源文档段落进行重排序，兼顾多跳推理与全文证据相关性。
+  - **这个项目的用途**: 在 MuSiQue (76.78%) 与 2Wiki (95.35%) 达到对比基线最高的 86.07% Recall@5，处于质量-延迟帕累托前沿。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/zilliztech/vector-graph-rag/) · 许可证: MIT
 
 - [**jev4pg**](https://github.com/Sheltercosmo/jev4pg) — 在 PostgreSQL 中使用 Jev Noul 原语进行语义查询过滤与门禁裁决。

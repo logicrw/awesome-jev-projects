@@ -6941,17 +6941,17 @@ AlphaOptimizer is an open-source tool from AlphaTales that helps Codex work with
 
 ## vector-graph-rag
 
-Graph RAG with pure vector search, achieving SOTA performance in multi-hop reasoning scenarios.
+Milvus-based multi-hop retrieval library with two-stage Jev relation selection and full-passage reranking, achieving 86.07% average Recall@5 on MuSiQue and 2Wiki.
 
 - Repository: https://github.com/zilliztech/vector-graph-rag
 - Category: Data & Search
-- Jev decision: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-- Purpose: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+- Jev decision: Jev Noul judgments first filter graph relations, then rerank full source passages alongside vector-search candidates to balance multi-hop reasoning with passage-level evidence.
+- Purpose: Reaches 86.07% average Recall@5 (76.78% MuSiQue, 95.35% 2Wiki) on the quality–latency Pareto frontier across compared baselines.
 - Review scope: Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.
 - License: MIT
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/zilliztech/vector-graph-rag/
-- Source evidence: https://github.com/zilliztech/vector-graph-rag/blob/656bdf2182ab137e1cc8f5bce9a6a84f507116d6/README.md
-- Source evidence: https://github.com/zilliztech/vector-graph-rag/blob/656bdf2182ab137e1cc8f5bce9a6a84f507116d6/src/vector_graph_rag/llm/jev.py
+- Source evidence: https://github.com/zilliztech/vector-graph-rag/blob/e32c077ccde8c577f9335b7966ebf22d46e18334/src/vector_graph_rag/llm/jev.py
+- Source evidence: https://github.com/zilliztech/vector-graph-rag/blob/e32c077ccde8c577f9335b7966ebf22d46e18334/evaluation/jev/two-stage/README.md
 
 ## memsearch
 
