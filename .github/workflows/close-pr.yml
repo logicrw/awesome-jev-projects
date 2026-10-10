@@ -16,11 +16,11 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           cat << 'EOF' > /tmp/close_pr_comment.md
-👋 感谢关注！Awesome Jev 网站与自动化工具链由核心团队独立维护，本项目**不接收任何形式的代码或文档 Pull Request**（所有项目收录与更新统一通过 [Issue 专用通道](https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml) 进行）。本 PR 已自动关闭，感谢您的理解与支持！
+          👋 感谢关注！Awesome Jev 网站与自动化工具链由核心团队独立维护，本项目**不接收任何形式的代码或文档 Pull Request**（所有项目收录与更新统一通过 [Issue 专用通道](https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml) 进行）。本 PR 已自动关闭，感谢您的理解与支持！
 
----
+          ---
 
-*Thank you for your interest! Awesome Jev operates as an automated catalog radar maintained directly by the core team. This repository **does not accept Pull Requests of any kind** (all project submissions and updates are handled exclusively via [GitHub Issues](https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml)). This PR has been closed automatically. Thank you for your understanding!*
-EOF
+          *Thank you for your interest! Awesome Jev operates as an automated catalog radar maintained directly by the core team. This repository **does not accept Pull Requests of any kind** (all project submissions and updates are handled exclusively via [GitHub Issues](https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml)). This PR has been closed automatically. Thank you for your understanding!*
+          EOF
           gh pr comment "$PR_NUMBER" --body-file /tmp/close_pr_comment.md
           gh pr close "$PR_NUMBER"
