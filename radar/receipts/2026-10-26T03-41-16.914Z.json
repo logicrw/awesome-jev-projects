@@ -1,0 +1,32 @@
+{
+  "lastAttemptAt": "2026-10-26T03:35:01.204Z",
+  "mode": "full",
+  "lastSuccessfulAt": null,
+  "status": "metadata-only",
+  "sources": [
+    {
+      "name": "Known repository metadata + latest commit",
+      "status": "partial",
+      "count": 107
+    }
+  ],
+  "newProjects": 0,
+  "schedule": "0 */6 * * *",
+  "schedulerStatus": "active",
+  "submissionRepository": "logicrw/awesome-jev-projects",
+  "metadata": {
+    "ok": 107,
+    "failed": 13
+  },
+  "discovery": {
+    "candidates": 0,
+    "checked": 0,
+    "rejected": 0,
+    "deferred": 0
+  },
+  "runUrl": "https://github.com/logicrw/awesome-jev-projects/actions/runs/40264767537",
+  "finishedAt": "2026-10-26T03:41:16.914Z",
+  "totalProjects": 864,
+  "projectsSha256": "4b34ccf898e7ac4e0db40cb1f52200ee28db0a9962a1ba8c86fb0c93fef55d81",
+  "receipts": []
+}

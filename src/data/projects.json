@@ -34325,7 +34325,7 @@
     "createdAt": "2026-09-17T03:21:12Z",
     "lastCommitAt": "2026-09-17T04:04:56Z",
     "headSha": "17e66fcd6ecfbb4c3083f748af510bf59cda985f",
-    "metadataFetchedAt": "2026-10-17T20:24:51.916Z",
+    "metadataFetchedAt": "2026-10-26T03:35:22.645Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/253618205?v=4",
     "verificationStatus": "integration-detected",
@@ -34359,7 +34359,7 @@
     },
     "updatedAt": "2026-09-30T12:37:46Z",
     "pushedAt": "2026-09-17T04:04:57Z",
-    "lastSyncedAt": "2026-10-17T20:24:51.916Z",
+    "lastSyncedAt": "2026-10-26T03:35:22.645Z",
     "archived": false,
     "licenseStatus": "custom"
   },
@@ -34393,7 +34393,7 @@
     "createdAt": "2026-09-07T07:53:41Z",
     "lastCommitAt": "2026-09-23T03:43:06Z",
     "headSha": "ac75f4bd6957b2c2170d0139f31b76aa6f29c784",
-    "metadataFetchedAt": "2026-10-17T20:24:54.869Z",
+    "metadataFetchedAt": "2026-10-26T03:35:25.592Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/15545195?v=4",
     "verificationStatus": "integration-detected",
@@ -34436,7 +34436,7 @@
     },
     "updatedAt": "2026-09-30T12:37:13Z",
     "pushedAt": "2026-09-23T03:45:06Z",
-    "lastSyncedAt": "2026-10-17T20:24:54.869Z",
+    "lastSyncedAt": "2026-10-26T03:35:25.592Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -34472,7 +34472,7 @@
     "createdAt": "2026-09-17T10:02:13Z",
     "lastCommitAt": "2026-09-17T10:02:07Z",
     "headSha": "86f01b686df2e6d5b566b80d015de9b8b34450a8",
-    "metadataFetchedAt": "2026-10-17T20:24:57.843Z",
+    "metadataFetchedAt": "2026-10-26T03:35:28.624Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/9921926?v=4",
     "verificationStatus": "integration-detected",
@@ -34506,7 +34506,7 @@
     },
     "updatedAt": "2026-09-30T12:37:54Z",
     "pushedAt": "2026-09-19T19:39:55Z",
-    "lastSyncedAt": "2026-10-17T20:24:57.843Z",
+    "lastSyncedAt": "2026-10-26T03:35:28.624Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -34530,7 +34530,7 @@
     "claimStatus": "经由公共仓库代码审查确认真实 Jev 可执行集成证据；决策机制提取自实际源码，未经本站性能跑分测试。",
     "claimStatusEn": "Verified with code-level Jev executable integration evidence; decision mechanisms extracted from source.",
     "plainSummaryEn": "SQLite C extension enabling TypeSafe Jev judgments as native SQL functions for semantic scoring and choices.",
-    "stars": 3,
+    "stars": 4,
     "forks": 1,
     "openIssues": 0,
     "license": {
@@ -34542,7 +34542,7 @@
     "createdAt": "2026-09-18T03:12:25Z",
     "lastCommitAt": "2026-09-18T03:12:25Z",
     "headSha": "2172600da148182703f8f221089d9304d0fb97f9",
-    "metadataFetchedAt": "2026-10-17T20:25:00.887Z",
+    "metadataFetchedAt": "2026-10-26T03:35:31.603Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/10111?v=4",
     "verificationStatus": "integration-detected",
@@ -34574,9 +34574,9 @@
         }
       ]
     },
-    "updatedAt": "2026-09-21T13:07:49Z",
+    "updatedAt": "2026-10-21T13:16:22Z",
     "pushedAt": "2026-09-18T03:12:30Z",
-    "lastSyncedAt": "2026-10-17T20:25:00.887Z",
+    "lastSyncedAt": "2026-10-26T03:35:31.603Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -34613,7 +34613,7 @@
     "createdAt": "2026-08-11T23:07:02Z",
     "lastCommitAt": "2026-09-19T11:00:45Z",
     "headSha": "0ac5f0de0c99a5db0d32fa8691dbf08c14663923",
-    "metadataFetchedAt": "2026-10-17T20:25:03.975Z",
+    "metadataFetchedAt": "2026-10-26T03:35:34.676Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/41026612?v=4",
     "verificationStatus": "integration-detected",
@@ -34680,7 +34680,7 @@
     },
     "updatedAt": "2026-10-10T03:12:29Z",
     "pushedAt": "2026-09-21T12:05:10Z",
-    "lastSyncedAt": "2026-10-17T20:25:03.975Z",
+    "lastSyncedAt": "2026-10-26T03:35:34.676Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -34716,7 +34716,7 @@
     "createdAt": "2026-09-19T14:56:21Z",
     "lastCommitAt": "2026-09-21T09:00:19Z",
     "headSha": "5fe292964f45dd288943dfcb1df30762c3d58aae",
-    "metadataFetchedAt": "2026-10-17T20:25:06.913Z",
+    "metadataFetchedAt": "2026-10-26T03:35:37.621Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/111659873?v=4",
     "verificationStatus": "integration-detected",
@@ -34810,7 +34810,7 @@
     },
     "updatedAt": "2026-10-02T06:32:18Z",
     "pushedAt": "2026-09-21T09:01:17Z",
-    "lastSyncedAt": "2026-10-17T20:25:06.913Z",
+    "lastSyncedAt": "2026-10-26T03:35:37.621Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -34847,7 +34847,7 @@
     "createdAt": "2026-09-20T11:23:53Z",
     "lastCommitAt": "2026-09-28T11:18:30Z",
     "headSha": "f6f41ef65c9263c3963cedb4146f3ce008e70b73",
-    "metadataFetchedAt": "2026-10-17T20:25:09.876Z",
+    "metadataFetchedAt": "2026-10-26T03:35:40.698Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/34853455?v=4",
     "verificationStatus": "integration-detected",
@@ -34896,7 +34896,7 @@
     },
     "updatedAt": "2026-10-07T14:33:43Z",
     "pushedAt": "2026-09-28T11:18:46Z",
-    "lastSyncedAt": "2026-10-17T20:25:09.876Z",
+    "lastSyncedAt": "2026-10-26T03:35:40.698Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -34921,9 +34921,9 @@
     "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
     "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
     "plainSummaryEn": "Rule-based CLI and agent skill that evaluates text and markdown files against custom rulesets for AI slop, grammar, and technical doc quality using Jev scores and line-by-line violation flags, then guides an AI agent to auto-fix violations.",
-    "stars": 35,
+    "stars": 36,
     "forks": 2,
-    "openIssues": 1,
+    "openIssues": 0,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -34931,9 +34931,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-20T07:12:51Z",
-    "lastCommitAt": "2026-10-01T17:32:48Z",
-    "headSha": "f2807bc4cf174786eda30afd1749e9886201d5c7",
-    "metadataFetchedAt": "2026-10-17T20:25:12.844Z",
+    "lastCommitAt": "2026-10-18T05:45:54Z",
+    "headSha": "f20e1ae3ba30d31e5ccf7613ff8387d789a98640",
+    "metadataFetchedAt": "2026-10-26T03:35:43.546Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/292363?v=4",
     "verificationStatus": "integration-detected",
@@ -34971,9 +34971,9 @@
       "issueBodySha256": "efbfcb28cf07e738c5b10888826db1ae51b487164816c71e92c08cf365e89e7a",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/37"
     },
-    "updatedAt": "2026-10-16T07:11:41Z",
-    "pushedAt": "2026-10-01T17:32:50Z",
-    "lastSyncedAt": "2026-10-17T20:25:12.844Z",
+    "updatedAt": "2026-10-23T15:09:41Z",
+    "pushedAt": "2026-10-18T05:45:56Z",
+    "lastSyncedAt": "2026-10-26T03:35:43.546Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35010,7 +35010,7 @@
     "createdAt": "2026-09-20T03:11:13Z",
     "lastCommitAt": "2026-09-20T04:08:37Z",
     "headSha": "fbadf01c69806730eb157bdc97f662a38b522593",
-    "metadataFetchedAt": "2026-10-17T20:25:15.902Z",
+    "metadataFetchedAt": "2026-10-26T03:35:46.598Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/158578641?v=4",
     "verificationStatus": "integration-detected",
@@ -35113,7 +35113,7 @@
     },
     "updatedAt": "2026-09-29T04:24:47Z",
     "pushedAt": "2026-09-20T04:08:42Z",
-    "lastSyncedAt": "2026-10-17T20:25:15.902Z",
+    "lastSyncedAt": "2026-10-26T03:35:46.598Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35150,7 +35150,7 @@
     "createdAt": "2026-09-20T14:10:07Z",
     "lastCommitAt": "2026-09-20T15:06:30Z",
     "headSha": "42737a29815e8df4375268ec3cfc9dc61aae1f6d",
-    "metadataFetchedAt": "2026-10-17T20:25:18.917Z",
+    "metadataFetchedAt": "2026-10-26T03:35:49.616Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/191001608?v=4",
     "verificationStatus": "integration-detected",
@@ -35190,7 +35190,7 @@
     },
     "updatedAt": "2026-09-20T15:08:14Z",
     "pushedAt": "2026-09-20T15:08:14Z",
-    "lastSyncedAt": "2026-10-17T20:25:18.917Z",
+    "lastSyncedAt": "2026-10-26T03:35:49.616Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35226,7 +35226,7 @@
     "createdAt": "2026-09-19T06:50:42Z",
     "lastCommitAt": "2026-09-23T18:45:26Z",
     "headSha": "b36c2da267023e6c580b1238edb787f3d4c99fb6",
-    "metadataFetchedAt": "2026-10-17T20:25:21.838Z",
+    "metadataFetchedAt": "2026-10-26T03:35:52.664Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/20537546?v=4",
     "verificationStatus": "integration-detected",
@@ -35329,7 +35329,7 @@
     },
     "updatedAt": "2026-10-07T14:05:56Z",
     "pushedAt": "2026-09-23T18:45:35Z",
-    "lastSyncedAt": "2026-10-17T20:25:21.838Z",
+    "lastSyncedAt": "2026-10-26T03:35:52.664Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35366,7 +35366,7 @@
     "createdAt": "2026-09-19T19:28:43Z",
     "lastCommitAt": "2026-10-02T16:59:44Z",
     "headSha": "3bca966bf85c4d6087ec57058a2d72fce2bc5fa2",
-    "metadataFetchedAt": "2026-10-17T20:25:24.971Z",
+    "metadataFetchedAt": "2026-10-26T03:35:55.644Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/83777601?v=4",
     "verificationStatus": "integration-detected",
@@ -35405,8 +35405,8 @@
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/40"
     },
     "updatedAt": "2026-10-02T16:59:49Z",
-    "pushedAt": "2026-10-02T17:21:57Z",
-    "lastSyncedAt": "2026-10-17T20:25:24.971Z",
+    "pushedAt": "2026-10-18T14:35:40Z",
+    "lastSyncedAt": "2026-10-26T03:35:55.644Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35431,7 +35431,7 @@
     "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
     "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
     "plainSummaryEn": "Filters text, structured records, functions, and diff hunks against plain-English descriptions using Jev Noul judgments.",
-    "stars": 138,
+    "stars": 139,
     "forks": 5,
     "openIssues": 3,
     "license": {
@@ -35443,7 +35443,7 @@
     "createdAt": "2026-09-18T11:11:25Z",
     "lastCommitAt": "2026-09-28T22:28:00Z",
     "headSha": "9d56104abcf35b0af330122dbe14989c6111a1fd",
-    "metadataFetchedAt": "2026-10-17T20:25:27.892Z",
+    "metadataFetchedAt": "2026-10-26T03:35:58.585Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/83777601?v=4",
     "verificationStatus": "integration-detected",
@@ -35517,9 +35517,9 @@
       "issueBodySha256": "30cf0ac6c202204401b6697fa4fef91d79737bd7070ec392b05cbf55fe1a0328",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/43"
     },
-    "updatedAt": "2026-10-11T04:57:50Z",
+    "updatedAt": "2026-10-20T16:33:25Z",
     "pushedAt": "2026-10-17T12:42:51Z",
-    "lastSyncedAt": "2026-10-17T20:25:27.892Z",
+    "lastSyncedAt": "2026-10-26T03:35:58.585Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35555,7 +35555,7 @@
     "createdAt": "2026-09-19T18:05:20Z",
     "lastCommitAt": "2026-09-20T18:47:18Z",
     "headSha": "e9d4bb38dbba7c7dba0cd4d0504ada741c87d1d7",
-    "metadataFetchedAt": "2026-10-17T20:25:30.890Z",
+    "metadataFetchedAt": "2026-10-26T03:36:01.629Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/49662053?v=4",
     "verificationStatus": "integration-detected",
@@ -35595,7 +35595,7 @@
     },
     "updatedAt": "2026-10-03T07:04:11Z",
     "pushedAt": "2026-09-20T18:47:19Z",
-    "lastSyncedAt": "2026-10-17T20:25:30.890Z",
+    "lastSyncedAt": "2026-10-26T03:36:01.629Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35635,9 +35635,9 @@
         "source": "readme"
       }
     },
-    "stars": 309,
-    "forks": 26,
-    "openIssues": 3,
+    "stars": 311,
+    "forks": 25,
+    "openIssues": 2,
     "license": {
       "status": "identified",
       "spdx": "Apache-2.0",
@@ -35647,7 +35647,7 @@
     "createdAt": "2026-09-19T02:12:23Z",
     "lastCommitAt": "2026-10-03T17:47:57Z",
     "headSha": "520aec345806722dc204780e3631c639c142474b",
-    "metadataFetchedAt": "2026-10-17T20:25:33.858Z",
+    "metadataFetchedAt": "2026-10-26T03:36:04.550Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/230064936?v=4",
     "verificationStatus": "integration-detected",
@@ -35671,9 +35671,9 @@
       ]
     },
     "sourceHash": "752866446e56ce2e2dc41ac6a0346bedcc74fc054592ee4f3dfc8053a60e3647",
-    "updatedAt": "2026-10-15T20:46:32Z",
+    "updatedAt": "2026-10-22T03:54:40Z",
     "pushedAt": "2026-10-03T17:48:18Z",
-    "lastSyncedAt": "2026-10-17T20:25:33.858Z",
+    "lastSyncedAt": "2026-10-26T03:36:04.550Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35713,7 +35713,7 @@
         "source": "readme"
       }
     },
-    "stars": 124,
+    "stars": 126,
     "forks": 19,
     "openIssues": 1,
     "license": {
@@ -35725,7 +35725,7 @@
     "createdAt": "2026-09-19T14:05:35Z",
     "lastCommitAt": "2026-09-21T23:08:58Z",
     "headSha": "b22e568adf110eeb64f89bf4d731a69d23c461dc",
-    "metadataFetchedAt": "2026-10-17T20:25:36.834Z",
+    "metadataFetchedAt": "2026-10-26T03:36:07.557Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/103605876?v=4",
     "verificationStatus": "integration-detected",
@@ -35749,9 +35749,9 @@
       ]
     },
     "sourceHash": "be29bfdff736e2d471f00fb20d8777f9195653385708baf6ceba42f70e0248e7",
-    "updatedAt": "2026-10-16T00:24:53Z",
+    "updatedAt": "2026-10-21T23:19:56Z",
     "pushedAt": "2026-09-21T23:08:58Z",
-    "lastSyncedAt": "2026-10-17T20:25:36.834Z",
+    "lastSyncedAt": "2026-10-26T03:36:07.557Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35791,8 +35791,8 @@
         "source": "repo-description"
       }
     },
-    "stars": 112,
-    "forks": 13,
+    "stars": 115,
+    "forks": 16,
     "openIssues": 2,
     "license": {
       "status": "identified",
@@ -35803,7 +35803,7 @@
     "createdAt": "2026-09-19T17:15:48Z",
     "lastCommitAt": "2026-09-28T17:32:34Z",
     "headSha": "d01527914012ccd75d3d16e0dcfc26e6e1fc56ff",
-    "metadataFetchedAt": "2026-10-17T20:25:39.847Z",
+    "metadataFetchedAt": "2026-10-26T03:36:10.595Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/191466064?v=4",
     "verificationStatus": "integration-detected",
@@ -35827,9 +35827,9 @@
       ]
     },
     "sourceHash": "0534be10d2954246debb6606313083246b5acf995048e742dca8a498db52eda8",
-    "updatedAt": "2026-10-17T15:18:18Z",
+    "updatedAt": "2026-10-25T23:44:41Z",
     "pushedAt": "2026-09-28T17:32:37Z",
-    "lastSyncedAt": "2026-10-17T20:25:39.847Z",
+    "lastSyncedAt": "2026-10-26T03:36:10.595Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -35869,7 +35869,7 @@
         "source": "muse-spark"
       }
     },
-    "stars": 256,
+    "stars": 264,
     "forks": 83,
     "openIssues": 2,
     "license": {
@@ -35879,7 +35879,7 @@
     "createdAt": "2026-09-20T04:39:05Z",
     "lastCommitAt": "2026-09-20T04:59:27Z",
     "headSha": "adc88caa9bf174d367e79a5f254c7936bcef088e",
-    "metadataFetchedAt": "2026-10-17T20:25:42.878Z",
+    "metadataFetchedAt": "2026-10-26T03:36:13.575Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/228423313?v=4",
     "verificationStatus": "integration-detected",
@@ -35903,9 +35903,9 @@
       ]
     },
     "sourceHash": "bfb2072af3f49ea579a799fd09a9e06b5bbd1352fc93d8e2ee41f750f10fe217",
-    "updatedAt": "2026-10-16T23:03:02Z",
+    "updatedAt": "2026-10-25T01:11:16Z",
     "pushedAt": "2026-09-20T04:59:32Z",
-    "lastSyncedAt": "2026-10-17T20:25:42.878Z",
+    "lastSyncedAt": "2026-10-26T03:36:13.575Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -35957,7 +35957,7 @@
     "createdAt": "2026-09-19T20:08:14Z",
     "lastCommitAt": "2026-09-20T00:17:14Z",
     "headSha": "d3e4acfb45c7cf6231f1621b7dafb09d21e95862",
-    "metadataFetchedAt": "2026-10-17T20:25:45.899Z",
+    "metadataFetchedAt": "2026-10-26T03:36:16.603Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/110200324?v=4",
     "verificationStatus": "integration-detected",
@@ -35983,7 +35983,7 @@
     "sourceHash": "bddfeb185880c3c6d278b78b9a665f904155933dc1f1f5bbc33d2439259c879e",
     "updatedAt": "2026-10-06T16:17:31Z",
     "pushedAt": "2026-09-20T00:17:16Z",
-    "lastSyncedAt": "2026-10-17T20:25:45.899Z",
+    "lastSyncedAt": "2026-10-26T03:36:16.603Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36024,9 +36024,9 @@
         "source": "repo-description"
       }
     },
-    "stars": 281,
-    "forks": 27,
-    "openIssues": 169,
+    "stars": 307,
+    "forks": 29,
+    "openIssues": 182,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -36036,7 +36036,7 @@
     "createdAt": "2026-09-19T07:07:36Z",
     "lastCommitAt": "2026-10-15T04:07:55Z",
     "headSha": "609a664e81f46e03731600bd7bd9f1b7a61257c5",
-    "metadataFetchedAt": "2026-10-17T20:25:48.817Z",
+    "metadataFetchedAt": "2026-10-26T03:36:19.581Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/1905188?v=4",
     "verificationStatus": "integration-detected",
@@ -36060,9 +36060,9 @@
       ]
     },
     "sourceHash": "780f879416479b645ee519bb85d0cce722d0df7aa2b41a029de92b76f2593e51",
-    "updatedAt": "2026-10-17T20:16:11Z",
+    "updatedAt": "2026-10-25T08:10:57Z",
     "pushedAt": "2026-10-15T04:07:55Z",
-    "lastSyncedAt": "2026-10-17T20:25:48.817Z",
+    "lastSyncedAt": "2026-10-26T03:36:19.581Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36102,7 +36102,7 @@
         "source": "muse-spark"
       }
     },
-    "stars": 27,
+    "stars": 28,
     "forks": 6,
     "openIssues": 2,
     "license": {
@@ -36114,7 +36114,7 @@
     "createdAt": "2026-09-18T21:30:40Z",
     "lastCommitAt": "2026-09-24T10:23:04Z",
     "headSha": "14ecba57e2c38b60252904ce5fe124b52af31bd5",
-    "metadataFetchedAt": "2026-10-17T20:25:51.844Z",
+    "metadataFetchedAt": "2026-10-26T03:36:22.612Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/128442444?v=4",
     "verificationStatus": "integration-detected",
@@ -36138,9 +36138,9 @@
       ]
     },
     "sourceHash": "2ec4ed2b88087859b406d94e1339d7c8cb10c575a35696586a2328cb7d9aacfe",
-    "updatedAt": "2026-10-06T19:43:25Z",
+    "updatedAt": "2026-10-25T14:39:45Z",
     "pushedAt": "2026-09-24T10:23:14Z",
-    "lastSyncedAt": "2026-10-17T20:25:51.844Z",
+    "lastSyncedAt": "2026-10-26T03:36:22.612Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36183,7 +36183,7 @@
     },
     "stars": 105,
     "forks": 12,
-    "openIssues": 1,
+    "openIssues": 0,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -36192,8 +36192,8 @@
     },
     "createdAt": "2026-09-20T00:27:29Z",
     "lastCommitAt": "2026-09-27T11:11:44Z",
-    "headSha": "a4e764ac09a62e696307b61d42eaaf0e13ece9b9",
-    "metadataFetchedAt": "2026-10-17T20:25:54.830Z",
+    "headSha": "586c14598d223a3d336056a57405d4fbe4aaae8a",
+    "metadataFetchedAt": "2026-10-26T03:36:25.591Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/76560658?v=4",
     "verificationStatus": "integration-detected",
@@ -36217,9 +36217,9 @@
       ]
     },
     "sourceHash": "021a5459d03f24d766626955b77cd11c2ebce7ebb08605b194f39468b85f211d",
-    "updatedAt": "2026-10-17T06:54:53Z",
-    "pushedAt": "2026-09-27T11:11:52Z",
-    "lastSyncedAt": "2026-10-17T20:25:54.830Z",
+    "updatedAt": "2026-10-24T08:53:39Z",
+    "pushedAt": "2026-10-20T01:51:26Z",
+    "lastSyncedAt": "2026-10-26T03:36:25.591Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36271,7 +36271,7 @@
     "createdAt": "2026-09-18T19:46:20Z",
     "lastCommitAt": "2026-09-25T00:34:54Z",
     "headSha": "2bc8a03d966d80e891f5191fc05a3af5a3f378a5",
-    "metadataFetchedAt": "2026-10-17T20:25:57.886Z",
+    "metadataFetchedAt": "2026-10-26T03:36:28.621Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/32692718?v=4",
     "verificationStatus": "integration-detected",
@@ -36297,7 +36297,7 @@
     "sourceHash": "19a351d7936e41a1fdc5359c6e3d5622682f25fbe241fc4f4ed7d1f1fc47de76",
     "updatedAt": "2026-10-07T11:46:11Z",
     "pushedAt": "2026-09-26T21:17:35Z",
-    "lastSyncedAt": "2026-10-17T20:25:57.886Z",
+    "lastSyncedAt": "2026-10-26T03:36:28.621Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36337,9 +36337,9 @@
         "source": "repo-description"
       }
     },
-    "stars": 23,
-    "forks": 1,
-    "openIssues": 7,
+    "stars": 26,
+    "forks": 2,
+    "openIssues": 3,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -36347,9 +36347,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-18T21:41:30Z",
-    "lastCommitAt": "2026-10-15T02:11:08Z",
-    "headSha": "583efad2b9033eb5e9470eb91f3f919765f3d21f",
-    "metadataFetchedAt": "2026-10-17T20:26:00.849Z",
+    "lastCommitAt": "2026-10-23T22:26:05Z",
+    "headSha": "4dc397f61ee2142c9377490b59ac06529a31d358",
+    "metadataFetchedAt": "2026-10-26T03:36:31.597Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/19510452?v=4",
     "verificationStatus": "integration-detected",
@@ -36373,9 +36373,9 @@
       ]
     },
     "sourceHash": "b32d918d4644fd924ff4eb60329e8a0d8b0c3aebf918cdcfaffaabd649369508",
-    "updatedAt": "2026-10-16T16:16:03Z",
-    "pushedAt": "2026-10-15T02:45:27Z",
-    "lastSyncedAt": "2026-10-17T20:26:00.849Z",
+    "updatedAt": "2026-10-25T21:20:48Z",
+    "pushedAt": "2026-10-23T22:28:21Z",
+    "lastSyncedAt": "2026-10-26T03:36:31.597Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36413,7 +36413,7 @@
         "source": "readme"
       }
     },
-    "stars": 59,
+    "stars": 62,
     "forks": 3,
     "openIssues": 0,
     "license": {
@@ -36425,7 +36425,7 @@
     "createdAt": "2026-09-20T09:36:44Z",
     "lastCommitAt": "2026-09-27T17:11:19Z",
     "headSha": "2c920c29e5e76cc57908b3c05907d7c5d91565c1",
-    "metadataFetchedAt": "2026-10-17T20:26:27.875Z",
+    "metadataFetchedAt": "2026-10-26T03:36:58.617Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/94739529?v=4",
     "verificationStatus": "integration-detected",
@@ -36449,9 +36449,9 @@
       ]
     },
     "sourceHash": "ff8bdbcd79fe68cb0f20e07412704cac722b1667e44433f12c5d6bcca8516a9e",
-    "updatedAt": "2026-10-16T06:33:05Z",
+    "updatedAt": "2026-10-24T02:25:28Z",
     "pushedAt": "2026-09-27T17:11:25Z",
-    "lastSyncedAt": "2026-10-17T20:26:27.875Z",
+    "lastSyncedAt": "2026-10-26T03:36:58.617Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36503,7 +36503,7 @@
     "createdAt": "2026-09-20T02:05:38Z",
     "lastCommitAt": "2026-09-21T02:08:25Z",
     "headSha": "0567d10169be4e41c6b99751c2de01dd9bd0de27",
-    "metadataFetchedAt": "2026-10-17T20:26:30.915Z",
+    "metadataFetchedAt": "2026-10-26T03:37:01.687Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/5935246?v=4",
     "verificationStatus": "integration-detected",
@@ -36529,7 +36529,7 @@
     "sourceHash": "e29d6eae8af26740aad2803cee6113a6d29d131a1a8bdd63060abb27427a83af",
     "updatedAt": "2026-10-16T09:10:00Z",
     "pushedAt": "2026-09-21T02:08:27Z",
-    "lastSyncedAt": "2026-10-17T20:26:30.915Z",
+    "lastSyncedAt": "2026-10-26T03:37:01.687Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36569,7 +36569,7 @@
         "source": "muse-spark"
       }
     },
-    "stars": 12,
+    "stars": 11,
     "forks": 1,
     "openIssues": 0,
     "license": {
@@ -36581,7 +36581,7 @@
     "createdAt": "2026-09-19T10:09:22Z",
     "lastCommitAt": "2026-09-19T10:09:19Z",
     "headSha": "a4ea18d8e2cb5cc8447f063c9870cebe46d7663f",
-    "metadataFetchedAt": "2026-10-17T20:26:33.853Z",
+    "metadataFetchedAt": "2026-10-26T03:37:04.627Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/42172631?v=4",
     "verificationStatus": "integration-detected",
@@ -36605,9 +36605,9 @@
       ]
     },
     "sourceHash": "1e179ee2c78d3aaa5e9f4e6b3436cfce81074e5c05073a06fe305ba4b33f5abf",
-    "updatedAt": "2026-10-11T08:36:16Z",
+    "updatedAt": "2026-10-20T16:49:26Z",
     "pushedAt": "2026-09-19T10:09:28Z",
-    "lastSyncedAt": "2026-10-17T20:26:33.853Z",
+    "lastSyncedAt": "2026-10-26T03:37:04.627Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36659,7 +36659,7 @@
     "createdAt": "2026-09-19T17:50:30Z",
     "lastCommitAt": "2026-09-19T19:16:09Z",
     "headSha": "fccea8c2da0edf1bdfd1de30f8664c6684ba6c63",
-    "metadataFetchedAt": "2026-10-17T20:26:36.961Z",
+    "metadataFetchedAt": "2026-10-26T03:37:07.662Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/178670964?v=4",
     "verificationStatus": "integration-detected",
@@ -36685,7 +36685,7 @@
     "sourceHash": "25cff8e57702530c16848f225b24c39a1444227a2212bfd17ba234434dc83164",
     "updatedAt": "2026-09-20T19:13:54Z",
     "pushedAt": "2026-10-01T19:01:18Z",
-    "lastSyncedAt": "2026-10-17T20:26:36.961Z",
+    "lastSyncedAt": "2026-10-26T03:37:07.662Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36727,7 +36727,7 @@
     },
     "stars": 9,
     "forks": 2,
-    "openIssues": 1,
+    "openIssues": 2,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -36737,7 +36737,7 @@
     "createdAt": "2026-09-20T07:47:57Z",
     "lastCommitAt": "2026-09-20T13:16:37Z",
     "headSha": "5c58e7b3a3c9977a7e646504190457773d1d87fa",
-    "metadataFetchedAt": "2026-10-17T20:26:39.921Z",
+    "metadataFetchedAt": "2026-10-26T03:37:10.634Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/99899594?v=4",
     "verificationStatus": "integration-detected",
@@ -36762,8 +36762,8 @@
     },
     "sourceHash": "023dc45c639e038230d0f534326a266c7dedc76c937a89ad6e8934877bc755db",
     "updatedAt": "2026-09-30T17:05:34Z",
-    "pushedAt": "2026-09-27T12:23:30Z",
-    "lastSyncedAt": "2026-10-17T20:26:39.921Z",
+    "pushedAt": "2026-10-18T12:22:32Z",
+    "lastSyncedAt": "2026-10-26T03:37:10.634Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36815,7 +36815,7 @@
     "createdAt": "2026-09-19T15:48:52Z",
     "lastCommitAt": "2026-09-20T13:26:47Z",
     "headSha": "c286f60a61d24b0f4249b2ea88495a4f52dfd51e",
-    "metadataFetchedAt": "2026-10-17T20:26:42.911Z",
+    "metadataFetchedAt": "2026-10-26T03:37:13.651Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/60301119?v=4",
     "verificationStatus": "integration-detected",
@@ -36841,7 +36841,7 @@
     "sourceHash": "866669ee14e0439bc4903452e07f3de772d211e07b81be47a78927cc067eafdb",
     "updatedAt": "2026-09-22T00:17:54Z",
     "pushedAt": "2026-09-20T13:26:51Z",
-    "lastSyncedAt": "2026-10-17T20:26:42.911Z",
+    "lastSyncedAt": "2026-10-26T03:37:13.651Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36883,7 +36883,7 @@
     },
     "stars": 5,
     "forks": 1,
-    "openIssues": 3,
+    "openIssues": 5,
     "license": {
       "status": "identified",
       "spdx": "Apache-2.0",
@@ -36893,7 +36893,7 @@
     "createdAt": "2026-09-19T19:18:24Z",
     "lastCommitAt": "2026-09-29T04:36:25Z",
     "headSha": "fae78bcd9fa84e17d4c26b93809f7ce23056828a",
-    "metadataFetchedAt": "2026-10-17T20:26:45.950Z",
+    "metadataFetchedAt": "2026-10-26T03:37:16.689Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/12295127?v=4",
     "verificationStatus": "integration-detected",
@@ -36918,8 +36918,8 @@
     },
     "sourceHash": "a3e2059af823b7a6d23a2f1afd3a1832bf61e8c5d7f476100e9c1c662c66d230",
     "updatedAt": "2026-09-30T12:38:29Z",
-    "pushedAt": "2026-10-17T14:02:52Z",
-    "lastSyncedAt": "2026-10-17T20:26:45.950Z",
+    "pushedAt": "2026-10-24T14:03:24Z",
+    "lastSyncedAt": "2026-10-26T03:37:16.689Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -36971,7 +36971,7 @@
     "createdAt": "2026-09-19T07:33:22Z",
     "lastCommitAt": "2026-10-05T13:09:36Z",
     "headSha": "48572305b384b53072bfc869de4420c5d9a6acf1",
-    "metadataFetchedAt": "2026-10-17T20:26:48.921Z",
+    "metadataFetchedAt": "2026-10-26T03:37:19.590Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/46613837?v=4",
     "verificationStatus": "integration-detected",
@@ -36997,7 +36997,7 @@
     "sourceHash": "e0eb1c17ddd4f01f9b864bbcd2f4b7f70202399271c8e9a570dd10581f6e66ab",
     "updatedAt": "2026-10-05T13:10:06Z",
     "pushedAt": "2026-10-05T13:10:02Z",
-    "lastSyncedAt": "2026-10-17T20:26:48.921Z",
+    "lastSyncedAt": "2026-10-26T03:37:19.590Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -37032,7 +37032,7 @@
     "createdAt": "2026-09-20T14:37:51Z",
     "lastCommitAt": "2026-10-17T16:36:30Z",
     "headSha": "4a53611fb65545d1fdeab625134cd0514b77d573",
-    "metadataFetchedAt": "2026-10-17T20:26:51.829Z",
+    "metadataFetchedAt": "2026-10-26T03:37:22.650Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/33373300?v=4",
     "verificationStatus": "integration-detected",
@@ -37081,7 +37081,7 @@
     },
     "updatedAt": "2026-10-17T16:36:35Z",
     "pushedAt": "2026-10-17T16:36:31Z",
-    "lastSyncedAt": "2026-10-17T20:26:51.829Z",
+    "lastSyncedAt": "2026-10-26T03:37:22.650Z",
     "archived": false,
     "licenseStatus": "custom"
   },
@@ -37106,7 +37106,7 @@
     "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
     "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
     "plainSummaryEn": "grep for what code does, not what it's called. Semantic code search powered by TypeSafe Jev.",
-    "stars": 60,
+    "stars": 62,
     "forks": 5,
     "openIssues": 1,
     "license": {
@@ -37118,7 +37118,7 @@
     "createdAt": "2026-09-19T04:24:17Z",
     "lastCommitAt": "2026-10-15T08:15:00Z",
     "headSha": "c36a02f2dcaae64d0afed1981c3ef5d30d9c6801",
-    "metadataFetchedAt": "2026-10-17T20:26:54.854Z",
+    "metadataFetchedAt": "2026-10-26T03:37:25.682Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/33680799?v=4",
     "verificationStatus": "integration-detected",
@@ -37183,9 +37183,9 @@
       "issueBodySha256": "3e1c0d239318aae9a6e6bcbfdbbf340c39becb93cf732d06d26b3e8564bfece6",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/46"
     },
-    "updatedAt": "2026-10-15T08:15:06Z",
+    "updatedAt": "2026-10-23T19:21:25Z",
     "pushedAt": "2026-10-15T08:15:22Z",
-    "lastSyncedAt": "2026-10-17T20:26:54.854Z",
+    "lastSyncedAt": "2026-10-26T03:37:25.682Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -37210,7 +37210,7 @@
     "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
     "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
     "plainSummaryEn": "The string baselines are best-match Jaro-Winkler and best-match TF-IDF cosine; the table shows\nthe better of the two. Exact matching after normalization scores 0.26, 0.41, 0.00, 0.00 and\n0.22.",
-    "stars": 7,
+    "stars": 8,
     "forks": 1,
     "openIssues": 0,
     "license": {
@@ -37222,7 +37222,7 @@
     "createdAt": "2026-09-18T11:11:29Z",
     "lastCommitAt": "2026-10-02T16:59:47Z",
     "headSha": "d3ab99f583a13b732738acb1fb9b7d887fa8649f",
-    "metadataFetchedAt": "2026-10-17T20:26:57.893Z",
+    "metadataFetchedAt": "2026-10-26T03:37:28.706Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/83777601?v=4",
     "verificationStatus": "integration-detected",
@@ -37323,9 +37323,9 @@
       "issueBodySha256": "172810c73b5124517934ceedd0d4b5bb219783eaa9e1a29dc97acc3dabd15a13",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/41"
     },
-    "updatedAt": "2026-10-17T18:59:23Z",
-    "pushedAt": "2026-10-02T17:21:59Z",
-    "lastSyncedAt": "2026-10-17T20:26:57.893Z",
+    "updatedAt": "2026-10-21T13:19:01Z",
+    "pushedAt": "2026-10-18T14:35:39Z",
+    "lastSyncedAt": "2026-10-26T03:37:28.706Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -37362,7 +37362,7 @@
     "createdAt": "2026-09-19T18:35:25Z",
     "lastCommitAt": "2026-10-02T16:59:50Z",
     "headSha": "6a402c90e0466927f3e6843b6e0ee4adb6fc4b1f",
-    "metadataFetchedAt": "2026-10-17T20:27:00.865Z",
+    "metadataFetchedAt": "2026-10-26T03:37:31.671Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/83777601?v=4",
     "verificationStatus": "integration-detected",
@@ -37437,8 +37437,8 @@
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/42"
     },
     "updatedAt": "2026-10-16T21:09:46Z",
-    "pushedAt": "2026-10-17T12:46:33Z",
-    "lastSyncedAt": "2026-10-17T20:27:00.865Z",
+    "pushedAt": "2026-10-18T14:35:41Z",
+    "lastSyncedAt": "2026-10-26T03:37:31.671Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -37468,8 +37468,8 @@
       "coding-agents",
       "typed-decisions"
     ],
-    "stars": 1136,
-    "forks": 115,
+    "stars": 1180,
+    "forks": 120,
     "openIssues": 2,
     "license": {
       "status": "identified",
@@ -37479,11 +37479,11 @@
     },
     "licenseStatus": "confirmed",
     "createdAt": "2026-09-18T20:01:29Z",
-    "updatedAt": "2026-10-17T07:43:22Z",
-    "pushedAt": "2026-10-16T10:32:53Z",
-    "lastCommitAt": "2026-10-16T10:29:32Z",
-    "lastSyncedAt": "2026-10-17T20:26:15.830Z",
-    "metadataFetchedAt": "2026-10-17T20:26:15.830Z",
+    "updatedAt": "2026-10-26T03:17:01Z",
+    "pushedAt": "2026-10-23T10:23:55Z",
+    "lastCommitAt": "2026-10-23T10:20:11Z",
+    "lastSyncedAt": "2026-10-26T03:36:46.568Z",
+    "metadataFetchedAt": "2026-10-26T03:36:46.568Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/26120791?v=4",
     "language": "Python",
     "topics": [
@@ -37495,7 +37495,7 @@
       "llm-routing"
     ],
     "archived": false,
-    "headSha": "b8f69fe68b0efaa006f9baede46c3849aaf789f6",
+    "headSha": "02f0461cfda2dda7353e916e38d9e97ef87c68c2",
     "sourceUrl": "https://github.com/kerpopule/hermes-jev-skills/blob/b22a21f365720cb7cf06f9b229c095176b39cdb9/jevkit/client.py",
     "sourcePath": "jevkit/client.py",
     "evidenceLines": [
@@ -37581,7 +37581,7 @@
     "createdAt": "2026-09-19T15:31:35Z",
     "lastCommitAt": "2026-09-19T15:31:32Z",
     "headSha": "05fbd7ce9ec74a2f193c09276a8d4d077d9d5e5c",
-    "metadataFetchedAt": "2026-10-17T20:27:03.897Z",
+    "metadataFetchedAt": "2026-10-26T03:37:34.638Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/42172631?v=4",
     "verificationStatus": "integration-detected",
@@ -37607,7 +37607,7 @@
     "sourceHash": "16c3189484e2672ff02808dbe9f8989046d636c93b896c0c15457ca7e86fa39b",
     "updatedAt": "2026-10-12T09:13:08Z",
     "pushedAt": "2026-09-19T15:31:40Z",
-    "lastSyncedAt": "2026-10-17T20:27:03.897Z",
+    "lastSyncedAt": "2026-10-26T03:37:34.638Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -37656,9 +37656,9 @@
       "name": "Other"
     },
     "createdAt": "2026-09-19T17:57:35Z",
-    "lastCommitAt": "2026-09-19T19:24:00Z",
-    "headSha": "58f636ecc4fb3339026e8a4f0cb49e5273f756a3",
-    "metadataFetchedAt": "2026-10-17T20:27:06.877Z",
+    "lastCommitAt": "2026-10-17T20:59:56Z",
+    "headSha": "a2a5a85544e11760de4432f3559f2b1a30f9e18f",
+    "metadataFetchedAt": "2026-10-26T03:37:37.645Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/16101773?v=4",
     "verificationStatus": "integration-detected",
@@ -37682,9 +37682,9 @@
       ]
     },
     "sourceHash": "9f50ef36e74ae44d2d5aa2ca5e3b110425326e23a90692719ccc31f69b0fc052",
-    "updatedAt": "2026-09-25T11:02:17Z",
-    "pushedAt": "2026-09-19T19:24:04Z",
-    "lastSyncedAt": "2026-10-17T20:27:06.877Z",
+    "updatedAt": "2026-10-17T21:00:02Z",
+    "pushedAt": "2026-10-17T20:59:58Z",
+    "lastSyncedAt": "2026-10-26T03:37:37.645Z",
     "archived": false,
     "licenseStatus": "custom"
   },
@@ -37735,7 +37735,7 @@
     "createdAt": "2026-09-19T17:35:36Z",
     "lastCommitAt": "2026-09-23T03:55:51Z",
     "headSha": "008c37082b5b3cb8d13e342f900a856ba5e4c414",
-    "metadataFetchedAt": "2026-10-17T20:27:09.927Z",
+    "metadataFetchedAt": "2026-10-26T03:37:40.615Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/66554426?v=4",
     "verificationStatus": "integration-detected",
@@ -37761,7 +37761,7 @@
     "sourceHash": "4cd2296f1d045a2e455a947fa23d36cddfff1e3f2d1d11954f0d19231d8a2849",
     "updatedAt": "2026-09-26T02:15:25Z",
     "pushedAt": "2026-09-23T03:56:59Z",
-    "lastSyncedAt": "2026-10-17T20:27:09.927Z",
+    "lastSyncedAt": "2026-10-26T03:37:40.615Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -37811,7 +37811,7 @@
     "createdAt": "2026-09-19T12:23:03Z",
     "lastCommitAt": "2026-09-19T14:07:55Z",
     "headSha": "144ed4cb5d0066b2149c91d4035367d609214647",
-    "metadataFetchedAt": "2026-10-17T20:27:12.949Z",
+    "metadataFetchedAt": "2026-10-26T03:37:43.700Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/218930453?v=4",
     "verificationStatus": "integration-detected",
@@ -37837,7 +37837,7 @@
     "sourceHash": "d91379e226181d88c5fa349c63580945d6334367fe10e5b2d8e0b886e26f7718",
     "updatedAt": "2026-09-20T00:28:19Z",
     "pushedAt": "2026-09-24T08:20:15Z",
-    "lastSyncedAt": "2026-10-17T20:27:12.949Z",
+    "lastSyncedAt": "2026-10-26T03:37:43.700Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -37890,7 +37890,7 @@
     "createdAt": "2026-09-19T15:08:07Z",
     "lastCommitAt": "2026-09-20T15:14:53Z",
     "headSha": "8aa403554d7904d3c14224cfda02a4e2144c0ccd",
-    "metadataFetchedAt": "2026-10-17T20:27:16.234Z",
+    "metadataFetchedAt": "2026-10-26T03:37:46.785Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/25781395?v=4",
     "verificationStatus": "integration-detected",
@@ -37916,7 +37916,7 @@
     "sourceHash": "d23276df736c0882a7c9a9953e6c5e00c15d5507c7419174c7da1b8f953a6198",
     "updatedAt": "2026-10-13T00:29:09Z",
     "pushedAt": "2026-09-20T15:14:55Z",
-    "lastSyncedAt": "2026-10-17T20:27:16.234Z",
+    "lastSyncedAt": "2026-10-26T03:37:46.785Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -37968,7 +37968,7 @@
     "createdAt": "2026-09-20T14:33:23Z",
     "lastCommitAt": "2026-09-20T18:15:04Z",
     "headSha": "12246f784a49f5e48be9aca8c2dd7588f1d1fa9f",
-    "metadataFetchedAt": "2026-10-17T20:27:18.893Z",
+    "metadataFetchedAt": "2026-10-26T03:37:49.723Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/1883779?v=4",
     "verificationStatus": "integration-detected",
@@ -37994,7 +37994,7 @@
     "sourceHash": "48c733731ba3a9bcdfb72d3dd22d33122dbcdbf1d73f0517b45a2ad0d7b6ba8a",
     "updatedAt": "2026-09-30T22:51:10Z",
     "pushedAt": "2026-09-20T18:15:11Z",
-    "lastSyncedAt": "2026-10-17T20:27:18.893Z",
+    "lastSyncedAt": "2026-10-26T03:37:49.723Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38046,7 +38046,7 @@
     "createdAt": "2026-09-20T03:07:18Z",
     "lastCommitAt": "2026-09-23T06:50:07Z",
     "headSha": "57f68600ecff35e1ddeb9cee4c692affe1fb79ae",
-    "metadataFetchedAt": "2026-10-17T20:27:21.891Z",
+    "metadataFetchedAt": "2026-10-26T03:37:52.640Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/98025755?v=4",
     "verificationStatus": "integration-detected",
@@ -38072,7 +38072,7 @@
     "sourceHash": "e3446e9103d9f316aa3627098f35999a07ce4a086ecc27bc614cac01e9eb3b4e",
     "updatedAt": "2026-09-23T06:50:15Z",
     "pushedAt": "2026-09-23T06:50:11Z",
-    "lastSyncedAt": "2026-10-17T20:27:21.891Z",
+    "lastSyncedAt": "2026-10-26T03:37:52.640Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38124,7 +38124,7 @@
     "createdAt": "2026-09-19T14:01:41Z",
     "lastCommitAt": "2026-09-20T19:58:53Z",
     "headSha": "d15edc9646541ac2a20182397c9a4df5319c883e",
-    "metadataFetchedAt": "2026-10-17T20:27:24.898Z",
+    "metadataFetchedAt": "2026-10-26T03:37:55.641Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/3525369?v=4",
     "verificationStatus": "integration-detected",
@@ -38150,7 +38150,7 @@
     "sourceHash": "21f67598d34d7c5dfb0ffd2b235722ebd770eb7cab8021a79b22d6bfb2d58735",
     "updatedAt": "2026-10-02T13:37:17Z",
     "pushedAt": "2026-09-20T20:03:01Z",
-    "lastSyncedAt": "2026-10-17T20:27:24.898Z",
+    "lastSyncedAt": "2026-10-26T03:37:55.641Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38200,7 +38200,7 @@
     "createdAt": "2026-09-20T05:17:00Z",
     "lastCommitAt": "2026-09-20T09:52:39Z",
     "headSha": "889d06f3e2b6225132788a028fe4d3f35f0ee2ae",
-    "metadataFetchedAt": "2026-10-17T20:27:27.991Z",
+    "metadataFetchedAt": "2026-10-26T03:37:58.710Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/183887963?v=4",
     "verificationStatus": "integration-detected",
@@ -38226,7 +38226,7 @@
     "sourceHash": "43210c6cc010a21704cb56d7843506a7f1c74ce3c152f9edf59f30291782b32e",
     "updatedAt": "2026-09-30T12:38:32Z",
     "pushedAt": "2026-09-20T09:52:39Z",
-    "lastSyncedAt": "2026-10-17T20:27:27.991Z",
+    "lastSyncedAt": "2026-10-26T03:37:58.710Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38267,7 +38267,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 137,
+    "stars": 140,
     "forks": 30,
     "openIssues": 1,
     "license": {
@@ -38279,7 +38279,7 @@
     "createdAt": "2026-09-19T10:35:48Z",
     "lastCommitAt": "2026-10-10T14:15:25Z",
     "headSha": "77b65c6b6dedc6c504f7f2caea57a354887b60a8",
-    "metadataFetchedAt": "2026-10-17T20:27:30.887Z",
+    "metadataFetchedAt": "2026-10-26T03:38:01.661Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/7868717?v=4",
     "verificationStatus": "integration-detected",
@@ -38303,9 +38303,9 @@
       ]
     },
     "sourceHash": "eed6aef3b9bb900cf7a54f4ab82490874570211b4e0824a75b7ee978c8db6cdd",
-    "updatedAt": "2026-10-15T17:54:57Z",
+    "updatedAt": "2026-10-21T08:15:48Z",
     "pushedAt": "2026-10-15T13:18:15Z",
-    "lastSyncedAt": "2026-10-17T20:27:30.887Z",
+    "lastSyncedAt": "2026-10-26T03:38:01.661Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38355,7 +38355,7 @@
     "createdAt": "2026-09-18T10:36:35Z",
     "lastCommitAt": "2026-09-21T07:06:59Z",
     "headSha": "b672902c82f2599b92ad75ecc9f7b9118955f815",
-    "metadataFetchedAt": "2026-10-17T20:27:33.872Z",
+    "metadataFetchedAt": "2026-10-26T03:38:04.689Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/3416677?v=4",
     "verificationStatus": "integration-detected",
@@ -38381,7 +38381,7 @@
     "sourceHash": "7935ab487bf92ba246f24bbdc59bcf7235a58889fb0c16e2299027fcf29e4960",
     "updatedAt": "2026-10-14T01:50:40Z",
     "pushedAt": "2026-09-21T07:07:02Z",
-    "lastSyncedAt": "2026-10-17T20:27:33.872Z",
+    "lastSyncedAt": "2026-10-26T03:38:04.689Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38421,7 +38421,7 @@
         "source": "readme"
       }
     },
-    "stars": 5,
+    "stars": 6,
     "forks": 0,
     "openIssues": 5,
     "license": {
@@ -38433,7 +38433,7 @@
     "createdAt": "2026-09-19T12:42:07Z",
     "lastCommitAt": "2026-10-16T14:11:09Z",
     "headSha": "d1b7cb516a2485b4beed5d322964b27328e955ec",
-    "metadataFetchedAt": "2026-10-17T20:27:36.937Z",
+    "metadataFetchedAt": "2026-10-26T03:38:07.843Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/6175822?v=4",
     "verificationStatus": "integration-detected",
@@ -38457,9 +38457,9 @@
       ]
     },
     "sourceHash": "bce7685eb8c44d13d800256a08d81bb9034f46155ccf82177fedf9a3b0e85140",
-    "updatedAt": "2026-10-16T14:11:20Z",
+    "updatedAt": "2026-10-20T06:12:28Z",
     "pushedAt": "2026-10-17T08:33:33Z",
-    "lastSyncedAt": "2026-10-17T20:27:36.937Z",
+    "lastSyncedAt": "2026-10-26T03:38:07.843Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38499,7 +38499,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 5,
+    "stars": 6,
     "forks": 0,
     "openIssues": 7,
     "license": {
@@ -38509,9 +38509,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-19T15:26:15Z",
-    "lastCommitAt": "2026-10-17T10:55:24Z",
-    "headSha": "9678a614ee080d7a3285665e3f455eae6b5f5aff",
-    "metadataFetchedAt": "2026-10-17T20:27:39.932Z",
+    "lastCommitAt": "2026-10-23T00:34:31Z",
+    "headSha": "38048a8459b5aaa7219d2489128faa479f100a0b",
+    "metadataFetchedAt": "2026-10-26T03:38:10.659Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/84506708?v=4",
     "verificationStatus": "integration-detected",
@@ -38535,9 +38535,9 @@
       ]
     },
     "sourceHash": "acf755d6bd767e8f9e31ca8063f8aa2b9d3b84d0b419c6e20c8688109d35f1bf",
-    "updatedAt": "2026-10-17T10:55:29Z",
-    "pushedAt": "2026-10-17T10:58:35Z",
-    "lastSyncedAt": "2026-10-17T20:27:39.932Z",
+    "updatedAt": "2026-10-23T00:34:37Z",
+    "pushedAt": "2026-10-24T07:05:21Z",
+    "lastSyncedAt": "2026-10-26T03:38:10.659Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38587,7 +38587,7 @@
     "createdAt": "2026-09-20T11:02:36Z",
     "lastCommitAt": "2026-09-20T14:25:13Z",
     "headSha": "7b20148292223df96b4345d66bb2691ff511a79d",
-    "metadataFetchedAt": "2026-10-17T20:27:42.901Z",
+    "metadataFetchedAt": "2026-10-26T03:38:13.616Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/10594453?v=4",
     "verificationStatus": "integration-detected",
@@ -38613,7 +38613,7 @@
     "sourceHash": "aa809dd72081dbd52cb9ee4ff3674db0495af8f01aaf4e39b1f85280d8207f42",
     "updatedAt": "2026-09-24T12:12:49Z",
     "pushedAt": "2026-09-20T14:25:19Z",
-    "lastSyncedAt": "2026-10-17T20:27:42.901Z",
+    "lastSyncedAt": "2026-10-26T03:38:13.616Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -38665,7 +38665,7 @@
     "createdAt": "2026-09-19T06:20:33Z",
     "lastCommitAt": "2026-10-17T12:33:21Z",
     "headSha": "f83cd79320dfede827468b5f25dde0b2fb865bb2",
-    "metadataFetchedAt": "2026-10-17T20:27:45.879Z",
+    "metadataFetchedAt": "2026-10-26T03:38:16.693Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/62425457?v=4",
     "verificationStatus": "integration-detected",
@@ -38691,7 +38691,7 @@
     "sourceHash": "b8d4cc8ed69c2cac8039c0ec89b08e6f233b8dd5511f38bab0319b7c23a9f35b",
     "updatedAt": "2026-10-17T12:33:25Z",
     "pushedAt": "2026-10-17T12:33:23Z",
-    "lastSyncedAt": "2026-10-17T20:27:45.879Z",
+    "lastSyncedAt": "2026-10-26T03:38:16.693Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38743,7 +38743,7 @@
     "createdAt": "2026-09-19T23:26:55Z",
     "lastCommitAt": "2026-09-20T18:31:48Z",
     "headSha": "6fed1518bbb84cc4865401630f37c01dc3decc10",
-    "metadataFetchedAt": "2026-10-17T20:27:48.877Z",
+    "metadataFetchedAt": "2026-10-26T03:38:19.621Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/519731?v=4",
     "verificationStatus": "integration-detected",
@@ -38769,7 +38769,7 @@
     "sourceHash": "e09243e3036759c2c0be2547279147ee0415bbd994d9b1885fb7534e5a920358",
     "updatedAt": "2026-09-29T11:49:19Z",
     "pushedAt": "2026-09-20T18:31:50Z",
-    "lastSyncedAt": "2026-10-17T20:27:48.877Z",
+    "lastSyncedAt": "2026-10-26T03:38:19.621Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38821,7 +38821,7 @@
     "createdAt": "2026-09-20T13:12:43Z",
     "lastCommitAt": "2026-09-20T17:53:45Z",
     "headSha": "8d2db18ef753cd84e06a75dcaa6fa881b35c5a77",
-    "metadataFetchedAt": "2026-10-17T20:27:51.928Z",
+    "metadataFetchedAt": "2026-10-26T03:38:22.656Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/169631528?v=4",
     "verificationStatus": "integration-detected",
@@ -38847,7 +38847,7 @@
     "sourceHash": "068677273c9104f522e3749dd8235b311de1f9d352d5af0c50cc4b9b9b2930d2",
     "updatedAt": "2026-09-23T03:30:18Z",
     "pushedAt": "2026-09-20T17:53:47Z",
-    "lastSyncedAt": "2026-10-17T20:27:51.928Z",
+    "lastSyncedAt": "2026-10-26T03:38:22.656Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38885,7 +38885,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 8,
+    "stars": 9,
     "forks": 1,
     "openIssues": 0,
     "license": {
@@ -38897,7 +38897,7 @@
     "createdAt": "2026-08-01T02:04:30Z",
     "lastCommitAt": "2026-09-23T14:56:46Z",
     "headSha": "ff76b00fb18d0d64016a6a5d8f162875569a7894",
-    "metadataFetchedAt": "2026-10-17T20:27:54.881Z",
+    "metadataFetchedAt": "2026-10-26T03:38:25.645Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/20677007?v=4",
     "verificationStatus": "integration-detected",
@@ -38921,9 +38921,9 @@
       ]
     },
     "sourceHash": "463a0666b739293887736d971fbbe14773e62af920b0668766c0b35699ae8a8b",
-    "updatedAt": "2026-09-26T13:51:27Z",
+    "updatedAt": "2026-10-21T08:13:02Z",
     "pushedAt": "2026-09-23T14:56:54Z",
-    "lastSyncedAt": "2026-10-17T20:27:54.881Z",
+    "lastSyncedAt": "2026-10-26T03:38:25.645Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -38967,13 +38967,15 @@
     "forks": 1,
     "openIssues": 0,
     "license": {
-      "status": "undeclared",
-      "spdx": null
+      "status": "identified",
+      "spdx": "MIT",
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-20T00:20:04Z",
-    "lastCommitAt": "2026-09-20T00:24:57Z",
-    "headSha": "172eae5dfb40abc72590b5451e5330edb4c53c91",
-    "metadataFetchedAt": "2026-10-17T20:27:57.993Z",
+    "lastCommitAt": "2026-10-22T04:32:08Z",
+    "headSha": "89ac29cf4fec5217d8f3be859d4d89fcf1e9ef4f",
+    "metadataFetchedAt": "2026-10-26T03:38:28.693Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/201413662?v=4",
     "verificationStatus": "integration-detected",
@@ -38997,9 +38999,9 @@
       ]
     },
     "sourceHash": "d1bb76b3934072e94cd87b945dc450dea54fa446e448daa3e1dc302f84c26d64",
-    "updatedAt": "2026-10-06T18:55:09Z",
-    "pushedAt": "2026-09-20T00:24:55Z",
-    "lastSyncedAt": "2026-10-17T20:27:57.993Z",
+    "updatedAt": "2026-10-22T04:32:13Z",
+    "pushedAt": "2026-10-24T16:35:48Z",
+    "lastSyncedAt": "2026-10-26T03:38:28.693Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -39051,7 +39053,7 @@
     "createdAt": "2026-09-19T20:08:43Z",
     "lastCommitAt": "2026-09-19T20:11:55Z",
     "headSha": "4a16d03957df28bd5989060266da80191456301c",
-    "metadataFetchedAt": "2026-10-17T20:28:00.904Z",
+    "metadataFetchedAt": "2026-10-26T03:38:31.669Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/3296497?v=4",
     "verificationStatus": "integration-detected",
@@ -39077,7 +39079,7 @@
     "sourceHash": "ee259b702d10cba266b12880247a9b6ca8a9785a2ba1264886c655295b10ed13",
     "updatedAt": "2026-09-20T09:29:33Z",
     "pushedAt": "2026-09-19T20:11:57Z",
-    "lastSyncedAt": "2026-10-17T20:28:00.904Z",
+    "lastSyncedAt": "2026-10-26T03:38:31.669Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -39118,17 +39120,19 @@
         "source": "readme"
       }
     },
-    "stars": 9,
+    "stars": 10,
     "forks": 1,
     "openIssues": 1,
     "license": {
-      "status": "undeclared",
-      "spdx": null
+      "status": "identified",
+      "spdx": "MIT",
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-16T22:42:44Z",
-    "lastCommitAt": "2026-09-17T14:16:41Z",
-    "headSha": "1d56e8c64d029a9554a0874e2ef2901ed196e230",
-    "metadataFetchedAt": "2026-10-17T20:28:03.873Z",
+    "lastCommitAt": "2026-10-20T21:14:27Z",
+    "headSha": "19f33bdd0b4b878d8282d299361796e64d0755ae",
+    "metadataFetchedAt": "2026-10-26T03:38:35.099Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/142441328?v=4",
     "verificationStatus": "integration-detected",
@@ -39152,9 +39156,9 @@
       ]
     },
     "sourceHash": "d8c594d78718577ba73fef6f9d774d490e9bb97e65070a63d2dec9d682563665",
-    "updatedAt": "2026-10-11T18:05:36Z",
-    "pushedAt": "2026-09-19T17:34:05Z",
-    "lastSyncedAt": "2026-10-17T20:28:03.873Z",
+    "updatedAt": "2026-10-23T00:45:19Z",
+    "pushedAt": "2026-10-20T21:16:48Z",
+    "lastSyncedAt": "2026-10-26T03:38:35.099Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -39191,7 +39195,7 @@
     "createdAt": "2026-09-20T09:52:52Z",
     "lastCommitAt": "2026-10-13T20:47:15Z",
     "headSha": "e4a5f93e6b1181904db46148950a38f437e72596",
-    "metadataFetchedAt": "2026-10-17T20:28:06.942Z",
+    "metadataFetchedAt": "2026-10-26T03:38:37.618Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/120266872?v=4",
     "verificationStatus": "integration-detected",
@@ -39258,7 +39262,7 @@
     },
     "updatedAt": "2026-10-13T20:47:30Z",
     "pushedAt": "2026-10-13T20:47:25Z",
-    "lastSyncedAt": "2026-10-17T20:28:06.942Z",
+    "lastSyncedAt": "2026-10-26T03:38:37.618Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -39295,7 +39299,7 @@
     "createdAt": "2026-09-19T08:38:51Z",
     "lastCommitAt": "2026-09-21T13:19:01Z",
     "headSha": "3507767b6f593c8f4393d8267775fa15b913fb10",
-    "metadataFetchedAt": "2026-10-17T20:28:09.897Z",
+    "metadataFetchedAt": "2026-10-26T03:38:40.642Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18315?v=4",
     "verificationStatus": "integration-detected",
@@ -39335,7 +39339,7 @@
     },
     "updatedAt": "2026-10-15T16:17:57Z",
     "pushedAt": "2026-09-21T13:19:03Z",
-    "lastSyncedAt": "2026-10-17T20:28:09.897Z",
+    "lastSyncedAt": "2026-10-26T03:38:40.642Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -39370,7 +39374,7 @@
     "createdAt": "2026-09-18T06:51:34Z",
     "lastCommitAt": "2026-10-05T17:22:55Z",
     "headSha": "5d389156b1f66a1e70270097671159bb562d9d67",
-    "metadataFetchedAt": "2026-10-17T20:28:12.902Z",
+    "metadataFetchedAt": "2026-10-26T03:38:43.671Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18315?v=4",
     "verificationStatus": "integration-detected",
@@ -39428,7 +39432,7 @@
     },
     "updatedAt": "2026-10-05T17:23:00Z",
     "pushedAt": "2026-10-05T17:22:56Z",
-    "lastSyncedAt": "2026-10-17T20:28:12.902Z",
+    "lastSyncedAt": "2026-10-26T03:38:43.671Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -39463,7 +39467,7 @@
     "createdAt": "2026-09-19T04:29:34Z",
     "lastCommitAt": "2026-10-05T17:05:26Z",
     "headSha": "e8f0d26c2909887e44163ff64e3c111d28ddd597",
-    "metadataFetchedAt": "2026-10-17T20:28:15.896Z",
+    "metadataFetchedAt": "2026-10-26T03:38:46.684Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18315?v=4",
     "verificationStatus": "integration-detected",
@@ -39512,7 +39516,7 @@
     },
     "updatedAt": "2026-10-05T17:05:31Z",
     "pushedAt": "2026-10-05T17:05:27Z",
-    "lastSyncedAt": "2026-10-17T20:28:15.896Z",
+    "lastSyncedAt": "2026-10-26T03:38:46.684Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -39547,7 +39551,7 @@
     "createdAt": "2026-09-17T06:27:38Z",
     "lastCommitAt": "2026-09-17T06:51:58Z",
     "headSha": "fef00f6f3707a0b52b21dc08b769f7be5ccf08f4",
-    "metadataFetchedAt": "2026-10-17T20:28:18.917Z",
+    "metadataFetchedAt": "2026-10-26T03:38:49.611Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18315?v=4",
     "verificationStatus": "integration-detected",
@@ -39596,7 +39600,7 @@
     },
     "updatedAt": "2026-09-18T08:16:16Z",
     "pushedAt": "2026-09-17T06:52:02Z",
-    "lastSyncedAt": "2026-10-17T20:28:18.917Z",
+    "lastSyncedAt": "2026-10-26T03:38:49.611Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -39633,7 +39637,7 @@
     "createdAt": "2026-09-17T01:47:58Z",
     "lastCommitAt": "2026-09-21T12:50:21Z",
     "headSha": "1db0ad0f528d6213ebf47deb9b6d0402c834e321",
-    "metadataFetchedAt": "2026-10-17T20:28:21.907Z",
+    "metadataFetchedAt": "2026-10-26T03:38:52.671Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18315?v=4",
     "verificationStatus": "integration-detected",
@@ -39736,7 +39740,7 @@
     },
     "updatedAt": "2026-09-30T12:37:44Z",
     "pushedAt": "2026-09-21T12:50:23Z",
-    "lastSyncedAt": "2026-10-17T20:28:21.907Z",
+    "lastSyncedAt": "2026-10-26T03:38:52.671Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -39773,7 +39777,7 @@
     "createdAt": "2026-09-20T10:08:36Z",
     "lastCommitAt": "2026-09-21T17:00:26Z",
     "headSha": "74a08a3c871939ebce062e73658541fda8a12e44",
-    "metadataFetchedAt": "2026-10-17T20:28:24.964Z",
+    "metadataFetchedAt": "2026-10-26T03:38:55.644Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18315?v=4",
     "verificationStatus": "integration-detected",
@@ -39822,7 +39826,7 @@
     },
     "updatedAt": "2026-09-28T07:46:36Z",
     "pushedAt": "2026-09-21T17:00:28Z",
-    "lastSyncedAt": "2026-10-17T20:28:24.964Z",
+    "lastSyncedAt": "2026-10-26T03:38:55.644Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -39859,7 +39863,7 @@
     "createdAt": "2026-09-17T14:27:29Z",
     "lastCommitAt": "2026-10-04T17:47:53Z",
     "headSha": "f37cbd68515c1a389db89215cf25c7af6b1c7c77",
-    "metadataFetchedAt": "2026-10-17T20:28:27.878Z",
+    "metadataFetchedAt": "2026-10-26T03:38:58.690Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/18315?v=4",
     "verificationStatus": "integration-detected",
@@ -39899,7 +39903,7 @@
     },
     "updatedAt": "2026-10-15T05:10:05Z",
     "pushedAt": "2026-10-04T17:47:54Z",
-    "lastSyncedAt": "2026-10-17T20:28:27.878Z",
+    "lastSyncedAt": "2026-10-26T03:38:58.690Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -39923,7 +39927,7 @@
     "claimStatus": "优先保留投稿者与仓库原文，缺失语言自动补充；自动检查仅确认 Jev 集成证据，未经本站运行或性能复测。",
     "claimStatusEn": "Author and repository text is preserved where clear; missing languages are enriched automatically. Checks establish source-level Jev integration, not runtime, safety, or performance validation.",
     "plainSummaryEn": "The agent loop where decisions don't cost a large language model call. Zero deps, runs offline, no API key needed.",
-    "stars": 23,
+    "stars": 24,
     "forks": 6,
     "openIssues": 0,
     "license": {
@@ -39935,7 +39939,7 @@
     "createdAt": "2026-09-20T15:21:09Z",
     "lastCommitAt": "2026-10-05T02:45:10Z",
     "headSha": "a77dd4b6a22fdc47e50f7bf04e4f76143f7f79b0",
-    "metadataFetchedAt": "2026-10-17T20:28:30.862Z",
+    "metadataFetchedAt": "2026-10-26T03:39:01.602Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/41887875?v=4",
     "verificationStatus": "integration-detected",
@@ -40045,9 +40049,9 @@
       "issueBodySha256": "e39a27f88544789f0655451cbb6288be5743c4d3f0da52bac0f30caa05edb599",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/55"
     },
-    "updatedAt": "2026-10-12T13:16:57Z",
+    "updatedAt": "2026-10-20T01:18:27Z",
     "pushedAt": "2026-10-05T02:45:52Z",
-    "lastSyncedAt": "2026-10-17T20:28:30.862Z",
+    "lastSyncedAt": "2026-10-26T03:39:01.602Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40083,7 +40087,7 @@
     "createdAt": "2026-09-20T21:07:29Z",
     "lastCommitAt": "2026-09-20T21:02:58Z",
     "headSha": "0a0466f614a9c35e4697a0e8a20600e0104e8151",
-    "metadataFetchedAt": "2026-10-17T20:28:33.940Z",
+    "metadataFetchedAt": "2026-10-26T03:39:04.672Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/110794587?v=4",
     "verificationStatus": "integration-detected",
@@ -40141,7 +40145,7 @@
     },
     "updatedAt": "2026-09-20T21:14:06Z",
     "pushedAt": "2026-09-20T21:07:33Z",
-    "lastSyncedAt": "2026-10-17T20:28:33.940Z",
+    "lastSyncedAt": "2026-10-26T03:39:04.672Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40181,7 +40185,7 @@
         "source": "readme"
       }
     },
-    "stars": 63,
+    "stars": 64,
     "forks": 7,
     "openIssues": 0,
     "license": {
@@ -40193,7 +40197,7 @@
     "createdAt": "2026-09-18T19:40:40Z",
     "lastCommitAt": "2026-09-19T11:57:55Z",
     "headSha": "ecf9c48d290e086bde790d6e24b93324667155e9",
-    "metadataFetchedAt": "2026-10-17T20:28:36.922Z",
+    "metadataFetchedAt": "2026-10-26T03:39:07.672Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/1448366?v=4",
     "verificationStatus": "integration-detected",
@@ -40217,9 +40221,9 @@
       ]
     },
     "sourceHash": "0badd2612fdef1454200d8cbeed528181a261983bd4f8941b9754bb159d049d8",
-    "updatedAt": "2026-10-01T03:20:04Z",
+    "updatedAt": "2026-10-21T08:32:11Z",
     "pushedAt": "2026-09-19T11:58:01Z",
-    "lastSyncedAt": "2026-10-17T20:28:36.922Z",
+    "lastSyncedAt": "2026-10-26T03:39:07.672Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40272,7 +40276,7 @@
     "createdAt": "2026-09-19T15:30:38Z",
     "lastCommitAt": "2026-09-19T15:50:49Z",
     "headSha": "80d33c4b0f39d471e817414caff06b6d1984515f",
-    "metadataFetchedAt": "2026-10-17T20:28:39.866Z",
+    "metadataFetchedAt": "2026-10-26T03:39:10.671Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/249879463?v=4",
     "verificationStatus": "integration-detected",
@@ -40298,7 +40302,7 @@
     "sourceHash": "02424004c0e439b3ce319dfbb03a58822ae906d6c977110fc2da6c1999cb937d",
     "updatedAt": "2026-09-30T20:05:16Z",
     "pushedAt": "2026-09-19T15:51:32Z",
-    "lastSyncedAt": "2026-10-17T20:28:39.866Z",
+    "lastSyncedAt": "2026-10-26T03:39:10.671Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40350,7 +40354,7 @@
     "createdAt": "2026-09-21T06:11:56Z",
     "lastCommitAt": "2026-09-22T17:52:09Z",
     "headSha": "b02d19a6659a04142c94efd187caac5e6950fec0",
-    "metadataFetchedAt": "2026-10-17T20:28:42.869Z",
+    "metadataFetchedAt": "2026-10-26T03:39:13.604Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/130393461?v=4",
     "verificationStatus": "integration-detected",
@@ -40376,7 +40380,7 @@
     "sourceHash": "bb45daeb5faaa0d4abc1ac540dbc967c0b7231630b07bd3db5d8577b9f3133e0",
     "updatedAt": "2026-10-04T06:23:49Z",
     "pushedAt": "2026-09-22T17:52:11Z",
-    "lastSyncedAt": "2026-10-17T20:28:42.869Z",
+    "lastSyncedAt": "2026-10-26T03:39:13.604Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40428,7 +40432,7 @@
     "createdAt": "2026-09-18T21:46:40Z",
     "lastCommitAt": "2026-09-29T20:16:40Z",
     "headSha": "794e9a5fcfe5910a9001f3ac14da0fb8a07c36c9",
-    "metadataFetchedAt": "2026-10-17T20:28:45.978Z",
+    "metadataFetchedAt": "2026-10-26T03:39:16.638Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/79052622?v=4",
     "verificationStatus": "integration-detected",
@@ -40454,7 +40458,7 @@
     "sourceHash": "7f791ce485fada33980402c081ef2cab1e1bc1b3da65b60797d07347d9893e8c",
     "updatedAt": "2026-09-29T20:16:44Z",
     "pushedAt": "2026-10-12T19:12:28Z",
-    "lastSyncedAt": "2026-10-17T20:28:45.978Z",
+    "lastSyncedAt": "2026-10-26T03:39:16.638Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40504,7 +40508,7 @@
     "createdAt": "2026-09-19T17:13:05Z",
     "lastCommitAt": "2026-09-20T17:31:52Z",
     "headSha": "423133b991c6426e1dee460eb126124f9f76382d",
-    "metadataFetchedAt": "2026-10-17T20:28:48.910Z",
+    "metadataFetchedAt": "2026-10-26T03:39:19.665Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/16575984?v=4",
     "verificationStatus": "integration-detected",
@@ -40530,7 +40534,7 @@
     "sourceHash": "d8310297d6ec993315805bcaab5fd3913403724e7174c978d27430ec031793fd",
     "updatedAt": "2026-10-08T01:04:25Z",
     "pushedAt": "2026-09-20T17:31:56Z",
-    "lastSyncedAt": "2026-10-17T20:28:48.910Z",
+    "lastSyncedAt": "2026-10-26T03:39:19.665Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -40582,7 +40586,7 @@
     "createdAt": "2026-09-19T11:46:09Z",
     "lastCommitAt": "2026-09-23T06:43:19Z",
     "headSha": "031681f50d89230c8a9f4384d20454f2310cfa7d",
-    "metadataFetchedAt": "2026-10-17T20:28:51.898Z",
+    "metadataFetchedAt": "2026-10-26T03:39:22.701Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/44469195?v=4",
     "verificationStatus": "integration-detected",
@@ -40608,7 +40612,7 @@
     "sourceHash": "80a124adff9a9f6b5d494477b9ead575c248a183d5ab974ed77e05c3ecc6d661",
     "updatedAt": "2026-10-09T04:20:21Z",
     "pushedAt": "2026-09-23T06:43:22Z",
-    "lastSyncedAt": "2026-10-17T20:28:51.898Z",
+    "lastSyncedAt": "2026-10-26T03:39:22.701Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40659,7 +40663,7 @@
     "createdAt": "2026-09-19T23:17:48Z",
     "lastCommitAt": "2026-09-20T04:33:50Z",
     "headSha": "b4d350c683da6d5890b97c84d1b534a57143e6a5",
-    "metadataFetchedAt": "2026-10-17T20:28:54.897Z",
+    "metadataFetchedAt": "2026-10-26T03:39:25.621Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/234891853?v=4",
     "verificationStatus": "integration-detected",
@@ -40685,7 +40689,7 @@
     "sourceHash": "b7b2928f4ff01ef128133452ab4f4c56611750d94b648db6e4670bfe777adebc",
     "updatedAt": "2026-10-09T06:27:12Z",
     "pushedAt": "2026-09-20T04:33:51Z",
-    "lastSyncedAt": "2026-10-17T20:28:54.897Z",
+    "lastSyncedAt": "2026-10-26T03:39:25.621Z",
     "archived": false,
     "licenseStatus": "custom"
   },
@@ -40738,7 +40742,7 @@
     "createdAt": "2026-09-19T08:32:15Z",
     "lastCommitAt": "2026-09-21T05:23:02Z",
     "headSha": "9f8f032918ac01d4efa1b4ee26eca0a4e27ddc08",
-    "metadataFetchedAt": "2026-10-17T20:28:57.932Z",
+    "metadataFetchedAt": "2026-10-26T03:39:28.651Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/11815232?v=4",
     "verificationStatus": "integration-detected",
@@ -40764,7 +40768,7 @@
     "sourceHash": "de0f46022c1f62d2509dcd4b184c60d662951c56038cff849ae47c7b29708160",
     "updatedAt": "2026-09-29T11:00:50Z",
     "pushedAt": "2026-09-21T05:23:09Z",
-    "lastSyncedAt": "2026-10-17T20:28:57.932Z",
+    "lastSyncedAt": "2026-10-26T03:39:28.651Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40805,8 +40809,8 @@
       }
     },
     "stars": 11,
-    "forks": 4,
-    "openIssues": 3,
+    "forks": 6,
+    "openIssues": 5,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -40816,7 +40820,7 @@
     "createdAt": "2026-09-19T07:23:19Z",
     "lastCommitAt": "2026-09-19T07:23:08Z",
     "headSha": "b3d29f71770a3447ad0b3db00658f64a8edc7dd3",
-    "metadataFetchedAt": "2026-10-17T20:29:00.911Z",
+    "metadataFetchedAt": "2026-10-26T03:39:31.636Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/5827908?v=4",
     "verificationStatus": "integration-detected",
@@ -40842,7 +40846,7 @@
     "sourceHash": "778a2ac4ec509e56ac4ddbb47f2344c48e2cd308adb0686793ac123f9430bf67",
     "updatedAt": "2026-10-15T20:39:04Z",
     "pushedAt": "2026-09-19T08:41:19Z",
-    "lastSyncedAt": "2026-10-17T20:29:00.911Z",
+    "lastSyncedAt": "2026-10-26T03:39:31.636Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40894,7 +40898,7 @@
     "createdAt": "2026-09-19T06:12:32Z",
     "lastCommitAt": "2026-10-08T14:54:56Z",
     "headSha": "858e08a50257a88f8eb548b87e5c46c9b42f1eb0",
-    "metadataFetchedAt": "2026-10-17T20:29:03.947Z",
+    "metadataFetchedAt": "2026-10-26T03:39:34.693Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/53109993?v=4",
     "verificationStatus": "integration-detected",
@@ -40920,7 +40924,7 @@
     "sourceHash": "5a7e53aa1289c8b6a0d3daeef898275e7a5cb0fe4d45079a045bcf92857d8f51",
     "updatedAt": "2026-10-08T14:56:20Z",
     "pushedAt": "2026-10-17T11:02:28Z",
-    "lastSyncedAt": "2026-10-17T20:29:03.947Z",
+    "lastSyncedAt": "2026-10-26T03:39:34.693Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -40960,7 +40964,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 5,
+    "stars": 6,
     "forks": 2,
     "openIssues": 0,
     "license": {
@@ -40970,9 +40974,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-19T16:03:17Z",
-    "lastCommitAt": "2026-10-10T11:30:31Z",
-    "headSha": "1d56d8830afd57b86b3d69e5c01cb005a43b1e5e",
-    "metadataFetchedAt": "2026-10-17T20:29:06.900Z",
+    "lastCommitAt": "2026-10-19T11:57:00Z",
+    "headSha": "d85d77c1ae275c32508cbaf32aa11dcf07f38362",
+    "metadataFetchedAt": "2026-10-26T03:39:37.654Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/184155180?v=4",
     "verificationStatus": "integration-detected",
@@ -40996,9 +41000,9 @@
       ]
     },
     "sourceHash": "0176d9ca3aa3617019d85af993aedf439b6e1eeb5ecc8acb57a9724389d9660e",
-    "updatedAt": "2026-10-10T11:32:28Z",
-    "pushedAt": "2026-10-10T11:30:33Z",
-    "lastSyncedAt": "2026-10-17T20:29:06.900Z",
+    "updatedAt": "2026-10-21T03:51:19Z",
+    "pushedAt": "2026-10-19T11:57:02Z",
+    "lastSyncedAt": "2026-10-26T03:39:37.654Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41038,7 +41042,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 4,
+    "stars": 5,
     "forks": 0,
     "openIssues": 0,
     "license": {
@@ -41050,7 +41054,7 @@
     "createdAt": "2026-09-20T12:04:26Z",
     "lastCommitAt": "2026-09-24T10:04:05Z",
     "headSha": "2bbd20db51aee84e77da513935ce7fc364bb9d06",
-    "metadataFetchedAt": "2026-10-17T20:29:10.008Z",
+    "metadataFetchedAt": "2026-10-26T03:39:40.712Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/38779388?v=4",
     "verificationStatus": "integration-detected",
@@ -41074,9 +41078,9 @@
       ]
     },
     "sourceHash": "c77281cd4d47d7fafcad95358e3cb5267c698857c534d05d74d880d7c6206964",
-    "updatedAt": "2026-09-29T20:08:36Z",
+    "updatedAt": "2026-10-22T13:03:49Z",
     "pushedAt": "2026-09-24T10:04:14Z",
-    "lastSyncedAt": "2026-10-17T20:29:10.008Z",
+    "lastSyncedAt": "2026-10-26T03:39:40.712Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41127,7 +41131,7 @@
     "createdAt": "2026-09-18T02:44:55Z",
     "lastCommitAt": "2026-09-29T01:38:54Z",
     "headSha": "721fc73d4571d4e4ad90dab65481e52f5b2f2531",
-    "metadataFetchedAt": "2026-10-17T20:29:12.974Z",
+    "metadataFetchedAt": "2026-10-26T03:39:43.630Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/74225210?v=4",
     "verificationStatus": "integration-detected",
@@ -41153,7 +41157,7 @@
     "sourceHash": "6f2009d564591ef95117cac9236de7d2104358d5dabd2028bd4a01548e025c49",
     "updatedAt": "2026-09-30T12:38:11Z",
     "pushedAt": "2026-09-29T02:06:42Z",
-    "lastSyncedAt": "2026-10-17T20:29:12.974Z",
+    "lastSyncedAt": "2026-10-26T03:39:43.630Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41205,7 +41209,7 @@
     "createdAt": "2026-09-21T04:08:49Z",
     "lastCommitAt": "2026-09-21T04:11:27Z",
     "headSha": "77b97a61022695427f20cadbf988781a90733c6b",
-    "metadataFetchedAt": "2026-10-17T20:29:15.946Z",
+    "metadataFetchedAt": "2026-10-26T03:39:46.662Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/11900597?v=4",
     "verificationStatus": "integration-detected",
@@ -41231,7 +41235,7 @@
     "sourceHash": "938c7ce346c3d0b80133db7988ac6de97a3f52f0e95171a662868cff19dec3de",
     "updatedAt": "2026-09-21T05:22:51Z",
     "pushedAt": "2026-09-21T04:11:28Z",
-    "lastSyncedAt": "2026-10-17T20:29:15.946Z",
+    "lastSyncedAt": "2026-10-26T03:39:46.662Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41271,8 +41275,8 @@
         "source": "readme"
       }
     },
-    "stars": 10,
-    "forks": 4,
+    "stars": 13,
+    "forks": 5,
     "openIssues": 2,
     "license": {
       "status": "identified",
@@ -41283,7 +41287,7 @@
     "createdAt": "2026-09-17T03:45:35Z",
     "lastCommitAt": "2026-09-18T18:59:16Z",
     "headSha": "996a49158638bcb4b4ed6564616493f86f10805c",
-    "metadataFetchedAt": "2026-10-17T20:29:18.918Z",
+    "metadataFetchedAt": "2026-10-26T03:39:49.635Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/60787233?v=4",
     "verificationStatus": "integration-detected",
@@ -41307,9 +41311,9 @@
       ]
     },
     "sourceHash": "09f26d63e40f0c68a68101156bc7d239ed2ded7258ddcb8ec19475c07f888f07",
-    "updatedAt": "2026-10-14T03:45:07Z",
+    "updatedAt": "2026-10-22T23:40:25Z",
     "pushedAt": "2026-09-18T18:59:18Z",
-    "lastSyncedAt": "2026-10-17T20:29:18.918Z",
+    "lastSyncedAt": "2026-10-26T03:39:49.635Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41361,7 +41365,7 @@
     "createdAt": "2026-09-19T08:54:17Z",
     "lastCommitAt": "2026-10-09T14:13:13Z",
     "headSha": "e1a3bf57220c724d73a67f78a4e8a014b8087b28",
-    "metadataFetchedAt": "2026-10-17T20:29:24.945Z",
+    "metadataFetchedAt": "2026-10-26T03:39:55.804Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/114113320?v=4",
     "verificationStatus": "integration-detected",
@@ -41387,7 +41391,7 @@
     "sourceHash": "1c2836347594ba5db4d3a138605d49927e21e638d62705e4cc0843570997e8c2",
     "updatedAt": "2026-10-09T14:13:18Z",
     "pushedAt": "2026-10-09T14:13:19Z",
-    "lastSyncedAt": "2026-10-17T20:29:24.945Z",
+    "lastSyncedAt": "2026-10-26T03:39:55.804Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41438,7 +41442,7 @@
     "createdAt": "2026-09-18T20:03:42Z",
     "lastCommitAt": "2026-09-19T22:18:12Z",
     "headSha": "349f70af7f8669ff3dc97fb4099304249326c229",
-    "metadataFetchedAt": "2026-10-17T20:29:27.963Z",
+    "metadataFetchedAt": "2026-10-26T03:39:58.668Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/35996656?v=4",
     "verificationStatus": "integration-detected",
@@ -41464,7 +41468,7 @@
     "sourceHash": "042b01731dbb32d45c8bf3b4ffe93fb64d2acb662a252a4627e90c3b56a39512",
     "updatedAt": "2026-09-22T13:10:36Z",
     "pushedAt": "2026-09-19T22:18:13Z",
-    "lastSyncedAt": "2026-10-17T20:29:27.963Z",
+    "lastSyncedAt": "2026-10-26T03:39:58.668Z",
     "archived": false,
     "licenseStatus": "custom"
   },
@@ -41514,9 +41518,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-20T01:42:31Z",
-    "lastCommitAt": "2026-10-15T06:22:34Z",
-    "headSha": "466c97613e720221cb4d86c3db8e838866f84359",
-    "metadataFetchedAt": "2026-10-17T20:29:30.967Z",
+    "lastCommitAt": "2026-10-22T21:07:53Z",
+    "headSha": "3115ad14e6caea6165567839afaeaa4e9ac1381a",
+    "metadataFetchedAt": "2026-10-26T03:40:01.634Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/52246947?v=4",
     "verificationStatus": "integration-detected",
@@ -41540,9 +41544,9 @@
       ]
     },
     "sourceHash": "5d1c399d2079614ff5249569b348a8f60d4ed3b370821a33e9c5ef3da0290779",
-    "updatedAt": "2026-10-15T06:22:39Z",
-    "pushedAt": "2026-10-15T06:23:56Z",
-    "lastSyncedAt": "2026-10-17T20:29:30.967Z",
+    "updatedAt": "2026-10-22T21:07:59Z",
+    "pushedAt": "2026-10-22T21:09:31Z",
+    "lastSyncedAt": "2026-10-26T03:40:01.634Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41594,7 +41598,7 @@
     "createdAt": "2026-09-19T18:37:21Z",
     "lastCommitAt": "2026-09-19T18:58:50Z",
     "headSha": "c369ff61b7fe3f99047d073cbc870565af9b902c",
-    "metadataFetchedAt": "2026-10-17T20:29:33.955Z",
+    "metadataFetchedAt": "2026-10-26T03:40:04.635Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/40383266?v=4",
     "verificationStatus": "integration-detected",
@@ -41620,7 +41624,7 @@
     "sourceHash": "06c994f7cffef9edc51d2cd49183b3e37a3d832ab324a3e2128597e713f46c16",
     "updatedAt": "2026-09-20T11:22:51Z",
     "pushedAt": "2026-09-19T18:58:54Z",
-    "lastSyncedAt": "2026-10-17T20:29:33.955Z",
+    "lastSyncedAt": "2026-10-26T03:40:04.635Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41668,9 +41672,9 @@
       "spdx": null
     },
     "createdAt": "2026-09-18T19:24:59Z",
-    "lastCommitAt": "2026-10-08T01:53:07Z",
-    "headSha": "254af278c1847475c7011ce0ffda2f859ec7ec8b",
-    "metadataFetchedAt": "2026-10-17T20:29:36.983Z",
+    "lastCommitAt": "2026-10-25T22:43:36Z",
+    "headSha": "3a5610eda98c849f663161835f590fa528ab9b51",
+    "metadataFetchedAt": "2026-10-26T03:40:07.643Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/100532011?v=4",
     "verificationStatus": "integration-detected",
@@ -41694,9 +41698,9 @@
       ]
     },
     "sourceHash": "e70763e000d4c283e467976deffb8617c058702bb6be4fdbe68c7a8b14ca4692",
-    "updatedAt": "2026-10-08T01:53:12Z",
-    "pushedAt": "2026-10-08T01:53:08Z",
-    "lastSyncedAt": "2026-10-17T20:29:36.983Z",
+    "updatedAt": "2026-10-25T22:43:41Z",
+    "pushedAt": "2026-10-25T22:43:37Z",
+    "lastSyncedAt": "2026-10-26T03:40:07.643Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -41748,7 +41752,7 @@
     "createdAt": "2026-09-18T14:51:43Z",
     "lastCommitAt": "2026-09-18T19:42:28Z",
     "headSha": "97615aa5cc14586488c11f6644a5b845827234c6",
-    "metadataFetchedAt": "2026-10-17T20:29:39.943Z",
+    "metadataFetchedAt": "2026-10-26T03:40:10.708Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/107373711?v=4",
     "verificationStatus": "integration-detected",
@@ -41774,7 +41778,7 @@
     "sourceHash": "8744952ff0dc86af225f3bf34df9dab007cbdabccb8e5f8713c8d4c598379db1",
     "updatedAt": "2026-10-02T04:28:10Z",
     "pushedAt": "2026-09-18T19:42:30Z",
-    "lastSyncedAt": "2026-10-17T20:29:39.943Z",
+    "lastSyncedAt": "2026-10-26T03:40:10.708Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41814,7 +41818,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 2,
+    "stars": 3,
     "forks": 0,
     "openIssues": 1,
     "license": {
@@ -41826,7 +41830,7 @@
     "createdAt": "2026-09-19T00:51:00Z",
     "lastCommitAt": "2026-09-20T21:58:59Z",
     "headSha": "c6e116af0c5dfdcf039bf42d6ee4274ce1dbb28f",
-    "metadataFetchedAt": "2026-10-17T20:29:42.879Z",
+    "metadataFetchedAt": "2026-10-26T03:40:13.633Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/258440358?v=4",
     "verificationStatus": "integration-detected",
@@ -41850,9 +41854,9 @@
       ]
     },
     "sourceHash": "96931c2607ff45c3875c7ade9e622936bdb4c0da368eff924ce88355308daf85",
-    "updatedAt": "2026-09-20T21:59:06Z",
+    "updatedAt": "2026-10-24T07:20:42Z",
     "pushedAt": "2026-09-20T21:59:02Z",
-    "lastSyncedAt": "2026-10-17T20:29:42.879Z",
+    "lastSyncedAt": "2026-10-26T03:40:13.633Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41904,7 +41908,7 @@
     "createdAt": "2026-09-18T06:43:15Z",
     "lastCommitAt": "2026-09-20T18:05:51Z",
     "headSha": "3cbdf934c236f9a57e60db12f343dcbf3904573f",
-    "metadataFetchedAt": "2026-10-17T20:29:46.067Z",
+    "metadataFetchedAt": "2026-10-26T03:40:16.753Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/27289342?v=4",
     "verificationStatus": "integration-detected",
@@ -41930,7 +41934,7 @@
     "sourceHash": "1199061ef823cc5ac62bb2859e22276f0ff4d6e1f8c3810c5d473e7a4f6161f2",
     "updatedAt": "2026-09-20T18:05:57Z",
     "pushedAt": "2026-09-20T18:05:53Z",
-    "lastSyncedAt": "2026-10-17T20:29:46.067Z",
+    "lastSyncedAt": "2026-10-26T03:40:16.753Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -41970,7 +41974,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 8,
+    "stars": 9,
     "forks": 0,
     "openIssues": 0,
     "license": {
@@ -41982,7 +41986,7 @@
     "createdAt": "2026-09-20T14:24:25Z",
     "lastCommitAt": "2026-09-20T17:41:56Z",
     "headSha": "be8364ad1a7596172f8cd79c70d2462f4dd0f4dc",
-    "metadataFetchedAt": "2026-10-17T20:29:48.949Z",
+    "metadataFetchedAt": "2026-10-26T03:40:19.639Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/39510437?v=4",
     "verificationStatus": "integration-detected",
@@ -42006,9 +42010,9 @@
       ]
     },
     "sourceHash": "1c20b5989b83a041669965c8c91382f39caf688520d8f8ae364bf3287c96fb5e",
-    "updatedAt": "2026-10-05T00:23:59Z",
+    "updatedAt": "2026-10-22T23:40:33Z",
     "pushedAt": "2026-09-20T17:42:17Z",
-    "lastSyncedAt": "2026-10-17T20:29:48.949Z",
+    "lastSyncedAt": "2026-10-26T03:40:19.639Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -42048,7 +42052,7 @@
         "source": "repo-description"
       }
     },
-    "stars": 2,
+    "stars": 3,
     "forks": 0,
     "openIssues": 0,
     "license": {
@@ -42058,9 +42062,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-19T22:05:25Z",
-    "lastCommitAt": "2026-10-07T21:32:40Z",
-    "headSha": "fcf54c6de3de867098004222f987380da780940d",
-    "metadataFetchedAt": "2026-10-17T20:29:52.003Z",
+    "lastCommitAt": "2026-10-21T21:49:06Z",
+    "headSha": "a06b612a9794b6996e08e0e211d5ea5c6db68b70",
+    "metadataFetchedAt": "2026-10-26T03:40:22.641Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/193447?v=4",
     "verificationStatus": "integration-detected",
@@ -42084,9 +42088,9 @@
       ]
     },
     "sourceHash": "966c07aeb930ec4ecd3ba828ca7e69cbdcd7e56e627070686105d41c877353f9",
-    "updatedAt": "2026-10-07T21:32:46Z",
-    "pushedAt": "2026-10-07T21:32:44Z",
-    "lastSyncedAt": "2026-10-17T20:29:52.003Z",
+    "updatedAt": "2026-10-24T18:20:12Z",
+    "pushedAt": "2026-10-21T21:49:08Z",
+    "lastSyncedAt": "2026-10-26T03:40:22.641Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -42136,7 +42140,7 @@
     "createdAt": "2026-09-20T16:33:34Z",
     "lastCommitAt": "2026-09-20T16:36:27Z",
     "headSha": "25fdfea90d87cc164434020567bf468c8eaeeb32",
-    "metadataFetchedAt": "2026-10-17T20:29:54.919Z",
+    "metadataFetchedAt": "2026-10-26T03:40:25.643Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/137675692?v=4",
     "verificationStatus": "integration-detected",
@@ -42162,7 +42166,7 @@
     "sourceHash": "9b916896be4aa7994a5a390b608ddf71de986322a158b624addb11a1b843b2a7",
     "updatedAt": "2026-09-20T19:41:39Z",
     "pushedAt": "2026-09-20T16:36:29Z",
-    "lastSyncedAt": "2026-10-17T20:29:54.919Z",
+    "lastSyncedAt": "2026-10-26T03:40:25.643Z",
     "archived": false,
     "licenseStatus": "unconfirmed"
   },
@@ -42212,9 +42216,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-20T10:16:37Z",
-    "lastCommitAt": "2026-10-11T17:48:28Z",
-    "headSha": "033b4423b8b1843913da85ff901e399084fbd707",
-    "metadataFetchedAt": "2026-10-17T20:29:57.931Z",
+    "lastCommitAt": "2026-10-25T15:31:59Z",
+    "headSha": "a4c06c1bb24a77d818ae67fb78a1319301f53a8b",
+    "metadataFetchedAt": "2026-10-26T03:40:28.626Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/49702497?v=4",
     "verificationStatus": "integration-detected",
@@ -42238,9 +42242,9 @@
       ]
     },
     "sourceHash": "3899d943143e95f394c4dc0751caf9c6a525be590d2e29f73faf19e89f9177ce",
-    "updatedAt": "2026-10-11T17:48:35Z",
-    "pushedAt": "2026-10-11T17:48:31Z",
-    "lastSyncedAt": "2026-10-17T20:29:57.931Z",
+    "updatedAt": "2026-10-25T15:32:04Z",
+    "pushedAt": "2026-10-25T15:32:00Z",
+    "lastSyncedAt": "2026-10-26T03:40:28.626Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -42290,9 +42294,9 @@
       "url": "https://api.github.com/licenses/mit"
     },
     "createdAt": "2026-09-20T13:08:20Z",
-    "lastCommitAt": "2026-09-23T14:32:47Z",
-    "headSha": "86b41abec76c6834d664051c8e0382abb5309a28",
-    "metadataFetchedAt": "2026-10-18T03:56:05.398Z",
+    "lastCommitAt": "2026-10-21T08:13:06Z",
+    "headSha": "0752bfb40450e0fcf44d27e97b0232f420591b54",
+    "metadataFetchedAt": "2026-10-26T03:40:31.650Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/13595614?v=4",
     "verificationStatus": "integration-detected",
@@ -42316,9 +42320,9 @@
       ]
     },
     "sourceHash": "82656d4fc8970e73d47bfb02acf9c63d3528467f57acacd6604ec3e7d275c144",
-    "updatedAt": "2026-10-06T10:44:02Z",
-    "pushedAt": "2026-09-23T14:33:38Z",
-    "lastSyncedAt": "2026-10-18T03:56:05.398Z",
+    "updatedAt": "2026-10-21T08:13:11Z",
+    "pushedAt": "2026-10-21T08:13:07Z",
+    "lastSyncedAt": "2026-10-26T03:40:31.650Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -42370,7 +42374,7 @@
     "createdAt": "2026-09-20T02:51:44Z",
     "lastCommitAt": "2026-09-20T15:49:17Z",
     "headSha": "393a4ca27333361e9a272972adc8d59236ca34cf",
-    "metadataFetchedAt": "2026-10-18T03:56:08.393Z",
+    "metadataFetchedAt": "2026-10-26T03:40:34.671Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/135076785?v=4",
     "verificationStatus": "integration-detected",
@@ -42396,7 +42400,7 @@
     "sourceHash": "e8b9940e42fad264261a073a670b3fb35105b9ed876e44eaa5f9c53f2e94e488",
     "updatedAt": "2026-09-22T19:22:43Z",
     "pushedAt": "2026-09-20T15:49:22Z",
-    "lastSyncedAt": "2026-10-18T03:56:08.393Z",
+    "lastSyncedAt": "2026-10-26T03:40:34.671Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -42432,7 +42436,7 @@
     "createdAt": "2026-09-21T16:19:50Z",
     "lastCommitAt": "2026-09-21T17:57:13Z",
     "headSha": "b0b37f03fcae0c3b0b4116a9a9c3385588372d5c",
-    "metadataFetchedAt": "2026-10-18T03:56:11.345Z",
+    "metadataFetchedAt": "2026-10-26T03:40:37.695Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/49147577?v=4",
     "verificationStatus": "integration-detected",
@@ -42508,7 +42512,7 @@
     },
     "updatedAt": "2026-09-22T13:53:39Z",
     "pushedAt": "2026-09-21T18:00:43Z",
-    "lastSyncedAt": "2026-10-18T03:56:11.345Z",
+    "lastSyncedAt": "2026-10-26T03:40:37.695Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -42550,7 +42554,7 @@
     },
     "stars": 15,
     "forks": 0,
-    "openIssues": 0,
+    "openIssues": 8,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -42560,7 +42564,7 @@
     "createdAt": "2026-09-20T23:13:05Z",
     "lastCommitAt": "2026-10-17T16:21:37Z",
     "headSha": "b6a9dd7364fb7c9a1b91302501f6f8309b367f02",
-    "metadataFetchedAt": "2026-10-18T03:56:14.353Z",
+    "metadataFetchedAt": "2026-10-26T03:40:40.705Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/31223104?v=4",
     "verificationStatus": "integration-detected",
@@ -42585,8 +42589,8 @@
     },
     "sourceHash": "cae04511689508e5329f6a40c5fcaeacf93b2c4c39a9ce5e8e91bf349eda553a",
     "updatedAt": "2026-10-17T16:21:42Z",
-    "pushedAt": "2026-10-17T16:21:37Z",
-    "lastSyncedAt": "2026-10-18T03:56:14.353Z",
+    "pushedAt": "2026-10-25T04:45:21Z",
+    "lastSyncedAt": "2026-10-26T03:40:40.705Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -42627,7 +42631,7 @@
       }
     },
     "stars": 21,
-    "forks": 1,
+    "forks": 2,
     "openIssues": 2,
     "license": {
       "status": "identified",
@@ -42638,7 +42642,7 @@
     "createdAt": "2026-09-18T17:06:56Z",
     "lastCommitAt": "2026-09-21T18:52:47Z",
     "headSha": "16bd3eae69b71284a75747fb4bf199b14ba1b075",
-    "metadataFetchedAt": "2026-10-18T03:56:17.305Z",
+    "metadataFetchedAt": "2026-10-26T03:40:43.646Z",
     "metadataStatus": "ok",
     "avatarUrl": "https://avatars.githubusercontent.com/u/8834829?v=4",
     "verificationStatus": "integration-detected",
@@ -42664,7 +42668,7 @@
     "sourceHash": "5a9e2441bcf15ebfd0adeff9ef36038e6946c5f4cf97a01cda98978db73d1dc0",
     "updatedAt": "2026-10-02T02:45:00Z",
     "pushedAt": "2026-09-24T02:49:08Z",
-    "lastSyncedAt": "2026-10-18T03:56:17.305Z",
+    "lastSyncedAt": "2026-10-26T03:40:43.646Z",
     "archived": false,
     "licenseStatus": "declared"
   },
@@ -77392,9 +77396,9 @@
       "evaluation-benchmarks",
       "typed-decisions"
     ],
-    "stars": 1252,
-    "forks": 207,
-    "openIssues": 232,
+    "stars": 1271,
+    "forks": 231,
+    "openIssues": 233,
     "license": {
       "status": "custom",
       "spdx": null,
@@ -77402,11 +77406,11 @@
     },
     "licenseStatus": "confirmed",
     "createdAt": "2026-06-11T07:53:01Z",
-    "updatedAt": "2026-10-17T11:41:54Z",
-    "pushedAt": "2026-10-17T20:21:43Z",
-    "lastCommitAt": "2026-10-16T17:22:26Z",
-    "lastSyncedAt": "2026-10-17T20:26:03.841Z",
-    "metadataFetchedAt": "2026-10-17T20:26:03.841Z",
+    "updatedAt": "2026-10-26T03:33:27Z",
+    "pushedAt": "2026-10-26T03:31:39Z",
+    "lastCommitAt": "2026-10-26T03:05:33Z",
+    "lastSyncedAt": "2026-10-26T03:36:34.561Z",
+    "metadataFetchedAt": "2026-10-26T03:36:34.561Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/298235407?v=4",
     "language": "TypeScript",
     "topics": [
@@ -77417,7 +77421,7 @@
       "jev"
     ],
     "archived": false,
-    "headSha": "e907dc62dd2e77a4433c2fb908419378c947774d",
+    "headSha": "6021885b7fe971b4a9f3b4046110ce4a2bace183",
     "sourceUrl": "https://github.com/reticlehq/reticle/blob/178e5c0701e839af6af04ce599784d58e6b10d36/core/src/wire/constants/constants.ts",
     "sourcePath": "core/src/wire/constants/constants.ts",
     "evidenceLines": [
@@ -77482,8 +77486,8 @@
       "typed-decisions"
     ],
     "stars": 0,
-    "forks": 0,
-    "openIssues": 8,
+    "forks": 1,
+    "openIssues": 13,
     "license": {
       "status": "identified",
       "spdx": "Apache-2.0",
@@ -77492,11 +77496,11 @@
     },
     "licenseStatus": "confirmed",
     "createdAt": "2026-10-08T06:48:34Z",
-    "updatedAt": "2026-10-09T16:02:20Z",
-    "pushedAt": "2026-10-16T06:18:27Z",
-    "lastCommitAt": "2026-10-09T16:02:07Z",
-    "lastSyncedAt": "2026-10-17T20:26:06.951Z",
-    "metadataFetchedAt": "2026-10-17T20:26:06.951Z",
+    "updatedAt": "2026-10-23T00:28:56Z",
+    "pushedAt": "2026-10-23T06:18:53Z",
+    "lastCommitAt": "2026-10-23T00:28:51Z",
+    "lastSyncedAt": "2026-10-26T03:36:37.705Z",
+    "metadataFetchedAt": "2026-10-26T03:36:37.705Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/15953669?v=4",
     "language": "Python",
     "topics": [
@@ -77507,7 +77511,7 @@
       "tool-routing"
     ],
     "archived": false,
-    "headSha": "29c3ab21180d0849c51a53deb9aa143f2fe5212f",
+    "headSha": "b73668ba3985057f93c46bec3bfdc2d2873dee7f",
     "sourceUrl": "https://github.com/Amantux/mcp-router/blob/881a6d5e9cade9179b69c60d8f9d7e1baec5953a/README.md",
     "sourcePath": "README.md",
     "evidenceLines": [
@@ -77581,8 +77585,8 @@
     "updatedAt": "2026-10-09T16:01:24Z",
     "pushedAt": "2026-10-09T16:02:29Z",
     "lastCommitAt": "2026-10-09T16:01:18Z",
-    "lastSyncedAt": "2026-10-17T20:26:09.983Z",
-    "metadataFetchedAt": "2026-10-17T20:26:09.983Z",
+    "lastSyncedAt": "2026-10-26T03:36:40.669Z",
+    "metadataFetchedAt": "2026-10-26T03:36:40.669Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/114113320?v=4",
     "language": "Python",
     "topics": [
@@ -77669,10 +77673,10 @@
     "licenseStatus": "confirmed",
     "createdAt": "2026-09-21T07:43:40Z",
     "updatedAt": "2026-10-12T06:54:54Z",
-    "pushedAt": "2026-10-16T22:45:12Z",
+    "pushedAt": "2026-10-20T18:43:30Z",
     "lastCommitAt": "2026-10-12T06:54:48Z",
-    "lastSyncedAt": "2026-10-17T20:26:12.864Z",
-    "metadataFetchedAt": "2026-10-17T20:26:12.864Z",
+    "lastSyncedAt": "2026-10-26T03:36:43.678Z",
+    "metadataFetchedAt": "2026-10-26T03:36:43.678Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/73140324?v=4",
     "language": "Python",
     "topics": [
@@ -77747,9 +77751,9 @@
       "coding-agents",
       "typed-decisions"
     ],
-    "stars": 135,
+    "stars": 137,
     "forks": 11,
-    "openIssues": 3,
+    "openIssues": 1,
     "license": {
       "status": "custom",
       "spdx": null,
@@ -77757,11 +77761,11 @@
     },
     "licenseStatus": "custom",
     "createdAt": "2026-09-17T06:58:19Z",
-    "updatedAt": "2026-10-17T19:18:50Z",
-    "pushedAt": "2026-10-17T19:18:47Z",
-    "lastCommitAt": "2026-10-17T19:14:41Z",
-    "lastSyncedAt": "2026-10-17T20:26:18.844Z",
-    "metadataFetchedAt": "2026-10-17T20:26:18.844Z",
+    "updatedAt": "2026-10-23T19:50:16Z",
+    "pushedAt": "2026-10-19T19:05:30Z",
+    "lastCommitAt": "2026-10-19T19:05:25Z",
+    "lastSyncedAt": "2026-10-26T03:36:49.533Z",
+    "metadataFetchedAt": "2026-10-26T03:36:49.533Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/35050222?v=4",
     "language": "Rust",
     "topics": [
@@ -77774,7 +77778,7 @@
       "rust"
     ],
     "archived": false,
-    "headSha": "3e84d4b7991e418e924ef8adbd43276cfbbee028",
+    "headSha": "ffff0c61652176fe0927e51c4981baa528e23486",
     "sourceUrl": "https://github.com/Dicklesworthstone/skillranker/blob/85216b0aad550acf047375fe65159e00cb31ce2e/src/jev/mod.rs",
     "sourcePath": "src/jev/mod.rs",
     "evidenceLines": [
@@ -77838,9 +77842,9 @@
       "typed-decisions",
       "coding-agents"
     ],
-    "stars": 120,
+    "stars": 119,
     "forks": 15,
-    "openIssues": 9,
+    "openIssues": 10,
     "license": {
       "status": "identified",
       "spdx": "MIT",
@@ -77849,11 +77853,11 @@
     },
     "licenseStatus": "confirmed",
     "createdAt": "2026-09-17T15:11:57Z",
-    "updatedAt": "2026-10-17T18:28:13Z",
-    "pushedAt": "2026-10-17T20:24:56Z",
-    "lastCommitAt": "2026-10-17T18:28:08Z",
-    "lastSyncedAt": "2026-10-17T20:26:21.861Z",
-    "metadataFetchedAt": "2026-10-17T20:26:21.861Z",
+    "updatedAt": "2026-10-25T20:11:35Z",
+    "pushedAt": "2026-10-25T17:48:52Z",
+    "lastCommitAt": "2026-10-25T07:32:43Z",
+    "lastSyncedAt": "2026-10-26T03:36:52.638Z",
+    "metadataFetchedAt": "2026-10-26T03:36:52.638Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/270777357?v=4",
     "language": "Python",
     "topics": [
@@ -77864,7 +77868,7 @@
       "python"
     ],
     "archived": false,
-    "headSha": "5c385a1c4beb09bb925d4beca64bcd350ce6205a",
+    "headSha": "636e77073d00a1fb5441304eec2aae8f5af6be4a",
     "sourceUrl": "https://github.com/agent-labs-dev/fastbrowse/blob/307c30218e41bb785000171f97197b2f828a7721/src/fastbrowse/clients/typesafe.py",
     "sourcePath": "src/fastbrowse/clients/typesafe.py",
     "evidenceLines": [
@@ -77928,8 +77932,8 @@
       "coding-agents",
       "typed-decisions"
     ],
-    "stars": 128,
-    "forks": 10,
+    "stars": 133,
+    "forks": 8,
     "openIssues": 5,
     "license": {
       "status": "identified",
@@ -77939,11 +77943,11 @@
     },
     "licenseStatus": "confirmed",
     "createdAt": "2026-09-22T11:47:24Z",
-    "updatedAt": "2026-10-17T15:20:45Z",
-    "pushedAt": "2026-10-17T18:08:49Z",
-    "lastCommitAt": "2026-10-17T14:28:38Z",
-    "lastSyncedAt": "2026-10-17T20:26:24.838Z",
-    "metadataFetchedAt": "2026-10-17T20:26:24.838Z",
+    "updatedAt": "2026-10-26T02:58:58Z",
+    "pushedAt": "2026-10-23T21:25:54Z",
+    "lastCommitAt": "2026-10-19T14:33:48Z",
+    "lastSyncedAt": "2026-10-26T03:36:55.582Z",
+    "metadataFetchedAt": "2026-10-26T03:36:55.582Z",
     "avatarUrl": "https://avatars.githubusercontent.com/u/56384605?v=4",
     "language": "TypeScript",
     "topics": [
@@ -77954,7 +77958,7 @@
       "typesafe"
     ],
     "archived": false,
-    "headSha": "30de2d838970f808c067b2cb522704209690b803",
+    "headSha": "981c6f312b65a0dd563d32bb3a469badbdc76c56",
     "sourceUrl": "https://github.com/Avinash-jetwani/jevmem/blob/b5bcffe008db16a3897e05059d2c5a19cd559992/scripts/jev-outage-proxy.mjs",
     "sourcePath": "scripts/jev-outage-proxy.mjs",
     "evidenceLines": [
