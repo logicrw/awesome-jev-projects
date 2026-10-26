@@ -1,0 +1,517 @@
+{
+  "lastAttemptAt": "2026-10-26T04:05:41.017Z",
+  "mode": "full",
+  "lastSuccessfulAt": null,
+  "status": "partial",
+  "sources": [
+    {
+      "name": "repositories: topic:jev fork:true",
+      "query": "topic:jev fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3066,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: typesafe jev fork:true",
+      "query": "typesafe jev fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8350,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: typesafe-ai fork:true",
+      "query": "typesafe-ai fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3282,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: jev-mcp fork:true",
+      "query": "jev-mcp fork:true",
+      "status": "bounded",
+      "count": 200,
+      "total": 893,
+      "pages": 2,
+      "firstPage": 7
+    },
+    {
+      "name": "repositories: jev decision fork:true",
+      "query": "jev decision fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8545,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"TypeSafe AI\" in:readme fork:true",
+      "query": "\"TypeSafe AI\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 23486,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"Jev API\" in:readme fork:true",
+      "query": "\"Jev API\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 12374,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: topic:typesafe-ai fork:true",
+      "query": "topic:typesafe-ai fork:true",
+      "status": "bounded",
+      "count": 200,
+      "total": 614,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: topic:typesafe ai fork:true",
+      "query": "topic:typesafe ai fork:true",
+      "status": "bounded",
+      "count": 166,
+      "total": 366,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"api.typesafe.ai\" in:readme fork:true",
+      "query": "\"api.typesafe.ai\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8415,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"typesafe.ai\" \"jev\" in:readme fork:true",
+      "query": "\"typesafe.ai\" \"jev\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 22291,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"from typesafe import jev\" in:readme fork:true",
+      "query": "\"from typesafe import jev\" in:readme fork:true",
+      "status": "ok",
+      "count": 1,
+      "total": 1,
+      "pages": 1,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: \"@typesafe/jev\" in:readme fork:true",
+      "query": "\"@typesafe/jev\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 28723,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "code: \"api.typesafe.ai\" in:file",
+      "query": "\"api.typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 42240,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "code: \"typesafe.ai\" in:file",
+      "query": "\"typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 81024,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "code: \"from typesafe import\" in:file",
+      "query": "\"from typesafe import\" in:file",
+      "status": "ok",
+      "count": 175,
+      "total": 175,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "code: \"@typesafe/jev\" in:file",
+      "query": "\"@typesafe/jev\" in:file",
+      "status": "ok",
+      "count": 124,
+      "total": 124,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "commits: \"typesafe.ai\"",
+      "query": "\"typesafe.ai\"",
+      "status": "search-cap",
+      "count": 200,
+      "total": 7801,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "commits: \"Jev\" \"AI\"",
+      "query": "\"Jev\" \"AI\"",
+      "status": "search-cap",
+      "count": 200,
+      "total": 451762,
+      "pages": 2,
+      "firstPage": 5
+    },
+    {
+      "name": "issues: \"typesafe.ai\" is:pr in:title,body",
+      "query": "\"typesafe.ai\" is:pr in:title,body",
+      "status": "bounded",
+      "count": 85,
+      "total": 485,
+      "pages": 1,
+      "firstPage": 5
+    },
+    {
+      "name": "issues: \"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "query": "\"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "status": "search-cap",
+      "count": 200,
+      "total": 29386,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "Known repository metadata + latest commit",
+      "status": "partial",
+      "count": 107
+    }
+  ],
+  "newProjects": 0,
+  "schedule": "0 */6 * * *",
+  "schedulerStatus": "active",
+  "submissionRepository": "logicrw/awesome-jev-projects",
+  "metadata": {
+    "ok": 107,
+    "failed": 13
+  },
+  "discovery": {
+    "candidates": 2526,
+    "checked": 60,
+    "rejected": 0,
+    "deferred": 2525
+  },
+  "runUrl": "https://github.com/logicrw/awesome-jev-projects/actions/runs/40267266468",
+  "finishedAt": "2026-10-26T04:32:40.937Z",
+  "totalProjects": 864,
+  "projectsSha256": "8f7a9c6e6a64e3948891a70a5bb43e24a0e5ae1dbfff4bdd86d355ec2467efb2",
+  "receipts": [
+    {
+      "repo": "Ryu0118/jev-sim-use",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "Hoyant-Su/JevSpawn",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "Spykoninho/trading-bot-jev",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "abeldzan/jev-rs",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "Civalski/claujev",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "Han-1413141/dsh-jev-thinkout",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "5fd857b17c405664e91a9ba88664ef1f/jev-x-blocker",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "harmanbassi/jev-agent-browser",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "Lexus2016/fast-jev-compaction",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "CompleteTech-LLC-AI-Research/jev-prune-kit",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "hasanzaman22/jev-effort-router",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "itsHungw/jev-codex-router",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "AliceSama1/light-jevllm",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "CosmoIknosLab/PathJev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Simonlee711/MedJev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "rominap22/strandsharness-langchain-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "dev-pikapik/JEVision",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ondata/vd-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "projectalphatech/jev-mcp",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "meta-introspector/pg-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "cathy-kim/jev-workflow",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ranpin/jevCabin",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "abirshhishirroy/mini-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ancientcomputing/jevdk",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "gautam0222/JEV_DataQualityGate",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "mkruglikov/droidjev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "kittimzhe/dsh-jev-goal-judge",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "WesleySmits/spark-jev-email-triage",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ajbmachon/jev-remnants",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "isaacbitran/jev-society",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "gcoter/jev-test",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "jasonli0226/jev-benchmark",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Wu-love-han/ai-jev-filter",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "geekhoo/jev-provider",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "113636xfh/jev-decision-head",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "JustasFF/hubris-jev-router",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ZephyrDeng/jev-triage",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "sevenboom77/jev_Pokemon",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "alexbuilding/awesome-jev-live-fork",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "dirnbauer/typo3-webcon-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "sukritisehgal-28/jev-dashboards",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ether-btc/muse-jev-playbook",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "gokuls87/claude-x-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "mbrajk/hollow-knight-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "TrivelaAS/Jevchrome",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "kevinb6e/pi-fast-jev-compaction",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "nisavid/jev-axi",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "mxkuzn/awesome-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "matteoandradeboschi/jev-classificador",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "aen07/jev-grievance-triage",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "DevItaliya22/jev-chess",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "mikluko/stalwart-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "reddy7356/jev-trader",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "dhable/jev-driver",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "mxkuzn/awesome-jev-tools",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "cbroker1/jev-un-squadron",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "iCreos/awesome-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "shiquda/yibie-awesome-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "OMrice8383/jev-router",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    }
+  ]
+}
