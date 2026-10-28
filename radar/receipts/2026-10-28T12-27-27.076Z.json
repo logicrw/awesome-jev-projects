@@ -1,0 +1,242 @@
+{
+  "lastAttemptAt": "2026-10-28T12:27:27.076Z",
+  "mode": "full",
+  "lastSuccessfulAt": null,
+  "status": "partial",
+  "sources": [
+    {
+      "name": "repositories: topic:jev fork:true",
+      "query": "topic:jev fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3085,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: typesafe jev fork:true",
+      "query": "typesafe jev fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8418,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: typesafe-ai fork:true",
+      "query": "typesafe-ai fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3303,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: jev-mcp fork:true",
+      "query": "jev-mcp fork:true",
+      "status": "bounded",
+      "count": 199,
+      "total": 901,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: jev decision fork:true",
+      "query": "jev decision fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8666,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: \"TypeSafe AI\" in:readme fork:true",
+      "query": "\"TypeSafe AI\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 24119,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: \"Jev API\" in:readme fork:true",
+      "query": "\"Jev API\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 12772,
+      "pages": 2,
+      "firstPage": 8
+    },
+    {
+      "name": "repositories: topic:typesafe-ai fork:true",
+      "query": "topic:typesafe-ai fork:true",
+      "status": "bounded",
+      "count": 200,
+      "total": 615,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: topic:typesafe ai fork:true",
+      "query": "topic:typesafe ai fork:true",
+      "status": "bounded",
+      "count": 166,
+      "total": 366,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"api.typesafe.ai\" in:readme fork:true",
+      "query": "\"api.typesafe.ai\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8607,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: \"typesafe.ai\" \"jev\" in:readme fork:true",
+      "query": "\"typesafe.ai\" \"jev\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 22883,
+      "pages": 2,
+      "firstPage": 7
+    },
+    {
+      "name": "repositories: \"from typesafe import jev\" in:readme fork:true",
+      "query": "\"from typesafe import jev\" in:readme fork:true",
+      "status": "ok",
+      "count": 1,
+      "total": 1,
+      "pages": 1,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: \"@typesafe/jev\" in:readme fork:true",
+      "query": "\"@typesafe/jev\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 29982,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "code: \"api.typesafe.ai\" in:file",
+      "query": "\"api.typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 40576,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "code: \"typesafe.ai\" in:file",
+      "query": "\"typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 75392,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "code: \"from typesafe import\" in:file",
+      "query": "\"from typesafe import\" in:file",
+      "status": "ok",
+      "count": 192,
+      "total": 192,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "code: \"@typesafe/jev\" in:file",
+      "query": "\"@typesafe/jev\" in:file",
+      "status": "ok",
+      "count": 137,
+      "total": 137,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "commits: \"typesafe.ai\"",
+      "query": "\"typesafe.ai\"",
+      "status": "search-cap",
+      "count": 200,
+      "total": 7998,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "commits: \"Jev\" \"AI\"",
+      "query": "\"Jev\" \"AI\"",
+      "status": "search-cap",
+      "count": 200,
+      "total": 398484,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "issues: \"typesafe.ai\" is:pr in:title,body",
+      "query": "\"typesafe.ai\" is:pr in:title,body",
+      "status": "bounded",
+      "count": 200,
+      "total": 499,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "issues: \"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "query": "\"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "status": "search-cap",
+      "count": 200,
+      "total": 30350,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "Known repository metadata + latest commit",
+      "status": "partial",
+      "count": 107
+    }
+  ],
+  "newProjects": 0,
+  "schedule": "0 */6 * * *",
+  "schedulerStatus": "active",
+  "submissionRepository": "logicrw/awesome-jev-projects",
+  "metadata": {
+    "ok": 107,
+    "failed": 13
+  },
+  "discovery": {
+    "candidates": 3026,
+    "checked": 60,
+    "rejected": 0,
+    "deferred": 2966
+  },
+  "runUrl": "https://github.com/logicrw/awesome-jev-projects/actions/runs/40687930001",
+  "finishedAt": "2026-10-28T12:51:32.986Z",
+  "totalProjects": 864,
+  "projectsSha256": "bff663284242cd59a3b717a399ef2b93d56350dfaca7e9557f12d629663fe048",
+  "receipts": [
+    {
+      "repo": "AI-Ascension/jev-factorio-agent",
+      "status": "duplicate",
+      "reason": "repository already listed"
+    },
+    {
+      "repo": "jbatra-umeey/jev-mcp-nexus",
+      "status": "rejected",
+      "reason": "repository has no accessible commit"
+    },
+    {
+      "repo": "soeprbp/jev-openrouter",
+      "status": "rejected",
+      "reason": "repository has no accessible commit"
+    },
+    {
+      "repo": "RobertMX23/Reto-30X-JEV",
+      "status": "rejected",
+      "reason": "repository has no accessible commit"
+    }
+  ]
+}
