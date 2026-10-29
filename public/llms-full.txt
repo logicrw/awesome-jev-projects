@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 864
+Catalog entries: 865
 
 ## Install the Agent Skill
 
@@ -12141,3 +12141,21 @@ iOS keyboard chat copilot that analyzes copied messages with Jev for intent clas
 - Source evidence: https://github.com/jev-chat/jev-chat-jarvis-ios/blob/f4b64cc655415091180e4c0573a2a82ca4319212/Shared/JevJudge.swift
 - Source evidence: https://github.com/jev-chat/jev-chat-jarvis-ios/blob/f4b64cc655415091180e4c0573a2a82ca4319212/Shared/JevPipeline.swift
 - Source evidence: https://github.com/jev-chat/jev-chat-jarvis-ios/blob/f4b64cc655415091180e4c0573a2a82ca4319212/README.md
+
+## Situation-Puzzle
+
+Turtle-soup puzzle game whose code implements a JevClient calling Jev to judge player questions and solutions, with real end-to-end tests.
+
+- Repository: https://github.com/ZeroTang05/Situation-Puzzle
+- Category: Domain & Vertical Tools
+- Jev decision: Turtle-soup puzzle game whose code implements a JevClient calling Jev to judge player questions and solutions, with real end-to-end tests.
+- Purpose: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+- Review scope: A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.
+- License: Custom license
+- Entry type: Integration
+- Jev relationship: Jev implementation
+- Review basis: Implementation material
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/zerotang05/situation-puzzle/
+- Source evidence: https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/client.ts
+- Source evidence: https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/prompts.ts
+- Source evidence: https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/apps/web/e2e/README.md

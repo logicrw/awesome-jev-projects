@@ -79152,5 +79152,220 @@
     "pushedAt": "2026-10-22T09:45:22Z",
     "lastSyncedAt": "2026-10-27T11:59:32.465Z",
     "archived": false
+  },
+  {
+    "id": "zerotang05:situation-puzzle",
+    "name": "Situation-Puzzle",
+    "author": "ZeroTang05",
+    "url": "https://github.com/ZeroTang05/Situation-Puzzle",
+    "repoId": 1383809427,
+    "category": "Domain & Vertical Tools",
+    "catalogKind": "integration",
+    "jevRelation": "implemented",
+    "reviewBasis": "implementation-material",
+    "plainSummary": "海龟汤推理游戏，代码中实现 JevClient 调用 Jev 判定玩家提问与还原结果，含真实端到端测试。",
+    "plainSummaryEn": "Turtle-soup puzzle game whose code implements a JevClient calling Jev to judge player questions and solutions, with real end-to-end tests.",
+    "jevDecisionPoint": "海龟汤推理游戏，代码中实现 JevClient 调用 Jev 判定玩家提问与还原结果，含真实端到端测试。",
+    "jevDecisionPointEn": "Turtle-soup puzzle game whose code implements a JevClient calling Jev to judge player questions and solutions, with real end-to-end tests.",
+    "highlightBenefit": "材料已绑定固定版本；收录不代表独立运行或性能验证。",
+    "highlightBenefitEn": "References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.",
+    "tags": [
+      "domain-workflows",
+      "typed-decisions"
+    ],
+    "summarySource": "ai-material-review",
+    "stars": 22,
+    "forks": 2,
+    "openIssues": 0,
+    "license": {
+      "status": "custom",
+      "spdx": null,
+      "name": "Other"
+    },
+    "licenseStatus": "custom",
+    "createdAt": "2026-09-23T16:22:49Z",
+    "lastCommitAt": "2026-10-27T12:45:28Z",
+    "headSha": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+    "metadataFetchedAt": "2026-10-29T16:35:17.272Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/251299589?v=4",
+    "verificationStatus": "material-reviewed",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-29T16:35:17.272Z",
+    "claimStatus": "模型依据固定版本材料判断生态类型与 Jev 关联；未经本站独立运行、安全或性能验证。",
+    "claimStatusEn": "A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/client.ts",
+        "note": "固定版本的相关材料"
+      },
+      {
+        "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/prompts.ts",
+        "note": "固定版本的相关材料"
+      },
+      {
+        "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/apps/web/e2e/README.md",
+        "note": "固定版本的相关材料"
+      }
+    ],
+    "sourceVerification": {
+      "method": "ai-material-review-v2",
+      "sha": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+      "files": [
+        {
+          "targetId": "R1",
+          "repoId": 1383809427,
+          "commit": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+          "path": "packages/jev/src/client.ts",
+          "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/client.ts",
+          "hash": "b76aacccb775ba791db95d64c2a36cb9286815044c38c109ba2ef2ebdf8f4587",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 9728
+          },
+          "sourcePartial": false,
+          "originalBytes": 9728
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1383809427,
+          "commit": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+          "path": "packages/jev/src/prompts.ts",
+          "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/prompts.ts",
+          "hash": "9dd688e7aeee2290aff1189299c9dbdcc8108f70d687ca32613349d33799fdf7",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 8577
+          },
+          "sourcePartial": false,
+          "originalBytes": 8577
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1383809427,
+          "commit": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+          "path": "apps/web/e2e/README.md",
+          "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/apps/web/e2e/README.md",
+          "hash": "e0547ef943823e4283140d68a1a5fd704f18350ab49f143982316c801a077bf8",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 1350
+          },
+          "sourcePartial": false,
+          "originalBytes": 1350
+        }
+      ],
+      "materials": [
+        {
+          "targetId": "R1",
+          "repoId": 1383809427,
+          "commit": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+          "path": "packages/jev/src/client.ts",
+          "form": "source",
+          "span": {
+            "startByte": 1884,
+            "endByte": 2907
+          },
+          "spanSha256": "add840caa42865768dc7de8912b7dde529800772c7a9b99f08e7f1d131f081af",
+          "partial": true,
+          "id": "M1686f0a0096e0280",
+          "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/client.ts",
+          "sourceSha256": "b76aacccb775ba791db95d64c2a36cb9286815044c38c109ba2ef2ebdf8f4587",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 9728
+          },
+          "sourcePartial": false,
+          "originalBytes": 9728
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1383809427,
+          "commit": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+          "path": "packages/jev/src/prompts.ts",
+          "form": "source",
+          "span": {
+            "startByte": 2222,
+            "endByte": 2478
+          },
+          "spanSha256": "ae14fd402fdbdd9f8edc359c58ca879a193c88f0ed7dfa4a286448177c899031",
+          "partial": true,
+          "id": "Mc955d6158c8adafb",
+          "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/prompts.ts",
+          "sourceSha256": "9dd688e7aeee2290aff1189299c9dbdcc8108f70d687ca32613349d33799fdf7",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 8577
+          },
+          "sourcePartial": false,
+          "originalBytes": 8577
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1383809427,
+          "commit": "6e0cc5d4f9e47498b6e77aeecca304b11f0948f8",
+          "path": "apps/web/e2e/README.md",
+          "form": "documentation",
+          "span": {
+            "startByte": 0,
+            "endByte": 105
+          },
+          "spanSha256": "ff83796134642ae328389d79b59bb3199ac8da5dbedc02e65647a4660e8e4353",
+          "partial": false,
+          "id": "M14c9cbb50165921b",
+          "url": "https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/apps/web/e2e/README.md",
+          "sourceSha256": "e0547ef943823e4283140d68a1a5fd704f18350ab49f143982316c801a077bf8",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 1350
+          },
+          "sourcePartial": false,
+          "originalBytes": 1350
+        }
+      ],
+      "reviewRevision": "d97e7cf4b2cebf0d9171e4756f56fb74f2133eafbeba8258b772470259c75ac8",
+      "model": {
+        "requested": "deepseek-flash",
+        "response": "deepseek-flash",
+        "systemFingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "decision": "admit",
+      "catalogKind": "integration",
+      "jevRelation": "implemented",
+      "reviewBasis": "implementation-material",
+      "claims": [
+        {
+          "type": "purpose",
+          "text": "AI 海龟汤情境推理游戏，由 Jev 担任主持人回答玩家提问并判定还原结果。",
+          "support": [
+            "M1686f0a0096e0280"
+          ]
+        },
+        {
+          "type": "mechanism",
+          "text": "JevClient 封装 ask/solve 判定调用，按语言构造 choice 型提示词并返回 Yes/No/Irrelevant 等判定结果。",
+          "support": [
+            "M1686f0a0096e0280",
+            "Mc955d6158c8adafb"
+          ]
+        },
+        {
+          "type": "contribution",
+          "text": "端到端测试使用真实浏览器、API、数据库和 Jev，不替换接口。",
+          "support": [
+            "M14c9cbb50165921b"
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 131,
+      "issueBodySha256": "38b0d4c9cc86affecbfc7619c03729684e6bc0b2126b7e5cf32e32ec01cd989f",
+      "issueTitleSha256": "f907432703da2b8df614881a695159bd23b061bfc66277fc4f12edc88ddb9bac",
+      "reviewRevision": "d97e7cf4b2cebf0d9171e4756f56fb74f2133eafbeba8258b772470259c75ac8",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/131"
+    }
   }
 ]
