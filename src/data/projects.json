@@ -79367,5 +79367,228 @@
       "reviewRevision": "d97e7cf4b2cebf0d9171e4756f56fb74f2133eafbeba8258b772470259c75ac8",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/131"
     }
+  },
+  {
+    "id": "zerotang05:videoadguard",
+    "name": "VideoAdGuard",
+    "author": "ZeroTang05",
+    "url": "https://github.com/ZeroTang05/VideoAdGuard",
+    "repoId": 954020209,
+    "category": "Browser & OS Action",
+    "catalogKind": "integration",
+    "jevRelation": "implemented",
+    "reviewBasis": "mixed",
+    "plainSummary": "浏览器扩展，调用 Jev 决策模型判断 B 站视频广告区间并标记跳过。",
+    "plainSummaryEn": "Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.",
+    "jevDecisionPoint": "浏览器扩展，调用 Jev 决策模型判断 B 站视频广告区间并标记跳过。",
+    "jevDecisionPointEn": "Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.",
+    "highlightBenefit": "材料已绑定固定版本；收录不代表独立运行或性能验证。",
+    "highlightBenefitEn": "References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.",
+    "tags": [
+      "browser-automation",
+      "typed-decisions"
+    ],
+    "summarySource": "ai-material-review",
+    "stars": 761,
+    "forks": 37,
+    "openIssues": 2,
+    "license": {
+      "status": "identified",
+      "spdx": "GPL-2.0",
+      "name": "GNU General Public License v2.0",
+      "url": "https://api.github.com/licenses/gpl-2.0"
+    },
+    "licenseStatus": "declared",
+    "createdAt": "2025-03-24T12:50:19Z",
+    "lastCommitAt": "2026-10-27T07:02:16Z",
+    "headSha": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+    "metadataFetchedAt": "2026-10-29T16:43:46.177Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/251299589?v=4",
+    "verificationStatus": "material-reviewed",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-29T16:43:46.177Z",
+    "claimStatus": "模型依据固定版本材料判断生态类型与 Jev 关联；未经本站独立运行、安全或性能验证。",
+    "claimStatusEn": "A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/README.en.md",
+        "note": "固定版本的相关材料"
+      },
+      {
+        "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.test.ts",
+        "note": "固定版本的相关材料"
+      },
+      {
+        "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.ts",
+        "note": "固定版本的相关材料"
+      }
+    ],
+    "sourceVerification": {
+      "method": "ai-material-review-v2",
+      "sha": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+      "files": [
+        {
+          "targetId": "R1",
+          "repoId": 954020209,
+          "commit": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+          "path": "README.en.md",
+          "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/README.en.md",
+          "hash": "b86503346db53a06ea98d8020ebdb24e6c662b5d24a8859af214e86ee1321bc4",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 4129
+          },
+          "sourcePartial": false,
+          "originalBytes": 4129
+        },
+        {
+          "targetId": "R1",
+          "repoId": 954020209,
+          "commit": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+          "path": "src/services/llm/system-one.test.ts",
+          "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.test.ts",
+          "hash": "ea4c19c943e8aade0e9f52f417ce44db94da13971d78dd87b71bd7dab71d1f2d",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7666
+          },
+          "sourcePartial": false,
+          "originalBytes": 7666
+        },
+        {
+          "targetId": "R1",
+          "repoId": 954020209,
+          "commit": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+          "path": "src/services/llm/system-one.ts",
+          "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.ts",
+          "hash": "45a7a1f550d75b31365a518a4d5b5a24daabb6093c823785cf25310e5ac5fc49",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7355
+          },
+          "sourcePartial": false,
+          "originalBytes": 7355
+        }
+      ],
+      "materials": [
+        {
+          "targetId": "R1",
+          "repoId": 954020209,
+          "commit": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+          "path": "README.en.md",
+          "form": "documentation",
+          "span": {
+            "startByte": 2966,
+            "endByte": 3319
+          },
+          "spanSha256": "60ba2350dbeb42add3d44121c76088cc6c3a653530845a98371558d0d8c9d475",
+          "partial": false,
+          "id": "M846c9056afca643a",
+          "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/README.en.md",
+          "sourceSha256": "b86503346db53a06ea98d8020ebdb24e6c662b5d24a8859af214e86ee1321bc4",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 4129
+          },
+          "sourcePartial": false,
+          "originalBytes": 4129
+        },
+        {
+          "targetId": "R1",
+          "repoId": 954020209,
+          "commit": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+          "path": "src/services/llm/system-one.test.ts",
+          "form": "source",
+          "span": {
+            "startByte": 4484,
+            "endByte": 5508
+          },
+          "spanSha256": "4c43dc9cebf46375cab9250b295140102c9d2792778dd0ae23cbd58112ede0c1",
+          "partial": true,
+          "id": "M545ab8b5508eed17",
+          "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.test.ts",
+          "sourceSha256": "ea4c19c943e8aade0e9f52f417ce44db94da13971d78dd87b71bd7dab71d1f2d",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7666
+          },
+          "sourcePartial": false,
+          "originalBytes": 7666
+        },
+        {
+          "targetId": "R1",
+          "repoId": 954020209,
+          "commit": "e2af3ac2313ce47bb5f8aeb690a1f88780ebb555",
+          "path": "src/services/llm/system-one.ts",
+          "form": "source",
+          "span": {
+            "startByte": 1386,
+            "endByte": 1642
+          },
+          "spanSha256": "15643c63082dbb7791fde2d32b708df0ce4fe443f6a0a1d326c4cd17d0aa297d",
+          "partial": true,
+          "id": "M95ca4b16e1669058",
+          "url": "https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.ts",
+          "sourceSha256": "45a7a1f550d75b31365a518a4d5b5a24daabb6093c823785cf25310e5ac5fc49",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7355
+          },
+          "sourcePartial": false,
+          "originalBytes": 7355
+        }
+      ],
+      "reviewRevision": "d97e7cf4b2cebf0d9171e4756f56fb74f2133eafbeba8258b772470259c75ac8",
+      "model": {
+        "requested": "deepseek-flash",
+        "response": "deepseek-flash",
+        "systemFingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "decision": "admit",
+      "catalogKind": "integration",
+      "jevRelation": "implemented",
+      "reviewBasis": "mixed",
+      "claims": [
+        {
+          "type": "purpose",
+          "text": "Browser extension that uses the Jev decision model to detect and mark ad segments in Bilibili videos so viewers can skip them.",
+          "support": [
+            "M846c9056afca643a"
+          ]
+        },
+        {
+          "type": "mechanism",
+          "text": "Resolves LLM settings for provider 'system_one' with model 'jev-latest' and calls the Jev endpoint https://api.typesafe.ai/v1/systemone.",
+          "support": [
+            "M545ab8b5508eed17"
+          ]
+        },
+        {
+          "type": "mechanism",
+          "text": "Builds ad-detection requests from video caption entries and applies a dual-threshold interval selection over Jev probability responses.",
+          "support": [
+            "M545ab8b5508eed17",
+            "M95ca4b16e1669058"
+          ]
+        },
+        {
+          "type": "contribution",
+          "text": "Replays 633 real Jev responses to validate contiguous ad-interval detection.",
+          "support": [
+            "M545ab8b5508eed17"
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 132,
+      "issueBodySha256": "d792fc04b4e200ce1376ebe21c3e75fd650756809fbb5ac4fd969f354aca981b",
+      "issueTitleSha256": "8f03702760dcfdaf4c5d56a4cce0f3b467b00b811405d997b39c57f69d15e5b3",
+      "reviewRevision": "d97e7cf4b2cebf0d9171e4756f56fb74f2133eafbeba8258b772470259c75ac8",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/132"
+    }
   }
 ]

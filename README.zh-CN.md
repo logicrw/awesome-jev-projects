@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-865%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#分类"><img src="https://img.shields.io/badge/Curated%20Projects-866%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev（System 1）** 是专门针对离散选择、连续打分与概率优化的百毫秒级决策模型：
 - ⚡ **百毫秒内极速返回**：50–100ms 快速完成判定，保障 Agent 主循环高频敏捷。
 - 🎯 **原生确定性输出**：原生支持 `Choice`（多选一）、`Score`（打分）与 `Noul`（二元逻辑与概率），免去易碎的正则提取。
-- 🛡️ **严格拒绝概念炒作**：按材料收录 **865+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
+- 🛡️ **严格拒绝概念炒作**：按材料收录 **866+** 个项目与资源，覆盖 17 个用途分类，并区分材料说明与实现证据。
 
 ### 📊 架构分工对比：System 1 (Jev) vs System 2 (大推理模型)
 
@@ -50,7 +50,7 @@
 - ⚡ **毫秒级吸顶搜索与浮动过滤**：即便页面下滑，也可随时唤出浮动分类面板，支持多标签一键点选过滤。
 - 🔍 **固定版本材料**：查看条目关联的源码、SQL、文档或示例，并按条目标注的审查依据理解结论。
 
-> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **865 个精选项目**
+> **[搜索与筛选 ↗](https://logicrw.github.io/awesome-jev-projects/)** · **866 个精选项目**
 
 由社区维护的 Jev 项目与资源目录，收录集成、基准测试、开发工具、研究与学习材料，并逐条展示关系、审查依据和许可事实。
 
@@ -79,7 +79,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 
 ## 分类
 
-- [浏览器与桌面 (55)](https://logicrw.github.io/awesome-jev-projects/categories/browser-os-action/)
+- [浏览器与桌面 (56)](https://logicrw.github.io/awesome-jev-projects/categories/browser-os-action/)
 - [命令行与流水线 (104)](https://logicrw.github.io/awesome-jev-projects/categories/cli-pipelines/)
 - [分类与目录 (2)](https://logicrw.github.io/awesome-jev-projects/categories/classification-taxonomy/)
 - [代码与图谱 (16)](https://logicrw.github.io/awesome-jev-projects/categories/codebase-graph-pathfinding/)
@@ -123,6 +123,14 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev 在此条目的作用**: 将页面状态与可执行候选交给 Jev，现有浏览器连接负责执行动作。
   - **这个项目的用途**: 把重复的页面选择交给独立决策步骤，复用已有浏览器连接。
   - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/wy-coliney/jev-browser-use/) · 许可证: MIT
+
+- [**VideoAdGuard**](https://github.com/ZeroTang05/VideoAdGuard) — 浏览器扩展，调用 Jev 决策模型判断 B 站视频广告区间并标记跳过。
+  - **条目类型**: 集成项目
+  - **Jev 关系**: 含 Jev 实现
+  - **审查依据**: 实现与说明材料
+  - **Jev 在此条目的作用**: 浏览器扩展，调用 Jev 决策模型判断 B 站视频广告区间并标记跳过。
+  - **这个项目的用途**: 材料已绑定固定版本；收录不代表独立运行或性能验证。
+  - [条目详情与固定版本材料](https://logicrw.github.io/awesome-jev-projects/projects/zerotang05/videoadguard/) · 许可证: GPL-2.0
 
 - [**Jev-cu**](https://github.com/Sac-Y/Jev-cu) — Codex Computer Use 辅助循环：界面文字候选交给 Jev，读取与执行交给桌面工具。
   - **Jev 在此条目的作用**: 选择元素、动作、完成度和风险，本地策略决定执行、停止或要求确认。

@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/ko/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#분류"><img src="https://img.shields.io/badge/Curated%20Projects-865%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#분류"><img src="https://img.shields.io/badge/Curated%20Projects-866%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@
 **TypeSafe Jev (System 1)**는 빠른 타입 안전 결정을 위해 제작된 경량 모델입니다:
 - ⚡ **100ms 미만 초고속 응답**: 50–100ms 내에 결정을 내려 에이전트 루프의 민첩성을 유지합니다.
 - 🎯 **네이티브 타입 출력**: `Choice`, `Score`, `Noul`을 지원하여 취약한 JSON 정규식 파싱이 필요 없습니다.
-- 🛡️ **과대 광고 배제**: 17개 분야의 865+개 프로젝트와 자료를 수록하며 설명 자료와 구현 근거를 구분합니다.
+- 🛡️ **과대 광고 배제**: 17개 분야의 866+개 프로젝트와 자료를 수록하며 설명 자료와 구현 근거를 구분합니다.
 
 ### 📊 아키텍처 비교: System 1 (Jev) vs System 2 (거대 추론 모델)
 
@@ -50,7 +50,7 @@
 - ⚡ **고정 검색바 및 플로팅 필터**: 페이지를 스크롤하는 중에도 툴바에서 언제든지 태그와 카테고리를 즉시 필터링할 수 있습니다.
 - 🔍 **고정 버전 자료**: 연결된 소스, SQL, 설명, 예시와 각 항목의 검토 근거를 함께 확인할 수 있습니다.
 
-> **[검색 및 필터 ↗](https://logicrw.github.io/awesome-jev-projects/ko/)** · **865 개 엄선 프로젝트**
+> **[검색 및 필터 ↗](https://logicrw.github.io/awesome-jev-projects/ko/)** · **866 개 엄선 프로젝트**
 
 Jev 연동, 벤치마크, 개발 도구, 연구 및 학습 자료를 모은 커뮤니티 목록입니다. 항목별 관계, 검토 근거 및 라이선스 정보를 표시합니다.
 
@@ -79,7 +79,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 
 ## 분류
 
-- [브라우저 및 데스크톱 (55)](https://logicrw.github.io/awesome-jev-projects/ko/categories/browser-os-action/)
+- [브라우저 및 데스크톱 (56)](https://logicrw.github.io/awesome-jev-projects/ko/categories/browser-os-action/)
 - [CLI 및 파이프라인 (104)](https://logicrw.github.io/awesome-jev-projects/ko/categories/cli-pipelines/)
 - [분류 및 카탈로그 (2)](https://logicrw.github.io/awesome-jev-projects/ko/categories/classification-taxonomy/)
 - [코드 및 그래프 탐색 (16)](https://logicrw.github.io/awesome-jev-projects/ko/categories/codebase-graph-pathfinding/)
@@ -123,6 +123,14 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **이 항목에서 Jev의 역할**: 페이지 상태와 실행 후보를 Jev에 보내고 기존 브라우저 연결로 동작을 실행한다.
   - **프로젝트의 용도**: 반복되는 화면 선택을 분리하면서 기존 연결을 재사용한다.
   - [상세 설명 및 고정 버전 자료](https://logicrw.github.io/awesome-jev-projects/ko/projects/wy-coliney/jev-browser-use/) · 라이선스: MIT
+
+- [**VideoAdGuard**](https://github.com/ZeroTang05/VideoAdGuard) — Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.
+  - **항목 유형**: 연동 프로젝트
+  - **Jev 관계**: Jev 구현 포함
+  - **검토 근거**: 구현 및 설명 자료
+  - **이 항목에서 Jev의 역할**: Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.
+  - **프로젝트의 용도**: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+  - [상세 설명 및 고정 버전 자료](https://logicrw.github.io/awesome-jev-projects/ko/projects/zerotang05/videoadguard/) · 라이선스: GPL-2.0
 
 - [**Jev-cu**](https://github.com/Sac-Y/Jev-cu) — 화면 텍스트 후보를 Jev에 보내고 데스크톱 도구가 관찰·실행하는 Codex 루프다.
   - **이 항목에서 Jev의 역할**: 대상·동작·완료·위험을 판단하며 로컬 정책이 실행이나 확인을 결정한다.

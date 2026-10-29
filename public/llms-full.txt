@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 865
+Catalog entries: 866
 
 ## Install the Agent Skill
 
@@ -12159,3 +12159,21 @@ Turtle-soup puzzle game whose code implements a JevClient calling Jev to judge p
 - Source evidence: https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/client.ts
 - Source evidence: https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/packages/jev/src/prompts.ts
 - Source evidence: https://github.com/ZeroTang05/Situation-Puzzle/blob/6e0cc5d4f9e47498b6e77aeecca304b11f0948f8/apps/web/e2e/README.md
+
+## VideoAdGuard
+
+Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.
+
+- Repository: https://github.com/ZeroTang05/VideoAdGuard
+- Category: Browser & OS Action
+- Jev decision: Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.
+- Purpose: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+- Review scope: A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.
+- License: GPL-2.0
+- Entry type: Integration
+- Jev relationship: Jev implementation
+- Review basis: Implementation and descriptive material
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/zerotang05/videoadguard/
+- Source evidence: https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/README.en.md
+- Source evidence: https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.test.ts
+- Source evidence: https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.ts

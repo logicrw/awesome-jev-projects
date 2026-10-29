@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/en/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#categories"><img src="https://img.shields.io/badge/Curated%20Projects-865%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#categories"><img src="https://img.shields.io/badge/Curated%20Projects-866%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@ When building autonomous agents, routing every small branching decision to a hea
 **TypeSafe Jev (System 1)** is purpose-built for fast, typed discrete decisions:
 - ⚡ **Sub-100ms Latency**: Delivers decisions in 50–100ms to keep agent loops snappy.
 - 🎯 **Native Typed Outputs**: Built-in primitives for `Choice`, `Score`, and `Noul` without fragile JSON regex parsing.
-- 🛡️ **Zero Vaporware**: 865+ projects and resources across 17 categories, distinguishing descriptive material from implementation evidence.
+- 🛡️ **Zero Vaporware**: 866+ projects and resources across 17 categories, distinguishing descriptive material from implementation evidence.
 
 ### 📊 Architecture Comparison: System 1 (Jev) vs System 2 (Reasoning LLMs)
 
@@ -50,7 +50,7 @@ When building autonomous agents, routing every small branching decision to a hea
 - ⚡ **Sticky Search & Floating Popover Filter**: Filter tags and categories anytime while scrolling via the anchored toolbar popover.
 - 🔍 **Fixed-Version Material**: Inspect linked source, SQL, documentation, or examples together with each entry’s review basis.
 
-> **[Search and filter ↗](https://logicrw.github.io/awesome-jev-projects/en/)** · **865 curated projects**
+> **[Search and filter ↗](https://logicrw.github.io/awesome-jev-projects/en/)** · **866 curated projects**
 
 A community catalog of Jev integrations, benchmarks, developer tools, research, and learning resources, with per-entry relationships, review basis, and license facts.
 
@@ -79,7 +79,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 
 ## Categories
 
-- [Browser & OS Action (55)](https://logicrw.github.io/awesome-jev-projects/en/categories/browser-os-action/)
+- [Browser & OS Action (56)](https://logicrw.github.io/awesome-jev-projects/en/categories/browser-os-action/)
 - [CLI & Pipelines (104)](https://logicrw.github.io/awesome-jev-projects/en/categories/cli-pipelines/)
 - [Classification (2)](https://logicrw.github.io/awesome-jev-projects/en/categories/classification-taxonomy/)
 - [Code Navigation (16)](https://logicrw.github.io/awesome-jev-projects/en/categories/codebase-graph-pathfinding/)
@@ -123,6 +123,14 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Sends page state and permitted candidates to Jev; the existing browser connection executes the actions.
   - **What this project offers**: Separates repetitive page choices into decision steps while reusing the browser connection.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wy-coliney/jev-browser-use/) · License: MIT
+
+- [**VideoAdGuard**](https://github.com/ZeroTang05/VideoAdGuard) — Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.
+  - **Entry type**: Integration
+  - **Jev relationship**: Jev implementation
+  - **Review basis**: Implementation and descriptive material
+  - **Jev’s role in this entry**: Browser extension calling the Jev decision model to detect and mark ad segments in Bilibili videos for skipping.
+  - **What this project offers**: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zerotang05/videoadguard/) · License: GPL-2.0
 
 - [**Jev-cu**](https://github.com/Sac-Y/Jev-cu) — A Codex Computer Use loop sending text candidates to Jev while desktop tools observe and act.
   - **Jev’s role in this entry**: Chooses targets and actions and assesses completion and risk; local policy controls execution or confirmation.
