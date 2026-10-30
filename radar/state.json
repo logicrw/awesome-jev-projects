@@ -13,27 +13,27 @@
     "repositories:\"typesafe.ai\" \"jev\" in:readme fork:false": 1,
     "repositories:\"from typesafe import jev\" in:readme fork:false": 1,
     "repositories:\"@typesafe/jev\" in:readme fork:false": 1,
-    "code:\"api.typesafe.ai\" in:file": 9,
-    "code:\"typesafe.ai\" in:file": 9,
-    "code:\"from typesafe import\" in:file": 1,
+    "code:\"api.typesafe.ai\" in:file": 1,
+    "code:\"typesafe.ai\" in:file": 1,
+    "code:\"from typesafe import\" in:file": 3,
     "code:\"@typesafe/jev\" in:file": 1,
-    "commits:\"typesafe.ai\"": 9,
-    "commits:\"Jev\" \"AI\"": 1,
-    "issues:\"typesafe.ai\" is:pr in:title,body": 1,
-    "issues:\"Jev\" \"TypeSafe\" is:pr in:title,body": 9,
-    "repositories:topic:jev fork:true": 9,
-    "repositories:typesafe jev fork:true": 9,
-    "repositories:typesafe-ai fork:true": 9,
-    "repositories:jev-mcp fork:true": 3,
-    "repositories:jev decision fork:true": 9,
-    "repositories:\"TypeSafe AI\" in:readme fork:true": 9,
-    "repositories:\"Jev API\" in:readme fork:true": 7,
-    "repositories:topic:typesafe-ai fork:true": 3,
-    "repositories:topic:typesafe ai fork:true": 1,
-    "repositories:\"api.typesafe.ai\" in:readme fork:true": 9,
-    "repositories:\"typesafe.ai\" \"jev\" in:readme fork:true": 7,
+    "commits:\"typesafe.ai\"": 1,
+    "commits:\"Jev\" \"AI\"": 3,
+    "issues:\"typesafe.ai\" is:pr in:title,body": 3,
+    "issues:\"Jev\" \"TypeSafe\" is:pr in:title,body": 1,
+    "repositories:topic:jev fork:true": 1,
+    "repositories:typesafe jev fork:true": 1,
+    "repositories:typesafe-ai fork:true": 1,
+    "repositories:jev-mcp fork:true": 5,
+    "repositories:jev decision fork:true": 1,
+    "repositories:\"TypeSafe AI\" in:readme fork:true": 1,
+    "repositories:\"Jev API\" in:readme fork:true": 9,
+    "repositories:topic:typesafe-ai fork:true": 5,
+    "repositories:topic:typesafe ai fork:true": 3,
+    "repositories:\"api.typesafe.ai\" in:readme fork:true": 1,
+    "repositories:\"typesafe.ai\" \"jev\" in:readme fork:true": 9,
     "repositories:\"from typesafe import jev\" in:readme fork:true": 1,
-    "repositories:\"@typesafe/jev\" in:readme fork:true": 9
+    "repositories:\"@typesafe/jev\" in:readme fork:true": 1
   },
   "tamaratran/fast-jev-compaction": {
     "checkedAt": "2026-09-18T06:52:26.940Z"
@@ -24244,5 +24244,437 @@
     "status": "deferred",
     "reason": "daily-quota-exhausted",
     "nextAttemptAt": "2026-10-30T00:00:00.000Z"
+  },
+  "nick7nlp/Jev-Selection-Bias": {
+    "fingerprint": "add40436ca26436f68c266245aed141ad45fb30263293192def044fc5ff24754",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "54d0ba383851909b9e1a65fdcda83677d380ab53b4828e69b5bbfd4ac83e69c6",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "kazuma761/Jevo-autorouting": {
+    "fingerprint": "ebb0f4ae539d4a6f9646c74c64e038637e995992c5fb296baafb7833db9c5aaf",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "1548a847787fa357bfd174acdb0204297ad85d0cb8330822a14b50f5cf8f3345",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "calligioni/jev-browser-control": {
+    "fingerprint": "4a17ad5ceaf5a73f8c53532b0ffd4759395136ef2f59d376cc61ef5a20dc0407",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "6752ba48be6db03a0b9d9ca1287489a42757b3f5a4bed232649061845e4664f7",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "SuperLLMModel/jev": {
+    "fingerprint": "bea848a8a70055a0bbd25b28c7120c28e55a6cec100eb874e837711f135ee8c4",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "57fb0262b30ea0eb2cdbe61eabd4ab032a651f44ee464fe86b138e0e4b66805e",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "catlynvald/jev": {
+    "fingerprint": "9026cb26a8cdcb50ce8ff558461a94f821b748c159fcd82ece93683e0f7d69a6",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "61ba9703d861e2df4782493174a6eacc27ebae101c88c059747879393dc11a24",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "dwade-work24/jev-role-review": {
+    "fingerprint": "7345e26d347d3903782fe208406d1d0a932b2fd9e969949d7d1b10bb8e4dbb9a",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "d3ca22f6fc22b2c173cdd761829d71c2412db0f65a50ed75e6b590431a0ab5d0",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "Eliot5566/awesome-jev-gallery": {
+    "fingerprint": "afe2c8d0b70b964712eed860ea8ebe4d8684b7cf76aa496a2492926fed41fcad",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "5dff1a02be596c24589403fa9273d5ca0307b78bbe5ebcb593b5e562d66a03a2",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "tripodxu/jev-piano": {
+    "fingerprint": "01b3162df7b6f041d7ba5aa53f3b84946de8ecdbb32ec2a773f27779a9e67836",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "6a5c2b3875f3fac379c479133ae30c76a2f2c0874cbdb7d9ee8ec31cc4607345",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "Innowayshinesps/JEV-LangswitchPOC": {
+    "fingerprint": "59889f5cd08d26bfb1cbab05f4ea0d2569c45fc4bb25f2e2fe8e3a521877e753",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "9529abf9c91a818a5a9f4371a115666e7a00aed31549b4b537136118c188ac43",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "work4life2/jev-fc-buddy": {
+    "fingerprint": "8c358c02e53ab606a12e586c15f7b60fdddf5c146734e7868779c9e6f554ed4d",
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 1,
+      "caseId": "a920fb78328a5c3243f54a308364ee3cd058c0f6cc1580a498b3550edec4a528",
+      "limitTokens": 6000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "benikigai/awesome-jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "sumant1122/jevci": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "amscotti/jevmoji": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "RosarioDiBartolo/jev-agent-skill": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "BasmaAbouzied0/jev-secret-guard": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "polaminggkub-debug/jev-watch": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "soummyaanon/jev-vs-laya": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "by-iPV/jev-demo-estudio": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "gotree94/Jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "LBDavid98/jevidence": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "Daltonganger/jev-claude-router": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "ashakiranbonthu3-eng/jev-state-engine": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "ritvarsbiksis/jev-plugin-main": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "P2030209/jev-chat-windows": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "ruoxhub/dsh-jev-plugin": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "xiaoqianran/kaggle-open-jev-typed-decision-engine": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "realchendahuang/jev-playbook": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "hojeongna/jev-agent-memory": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "lian-wsy/wsy-jev-uav-track": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "Parul077/jev-state-engine": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "ialeandrodelfino/jev-gateway": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "nsolland/jevrouter": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "ZeroTang05/awesome-jev-projects": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "actions-marketplace-validations/ShuhanSun_jev-oas-sentinel": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "sourabh-virdi/jevons-loop": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "XiaoRui114514/jev-chat-windows-custom-jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "kyle-pena-nlp/jevchat": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "dgr8akki/jev-voice": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "stefanwebb/meta-awesome-jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "petercr/jev-orchestrator": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "logicinfocursos/jev_youtube_tutorial": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "stainlu/awesome-jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "quinnjr/opencode-jev-compaction": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "amazedsaint/jevduck": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "leecoder/jev-evaluation": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "jonny5isalive5/jev-choice-probability-consistency": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "jangya/jev-webmcp": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "pankona/japanese-jev-lint": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "fivetaku/awesome-jev-study": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "noelserdna/cartas-ciberseguridad-jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "ahmadswalih/jev-chess-test": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "MudassarZia/jev-factorio": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "stellar-experimental/stellar-raven-jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "mit-bach/jev-library": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "disler/ten-levels-of-jev": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "MokiMeow/jev-fabric": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
+  },
+  "Zafer-Liu/jev-demo-router": {
+    "checkedAt": "2026-10-30T05:33:16.543Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-10-31T00:00:00.000Z"
   }
 }
