@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { exclusionNeedsEvidence } from "./jev-decision.mjs";
 import { inferCanonicalTags } from "../src/lib/tags.mjs";
 /** Public GitHub radar. No repository code is executed; all remote text is untrusted data. */
 import { readFile, writeFile, rename, mkdir } from "node:fs/promises";
@@ -214,6 +215,7 @@ export async function reviewRadarCandidate({
   if (!verdict) return finish(attempts >= MAX_REVIEW_ATTEMPTS ? "retry-exhausted" : "deferred", "invalid-material-reference", {
     state: { ...state, ...(attempts < MAX_REVIEW_ATTEMPTS ? { nextAttemptAt: nextAttemptAt() } : {}) },
   });
+  if (exclusionNeedsEvidence(reviewed.evidenceBundle, verdict)) return finish("insufficient-evidence", "counterevidence-needed", { state });
   if (verdict.decision === "exclude") return finish("rejected", "model-excluded", { state });
   if (verdict.decision === "need-more") return finish("insufficient-evidence", verdict.need ?? "material-needed", { state });
   const target = targets.find((entry) => entry.id === verdict.target);
@@ -430,6 +432,7 @@ async function reviewPlannedRadar() {
     state[entry.full] = decision.state;
     budgetReceipts.push({ caseId: entry.caseId, reservationId: authorized.reservationId,
       budgetLedger: decision.cached ? grant.budgetLedger : decision.reviewDetails?.budgetLedger,
+      accountingOverrun: decision.reviewDetails?.budget?.accountingOverrun === true,
       accountingVerified: decision.reviewDetails?.usage?.status === "reported" && !decision.reviewDetails?.budget?.accountingOverrun });
     // Persist each local receipt before unrelated later cases can fail. Remote
     // settlement is separate; a missing receipt never releases its reservation.

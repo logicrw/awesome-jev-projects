@@ -50,7 +50,7 @@ test("real L1 dead-code matches cannot override model veto, missing token or out
     [{ verified: null, status: "missing-token" }, "provider-unavailable"],
     [null, "invalid-output"],
   ]) {
-    const result = await run(async (input) => verdict === "exclude" ? positive(input, { decision: "exclude", jevRelation: "unrelated" }) : verdict);
+    const result = await run(async (input) => verdict === "exclude" ? positive(input, { decision: "exclude", jevRelation: "unrelated", conflicts: [positive(input).claims[0].support[0]] }) : verdict);
     assert.equal(result.status, expected);
     assert.equal(result.issueBodySha, bodyHash(issue.body));
     assert.equal(result.project, undefined);
@@ -281,7 +281,7 @@ test("a bug report mentioning an SDK remains subject to model intent exclusion",
   const result = await run((input) => {
     calls++;
     assert.match(input.issue.body, /bug report/);
-    return positive(input, { decision: "exclude", jevRelation: "unrelated" });
+    return positive(input, { decision: "exclude", jevRelation: "unrelated", conflicts: [positive(input).claims[0].support[0]] });
   }, { issue: { ...issue, title: "Rendering bug", body: "This is a bug report, not a submission. The example link is https://github.com/logicrw/audit-probe" } });
   assert.equal(calls, 1);
   assert.equal(result.status, "rejected");
@@ -405,7 +405,7 @@ test("new feedback receipts require a title and suppress stale title results bef
 });
 
 test("negative Material decisions retain the title fence in their prepared receipt", async () => {
-  const result = await run((input) => positive(input, { decision: "exclude", jevRelation: "unrelated" }));
+  const result = await run((input) => positive(input, { decision: "exclude", jevRelation: "unrelated", conflicts: [positive(input).claims[0].support[0]] }));
   assert.equal(result.status, "rejected");
   assert.equal(result.reviewContract, "material-v2");
   assert.equal(result.issueTitleSha, bodyHash(issue.title));

@@ -6,7 +6,8 @@ import { pathToFileURL } from 'node:url';
 import { createGitHubClient } from './github-client.mjs';
 import { reviewPolicyRevision } from './review-policy.mjs';
 import { createQuotaRegistry, validateQuotaRegistry, compactQuotaRegistry, reserveQuota, settleQuota } from './budget-quota.mjs';
-const REPO = 'logicrw/awesome-jev-projects', BRANCH = 'ingestion-budget', FILE = 'radar/review-budget.json', LIMIT = 6000;
+import { REVIEW_BUDGET, validateBudgetLedger } from './review-budget.mjs';
+const REPO = 'logicrw/awesome-jev-projects', BRANCH = 'ingestion-budget', FILE = 'radar/review-budget.json';
 const hash = (text) => createHash('sha256').update(text).digest('hex');
 const sha = (value) => /^[a-f\d]{40}$/.test(value ?? '');
 const id = (value) => /^[a-f\d]{64}$/.test(value ?? '');
@@ -19,17 +20,14 @@ export function radarCaseId(inspection, reviewRevision = reviewPolicyRevision())
   if (!Number.isSafeInteger(inspection?.repo?.id) || !sha(inspection.sha) || !id(reviewRevision)) throw Error('Invalid radar case identity');
   return hash(`radar:${inspection.repo.id}:${inspection.sha}:${reviewRevision}`);
 }
-function validLedger(ledger, caseId) {
-  return ledger && Object.keys(ledger).sort().join(',') === 'caseId,chargedTokens,httpAttempts,limitTokens,semanticRounds,version' &&
-    ledger.version === 1 && ledger.caseId === caseId && ledger.limitTokens === LIMIT && Number.isSafeInteger(ledger.chargedTokens) && ledger.chargedTokens >= 0 &&
-    Number.isInteger(ledger.httpAttempts) && ledger.httpAttempts >= 0 && ledger.httpAttempts <= 3 && Number.isInteger(ledger.semanticRounds) && ledger.semanticRounds >= 0 && ledger.semanticRounds <= 2;
-}
-function initial(caseId) { return { version: 1, caseId, limitTokens: LIMIT, chargedTokens: 0, httpAttempts: 0, semanticRounds: 0 }; }
+const validLedger = (ledger, caseId) => validateBudgetLedger(ledger, { caseId, allowOverrun: true });
+function initial(caseId) { return { version: REVIEW_BUDGET.version, caseId, limitTokens: REVIEW_BUDGET.caseTokens, chargedTokens: 0, httpAttempts: 0, semanticRounds: 0 }; }
 function validRecord(record, caseId) {
-  return record && Object.keys(record).sort().join(',') === 'baseLedger,grantTokens,ledger,reservationId,runAttempt,runId,status' &&
+  return record && Object.keys(record).sort().join(',') === `${record.accountingOverrun === true ? 'accountingOverrun,' : ''}baseLedger,grantTokens,ledger,reservationId,runAttempt,runId,status` &&
+    (!Object.hasOwn(record, 'accountingOverrun') || record.status === 'settled') &&
     ['reserved', 'settled'].includes(record.status) && reservationIdentity(record.reservationId) && /^[1-9]\d{0,19}$/.test(record.runId) && Number.isSafeInteger(record.runAttempt) && record.runAttempt >= 1 &&
-    validLedger(record.baseLedger, caseId) && Number.isSafeInteger(record.grantTokens) && record.grantTokens > 0 && record.grantTokens === LIMIT - record.baseLedger.chargedTokens &&
-    (record.status === 'reserved' ? record.ledger === null : validLedger(record.ledger, caseId) && record.ledger.chargedTokens >= record.baseLedger.chargedTokens &&
+    validLedger(record.baseLedger, caseId) && Number.isSafeInteger(record.grantTokens) && record.grantTokens > 0 && record.grantTokens === record.baseLedger.limitTokens - record.baseLedger.chargedTokens &&
+    (record.status === 'reserved' ? record.ledger === null : validLedger(record.ledger, caseId) && record.ledger.version === record.baseLedger.version && record.ledger.limitTokens === record.baseLedger.limitTokens && record.ledger.chargedTokens >= record.baseLedger.chargedTokens &&
       record.ledger.httpAttempts >= record.baseLedger.httpAttempts && record.ledger.semanticRounds >= record.baseLedger.semanticRounds);
 }
 async function readJSON(api, path, head, maximum) {
@@ -117,18 +115,18 @@ export async function reserveControlBudgets({ api, cases, runId, runAttempt, dry
     if (!id(caseId)) throw Error('Invalid budget case identity');
     if (snapshot.changedCases.size >= 99) { deferred.push({ caseId, status: 'transaction-capacity' }); continue; }
     const prior = await readCase(api, snapshot, caseId);
-    if (prior?.status === 'reserved' || (prior && prior.runId === String(runId) && prior.runAttempt === runAttempt)) {
+    if (prior?.status === 'reserved' || prior?.accountingOverrun === true || (prior && prior.runId === String(runId) && prior.runAttempt === runAttempt)) {
       deferred.push({ caseId, status: 'budget-exhausted' });
       if (snapshot.legacyCases[caseId]) snapshot.changedCases.set(caseId, prior);
       continue;
     }
     const baseLedger = prior?.ledger ?? initial(caseId);
-    if (baseLedger.chargedTokens >= LIMIT || baseLedger.httpAttempts >= 3 || baseLedger.semanticRounds >= 2) {
+    if (baseLedger.chargedTokens >= baseLedger.limitTokens || baseLedger.httpAttempts >= REVIEW_BUDGET.maxHTTPAttempts || baseLedger.semanticRounds >= REVIEW_BUDGET.maxSemanticRounds) {
       deferred.push({ caseId, status: 'budget-exhausted' });
       if (snapshot.legacyCases[caseId]) snapshot.changedCases.set(caseId, prior);
       continue;
     }
-    const reservationId = `${new Date(now).toISOString().slice(0, 10)}:${hash(`${caseId}:${runId}:${runAttempt}:${randomUUID()}`)}`, grantTokens = LIMIT - baseLedger.chargedTokens;
+    const reservationId = `${new Date(now).toISOString().slice(0, 10)}:${hash(`${caseId}:${runId}:${runAttempt}:${randomUUID()}`)}`, grantTokens = baseLedger.limitTokens - baseLedger.chargedTokens;
     const quota = reserveQuota(snapshot.quota, { reservationId, caseId, owner, repository, grantTokens, now, limits });
     if (!quota.ok || !quota.dispatchAuthorized) { deferred.push({ caseId, status: quota.status, retryNotBefore: quota.retryNotBefore }); continue; }
     snapshot.quota = quota.registry;
@@ -169,9 +167,10 @@ export async function settleRadarBudgets({ api, receipts, runId, runAttempt, dry
     const prior = await readCase(api, snapshot, receipt.caseId);
     if (!prior || prior.status !== 'reserved' || prior.reservationId !== receipt.reservationId || prior.runId !== String(runId) || prior.runAttempt !== runAttempt) continue;
     if (!receipt.budgetLedger) continue;
-    const record = { ...prior, status: 'settled', ledger: receipt.budgetLedger };
+    const record = { ...prior, status: 'settled', ledger: receipt.budgetLedger,
+      ...(receipt.accountingOverrun === true || receipt.budgetLedger.chargedTokens - prior.baseLedger.chargedTokens > prior.grantTokens ? { accountingOverrun: true } : {}) };
     if (!validRecord(record, receipt.caseId)) throw Error('Invalid radar budget receipt; reservation retained');
-    const quota = settleQuota(snapshot.quota, { reservationId: prior.reservationId, chargedTokens: receipt.budgetLedger.chargedTokens - prior.baseLedger.chargedTokens, now, accountingVerified: receipt.accountingVerified === true });
+    const quota = settleQuota(snapshot.quota, { reservationId: prior.reservationId, chargedTokens: receipt.budgetLedger.chargedTokens - prior.baseLedger.chargedTokens, now, accountingVerified: receipt.accountingVerified === true, accountingOverrun: receipt.accountingOverrun === true });
     if (!quota.ok) throw Error('Invalid global quota settlement; reservation retained');
     snapshot.quota = quota.registry; snapshot.changedCases.set(receipt.caseId, record); snapshot.cache.set(receipt.caseId, record);
   }

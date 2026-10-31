@@ -53,7 +53,9 @@ test('SQL, unknown DSL and docs are materials; 10MB text uses bounded streamed w
     return encode(name,`material for ${name}`);
   };
   const result=await collectAdditionalMaterials({api,repository:repo,sha,maxFiles:8});
-  assert.equal(result.sources.length,4);
+  assert.equal(result.sources.length,3);
+  assert.deepEqual(new Set(result.sources.map(source=>source.path)),new Set(['db/integration.sql','spec/new.dsl','README.md']));
+  assert.equal(result.sources.filter(source=>source.form==='prose').length,1);
   assert.deepEqual(largeOptions,{raw:true,responseBytes:10_485_760,sampleMaterials:true});
   const large=result.sources.find(s=>s.path==='README.md');
   assert.equal(large.partial,true);assert.equal(large.originalBytes,10_000_000);

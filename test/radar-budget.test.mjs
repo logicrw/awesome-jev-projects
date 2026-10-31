@@ -14,7 +14,7 @@ test('radar planning reserves remote state before issuing data-only grants',asyn
   assert.equal(r.grants.length,1);
   assert.ok(f.writes.some(write=>write.path.endsWith('/git/refs')));
   for(const write of f.writes.filter(write=>write.path.endsWith('/git/trees'))){assert.ok(write.body.tree.length<=100);assert.equal(write.body.tree[0].path,'radar/review-budget.json');assert.ok(write.body.tree.slice(1).every(entry=>/^radar\/review-budget-cases\/[a-f0-9]{2}\/[a-f0-9]{64}\.json$/.test(entry.path)));}
-  const authorization=await grant(f,e,r);assert.equal(authorization.budgetGrant.grantTokens,6000);
+  const authorization=await grant(f,e,r);assert.equal(authorization.budgetGrant.grantTokens,16000);
   assert.equal(await grant(f,e,r,'100',2),null);
   assert.equal(await grant(f,e,r,'200',1),null);
   const again=await reserveRadarBudgets({api:f.api,plan:{version:1,cases:[e]},runId:'101',runAttempt:1});
@@ -25,7 +25,7 @@ test('radar and Issue-shaped cases share the same daily owner/global quota',asyn
   const f=budgetFixture();
   const entries=[entry(1,'submitter'),entry(2,'submitter'),entry(3,'submitter')];
   const r=await reserveRadarBudgets({api:f.api,plan:{version:1,cases:entries},runId:'100',runAttempt:1,now:'2026-10-09T00:00:00Z'});
-  assert.equal(r.grants.length,2);assert.equal(r.deferred[0].status,'daily-quota-exhausted');
+  assert.equal(r.grants.length,1);assert.equal(r.deferred[0].status,'daily-quota-exhausted');
   const issue=await reserveControlBudgets({api:f.api,cases:[{caseId:'d'.repeat(64),owner:'submitter',repository:'logicrw/issue-project'}],runId:'200',runAttempt:1,now:'2026-10-09T01:00:00Z'});
   assert.equal(issue.grants.length,0);assert.equal(issue.deferred[0].retryNotBefore,'2026-10-10T00:00:00.000Z');
 });
@@ -35,9 +35,9 @@ test('settlement releases only trusted measured unused tokens and keeps cumulati
   const g=await grant(f,e,r),ledger={...g.budgetLedger,chargedTokens:2100,httpAttempts:1,semanticRounds:1};
   assert.equal(await settleRadarBudgets({api:f.api,runId:'100',runAttempt:1,receipts:[{caseId:e.caseId,reservationId:r.grants[0].reservationId,budgetLedger:ledger}]}),true);
   const r2=await reserveRadarBudgets({api:f.api,plan:{version:1,cases:[e]},runId:'101',runAttempt:1});
-  const g2=await grant(f,e,r2,'101');assert.equal(g2.budgetGrant.grantTokens,3900);assert.equal(g2.budgetLedger.httpAttempts,1);
+  const g2=await grant(f,e,r2,'101');assert.equal(g2.budgetGrant.grantTokens,13900);assert.equal(g2.budgetLedger.httpAttempts,1);
   const spent=Object.values(f.registry().quota.reservations).reduce((sum,row)=>sum+(row.chargedTokens??row.grantTokens),0);
-  assert.equal(spent,6000);
+  assert.equal(spent,16000);
 });
 
 test('an unknown ref response is read back and not republished or refunded',async()=>{
@@ -101,7 +101,7 @@ test('a fused provider authorizes only its delayed recovery probe and trusted ac
   const a=await reserveRadarBudgets({api:f.api,plan:{version:1,cases:[first]},runId:'100',runAttempt:1,now:'2026-10-09T00:00:00Z'});
   const base=(await grant(f,first,a)).budgetLedger;
   await settleRadarBudgets({api:f.api,runId:'100',runAttempt:1,now:'2026-10-09T01:00:00Z',receipts:[{
-    caseId:first.caseId,reservationId:a.grants[0].reservationId,budgetLedger:{...base,chargedTokens:6500,httpAttempts:1,semanticRounds:1},accountingVerified:true}]});
+    caseId:first.caseId,reservationId:a.grants[0].reservationId,budgetLedger:{...base,chargedTokens:16500,httpAttempts:1,semanticRounds:1},accountingVerified:true}]});
   const b=await reserveRadarBudgets({api:f.api,plan:{version:1,cases:[second]},runId:'101',runAttempt:1,now:'2026-10-10T00:00:00Z'});
   assert.equal(b.grants.length,1);
   const probe=await readRadarBudgetGrant({api:f.api,caseId:second.caseId,reservationId:b.grants[0].reservationId,runId:'101',runAttempt:1,now:'2026-10-10T00:00:01Z'});
@@ -110,4 +110,64 @@ test('a fused provider authorizes only its delayed recovery probe and trusted ac
   await settleRadarBudgets({api:f.api,runId:'101',runAttempt:1,now:'2026-10-10T00:00:03Z',receipts:[{
     caseId:second.caseId,reservationId:b.grants[0].reservationId,budgetLedger:{...probe.budgetLedger,chargedTokens:1000,httpAttempts:1,semanticRounds:1},accountingVerified:true}]});
   assert.equal(f.registry().quota.fused,false);
+});
+
+test('persisted version 1 cases retain 6000 limits and counters across inline and sharded reads', async () => {
+  for (const inline of [true, false]) {
+    for (const [status, chargedTokens, httpAttempts, semanticRounds, expectedGrant] of [
+      ['reserved', 0, 0, 0, 0], ['settled', 2400, 1, 0, 3600], ['settled', 6000, 1, 0, 0],
+      ['settled', 2400, 3, 0, 0], ['settled', 2400, 1, 2, 0],
+    ]) {
+      const f = budgetFixture(), e = entry(), day = '2026-10-09', reservationId = `${day}:${'a'.repeat(64)}`;
+      const baseLedger = { version: 1, caseId: e.caseId, limitTokens: 6000, chargedTokens: 0, httpAttempts: 0, semanticRounds: 0 };
+      const record = { reservationId, runId: '90', runAttempt: 1, status, baseLedger, grantTokens: 6000,
+        ledger: status === 'settled' ? { ...baseLedger, chargedTokens, httpAttempts, semanticRounds } : null };
+      const { createQuotaRegistry } = await import('../scripts/budget-quota.mjs');
+      const quota = createQuotaRegistry();
+      quota.reservations[reservationId] = { caseId: e.caseId, owner: 'logicrw', repository: e.inspection.repo.full_name, day,
+        grantTokens: 6000, chargedTokens: status === 'settled' ? chargedTokens : null };
+      f.seed(inline ? { version: 1, cases: { [e.caseId]: record }, quota } : { version: 2, quota }, inline ? {} : { [e.caseId]: record });
+      const result = await reserveRadarBudgets({ api: f.api, plan: { version: 1, cases: [e] }, runId: '100', runAttempt: 1, now: `${day}T01:00:00Z` });
+      assert.equal(result.grants.length, expectedGrant ? 1 : 0);
+      if (expectedGrant) {
+        const g = await grant(f, e, result);
+        assert.equal(g.budgetGrant.grantTokens, expectedGrant);
+        assert.deepEqual(g.budgetLedger, record.ledger);
+      } else assert.equal(result.deferred[0].status, 'budget-exhausted');
+    }
+  }
+});
+
+test('an in-flight legacy reservation can settle but cannot upgrade its ledger version', async () => {
+  const f = budgetFixture(), e = entry(), reservationId = `2026-10-09:${'a'.repeat(64)}`;
+  const baseLedger = { version: 1, caseId: e.caseId, limitTokens: 6000, chargedTokens: 0, httpAttempts: 0, semanticRounds: 0 };
+  const record = { reservationId, runId: '100', runAttempt: 1, status: 'reserved', baseLedger, grantTokens: 6000, ledger: null };
+  const { createQuotaRegistry } = await import('../scripts/budget-quota.mjs');
+  const quota = createQuotaRegistry();
+  quota.reservations[reservationId] = { caseId: e.caseId, owner: 'logicrw', repository: e.inspection.repo.full_name,
+    day: '2026-10-09', grantTokens: 6000, chargedTokens: null };
+  f.seed({ version: 2, quota }, { [e.caseId]: record });
+  const read = await readRadarBudgetGrant({ api: f.api, caseId: e.caseId, reservationId, runId: '100', runAttempt: 1 });
+  assert.equal(read.budgetGrant.grantTokens, 6000);
+  const settle = (budgetLedger) => settleRadarBudgets({ api: f.api, runId: '100', runAttempt: 1, receipts: [{ caseId: e.caseId, reservationId, budgetLedger }] });
+  await assert.rejects(settle({ ...baseLedger, version: 2, limitTokens: 16000 }), /Invalid radar budget receipt/);
+  assert.equal(await settle({ ...baseLedger, chargedTokens: 1000, httpAttempts: 1, semanticRounds: 1 }), true);
+  assert.equal(f.registry().cases[e.caseId].ledger.limitTokens, 6000);
+});
+
+test('a request overrun below the case grant persists a fuse and a permanent case stop', async () => {
+  const f = budgetFixture(), e = entry(), next = entry(2);
+  const first = await reserveRadarBudgets({ api: f.api, plan: { version: 1, cases: [e] }, runId: '100', runAttempt: 1, now: '2026-10-09T00:00:00Z' });
+  const base = (await grant(f, e, first)).budgetLedger;
+  await settleRadarBudgets({ api: f.api, runId: '100', runAttempt: 1, now: '2026-10-09T01:00:00Z', receipts: [{
+    caseId: e.caseId, reservationId: first.grants[0].reservationId, budgetLedger: { ...base, chargedTokens: 2500, httpAttempts: 1, semanticRounds: 0 }, accountingOverrun: true,
+  }] });
+  assert.equal(f.registry().quota.fused, true);
+  assert.equal(f.registry().cases[e.caseId].accountingOverrun, true);
+  assert.equal(f.registry().cases[e.caseId].ledger.chargedTokens, 2500);
+  const blocked = await reserveRadarBudgets({ api: f.api, plan: { version: 1, cases: [next] }, runId: '101', runAttempt: 1, now: '2026-10-09T02:00:00Z' });
+  assert.equal(blocked.deferred[0].status, 'quota-fused');
+  const later = await reserveRadarBudgets({ api: f.api, plan: { version: 1, cases: [e] }, runId: '102', runAttempt: 1, now: '2026-10-10T02:00:00Z' });
+  assert.equal(later.grants.length, 0);
+  assert.equal(later.deferred[0].status, 'budget-exhausted');
 });

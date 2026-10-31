@@ -56,7 +56,7 @@ test("evaluateCandidateWithJev handles successful Jev System One response (admit
   };
 
   const result = await evaluateCandidateWithJev({
-    state: { repo: "browser-use/jev-ultrafast", code: "TypeSafeJevClient" },
+    state: { repo: "browser-use/jev-ultrafast", evidenceFiles: [{ path: "src/client.ts", sample: "TypeSafeJevClient()" }] },
     apiKey: "test-key",
     fetchImpl: mockFetch,
   });
@@ -81,6 +81,7 @@ test("evaluateCandidateWithJev handles Jev System One rejection (rejected candid
           type: "noul",
           noul: 0.05,
         },
+        evidence_basis: { choice: "counterevidence" },
         category_choice: {
           type: "choice",
           choice: "CLI & Pipelines",
@@ -96,7 +97,7 @@ test("evaluateCandidateWithJev handles Jev System One rejection (rejected candid
   });
 
   const result = await evaluateCandidateWithJev({
-    state: { repo: "fake/project", code: "no jev here" },
+    state: { repo: "fake/project", evidenceFiles: [{ path: "src/main.py", sample: "raise NotImplementedError()" }] },
     apiKey: "test-key",
     fetchImpl: mockFetch,
   });
@@ -136,4 +137,37 @@ test("evaluateCandidateWithJev handles network exception gracefully", async () =
 
   assert.equal(result.status, "fallback");
   assert.equal(result.reason, "network-error");
+});
+
+const gateReply = (probability, basis = "insufficient") => async () => ({
+  ok: true, json: async () => ({ answers: { is_genuine_jev: { noul: probability }, evidence_basis: { choice: basis } } }),
+});
+
+test("no source, config-only, and sampled stubs with declarations remain provisional", async () => {
+  for (const evidenceFiles of [[], [{ path: "README_zh.md", sample: "集成 Jev" }],
+    [{ path: "docs/README.md", sample: "Jev integration" }], [{ path: "Package.swift", sample: "Jev dependency" }],
+    [{ path: "Shared/Service.swift", sample: "// Jev client will live here" }]]) {
+    const result = await evaluateCandidateWithJev({ state: { intent: "Uses Jev", evidenceFiles }, apiKey: "fixture", fetchImpl: gateReply(0.05) });
+    assert.equal(result.status, "provisional");
+    assert.equal(result.needsEvidence, true);
+    assert.equal(result.isRejected, false);
+  }
+});
+
+test("a missing or invalid probability cannot become a conclusive gate result", async () => {
+  for (const value of [undefined, null, "0.1", -1, 1.1, NaN, Infinity]) {
+    const result = await evaluateCandidateWithJev({ state: { intent: "Jev" }, apiKey: "fixture", fetchImpl: gateReply(value) });
+    assert.equal(result.status, "fallback");
+    assert.equal(result.reason, "invalid-probability");
+    assert.notEqual(result.isRejected, true);
+  }
+});
+
+test("midrange scores and absent counterevidence cannot reject inspected source", async () => {
+  for (const probability of [0, 0.19, 0.2, 0.5, 0.79]) {
+    const result = await evaluateCandidateWithJev({ state: { evidenceFiles: [{ path: "pkg/client.go", sample: "package client" }] },
+      apiKey: "fixture", fetchImpl: gateReply(probability) });
+    assert.equal(result.status, "provisional");
+    assert.equal(result.isRejected, false);
+  }
 });

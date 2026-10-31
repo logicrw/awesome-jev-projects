@@ -599,7 +599,7 @@ test("prepareSubmission respects the model veto and renders a local rejection re
     taxonomy,
     api: async () => {},
     inspect: async () => inspected,
-    reviewer: async (input) => acceptedReview(input, { decision: "exclude", jevRelation: "unrelated" }),
+    reviewer: async (input) => acceptedReview(input, { decision: "exclude", jevRelation: "unrelated", conflicts: [acceptedReview(input).claims[0].support[0]] }),
     enrich: async ({ fallback }) => fallback,
   });
   assert.equal(result.status, "rejected");

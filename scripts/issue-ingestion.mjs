@@ -19,6 +19,7 @@ import {
 import { summarize, verifyIntegration, atomicJSON } from "./radar-sync.mjs";
 import { readAssetBundle, validateAssetBundle } from "./ingestion-assets.mjs";
 import { validateVerdict, resolveMaterialRefs, resolveMaterialFiles } from "./evidence-bundle.mjs";
+import { exclusionNeedsEvidence } from "./jev-decision.mjs";
 import { licenseFactsFromRepo } from "../src/lib/catalog-contract.mjs";
 import { reviewPolicyRevision } from "./review-policy.mjs";
 import { settleRetry, validateRetryClaim, readReviewBudgetGrant } from "./ingestion-retry.mjs";
@@ -72,7 +73,7 @@ const REVIEW_MESSAGES = Object.freeze({
   "duplicate": "此仓库已在目录中，无需重复收录。",
   "accepted": "模型已依据固定版本材料完成相关性与类型审查。",
   "model-rejected": "模型判断本次内容不属于可收录的 Jev 相关投稿；本轮自动审查已结束。",
-  "insufficient-evidence": "当前材料不足以形成收录结论，本轮自动审查已结束；更新仓库材料或投稿说明后可触发下一轮。",
+  "insufficient-evidence": "当前送审材料尚不足以形成收录结论，项目保留为待补证，Issue 将保持开放。请将关键实现文件路径（如 app/src/main/.../JevClient.kt 或 Shared/JevService.swift）及 Jev 调用位置补入本 Issue 正文；保存修改后会在配额允许范围内重新审查。也可在评论中补充说明供后续读取；单独评论不会重启已结束的审查。",
   "invalid-output": "模型输出未通过结构或证据引用校验，本轮自动审查已结束。",
   "provider-unavailable": "模型服务暂不可用，本轮未形成收录结论。",
   "transient-failure": "审查服务暂时不可用，将在限额内自动重试。",
@@ -94,6 +95,8 @@ function safeJevGateDiagnostics(gate) {
     ...(publicReviewMetadata(gate.reason, 60) ? { reason: publicReviewMetadata(gate.reason, 60) } : {}),
     ...(typeof gate.isGenuine === "boolean" ? { isGenuine: gate.isGenuine } : {}),
     ...(typeof gate.isRejected === "boolean" ? { isRejected: gate.isRejected } : {}),
+    ...(typeof gate.needsEvidence === "boolean" ? { needsEvidence: gate.needsEvidence } : {}),
+    ...(Number.isSafeInteger(gate.sourceFileCount) ? { sourceFileCount: gate.sourceFileCount } : {}),
     ...(typeof gate.probability === "number" && Number.isFinite(gate.probability) ? { probability: gate.probability } : {}),
     ...(publicReviewMetadata(gate.category, 60) ? { category: publicReviewMetadata(gate.category, 60) } : {}),
     ...(typeof gate.depthScore === "number" && Number.isFinite(gate.depthScore) ? { depthScore: Math.round(gate.depthScore * 100) / 100 } : {}),
@@ -242,7 +245,7 @@ export async function prepareSubmission({
       const retryNotBefore = Number.isFinite(notBefore) && notBefore > Date.now() ? new Date(notBefore).toISOString() : undefined;
       return finish("transient-retry", "transient-failure", { ...reviewMeta, retryable: true, retryNotBefore });
     }
-    const status = review?.status === "budget-not-reserved" ? "budget-exhausted" : ["insufficient-evidence", "budget-exhausted", "provider-unavailable", "dry-run"].includes(review?.status) ? review.status :
+    const status = review?.status === "provisional" ? "insufficient-evidence" : review?.status === "budget-not-reserved" ? "budget-exhausted" : ["insufficient-evidence", "budget-exhausted", "provider-unavailable", "dry-run"].includes(review?.status) ? review.status :
       ["missing-token", "missing-provider-config", "invalid-provider-config", "circuit-open", "http-error", "request-failed", "timeout"].includes(review?.status) ? "provider-unavailable" : "invalid-output";
     return finish(status, status, reviewMeta);
   }
@@ -266,6 +269,8 @@ export async function prepareSubmission({
     return !Number.isSafeInteger(base) || base < 0 || start < base || end <= start || end > base + bytes.length ||
       bodyHash(bytes.subarray(start - base, end - base)) !== ref.spanSha256;
   })) return finish("invalid-output", "invalid-output", reviewMeta);
+  if (exclusionNeedsEvidence(bundle, verdict))
+    return finish("insufficient-evidence", "insufficient-evidence", { ...reviewMeta, submittedRepository: snapshot.target.repository });
   if (verdict.decision === "exclude") return finish("rejected", "model-rejected", { ...reviewMeta, submittedRepository: snapshot.target.repository });
   if (verdict.decision === "need-more") return finish("insufficient-evidence", "insufficient-evidence", { ...reviewMeta, submittedRepository: snapshot.target.repository });
   if (!snapshot.target.available || !refs.length || !files.length) return finish("invalid-output", "invalid-output", reviewMeta);

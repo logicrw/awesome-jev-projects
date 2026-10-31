@@ -285,21 +285,89 @@ export function isPersistentExclusion(entry) {
   return ["maintainer-removed", "policy-blocked"].includes(entry?.status);
 }
 
-function materialForm(path) {
-  if (/\.(?:md|mdx|rst|txt)$/i.test(path)) return "prose";
+function isReadmePath(path) {
+  return /(?:^|\/)readme(?:$|[._-][^/]*$)/i.test(path);
+}
+
+const MANIFEST_PATH = /(?:^|\/)(?:package(?:-lock)?\.json|(?:build|settings)\.gradle(?:\.kts)?|gradle\.properties|Cargo\.(?:toml|lock)|go\.(?:mod|sum)|pom\.xml|Podfile(?:\.lock)?|Package\.(?:swift|resolved)|Gemfile(?:\.lock)?|Pipfile(?:\.lock)?|requirements(?:[._-][^/]*)?\.txt|CMakeLists\.txt|Makefile|Dockerfile(?:\.[^/]*)?)$/i;
+
+/** Sampling labels only: unknown languages and SQL remain readable materials. */
+export function materialForm(path) {
+  if (isReadmePath(path)) return "prose";
+  if (MANIFEST_PATH.test(path) ||
+      /\.(?:json|ya?ml|toml|ini|conf|cfg|xml|properties|gradle(?:\.kts)?|lock|plist|pbxproj|xcscheme|xcconfig|xcworkspacedata|entitlements|xctestplan)$/i.test(path) ||
+      /(?:^|\/)(?:\.(?:gitignore|gitattributes|editorconfig|npmrc|yarnrc|prettierrc|eslintrc|nvmrc|tool-versions|node-version|ruby-version))$/i.test(path)) return "config";
+  if (/\.(?:md|mdx|markdown|rst|txt|adoc|asciidoc|rdoc)$/i.test(path) ||
+      /(?:^|\/)(?:license|licence|copying|notice|authors|changelog|contributing|security|code_of_conduct)(?:$|[._-][^/]*$)/i.test(path)) return "prose";
   if (/\.sql$/i.test(path)) return "sql";
-  if (/\.(?:json|ya?ml|toml|ini|conf|cfg|xml)$/i.test(path)) return "config";
   return "source";
 }
 
 function materialRank(entry, need = "") {
   const p = entry.path;
-  return Number(/(?:^|\/)readme(?:\.[^/]*)?$/i.test(p)) * 40 +
-    Number(/jev|typesafe|providers?|controllers?|evaluators?/i.test(p)) * 30 +
-    Number(need === "configuration" && /config|provider|\.sql$|\.ya?ml$|\.toml$/i.test(p)) * 25 +
-    Number(need === "usage-example" && /readme|docs|example|tutorial|usage/i.test(p)) * 25 +
-    Number(need === "backend" && /backend|provider|model|evaluat|controller/i.test(p)) * 25 -
+  const form = materialForm(p);
+  const code = form === "source" || form === "sql";
+  const readmeRank = /^readme(?:\.(?:md|mdx|markdown|rst|txt|adoc|asciidoc|rdoc))?$/i.test(p)
+    ? 40 : isReadmePath(p) ? p.includes("/") ? 10 : 20 : 0;
+  return readmeRank +
+    Number(form === "config" && MANIFEST_PATH.test(p)) * 15 +
+    Number(code) * 20 +
+    Number(code && /jev|typesafe|clients?|services?|judges?|providers?|controllers?|evaluators?/i.test(p)) * 35 +
+    Number(code && /(?:^|\/)(?:src|main|lib|pkg|internal|shared|sources|core|app)(?:\/|$)/i.test(p)) * 25 +
+    Number(need === "configuration" && (form === "config" || form === "sql")) * 25 +
+    Number(need === "usage-example" && /readme|docs|example|tutorial|usage/i.test(p)) * 10 +
+    Number(code && need === "backend" && /backend|provider|model|evaluat|controller/i.test(p)) * 25 -
     Number(/(?:^|\/)(?:node_modules|vendor|dist|build|generated|\.git)(?:\/|$)/i.test(p)) * 50;
+}
+
+function selectMaterials(entries, { need, hints, excluded, limit }) {
+  const rank = (a, b) => materialRank(b, need) - materialRank(a, need) || a.path.localeCompare(b.path);
+  const bucket = (entry) => {
+    const form = materialForm(entry.path);
+    return form === "prose" ? "docs" : form === "config" ? "config" : "code";
+  };
+  // excludePaths are already supplied materials, so a second round cannot spend
+  // the same documentation/manifest allowance on translated or sibling files.
+  const previous = [...excluded].map((path) => bucket({ path }));
+  const caps = {
+    docs: Math.max(0, 1 - previous.filter((value) => value === "docs").length),
+    config: Math.max(0, 2 - previous.filter((value) => value === "config").length),
+    code: limit,
+  };
+  const counts = { docs: 0, config: 0, code: 0 };
+  const selected = [];
+  const selectedPaths = new Set();
+  let nominated = 0;
+  let allowHintFallback = false;
+  const hintLimit = Math.floor(limit / 2);
+  const candidates = [...entries].sort((a, b) => Number(hints.has(b.path)) - Number(hints.has(a.path)) || rank(a, b));
+  const take = (group, count) => {
+    for (const entry of candidates) {
+      if (count <= 0 || selected.length >= limit) break;
+      const category = bucket(entry);
+      if ((group && category !== group) || selectedPaths.has(entry.path) || counts[category] >= caps[category] ||
+          (hints.has(entry.path) && nominated >= hintLimit && !allowHintFallback)) continue;
+      selected.push(entry);
+      selectedPaths.add(entry.path);
+      counts[category]++;
+      nominated += Number(hints.has(entry.path));
+      count--;
+    }
+  };
+  // Five implementation-material slots at eight files. Smaller second rounds
+  // retain a source slot while leaving room for a requested document or config.
+  take("code", Math.max(1, limit - 3));
+  take("docs", caps.docs);
+  take("config", caps.config);
+  take(null, limit - selected.length);
+  // All eligible independent candidates have now been considered. Preserve the
+  // source floor even if the submitter happened to nominate every source file;
+  // translations blocked by a full docs bucket are not discovery alternatives.
+  allowHintFallback = true;
+  take("docs", caps.docs - counts.docs);
+  take("config", caps.config - counts.config);
+  take(null, limit - selected.length);
+  return selected.sort(rank);
 }
 
 /** Bounded immutable text collection. File names affect ordering, never semantic admission. */
@@ -321,18 +389,34 @@ export async function collectAdditionalMaterials({ api, repository, sha, need = 
   }
   const excluded = new Set(excludePaths);
   const hints = new Set(preferredPaths.filter(isReadableMaterialPath).slice(0, 16));
-  const entries = (tree.tree ?? []).slice(0, 15000).filter((entry) => materialCandidate(entry) && !excluded.has(entry.path));
-  const rank = (a, b) => materialRank(b, need) - materialRank(a, need) || a.path.localeCompare(b.path);
-  const nominated = entries.filter((entry) => hints.has(entry.path)).sort(rank);
-  const discovered = entries.filter((entry) => !hints.has(entry.path)).sort(rank);
-  const limit = Math.max(1, Math.min(8, maxFiles));
-  const hintLimit = Math.min(Math.floor(limit / 2), nominated.length);
-  const selected = [...nominated.slice(0, hintLimit), ...discovered.slice(0, limit - hintLimit)];
-  if (selected.length < limit) selected.push(...nominated.slice(hintLimit, hintLimit + limit - selected.length));
+  const entries = [...new Map((tree.tree ?? []).slice(0, 15000)
+    .filter((entry) => materialCandidate(entry) && !excluded.has(entry.path))
+    .map((entry) => [entry.path, entry])).values()];
+  const limit = Number.isFinite(maxFiles) ? Math.max(1, Math.min(8, Math.floor(maxFiles))) : 3;
+  const selected = selectMaterials(entries, { need, hints, excluded, limit });
+  const isCode = (entry) => ["source", "sql"].includes(materialForm(entry.path));
+  const sourceTarget = selected.filter(isCode).length;
+  const attempted = new Set();
+  // A missing/binary/mismatched file must not hide a readable source candidate.
+  // Permit at most four replacements; byte and scan ceilings still apply.
+  const maxFileAttempts = limit + 4;
   const sources = [];
   let used = 0, scanned = 0;
   const unread = [];
-  for (const entry of selected) {
+  for (let index = 0; index < maxFileAttempts; index++) {
+    if (index >= selected.length) {
+      const sourceCount = new Set(sources.filter(isCode).map((source) => source.path)).size;
+      if (sourceCount >= sourceTarget) break;
+      const hintCount = new Set(sources.filter((source) => hints.has(source.path)).map((source) => source.path)).size;
+      const preferHints = hintCount < Math.floor(limit / 2);
+      const replacement = entries.filter((entry) => isCode(entry) && !attempted.has(entry.path)).sort((a, b) =>
+        (Number(hints.has(b.path)) - Number(hints.has(a.path))) * (preferHints ? 1 : -1) ||
+        materialRank(b, need) - materialRank(a, need) || a.path.localeCompare(b.path))[0];
+      if (!replacement) break;
+      selected.push(replacement);
+    }
+    const entry = selected[index];
+    attempted.add(entry.path);
     if (used + Math.min(entry.size ?? 65536, 65536) > maxTotalBytes) { unread.push(entry.path); continue; }
     try {
       const endpoint = `/repos/${repository}/contents/${pathPart(entry.path)}?ref=${sha}`;
@@ -344,16 +428,18 @@ export async function collectAdditionalMaterials({ api, repository, sha, need = 
         if (!sampled || !Number.isSafeInteger(sampled.scannedBytes) || sampled.scannedBytes < 0 || sampled.scannedBytes > scanLimit ||
             !Array.isArray(sampled.windows) || sampled.windows.length > 7) { unread.push(entry.path); continue; }
         scanned += sampled.scannedBytes;
+        let acceptedWindows = 0;
         for (const window of sampled.windows) {
-          if (typeof window.text !== "string" || window.text.includes("\0") || !Number.isSafeInteger(window.startByte) || window.startByte < 0 ||
+          if (!window || typeof window.text !== "string" || !window.text.trim() || window.text.includes("\0") || !Number.isSafeInteger(window.startByte) || window.startByte < 0 ||
               window.endByte !== window.startByte + Buffer.byteLength(window.text) || window.endByte > entry.size ||
               Buffer.byteLength(window.text) > 16384 || used + Buffer.byteLength(window.text) > maxTotalBytes) continue;
+          acceptedWindows++;
           used += Buffer.byteLength(window.text);
           sources.push({ ...sourceFile(repository, sha, entry.path, window.text), form: materialForm(entry.path),
             partial: true, originalBytes: entry.size, readSpan: { startByte: window.startByte, endByte: window.endByte },
             blobOid: entry.sha ?? null, contentSha256: sampled.complete ? sampled.contentSha256 : null });
         }
-        if (!sampled.complete) unread.push(entry.path);
+        if (!sampled.complete || !acceptedWindows || acceptedWindows < sampled.windows.length) unread.push(entry.path);
         continue;
       }
       const file = await api(endpoint, { responseBytes: 100_000 });
@@ -368,7 +454,7 @@ export async function collectAdditionalMaterials({ api, repository, sha, need = 
     }
   }
   return { sources, inventory: tree, coverage: { bytesRead: used, scannedBytes: scanned, truncatedTree: Boolean(tree.truncated),
-    candidateCount: entries.length, omitted: Math.max(0, entries.length - sources.length), unread } };
+    candidateCount: entries.length, attemptedFiles: attempted.size, omitted: Math.max(0, entries.length - new Set(sources.map((source) => source.path)).size), unread } };
 }
 
 function safePath(value) {
@@ -734,7 +820,7 @@ export async function inspectRepository({
   if (semanticReview) {
     const collected = await collectAdditionalMaterials({ api, repository: canonical, sha, preferredPaths, maxFiles: 8 });
     const sources = collected.sources.map((source) => ({ ...source, repoId: repo.id, repository: canonical, commit: sha }));
-    const readmeFiles = sources.filter((source) => /(?:^|\/)readme(?:\.[^/]*)?$/i.test(source.path));
+    const readmeFiles = sources.filter((source) => isReadmePath(source.path));
     return { status: "inspected", repo, sha, commits, sources, materialSources: sources,
       sourceInventory: collected.inventory, coverage: collected.coverage,
       readme: readmeFiles.map((source) => source.text).join("\n\n"), readmeFiles,

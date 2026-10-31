@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { reserveQuota, settleQuota, createQuotaRegistry, validateQuotaRegistry, compactQuotaRegistry } from "../scripts/budget-quota.mjs";
 const today = "2026-10-09";
 const rid = (label, day = today) => `${day}:${createHash("sha256").update(label).digest("hex")}`;
-const request = (overrides = {}) => ({ reservationId: rid("r1"), caseId: "case1", owner: "logicrw", repository: "logicrw/demo", grantTokens: 6000, now: `${today}T23:50:00Z`, ...overrides });
+const request = (overrides = {}) => ({ reservationId: rid("r1"), caseId: "case1", owner: "logicrw", repository: "logicrw/demo", grantTokens: 16000, now: `${today}T23:50:00Z`, ...overrides });
 
 test("reserve is immutable and idempotent without a second dispatch authorization", () => {
   const first = reserveQuota(null, request()), before = structuredClone(first.registry);
@@ -19,8 +19,8 @@ test("reserve is immutable and idempotent without a second dispatch authorizatio
 test("known settlement releases only unused grant and cannot increase the case allowance", () => {
   let registry = reserveQuota(null, request()).registry;
   registry = settleQuota(registry, { reservationId: rid("r1"), chargedTokens: 1000 }).registry;
-  assert.equal(reserveQuota(registry, request({ reservationId: rid("r2"), grantTokens: 5000 })).status, "reserved");
-  assert.equal(reserveQuota(registry, request({ reservationId: rid("r2"), grantTokens: 5001 })).status, "case-budget-exhausted");
+  assert.equal(reserveQuota(registry, request({ reservationId: rid("r2"), grantTokens: 15000 })).status, "reserved");
+  assert.equal(reserveQuota(registry, request({ reservationId: rid("r2"), grantTokens: 15001 })).status, "case-budget-exhausted");
   assert.equal(reserveQuota(registry, request({ reservationId: rid("r2"), owner: "other" })).status, "case-identity-conflict");
   assert.equal(settleQuota(registry, { reservationId: rid("r1"), chargedTokens: 999 }).status, "settlement-conflict");
 });
@@ -41,9 +41,9 @@ test("unknown work remains full debt in its original UTC day across midnight", (
 test("daily global, owner and repository caps report the next UTC boundary", () => {
   const registry = reserveQuota(null, request()).registry;
   for (const [scope, limits, changes] of [
-    ["global", { global: 6000, owner: 12000, repository: 12000 }, { owner: "other", repository: "other/demo" }],
-    ["owner", { global: 18000, owner: 6000, repository: 12000 }, { repository: "logicrw/second" }],
-    ["repository", { global: 18000, owner: 12000, repository: 6000 }, {}],
+    ["global", { global: 16000, owner: 32000, repository: 32000 }, { owner: "other", repository: "other/demo" }],
+    ["owner", { global: 48000, owner: 16000, repository: 32000 }, { repository: "logicrw/second" }],
+    ["repository", { global: 48000, owner: 32000, repository: 16000 }, {}],
   ]) {
     const result = reserveQuota(registry, request({ reservationId: rid(scope), caseId: scope, limits, ...changes }));
     assert.equal(result.status, "daily-quota-exhausted"); assert.equal(result.scope, scope);
@@ -53,9 +53,9 @@ test("daily global, owner and repository caps report the next UTC boundary", () 
 
 test("overrun retains its actual charge, then allows one verified recovery probe next UTC day", () => {
   const initial = reserveQuota(null, request());
-  const overrun = settleQuota(initial.registry, { reservationId: rid("r1"), chargedTokens: 7200, now: `${today}T23:55:00Z` });
+  const overrun = settleQuota(initial.registry, { reservationId: rid("r1"), chargedTokens: 17200, now: `${today}T23:55:00Z` });
   assert.equal(overrun.status, "provider-budget-violation");
-  assert.equal(overrun.registry.reservations[rid("r1")].chargedTokens, 7200);
+  assert.equal(overrun.registry.reservations[rid("r1")].chargedTokens, 17200);
   assert.equal(overrun.registry.fusedUntilUTC, "2026-10-10T00:00:00.000Z");
   assert.equal(reserveQuota(overrun.registry, request({ reservationId: rid("r2"), caseId: "case2" })).status, "quota-fused");
   const probeId = rid("probe", "2026-10-10");
@@ -64,13 +64,13 @@ test("overrun retains its actual charge, then allows one verified recovery probe
   assert.equal(reserveQuota(probe.registry, request({ reservationId: rid("other", "2026-10-10"), caseId: "other", now: "2026-10-10T02:00:00Z" })).status, "quota-recovery-pending");
   const recovered = settleQuota(probe.registry, { reservationId: probeId, chargedTokens: 1000, now: "2026-10-10T03:00:00Z", accountingVerified: true });
   assert.equal(recovered.registry.fused, false);
-  assert.equal(recovered.registry.reservations[rid("r1")].chargedTokens, 7200);
+  assert.equal(recovered.registry.reservations[rid("r1")].chargedTokens, 17200);
   assert.equal(validateQuotaRegistry(recovered.registry), true);
-  assert.equal(reserveQuota(recovered.registry, request({ reservationId: rid("normal", "2026-10-10"), caseId: "normal", grantTokens: 5000, now: "2026-10-10T04:00:00Z" })).status, "reserved");
+  assert.equal(reserveQuota(recovered.registry, request({ reservationId: rid("normal", "2026-10-10"), caseId: "normal", grantTokens: 15000, now: "2026-10-10T04:00:00Z" })).status, "reserved");
 });
 
 test("an unknown or crashed probe never refunds its case and only permits another probe next UTC day", () => {
-  const fused = settleQuota(reserveQuota(null, request()).registry, { reservationId: rid("r1"), chargedTokens: 7000 }).registry;
+  const fused = settleQuota(reserveQuota(null, request()).registry, { reservationId: rid("r1"), chargedTokens: 17000 }).registry;
   const probeId = rid("probe", "2026-10-10");
   let registry = reserveQuota(fused, request({ reservationId: probeId, caseId: "probe", now: "2026-10-10T01:00:00Z" })).registry;
   registry = settleQuota(registry, { reservationId: probeId, chargedTokens: null, now: "2026-10-10T02:00:00Z" }).registry;
@@ -122,7 +122,7 @@ test("controller-authorized unknown GC restores row capacity without reviving re
 test("GC preserves fuse recovery state rather than silently clearing old violations", () => {
   const oldDay = "2026-01-01", oldId = rid("old", oldDay);
   const initial = reserveQuota(null, request({ reservationId: oldId, now: `${oldDay}T00:00:00Z` }));
-  const fused = settleQuota(initial.registry, { reservationId: oldId, chargedTokens: 7000 }).registry;
+  const fused = settleQuota(initial.registry, { reservationId: oldId, chargedTokens: 17000 }).registry;
   const result = compactQuotaRegistry(fused, { now: `${today}T00:00:00Z`, permanentCaseAccounting: true });
   assert.equal(result.removed, 1); assert.equal(result.registry.fused, true);
   const probe = reserveQuota(result.registry, request({ reservationId: rid("new"), caseId: "new" }));

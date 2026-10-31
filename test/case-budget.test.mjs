@@ -10,18 +10,18 @@ const fixture=()=>budgetFixture();
 const reserve=(f,runId='100',runAttempt=1)=>reserveReviewBudget({api:f.api,issueNumber:12,runId,runAttempt});
 const read=(f,r,runId='100',runAttempt=1)=>readReviewBudgetGrant({api:f.api,issueNumber:12,bodySha,titleSha:r.titleSha,reviewRevision:r.reviewRevision,reservationId:r.reservationId,runId,runAttempt});
 
-test('all 6000 remaining tokens are reserved before the model receives a grant',async()=>{
+test('all 16000 remaining tokens are reserved before the model receives a grant',async()=>{
   const f=fixture(),r=await reserve(f);
   assert.equal(r.allowed,true);assert.ok(f.writes.some((write)=>write.path.endsWith('/git/refs')));
   const grant=await read(f,r);
-  assert.equal(grant.budgetGrant.grantTokens,6000);
+  assert.equal(grant.budgetGrant.grantTokens,16000);
   assert.equal(grant.budgetGrant.caseId,grant.budgetLedger.caseId);
   assert.deepEqual(grant.budgetGrant.baseline,{chargedTokens:0,httpAttempts:0,semanticRounds:0});
   assert.equal(await read(f,r,'100',2),null,'rerunning only the reviewer must not replay a prior reservation');
   assert.equal(await read(f,r,'999',1),null);
 });
 
-test('unknown or crashed calls consume the full held grant and cannot obtain another 6000',async()=>{
+test('unknown or crashed calls consume the full held grant and cannot obtain another 16000',async()=>{
   const f=fixture();await reserve(f);
   const retry=await reserve(f,'101');
   assert.equal(retry.allowed,false);assert.equal(retry.status,'budget-exhausted');
@@ -33,7 +33,7 @@ test('trusted settlement carries spent tokens and HTTP rounds across scheduled r
   assert.equal(await settleReviewBudget({api:f.api,issueNumber:12,bodySha,reservationId:r.reservationId,budgetLedger:ledger,runId:'100',runAttempt:1}),true);
   assert.equal(await settleReviewBudget({api:f.api,issueNumber:12,bodySha,reservationId:r.reservationId,budgetLedger:ledger,runId:'100',runAttempt:1}),false);
   const r2=await reserve(f,'101'),second=await read(f,r2,'101');
-  assert.equal(second.budgetGrant.grantTokens,3600);
+  assert.equal(second.budgetGrant.grantTokens,13600);
   assert.deepEqual(second.budgetLedger,ledger);
   await settleReviewBudget({api:f.api,issueNumber:12,bodySha,reservationId:r2.reservationId,budgetLedger:{...ledger,chargedTokens:3500,httpAttempts:3,semanticRounds:2},runId:'101',runAttempt:1});
   assert.equal((await reserve(f,'102')).allowed,false,'HTTP/semantic limits do not reset with token balance');
@@ -50,9 +50,9 @@ test('comment text cannot manufacture a branch grant and mismatched receipts can
 
 test('actual provider accounting overrun is retained and never permits another request',async()=>{
   const f=fixture(),r=await reserve(f),grant=await read(f,r);
-  await settleReviewBudget({api:f.api,issueNumber:12,bodySha,reservationId:r.reservationId,budgetLedger:{...grant.budgetLedger,chargedTokens:6500,httpAttempts:1,semanticRounds:1},runId:'100',runAttempt:1});
+  await settleReviewBudget({api:f.api,issueNumber:12,bodySha,reservationId:r.reservationId,budgetLedger:{...grant.budgetLedger,chargedTokens:16500,httpAttempts:1,semanticRounds:1},runId:'100',runAttempt:1});
   const record=Object.values(f.registry().cases)[0];
-  assert.equal(record.ledger.chargedTokens,6500);
+  assert.equal(record.ledger.chargedTokens,16500);
   assert.equal((await reserve(f,'101')).allowed,false);
 });
 

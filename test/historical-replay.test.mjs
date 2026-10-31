@@ -56,7 +56,7 @@ for(const issueNumber of [113,114])test(`fixed #${issueNumber}: genuine material
  assert.ok(result.project.evidence.length>0);assert.ok(calls>=1&&calls<=2);
  assert.equal(requests[0].thinking.type,'disabled');assert.equal(requests[0].max_tokens,512);
  if(calls===2){assert.equal(requests[1].thinking.type,'enabled');assert.equal(requests[1].max_tokens,2048);}
- assert.ok(result.budgetLedger.chargedTokens<=6000);
+ assert.ok(result.budgetLedger.chargedTokens<=result.budgetLedger.limitTokens);
  const metrics=requests.map((request,i)=>{const packet=JSON.parse(request.messages[1].content);return {
   phase:i+1,...requestBudget(request.messages,i+1),materialCount:packet.evidence.materials.length,
   materialBytes:packet.evidence.materials.reduce((n,m)=>n+Buffer.byteLength(m.text),0),
@@ -66,7 +66,7 @@ for(const issueNumber of [113,114])test(`fixed #${issueNumber}: genuine material
   accounting:'scripted usage, not provider measurement',chargedTokens:result.budgetLedger.chargedTokens}));
 });
 
-test('fixed #111: pure prompt pattern library without executable Jev API integration is excluded',async(t)=>{
+test('fixed #111: a scripted exclusion based only on absent executable calls needs evidence',async(t)=>{
  const fixture=JSON.parse(await readFile(new URL('./fixtures/historical/issue-111.json',import.meta.url),'utf8'));
  const reviewer=createSubmissionReviewer({token:'offline-fixture',source:'deepseek',fetchImpl:async(_url,options)=>{
   const verdict={target:'R1',decision:'exclude',catalogKind:'learning-resource',jevRelation:'discussed',
@@ -79,8 +79,9 @@ test('fixed #111: pure prompt pattern library without executable Jev API integra
  const result=await prepareSubmission({issue:{...fixture.issue,state:'open'},repository:'logicrw/awesome-jev-projects',projects:[],taxonomy,
   api:sourceAPI(fixture),reviewer:input=>reviewer({...input,allowUnreserved:true}),
   enrich:createSummaryEnricher({token:'fixture',fetchImpl:()=>assert.fail('no summary call on exclusion')})});
- assert.equal(result.status,'rejected');
- assert.equal(result.reasonCode,'model-rejected');
+ assert.equal(result.status,'insufficient-evidence');
+ assert.equal(result.needsEvidence,true);
+ assert.equal(result.reasonCode,'insufficient-evidence');
  assert.equal(result.submittedRepository,'vicfei/awesome-jev-prompts');
- t.diagnostic(JSON.stringify({issue:111,decision:'exclude',reason:result.reason}));
+ t.diagnostic(JSON.stringify({issue:111,decision:'need-more',reason:result.reason}));
 });

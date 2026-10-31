@@ -357,11 +357,11 @@ export async function readReviewBudgetGrant({ api, issueNumber, bodySha, titleSh
   if (!/^(?:\d{4}-\d{2}-\d{2}:)?[a-f\d]{64}$/.test(reservationId ?? "") || !await currentIssue(api, candidate)) return null;
   return readRadarBudgetGrant({ api, caseId: reviewCaseId(issueNumber, bodySha, titleSha, reviewRevision), reservationId, runId, runAttempt });
 }
-export async function settleReviewBudget({ api, issueNumber, bodySha, titleSha = bodyHash(""), reviewRevision = reviewPolicyRevision(), reservationId, budgetLedger, accountingVerified = false,
+export async function settleReviewBudget({ api, issueNumber, bodySha, titleSha = bodyHash(""), reviewRevision = reviewPolicyRevision(), reservationId, budgetLedger, accountingVerified = false, accountingOverrun = false,
   runId = process.env.GITHUB_RUN_ID, runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT), dryRun }) {
   if (isDryRun(dryRun)) return false;
   requireCandidate({ issueNumber, bodySha });
-  return settleRadarBudgets({ api, receipts: [{ caseId: reviewCaseId(issueNumber, bodySha, titleSha, reviewRevision), reservationId, budgetLedger, accountingVerified }], runId, runAttempt });
+  return settleRadarBudgets({ api, receipts: [{ caseId: reviewCaseId(issueNumber, bodySha, titleSha, reviewRevision), reservationId, budgetLedger, accountingVerified, accountingOverrun }], runId, runAttempt });
 }
 async function output(values) {
   if (process.env.GITHUB_OUTPUT)
@@ -390,7 +390,8 @@ async function main() {
     if (prepared.budgetReservationId !== process.env.INGEST_BUDGET_RESERVATION_ID) throw new Error("Model budget receipt reservation mismatch");
     const settled = await settleReviewBudget({ api: budgetApi, issueNumber: Number(process.env.INGEST_ISSUE_NUMBER), bodySha: process.env.INGEST_ISSUE_BODY_SHA, titleSha: process.env.INGEST_ISSUE_TITLE_SHA, reviewRevision: process.env.INGEST_REVIEW_REVISION,
       reservationId: prepared.budgetReservationId, budgetLedger: prepared.budgetLedger,
-      accountingVerified: prepared.reviewDetails?.usage?.status === "reported" && !prepared.reviewDetails?.budget?.accountingOverrun, trustedWriter });
+      accountingVerified: prepared.reviewDetails?.usage?.status === "reported" && !prepared.reviewDetails?.budget?.accountingOverrun,
+      accountingOverrun: prepared.reviewDetails?.budget?.accountingOverrun === true, trustedWriter });
     console.log(`Model budget: ${settled ? "settled" : "unchanged"}`); return;
   }
   if (mode === "select") {

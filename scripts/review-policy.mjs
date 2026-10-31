@@ -1,6 +1,6 @@
 /** Stable trusted review policy identity. Secrets and unrelated Git commits are excluded. */
 import { createHash } from 'node:crypto';
-export const MATERIAL_REVIEW_POLICY = 'material-v3';
+export const MATERIAL_REVIEW_POLICY = 'material-v4';
 export function reviewPolicyRevision({
   model = process.env.DEEPSEEK_MODEL || 'deepseek-flash',
   endpoint = process.env.DEEPSEEK_ENDPOINT || 'https://api.deepseek.com/chat/completions',

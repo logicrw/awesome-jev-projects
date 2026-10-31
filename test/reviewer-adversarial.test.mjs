@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { createSubmissionReviewer } from "../scripts/source-enrichment.mjs";
-import { requestBudget } from "../scripts/review-budget.mjs";
+import { requestBudget, REVIEW_BUDGET } from "../scripts/review-budget.mjs";
 
 const sha = "b".repeat(40);
 const target = { id: "R1", repository: "logicrw/demo", repoId: 1, commit: sha, available: true, listed: false };
@@ -121,7 +121,7 @@ test("unknown usage keeps full reservations; known usage releases only observed 
   assert.equal(result.budget.exactProviderBillingCap, false);
 });
 
-test("actual provider overrun is preserved rather than clamped into a false six-thousand guarantee", async () => {
+test("actual provider overrun is preserved rather than clamped into a false accounting guarantee", async () => {
   let calls = 0;
   const reviewer = createSubmissionReviewer({ token: "fixture", fetchImpl: async (_, options) => { calls++; return response(verdict(options), {}, 7000); } });
   const result = await reviewer(input);
@@ -171,12 +171,12 @@ test("wide materials keep more than 1450 bytes while regular target and reservat
   assert.equal(result.decision, "admit");
   assert.ok(bodyBytes > 3000);
   assert.ok(bodyBytes < 6144);
-  assert.ok(result.attempts[0].budget.estimatedTotalTokens <= 2000);
+  assert.ok(result.attempts[0].budget.estimatedTotalTokens <= REVIEW_BUDGET.normalTargetTokens);
   assert.ok(result.attempts[0].budget.reservedTokens <= 6000);
   assert.equal(result.attempts[0].budget.tokenizerVerified, false);
 });
 
-test("official-counter injection may calibrate estimates but cannot enlarge the byte reservation", async () => {
+test("local counters calibrate estimates while the conservative reservation floor remains", async () => {
   let counted = 0;
   const reviewer = createSubmissionReviewer({ token: "fixture", countInputTokens: async (_messages, config) => {
     counted++; assert.equal(config.model, "deepseek-flash"); return { tokens: 300, tokenizer: "fixture-v41", verifiedAgainstProvider: false };
@@ -186,7 +186,9 @@ test("official-counter injection may calibrate estimates but cannot enlarge the 
   const budget = result.attempts[0].budget;
   assert.equal(budget.estimatedInputTokens, 300);
   assert.equal(budget.localTokenizer, "fixture-v41");
-  assert.equal(budget.reservedTokens, budget.inputUtf8Bytes + 128 + 512);
+  assert.equal(budget.reservedTokens, budget.reservedInputTokens + REVIEW_BUDGET.framingReserve + REVIEW_BUDGET.normalOutputTokens);
+  assert.ok(budget.reservedInputTokens >= Math.ceil(300 * 1.2));
+  assert.ok(budget.reservedTokens < budget.inputUtf8Bytes + 128 + 512);
   assert.equal(requestBudget([{ role: "user", content: "中文" }], 2).outputTokenLimit, 2048);
 });
 
@@ -336,4 +338,35 @@ test("provider identity metadata cannot echo the configured credential", async (
   assert.equal(result.attempts[0].responseModel, null);
   assert.equal(result.attempts[0].systemFingerprint, null);
   assert.equal(JSON.stringify(result).includes(token), false);
+});
+
+test('two near-5KB reviewer requests finish with unknown usage inside a persisted 16000-token grant', async () => {
+  const { budgetFixture } = await import('./helpers/budget-fixture.mjs');
+  const { reserveControlBudgets, readRadarBudgetGrant, settleRadarBudgets } = await import('../scripts/radar-budget.mjs');
+  const f = budgetFixture(), caseId = 'e'.repeat(64), runId = '500', runAttempt = 1;
+  const reserved = await reserveControlBudgets({ api: f.api, cases: [{ caseId, owner: 'logicrw', repository: 'logicrw/demo' }], runId, runAttempt });
+  const reservationId = reserved.grants[0].reservationId;
+  const authorization = await readRadarBudgetGrant({ api: f.api, caseId, reservationId, runId, runAttempt });
+  const requests = [];
+  const text = 'Jev integration example: structured decisions are submitted through an explicit client and returned to callers. '.repeat(20).slice(0, 1400);
+  const reviewer = createSubmissionReviewer({ token: 'fixture', fetchImpl: async (_, options) => {
+    requests.push(JSON.parse(options.body));
+    return response(verdict(options, requests.length === 1 ? { decision: 'need-more', need: 'backend', category: null, jevRelation: 'uncertain' } : {}), { usage: undefined });
+  } });
+  const result = await reviewer({ ...input, ...authorization, caseId, expectedReservationId: reservationId, allowUnreserved: false,
+    sources: [file(text), file(text, 'guide.md')], acquireEvidence: async () => [file(text.replaceAll('integration', 'backend'), 'backend.md')] });
+  assert.equal(result.decision, 'admit');
+  assert.equal(requests.length, 2);
+  for (const request of requests) {
+    const bytes = Buffer.byteLength(JSON.stringify(request.messages));
+    assert.ok(bytes >= 5000 && bytes <= REVIEW_BUDGET.maxMessagesBytes, `actual reviewer request contained ${bytes} bytes`);
+  }
+  assert.equal(result.usage.status, 'unknown');
+  assert.equal(result.budgetLedger.chargedTokens, result.attempts.reduce((sum, attempt) => sum + attempt.budget.reservedTokens, 0));
+  assert.equal(result.budgetLedger.httpAttempts, 2);
+  assert.equal(result.budgetLedger.semanticRounds, 2);
+  assert.equal(await settleRadarBudgets({ api: f.api, runId, runAttempt, receipts: [{ caseId, reservationId, budgetLedger: result.budgetLedger }] }), true);
+  assert.equal(f.registry().cases[caseId].ledger.chargedTokens, result.budgetLedger.chargedTokens);
+  const retry = await reserveControlBudgets({ api: f.api, cases: [{ caseId, owner: 'logicrw', repository: 'logicrw/demo' }], runId: '501', runAttempt });
+  assert.equal(retry.grants.length, 0, 'settlement cannot reset the semantic-round limit');
 });

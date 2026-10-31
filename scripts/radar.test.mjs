@@ -346,11 +346,11 @@ test("radar admits README and SQL material according to model kind without a cod
   }
 });
 
-test("radar preserves model exclusion and need-more without legacy heuristic fallback", async () => {
-  const {inspection,verdict}=materialFixture();
+test("radar preserves cited counterevidence and need-more without legacy heuristic fallback", async () => {
+  const {inspection,verdict}=materialFixture("src/backend.ts", "throw new Error(\"Jev backend is not implemented\");");
   for(const decision of ['exclude','need-more']){
     const result=await reviewRadarCandidate({inspection:{...inspection,evidence:{verified:true}},taxonomy,
-      reviewer:async()=>({...verdict,decision,need:decision==='need-more'?'backend':null})});
+      reviewer:async()=>({...verdict,decision,conflicts:[verdict.claims[0].support[0]],need:decision==='need-more'?'backend':null})});
     assert.equal(result.status,decision==='exclude'?'rejected':'insufficient-evidence');
   }
   const missing=await reviewRadarCandidate({inspection,taxonomy,reviewer:async()=>null});
@@ -434,4 +434,13 @@ test('accepted radar artifacts retain policy and bounded model receipts without 
   assert.equal(result.reviewDetails.attempts[0].requestDigest,'a'.repeat(64));
   assert.equal(Object.hasOwn(result.reviewDetails,'messages'),false);
   assert.equal(Object.hasOwn(result.reviewDetails,'rawOutput'),false);
+});
+
+
+test("radar keeps uncited README-only exclusions provisional without a rejection cache", async () => {
+  const { inspection, verdict } = materialFixture();
+  const result = await reviewRadarCandidate({ inspection, taxonomy, reviewer: async () => ({ ...verdict, decision: "exclude", claims: [] }) });
+  assert.equal(result.status, "insufficient-evidence");
+  assert.equal(result.state.status, "insufficient-evidence");
+  assert.equal(result.reason, "counterevidence-needed");
 });

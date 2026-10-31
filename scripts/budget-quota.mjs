@@ -1,6 +1,7 @@
 /** Pure quota control. All periods use UTC; permanent case accounting belongs to the controller. */
-export const DEFAULT_QUOTA_LIMITS = Object.freeze({ global: 60000, owner: 12000, repository: 6000 });
-const CASE_LIMIT = 6000;
+import { REVIEW_BUDGET } from "./review-budget.mjs";
+export const DEFAULT_QUOTA_LIMITS = Object.freeze({ global: 120000, owner: 24000, repository: REVIEW_BUDGET.caseTokens });
+const CASE_LIMIT = REVIEW_BUDGET.caseTokens;
 const MAX_RESERVATIONS = 10000;
 const nonnegative = (n) => Number.isSafeInteger(n) && n >= 0;
 const identity = (s) => typeof s === "string" && /^[\w:.-]{1,200}$/.test(s);
@@ -95,7 +96,7 @@ export function reserveQuota(registry, { reservationId, caseId, owner, repositor
 }
 
 /** chargedTokens is this reservation's charge, not the cumulative case ledger. */
-export function settleQuota(registry, { reservationId, chargedTokens, now, accountingVerified = false } = {}) {
+export function settleQuota(registry, { reservationId, chargedTokens, now, accountingVerified = false, accountingOverrun = false } = {}) {
   const next = readRegistry(registry);
   if (!next || !identity(reservationId)) return fail("reservation-not-found", next ?? registry ?? null);
   const encodedDay = reservationDay(reservationId);
@@ -110,7 +111,7 @@ export function settleQuota(registry, { reservationId, chargedTokens, now, accou
   const current = clock(now ?? `${row.day}T00:00:00.000Z`);
   if (!current) return fail("invalid-settlement-time", next);
   row.chargedTokens = chargedTokens;
-  const overrun = chargedTokens > row.grantTokens;
+  const overrun = accountingOverrun === true || chargedTokens > row.grantTokens;
   if (overrun) {
     next.fused = true;
     next.fusedUntilUTC = next.fusedUntilUTC && next.fusedUntilUTC > current.retryNotBefore ? next.fusedUntilUTC : current.retryNotBefore;

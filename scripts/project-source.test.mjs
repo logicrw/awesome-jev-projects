@@ -9,6 +9,8 @@ import {
   decodeNotebookCode,
   inspectRepository,
   readLocalizedReadmes,
+  collectAdditionalMaterials,
+  materialForm,
 } from "./project-source.mjs";
 
 const sha = "a".repeat(40);
@@ -775,3 +777,173 @@ Also see \`src/providers/jev_eval.ts:25\`
   assert.ok(paths.includes("src/providers/jev_eval.ts"));
 });
 
+function materialFixture(paths, overrides = {}) {
+  const inventory = { tree: paths.map((path) => ({ path, type: "blob", mode: "100644", size: 64 })) };
+  return { inventory, ...fixture({
+    [`/repos/${repository}/git/trees/${sha}?recursive=1`]: inventory,
+    ...Object.fromEntries(paths.map((path) => [
+      `/repos/${repository}/contents/${path}?ref=${sha}`, encoded(`Material from ${path}`, path),
+    ])),
+    ...overrides,
+  }) };
+}
+
+test("material labels cover translated docs and mobile manifests without a language admission whitelist", () => {
+  for (const path of ["README", "README_zh", "README_ja.md", "docs/README", "README.en.md", "docs/guide.md", "LICENSE"])
+    assert.equal(materialForm(path), "prose", path);
+  for (const path of ["package.json", "app/build.gradle", "app/build.gradle.kts", "settings.gradle.kts", "Cargo.toml", "go.mod", "pom.xml", "Podfile", "Package.swift", "requirements-dev.txt", "Info.plist", "App.xcodeproj/project.pbxproj", ".gitignore"])
+    assert.equal(materialForm(path), "config", path);
+  assert.equal(materialForm("queries/judge.sql"), "sql");
+  assert.equal(materialForm("Shared/JevService.swift"), "source");
+  assert.equal(materialForm("policy/decision.custom_dsl"), "source");
+  assert.equal(materialForm("lib/evaluate"), "source");
+  assert.equal(materialForm("README.md/client.kt"), "source");
+});
+
+for (const [platform, codePaths] of [
+  ["Android", ["app/src/main/java/com/example/JevClient.kt", "app/src/main/java/com/example/JudgeService.kt", "app/src/main/java/com/example/Client.kt", "app/src/main/java/com/example/Decision.kt", "app/src/main/java/com/example/Response.kt"]],
+  ["iOS", ["Shared/JevService.swift", "Sources/Client/Judge.swift", "Shared/Client.swift", "Sources/Decision.swift", "Shared/Response.swift"]],
+]) {
+  test(`semantic first pass reserves five ${platform} sources despite eight translated READMEs`, async () => {
+    const translations = ["zh", "ja", "ko", "de", "fr", "es", "ru", "pt"].map((lang) => `README_${lang}.md`);
+    const paths = ["README.md", ...translations, "docs/README.md", "docs/jev-client.md", "package.json", "app/build.gradle.kts", "Package.swift", "Podfile", "go.mod", ...codePaths];
+    const f = materialFixture(paths);
+    const result = await inspect(f, { semanticReview: true });
+    assert.equal(result.status, "inspected");
+    assert.equal(result.sources.length, 8);
+    assert.equal(result.sources.filter((source) => source.form === "source").length, 5);
+    assert.equal(result.sources.filter((source) => source.form === "config").length, 2);
+    assert.deepEqual(result.readmeFiles.map((source) => source.path), ["README.md"]);
+    assert.ok(result.sources.slice(0, 3).some((source) => source.path === codePaths[0]));
+    assert.ok(result.sources.slice(0, 3).every((source) => source.form === "source"));
+    assert.ok(result.sources.every((source) => source.commit === sha && source.url.includes(`/blob/${sha}/`)));
+    assert.equal(f.requests.filter((path) => path.includes("/contents/")).length, 8);
+  });
+}
+
+test("deep independent code outranks translated and nested README hints and retains discovery slots", async () => {
+  const hinted = Array.from({ length: 8 }, (_, index) => `src/jev-hint-${index}.ts`);
+  const discovered = ["lib/Client.scala", "pkg/Judge.ex", "internal/Service.clj", "Shared/Typesafe.fs", "app/src/main/Decision.kt"];
+  const f = materialFixture([...hinted, ...discovered, "README.md", "README_zh.md", "docs/README.md", "package.json", "Cargo.toml"]);
+  const result = await collectAdditionalMaterials({ api: f.api, repository, sha, maxFiles: 8, preferredPaths: hinted });
+  assert.equal(result.sources.length, 8);
+  assert.equal(result.sources.filter((source) => hinted.includes(source.path)).length, 4);
+  assert.equal(result.sources.filter((source) => source.form === "source").length, 5);
+  assert.ok(result.sources.some((source) => discovered.includes(source.path)));
+  assert.deepEqual(result.sources.filter((source) => source.form === "prose").map((source) => source.path), ["README.md"]);
+});
+
+test("second pass reuses category allowances and never substitutes another language README", async () => {
+  const paths = ["README.md", "README_zh.md", "README_ja.md", "docs/README.md", "docs/guide.md", "package.json", "go.mod", "Podfile",
+    ...Array.from({ length: 10 }, (_, index) => `lib/JevClient${index}.swift`)];
+  const f = materialFixture(paths);
+  const first = await collectAdditionalMaterials({ api: f.api, repository, sha, maxFiles: 8 });
+  const excludePaths = first.sources.map((source) => source.path);
+  const second = await collectAdditionalMaterials({ api: f.api, repository, sha, need: "usage-example", excludePaths, inventory: first.inventory });
+  assert.equal(second.sources.length, 3);
+  assert.ok(second.sources.every((source) => source.form === "source" && !excludePaths.includes(source.path)));
+  assert.equal(f.requests.filter((path) => path.includes("/git/trees/")).length, 1);
+  assert.equal([...first.sources, ...second.sources].filter((source) => source.form === "prose").length, 1);
+  assert.equal([...first.sources, ...second.sources].filter((source) => source.form === "config").length, 2);
+});
+
+test("SQL, DSL and unknown readable files fill source sampling slots without claiming implementation", async () => {
+  const codePaths = ["queries/Jev.sql", "policy/Judge.dsl", "lib/Client.custom", "pkg/service.ex", "internal/evaluate"];
+  const f = materialFixture(["README_zh", "package.json", "Podfile", ...codePaths]);
+  const result = await inspect(f, { semanticReview: true });
+  assert.equal(result.sources.length, 8);
+  assert.equal(result.sources.filter((source) => ["source", "sql"].includes(source.form)).length, 5);
+  assert.deepEqual(result.readmeFiles.map((source) => source.path), ["README_zh"]);
+  assert.equal(result.evidence.verified, false);
+  assert.deepEqual(result.evidence.implementationFiles, []);
+});
+
+test("failed selected reads remain visible coverage gaps and cannot spend replacement docs slots", async () => {
+  const paths = ["README.md", "README_zh.md", "package.json", "Podfile", ...Array.from({ length: 5 }, (_, index) => `src/Jev${index}.kt`)];
+  const f = materialFixture(paths, {
+    [`/repos/${repository}/contents/src/Jev0.kt?ref=${sha}`]: missing(),
+    [`/repos/${repository}/contents/src/Jev1.kt?ref=${sha}`]: encoded("binary\0text", "src/Jev1.kt"),
+    [`/repos/${repository}/contents/src/Jev2.kt?ref=${sha}`]: encoded("wrong path", "different.kt"),
+  });
+  const result = await collectAdditionalMaterials({ api: f.api, repository, sha, maxFiles: 8 });
+  assert.equal(result.sources.length, 5);
+  assert.deepEqual(result.coverage.unread, ["src/Jev0.kt", "src/Jev1.kt", "src/Jev2.kt"]);
+  assert.equal(result.coverage.omitted, 4);
+  assert.equal(result.sources.filter((source) => source.form === "prose").length, 1);
+  assert.ok(!f.requests.some((path) => path.includes("README_zh.md")));
+});
+
+test("nominations fill unused seats only after eligible independent candidates are exhausted", async () => {
+  const paths = Array.from({ length: 8 }, (_, index) => `src/Jev${index}.kt`);
+  const f = materialFixture(paths);
+  const result = await collectAdditionalMaterials({ api: f.api, repository, sha, maxFiles: 8, preferredPaths: paths });
+  assert.equal(result.sources.length, 8);
+  assert.equal(result.coverage.omitted, 0);
+
+  const independent = ["README.md", "README_zh.md", "docs/README.md", "package.json", "Podfile", "go.mod", "Package.swift"];
+  const mixed = materialFixture([...paths.slice(0, 5), ...independent]);
+  const recovered = await collectAdditionalMaterials({ api: mixed.api, repository, sha, maxFiles: 8, preferredPaths: paths.slice(0, 5) });
+  assert.equal(recovered.sources.length, 8);
+  assert.equal(recovered.sources.filter((source) => source.form === "source").length, 5);
+  assert.equal(recovered.sources.filter((source) => source.form === "config").length, 2);
+  assert.equal(recovered.sources.filter((source) => source.form === "prose").length, 1);
+
+  const docs = materialFixture(["README_zh.md", "docs/README.md", "docs/guide.md"]);
+  const followup = await collectAdditionalMaterials({ api: docs.api, repository, sha, excludePaths: ["README.md"] });
+  assert.equal(followup.sources.length, 0);
+  assert.equal(followup.coverage.omitted, 3);
+});
+
+test("large-file windows count once and invalid or empty samples remain unread", async () => {
+  const paths = ["lib/Jev0.swift", "lib/Jev1.swift", "lib/Jev2.swift", "lib/Jev3.swift"];
+  const inventory = { tree: paths.map((path) => ({ type: "blob", path, mode: "100644", size: 100_000 })) };
+  const requests = [];
+  const api = async (path, options) => {
+    requests.push(path);
+    assert.equal(options.sampleMaterials, true);
+    assert.ok(options.responseBytes <= 10_485_760);
+    const valid = { text: "Jev client", startByte: 0, endByte: 10 };
+    return { scannedBytes: 100_000, complete: true,
+      windows: path.includes("Jev0") ? [valid, { ...valid, startByte: 100, endByte: 110 }] : path.includes("Jev1") ? [] : [null, { text: "", startByte: 0, endByte: 0 }, { text: " \n", startByte: 0, endByte: 2 }] };
+  };
+  const result = await collectAdditionalMaterials({ api, repository, sha, inventory, maxFiles: 3 });
+  assert.equal(result.sources.length, 2);
+  assert.equal(new Set(result.sources.map((source) => source.path)).size, 1);
+  assert.equal(result.coverage.omitted, 3);
+  assert.deepEqual(result.coverage.unread, ["lib/Jev1.swift", "lib/Jev2.swift", "lib/Jev3.swift"]);
+  assert.equal(requests.length, 4);
+});
+
+
+test("a translated or nested README outranks general prose without the root README bonus", async () => {
+  for (const readme of ["README_zh.md", "docs/README.md"]) {
+    const f = materialFixture([readme, "docs/guide.md", "LICENSE", "NOTICE", "package.json",
+      ...Array.from({ length: 5 }, (_, i) => `Shared/JevService${i}.swift`)]);
+    const result = await collectAdditionalMaterials({ api: f.api, repository, sha, maxFiles: 8 });
+    assert.deepEqual(result.sources.filter((s) => s.form === "prose").map((s) => s.path), [readme]);
+    assert.ok(result.sources.slice(0, 3).every((s) => s.form === "source"));
+  }
+});
+
+
+test("failed source reads use bounded same-bucket replacements to preserve the source floor", async () => {
+  const codePaths = Array.from({ length: 10 }, (_, i) => `src/Jev${i}.kt`);
+  const f = materialFixture(["README.md", "README_zh.md", "package.json", "Podfile", ...codePaths], {
+    [`/repos/${repository}/contents/src/Jev0.kt?ref=${sha}`]: missing(),
+    [`/repos/${repository}/contents/src/Jev1.kt?ref=${sha}`]: encoded("binary\0text", "src/Jev1.kt"),
+  });
+  const result = await collectAdditionalMaterials({ api: f.api, repository, sha, maxFiles: 8 });
+  assert.equal(result.sources.filter((s) => s.form === "source").length, 5);
+  assert.equal(result.sources.filter((s) => s.form === "prose").length, 1);
+  assert.equal(result.sources.filter((s) => s.form === "config").length, 2);
+  assert.equal(result.coverage.attemptedFiles, 10);
+  assert.deepEqual(result.coverage.unread, codePaths.slice(0, 2));
+
+  const failing = materialFixture(["README.md", "package.json", "Podfile", ...codePaths],
+    Object.fromEntries(codePaths.map((path) => [`/repos/${repository}/contents/${path}?ref=${sha}`, missing()])));
+  const exhausted = await collectAdditionalMaterials({ api: failing.api, repository, sha, maxFiles: 8 });
+  assert.equal(exhausted.sources.filter((s) => s.form === "source").length, 0);
+  assert.equal(exhausted.coverage.attemptedFiles, 12);
+  assert.equal(failing.requests.filter((path) => path.includes("/contents/")).length, 12);
+  assert.equal(exhausted.coverage.unread.length, 9);
+});
