@@ -79591,5 +79591,136 @@
       "reviewRevision": "d97e7cf4b2cebf0d9171e4756f56fb74f2133eafbeba8258b772470259c75ac8",
       "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/132"
     }
+  },
+  {
+    "id": "wallerchen:jev-measured",
+    "name": "jev-measured",
+    "author": "WallerChen",
+    "url": "https://github.com/WallerChen/jev-measured",
+    "repoId": 1376870775,
+    "category": "Evaluation & Observability",
+    "catalogKind": "benchmark",
+    "jevRelation": "implemented",
+    "reviewBasis": "implementation-material",
+    "plainSummary": "实测 Jev 与 12 种决策模型在 12 个场景下的每次决策成本、延迟和准确率基准。",
+    "plainSummaryEn": "Measured cost, latency and accuracy of the live Jev API across 12 use cases with multi-model comparison.",
+    "jevDecisionPoint": "对比 Jev 与其它决策模型在 Choice、Score 与 Noul 决策原语上的成本与延迟。",
+    "jevDecisionPointEn": "Compares Jev API decision cost, latency, and accuracy using Choice, Score, and Noul primitives.",
+    "highlightBenefit": "材料已绑定固定版本；收录不代表独立运行或性能验证。",
+    "highlightBenefitEn": "References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.",
+    "tags": [
+      "evaluation-benchmarks",
+      "typed-decisions",
+      "classification-ranking"
+    ],
+    "summarySource": "ai-material-review",
+    "stars": 1,
+    "forks": 0,
+    "openIssues": 0,
+    "license": {
+      "status": "identified",
+      "spdx": "MIT",
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "licenseStatus": "declared",
+    "createdAt": "2026-09-19T07:33:01Z",
+    "lastCommitAt": "2026-10-14T17:01:55Z",
+    "headSha": "846ecfd21ec03dbf5a1aed8919b0a711512b072e",
+    "metadataFetchedAt": "2026-10-31T05:01:15.343Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/109010131?v=4",
+    "verificationStatus": "material-reviewed",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-31T05:01:15.344Z",
+    "claimStatus": "模型依据固定版本材料判断生态类型与 Jev 关联；未经本站独立运行、安全或性能验证。",
+    "claimStatusEn": "A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/WallerChen/jev-measured/blob/846ecfd21ec03dbf5a1aed8919b0a711512b072e/README.md",
+        "note": "固定版本说明与评测数据"
+      },
+      {
+        "url": "https://github.com/WallerChen/jev-measured/blob/846ecfd21ec03dbf5a1aed8919b0a711512b072e/bench/run.py",
+        "note": "调用 Jev 原语执行基准测试的代码"
+      },
+      {
+        "url": "https://github.com/WallerChen/jev-measured/blob/846ecfd21ec03dbf5a1aed8919b0a711512b072e/bench/headtohead.py",
+        "note": "多模型横向对比与准确率统计代码"
+      }
+    ],
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 126,
+      "issueBodySha256": "522b9b7b48f6a620fcd1e896c81950c9eca12f7bca9d1a2e5e7ac442152da3b1",
+      "issueTitleSha256": "b4ab74f653f2de49e4239c98a048723725f9d51df38a2c4a992bb12f801c54cc",
+      "reviewRevision": "24def1a9b537a57d73829e72b2135b5a2190f0b5",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/126"
+    }
+  },
+  {
+    "id": "raxitlabs:decision-models-as-guardrails",
+    "name": "decision-models-as-guardrails",
+    "author": "raxITlabs",
+    "url": "https://github.com/raxITlabs/decision-models-as-guardrails",
+    "repoId": 1391916276,
+    "category": "Evaluation & Observability",
+    "catalogKind": "benchmark",
+    "jevRelation": "implemented",
+    "reviewBasis": "implementation-material",
+    "plainSummary": "开源基准评测：对比 Jev 1.13/1.14 与 Bedrock 等 19 个系统在 9975 项护栏检查中的表现。",
+    "plainSummaryEn": "Open benchmark evaluating 19 systems including Jev on 9,975 guardrail checks for balanced accuracy and cost.",
+    "jevDecisionPoint": "通过 TypeSafe SDK 调用 Noul 门禁原语执行 yes/no 护栏拦截与置信度评估。",
+    "jevDecisionPointEn": "Calls Jev Noul gate primitives via TypeSafe Python SDK for typed yes/no guardrail filtering.",
+    "highlightBenefit": "材料已绑定固定版本；收录不代表独立运行或性能验证。",
+    "highlightBenefitEn": "References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.",
+    "tags": [
+      "evaluation-benchmarks",
+      "security-guardrails"
+    ],
+    "summarySource": "ai-material-review",
+    "stars": 0,
+    "forks": 2,
+    "openIssues": 1,
+    "license": {
+      "status": "identified",
+      "spdx": "Apache-2.0",
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "licenseStatus": "declared",
+    "createdAt": "2026-09-28T05:41:40Z",
+    "lastCommitAt": "2026-10-30T11:59:57Z",
+    "headSha": "b35790ff0c59d5ea179bff8f941e15daeeb63729",
+    "metadataFetchedAt": "2026-10-31T05:01:15.344Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/191797964?v=4",
+    "verificationStatus": "material-reviewed",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-10-31T05:01:15.344Z",
+    "claimStatus": "模型依据固定版本材料判断生态类型与 Jev 关联；未经本站独立运行、安全或性能验证。",
+    "claimStatusEn": "A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/README.md",
+        "note": "固定版本说明与复现指南"
+      },
+      {
+        "url": "https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/benchmark/goldrails_bench/systemone.py",
+        "note": "调用 Jev System One / Noul 进行护栏判决的评测代码"
+      },
+      {
+        "url": "https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/REPRODUCE.md",
+        "note": "独立复现指引与测试集描述"
+      }
+    ],
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 127,
+      "issueBodySha256": "dfd6cf494ca632abd028f008cbc29a2d106927ece6800db841d245ba5f6d6f42",
+      "issueTitleSha256": "1a30f1e8079b96cfdf6d446fd99d41d68e8f09afa91fecb55cd939ef3f0dfc3c",
+      "reviewRevision": "24def1a9b537a57d73829e72b2135b5a2190f0b5",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/127"
+    }
   }
 ]

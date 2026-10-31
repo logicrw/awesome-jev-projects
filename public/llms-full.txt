@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 866
+Catalog entries: 868
 
 ## Install the Agent Skill
 
@@ -12177,3 +12177,39 @@ Browser extension calling the Jev decision model to detect and mark ad segments 
 - Source evidence: https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/README.en.md
 - Source evidence: https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.test.ts
 - Source evidence: https://github.com/ZeroTang05/VideoAdGuard/blob/e2af3ac2313ce47bb5f8aeb690a1f88780ebb555/src/services/llm/system-one.ts
+
+## jev-measured
+
+Measured cost, latency and accuracy of the live Jev API across 12 use cases with multi-model comparison.
+
+- Repository: https://github.com/WallerChen/jev-measured
+- Category: Evaluation & Observability
+- Jev decision: Compares Jev API decision cost, latency, and accuracy using Choice, Score, and Noul primitives.
+- Purpose: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+- Review scope: A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.
+- License: MIT
+- Entry type: Benchmark
+- Jev relationship: Jev implementation
+- Review basis: Implementation material
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/wallerchen/jev-measured/
+- Source evidence: https://github.com/WallerChen/jev-measured/blob/846ecfd21ec03dbf5a1aed8919b0a711512b072e/README.md
+- Source evidence: https://github.com/WallerChen/jev-measured/blob/846ecfd21ec03dbf5a1aed8919b0a711512b072e/bench/run.py
+- Source evidence: https://github.com/WallerChen/jev-measured/blob/846ecfd21ec03dbf5a1aed8919b0a711512b072e/bench/headtohead.py
+
+## decision-models-as-guardrails
+
+Open benchmark evaluating 19 systems including Jev on 9,975 guardrail checks for balanced accuracy and cost.
+
+- Repository: https://github.com/raxITlabs/decision-models-as-guardrails
+- Category: Evaluation & Observability
+- Jev decision: Calls Jev Noul gate primitives via TypeSafe Python SDK for typed yes/no guardrail filtering.
+- Purpose: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+- Review scope: A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.
+- License: Apache-2.0
+- Entry type: Benchmark
+- Jev relationship: Jev implementation
+- Review basis: Implementation material
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/raxitlabs/decision-models-as-guardrails/
+- Source evidence: https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/README.md
+- Source evidence: https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/benchmark/goldrails_bench/systemone.py
+- Source evidence: https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/REPRODUCE.md
