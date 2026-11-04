@@ -1,0 +1,492 @@
+{
+  "lastAttemptAt": "2026-11-04T14:04:07.370Z",
+  "mode": "full",
+  "lastSuccessfulAt": null,
+  "status": "partial",
+  "sources": [
+    {
+      "name": "repositories: topic:jev fork:true",
+      "query": "topic:jev fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3138,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: typesafe jev fork:true",
+      "query": "typesafe jev fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8551,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: typesafe-ai fork:true",
+      "query": "typesafe-ai fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 3355,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: jev-mcp fork:true",
+      "query": "jev-mcp fork:true",
+      "status": "bounded",
+      "count": 199,
+      "total": 929,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: jev decision fork:true",
+      "query": "jev decision fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8898,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: \"TypeSafe AI\" in:readme fork:true",
+      "query": "\"TypeSafe AI\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 25553,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: \"Jev API\" in:readme fork:true",
+      "query": "\"Jev API\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 14034,
+      "pages": 2,
+      "firstPage": 7
+    },
+    {
+      "name": "repositories: topic:typesafe-ai fork:true",
+      "query": "topic:typesafe-ai fork:true",
+      "status": "bounded",
+      "count": 200,
+      "total": 621,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: topic:typesafe ai fork:true",
+      "query": "topic:typesafe ai fork:true",
+      "status": "bounded",
+      "count": 177,
+      "total": 377,
+      "pages": 2,
+      "firstPage": 3
+    },
+    {
+      "name": "repositories: \"api.typesafe.ai\" in:readme fork:true",
+      "query": "\"api.typesafe.ai\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 9071,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "repositories: \"typesafe.ai\" \"jev\" in:readme fork:true",
+      "query": "\"typesafe.ai\" \"jev\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 24224,
+      "pages": 2,
+      "firstPage": 7
+    },
+    {
+      "name": "repositories: \"from typesafe import jev\" in:readme fork:true",
+      "query": "\"from typesafe import jev\" in:readme fork:true",
+      "status": "ok",
+      "count": 1,
+      "total": 1,
+      "pages": 1,
+      "firstPage": 1
+    },
+    {
+      "name": "repositories: \"@typesafe/jev\" in:readme fork:true",
+      "query": "\"@typesafe/jev\" in:readme fork:true",
+      "status": "search-cap",
+      "count": 200,
+      "total": 33756,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "code: \"api.typesafe.ai\" in:file",
+      "query": "\"api.typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 41728,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "code: \"typesafe.ai\" in:file",
+      "query": "\"typesafe.ai\" in:file",
+      "status": "search-cap",
+      "count": 200,
+      "total": 80768,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "code: \"from typesafe import\" in:file",
+      "query": "\"from typesafe import\" in:file",
+      "status": "bounded",
+      "count": 43,
+      "total": 243,
+      "pages": 1,
+      "firstPage": 3
+    },
+    {
+      "name": "code: \"@typesafe/jev\" in:file",
+      "query": "\"@typesafe/jev\" in:file",
+      "status": "ok",
+      "count": 177,
+      "total": 177,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "commits: \"typesafe.ai\"",
+      "query": "\"typesafe.ai\"",
+      "status": "search-cap",
+      "count": 200,
+      "total": 8452,
+      "pages": 2,
+      "firstPage": 9
+    },
+    {
+      "name": "commits: \"Jev\" \"AI\"",
+      "query": "\"Jev\" \"AI\"",
+      "status": "search-cap",
+      "count": 200,
+      "total": 388978,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "issues: \"typesafe.ai\" is:pr in:title,body",
+      "query": "\"typesafe.ai\" is:pr in:title,body",
+      "status": "bounded",
+      "count": 200,
+      "total": 511,
+      "pages": 2,
+      "firstPage": 1
+    },
+    {
+      "name": "issues: \"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "query": "\"Jev\" \"TypeSafe\" is:pr in:title,body",
+      "status": "search-cap",
+      "count": 200,
+      "total": 32276,
+      "pages": 2,
+      "firstPage": 7
+    },
+    {
+      "name": "Known repository metadata + latest commit",
+      "status": "partial",
+      "count": 106
+    }
+  ],
+  "newProjects": 0,
+  "schedule": "0 */6 * * *",
+  "schedulerStatus": "active",
+  "submissionRepository": "logicrw/awesome-jev-projects",
+  "metadata": {
+    "ok": 106,
+    "failed": 14
+  },
+  "discovery": {
+    "candidates": 2954,
+    "checked": 60,
+    "rejected": 0,
+    "deferred": 2948
+  },
+  "runUrl": "https://github.com/logicrw/awesome-jev-projects/actions/runs/41843866297",
+  "finishedAt": "2026-11-04T14:29:53.017Z",
+  "totalProjects": 868,
+  "projectsSha256": "6e9d119e95dc979fc7e1c74a488caf77a056b1c062655f2747294372c4e4db2c",
+  "receipts": [
+    {
+      "repo": "ZimmyGao/openjev-rlcd",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "x4rMa/AnyJev",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "reinv3ntdotcom/AnyJev",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "HermCoze/jev-search",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "CharTyr/MaiBot-JevPreprocessor",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "0x7067/jevpact",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "laikmosh/fast-jev-compaction",
+      "status": "blocked",
+      "reason": "insufficient-evidence"
+    },
+    {
+      "repo": "SergioR28/04-jev-vs-llms",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "wangpichao/openjev-rlcd",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "lifestyle3nergy-web/duckdb-jev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "marcelosales00/jev-trader",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "bym6096/Jev_game2",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "TangVarie/JevforCoentent",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "DomineYH/jev_task_routing",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "CopilotKit/openmuse",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "unionai-oss/pandera",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "nicobailon/pi-web-access",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "finch-xu/cc-router",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "lateos-ai/reflex",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "baiibayu/srouter",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "tbdavid2019/ai-hedge-fund-API",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "andyrewlee/awesome-system-one",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "krzyzanowskim/TypeSafe",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "fightheyyy/XIAOBA",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "maciekt07/nextjs-math-course",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "tickernelz/sub2api",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "kunko-ai-labs/judge-audit",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Alplox/mis-recursos-webdev",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "yale-ch/chai-engine",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Sur-Cai/macos-computer-use-kit",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ItisShikhar/gg-friggin-ez",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "godspede/construct-auto-classifier",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "OpenLAIR/PremiseCheck",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "nico-c-hublo/pi-pignon",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "npipeline/NPipeline",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "yanng981/awesome-system-one",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Dino-Kupinic/blackrose",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Hawxy/TypeSafeAI.Net",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "collapseindex/dinostomp",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "cs68614-hash/awesome-grokbot-templates",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "shashikantdev3/decision-models-lab",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "knoopx/ninfer",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "ItsOdeLeo/MLX-Direct-Decider",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "CloakHQ/CloakBrowser-Agent",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "5ak3t/ej",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "KanishkaGD/decision-rerank",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "huntersxy/astrbot_plugin_oven_multi",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Query-farm/vgi-typesafe",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "cristoferdomingues/BlackAgents",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "CaffeinatedSoftwareLLC/agora",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "samirmedani/wispad",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "Grivn/mnemon-memory-agent",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "adambkovacs/candidate-experience-benchmark",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    },
+    {
+      "repo": "patronus-protect/decision-model-guard",
+      "status": "deferred",
+      "reason": "daily-quota-exhausted"
+    }
+  ]
+}
