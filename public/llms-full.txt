@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 868
+Catalog entries: 869
 
 ## Install the Agent Skill
 
@@ -12213,3 +12213,20 @@ Open benchmark evaluating 19 systems including Jev on 9,975 guardrail checks for
 - Source evidence: https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/README.md
 - Source evidence: https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/benchmark/goldrails_bench/systemone.py
 - Source evidence: https://github.com/raxITlabs/decision-models-as-guardrails/blob/b35790ff0c59d5ea179bff8f941e15daeeb63729/REPRODUCE.md
+
+## onlyread
+
+Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.
+
+- Repository: https://github.com/onlyreadai/onlyread
+- Category: Security & Guardrails
+- Jev decision: Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.
+- Purpose: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+- Review scope: A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.
+- License: AGPL-3.0
+- Entry type: Integration
+- Jev relationship: Jev implementation
+- Review basis: Implementation material
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/onlyreadai/onlyread/
+- Source evidence: https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.ts
+- Source evidence: https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.test.ts

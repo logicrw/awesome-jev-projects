@@ -79759,5 +79759,181 @@
     "pushedAt": "2026-10-30T11:59:57Z",
     "lastSyncedAt": "2026-11-06T05:56:27.628Z",
     "archived": false
+  },
+  {
+    "id": "onlyreadai:onlyread",
+    "name": "onlyread",
+    "author": "onlyreadai",
+    "url": "https://github.com/onlyreadai/onlyread",
+    "repoId": 1446915876,
+    "category": "Security & Guardrails",
+    "catalogKind": "integration",
+    "jevRelation": "implemented",
+    "reviewBasis": "implementation-material",
+    "plainSummary": "Chrome 扩展用 Jev 判定会改数据的请求，使 AI 代理保持只读；源码显示实际调用 Jev 端点。",
+    "plainSummaryEn": "Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.",
+    "jevDecisionPoint": "Chrome 扩展用 Jev 判定会改数据的请求，使 AI 代理保持只读；源码显示实际调用 Jev 端点。",
+    "jevDecisionPointEn": "Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.",
+    "highlightBenefit": "材料已绑定固定版本；收录不代表独立运行或性能验证。",
+    "highlightBenefitEn": "References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.",
+    "tags": [
+      "security-guardrails",
+      "typed-decisions"
+    ],
+    "summarySource": "ai-material-review",
+    "stars": 21,
+    "forks": 0,
+    "openIssues": 0,
+    "license": {
+      "status": "identified",
+      "spdx": "AGPL-3.0",
+      "name": "GNU Affero General Public License v3.0",
+      "url": "https://api.github.com/licenses/agpl-3.0"
+    },
+    "licenseStatus": "declared",
+    "createdAt": "2026-11-05T11:32:23Z",
+    "lastCommitAt": "2026-11-06T17:10:07Z",
+    "headSha": "8e1f626b53aed709c06d14e9efb5b2a39cf0301f",
+    "metadataFetchedAt": "2026-11-08T06:00:07.308Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/334555679?v=4",
+    "verificationStatus": "material-reviewed",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-11-08T06:00:07.308Z",
+    "claimStatus": "模型依据固定版本材料判断生态类型与 Jev 关联；未经本站独立运行、安全或性能验证。",
+    "claimStatusEn": "A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.ts",
+        "note": "固定版本的相关材料"
+      },
+      {
+        "url": "https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.test.ts",
+        "note": "固定版本的相关材料"
+      }
+    ],
+    "sourceVerification": {
+      "method": "ai-material-review-v2",
+      "sha": "8e1f626b53aed709c06d14e9efb5b2a39cf0301f",
+      "files": [
+        {
+          "targetId": "R1",
+          "repoId": 1446915876,
+          "commit": "8e1f626b53aed709c06d14e9efb5b2a39cf0301f",
+          "path": "extension/src/background/judge/byok.ts",
+          "url": "https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.ts",
+          "hash": "4c6ced2e54ad7270483f07ebf4486f2f946c80823a6e8fab0f4dc55580c2cbd2",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 2440
+          },
+          "sourcePartial": false,
+          "originalBytes": 2440
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1446915876,
+          "commit": "8e1f626b53aed709c06d14e9efb5b2a39cf0301f",
+          "path": "extension/src/background/judge/byok.test.ts",
+          "url": "https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.test.ts",
+          "hash": "5c0f11eb48a59d7b688c8b39a0085abcc57f6bf106e94e55fb551fb102d1bed8",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7902
+          },
+          "sourcePartial": false,
+          "originalBytes": 7902
+        }
+      ],
+      "materials": [
+        {
+          "targetId": "R1",
+          "repoId": 1446915876,
+          "commit": "8e1f626b53aed709c06d14e9efb5b2a39cf0301f",
+          "path": "extension/src/background/judge/byok.ts",
+          "form": "source",
+          "span": {
+            "startByte": 970,
+            "endByte": 1843
+          },
+          "spanSha256": "8b450ec46c5405da349c5881d5fd713a0173a9b13bac1604574d3550d4cee829",
+          "partial": false,
+          "id": "M129a762f74522a6b",
+          "url": "https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.ts",
+          "sourceSha256": "4c6ced2e54ad7270483f07ebf4486f2f946c80823a6e8fab0f4dc55580c2cbd2",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 2440
+          },
+          "sourcePartial": false,
+          "originalBytes": 2440
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1446915876,
+          "commit": "8e1f626b53aed709c06d14e9efb5b2a39cf0301f",
+          "path": "extension/src/background/judge/byok.test.ts",
+          "form": "source",
+          "span": {
+            "startByte": 1618,
+            "endByte": 2642
+          },
+          "spanSha256": "f1b2a9df2d7b7941b3a15a657ee8cd38c6a74ba56af48fb6fc7b662749692ddd",
+          "partial": true,
+          "id": "M57f3b1e06f1b57cc",
+          "url": "https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.test.ts",
+          "sourceSha256": "5c0f11eb48a59d7b688c8b39a0085abcc57f6bf106e94e55fb551fb102d1bed8",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7902
+          },
+          "sourcePartial": false,
+          "originalBytes": 7902
+        }
+      ],
+      "reviewRevision": "4f567912dc3385d04ff73d0f3205de3e82d8b3689334a141cb91810d9c04fa0b",
+      "model": {
+        "requested": "deepseek-flash",
+        "response": "deepseek-flash",
+        "systemFingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "decision": "admit",
+      "catalogKind": "integration",
+      "jevRelation": "implemented",
+      "reviewBasis": "implementation-material",
+      "claims": [
+        {
+          "type": "purpose",
+          "text": "Chrome extension that keeps AI agents read-only by using Jev to judge which requests would change data.",
+          "support": [
+            "M129a762f74522a6b"
+          ]
+        },
+        {
+          "type": "mechanism",
+          "text": "Builds a JevJudge pointed at the provider's Jev endpoint with a configured model and budget, alongside a separate review judge.",
+          "support": [
+            "M129a762f74522a6b",
+            "M57f3b1e06f1b57cc"
+          ]
+        },
+        {
+          "type": "mechanism",
+          "text": "Tests assert the Jev endpoint URL and Bearer auth are used when calling the judge.",
+          "support": [
+            "M57f3b1e06f1b57cc"
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 135,
+      "issueBodySha256": "1aec12f8c45b93871d8dff4965a80fc7240a55f7a27c898d2f1ab9424324fc09",
+      "issueTitleSha256": "abf9d12b9d73e88c4676f896da2c6eb40623bede9e4e91c13d0a11d173c5552a",
+      "reviewRevision": "4f567912dc3385d04ff73d0f3205de3e82d8b3689334a141cb91810d9c04fa0b",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/135"
+    }
   }
 ]

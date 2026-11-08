@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 868
+Catalog entries: 869
 
 ## Install the Agent Skill
 
@@ -46,7 +46,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 - [Routing & Cost Optimization](https://logicrw.github.io/awesome-jev-projects/en/categories/routing-cost-optimization/): 70
 - [SDK & Decision Frameworks](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-decision-frameworks/): 134
 - [SDK & Integrations](https://logicrw.github.io/awesome-jev-projects/en/categories/sdk-integrations/): 6
-- [Security & Guardrails](https://logicrw.github.io/awesome-jev-projects/en/categories/security-guardrails/): 68
+- [Security & Guardrails](https://logicrw.github.io/awesome-jev-projects/en/categories/security-guardrails/): 69
 - [Voice & Conversation](https://logicrw.github.io/awesome-jev-projects/en/categories/voice-conversation/): 6
 
 ## Sponsorship · Paid placements
