@@ -13,27 +13,27 @@
     "repositories:\"typesafe.ai\" \"jev\" in:readme fork:false": 1,
     "repositories:\"from typesafe import jev\" in:readme fork:false": 1,
     "repositories:\"@typesafe/jev\" in:readme fork:false": 1,
-    "code:\"api.typesafe.ai\" in:file": 7,
-    "code:\"typesafe.ai\" in:file": 7,
-    "code:\"from typesafe import\" in:file": 1,
-    "code:\"@typesafe/jev\" in:file": 1,
-    "commits:\"typesafe.ai\"": 7,
-    "commits:\"Jev\" \"AI\"": 9,
-    "issues:\"typesafe.ai\" is:pr in:title,body": 3,
-    "issues:\"Jev\" \"TypeSafe\" is:pr in:title,body": 5,
-    "repositories:topic:jev fork:true": 7,
-    "repositories:typesafe jev fork:true": 7,
-    "repositories:typesafe-ai fork:true": 7,
-    "repositories:jev-mcp fork:true": 10,
-    "repositories:jev decision fork:true": 7,
-    "repositories:\"TypeSafe AI\" in:readme fork:true": 7,
-    "repositories:\"Jev API\" in:readme fork:true": 5,
-    "repositories:topic:typesafe-ai fork:true": 7,
-    "repositories:topic:typesafe ai fork:true": 1,
-    "repositories:\"api.typesafe.ai\" in:readme fork:true": 7,
-    "repositories:\"typesafe.ai\" \"jev\" in:readme fork:true": 5,
+    "code:\"api.typesafe.ai\" in:file": 9,
+    "code:\"typesafe.ai\" in:file": 9,
+    "code:\"from typesafe import\" in:file": 3,
+    "code:\"@typesafe/jev\" in:file": 3,
+    "commits:\"typesafe.ai\"": 9,
+    "commits:\"Jev\" \"AI\"": 1,
+    "issues:\"typesafe.ai\" is:pr in:title,body": 5,
+    "issues:\"Jev\" \"TypeSafe\" is:pr in:title,body": 7,
+    "repositories:topic:jev fork:true": 9,
+    "repositories:typesafe jev fork:true": 9,
+    "repositories:typesafe-ai fork:true": 9,
+    "repositories:jev-mcp fork:true": 1,
+    "repositories:jev decision fork:true": 9,
+    "repositories:\"TypeSafe AI\" in:readme fork:true": 9,
+    "repositories:\"Jev API\" in:readme fork:true": 7,
+    "repositories:topic:typesafe-ai fork:true": 1,
+    "repositories:topic:typesafe ai fork:true": 3,
+    "repositories:\"api.typesafe.ai\" in:readme fork:true": 9,
+    "repositories:\"typesafe.ai\" \"jev\" in:readme fork:true": 7,
     "repositories:\"from typesafe import jev\" in:readme fork:true": 1,
-    "repositories:\"@typesafe/jev\" in:readme fork:true": 7
+    "repositories:\"@typesafe/jev\" in:readme fork:true": 9
   },
   "tamaratran/fast-jev-compaction": {
     "checkedAt": "2026-09-18T06:52:26.940Z"
@@ -37810,6 +37810,405 @@
   },
   "waynesutton/botbeef": {
     "checkedAt": "2026-11-11T05:56:24.342Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "Kunlun-Zhu/awesome-jev": {
+    "fingerprint": "954f14641faaa5fbee5b48b6ff8c652ebb2d541804fa31686d8a8ea456690e72",
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 2,
+      "caseId": "042f60d1d87199db5ed070f1ded167b6b47b192fd16ba18273c1ddf21827779f",
+      "limitTokens": 16000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "Running-Snail-GO/esp32s3-iphone-jev-public": {
+    "fingerprint": "c244b7b148fc012daa8054ed2e73c6b41dd69abdcda7fd85aa1b3fe869c5beab",
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 2,
+      "caseId": "77e50ae69d10808240794a106817b6bca865b536cd3022affef1f55432e7d0da",
+      "limitTokens": 16000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "MasahiroOkamura-MAC/jev-router-vercel": {
+    "fingerprint": "563110759c01e83baa9acf054623347c05c299b94f174df71a42d7c276279c64",
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 2,
+      "caseId": "b0084b30988a5171e0bb82f4e1b3bf5c4013c323fc2b5ff16d824997fd689f13",
+      "limitTokens": 16000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "Shijiuwei/fast-jev-compaction-sync": {
+    "fingerprint": "f188c2fe93bd2d0cf0324f47ceed9a38054c2a5e8fc837052c791b6ca0ded70d",
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 2,
+      "caseId": "cdae1c3f1160ebf308da90d3cbd6fd95031a9a7775b04bb390e2e5be030b1ff2",
+      "limitTokens": 16000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "bitbrew-dev/jevwise": {
+    "fingerprint": "6981885b7bc4418aa116b7d68526e326d42e8f4c02d8d6fad9e1aab108a9c03d",
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 2,
+      "caseId": "a09bec2d6afbba4fbfd0b50e3b96168ebd8fddba0edb1cb9ebcf6536bc59f321",
+      "limitTokens": 16000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "ayomidedaniel1/jev-job-search": {
+    "fingerprint": "8f084a52fadbcf70dcf49e6e9fe91692c3b2e1c4b80be3b0fa11e7280840c479",
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 2,
+      "caseId": "762bac3b58c5b42cd3c92f781aeb6484e5ae5f081e910c2fbfa1dc4da81d3b37",
+      "limitTokens": 16000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "tensorchord/Awesome-LLMOps": {
+    "fingerprint": "3df950dc2ec5ca0131309a1be0593837ca39370917dba6ae0dc95eaed2268afe",
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "blocked",
+    "reason": "insufficient-evidence",
+    "attempts": 1,
+    "budgetLedger": {
+      "version": 2,
+      "caseId": "19ada5e29a2899c92fde802fe384d816763e1802a9e8bf8bf78b8b39626dd2f1",
+      "limitTokens": 16000,
+      "chargedTokens": 0,
+      "httpAttempts": 0,
+      "semanticRounds": 0
+    }
+  },
+  "Dongbumlee/ontosmith": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "zadescoxp/calibrain-harness": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "jlt-commons/lev": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "explainers-by-googlers/decisions-api": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "carteakey/l3ms": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "Yalin000/Chinese-independent-developer": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "fmegahed/isa401": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "ranzevor/Latticefolk": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "zhangyinglong3550/stable-chrome": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "webdevnerdstuff/claude-loadout": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "quailyquaily/uniai": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "aborruso/llm-openrouter-decisions": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "visualife/ClaudeRouter": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "sxeptical/larp-detector": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "AFreeCoder/apipool": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "lilexi-bot/grad-apply-overseas-career-skill": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "nhirsama/shareai": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "trungnt13/claude-system1": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "mpointer/typesafe-gates": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "ssccio/switchyard": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "priaculun/ontoken-auto": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "lrendina/screenshot-organizer": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "kingabzpro/StocksSignal": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "ljcyt/bing-rewards-automation": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "dielduarte/typesafe-rust-sdk": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "BrettReifs/decision-kit": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "inikhildubey/llm-router": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "q-qp-p/NucleiSniper": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "tenuo-ai/safe-upgrade": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "2003sounak16-ui/Vani-Shield": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "zszzlzm/DSH-Tool-Router": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "dorkitude/order-blind-decisions": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "finic-ai/fraud-benchmark-lending-club": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "r3c0nc1l3r/reverie": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "SoundBlaster/SwiftDecision": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "AdiRishi/dotagents": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "lishuangqiang/sub2api": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "awaku7/llmcapa": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "rasecagapito/agenticOS": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "DysektAI/pi-extensions": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "rifolio/advanced-project-in-digital-media-02830": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "masonhuemmer/m365": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "adrianramos13/restAIrantes": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "Hoppitbilbo/DebateAI": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "LoboProgrammingg/auxiliador-biblico": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "Theblackcat98/github-stars": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "Gor0d/economIA": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "SuperCorks/agent-skills": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
+    "status": "deferred",
+    "reason": "daily-quota-exhausted",
+    "nextAttemptAt": "2026-11-12T00:00:00.000Z"
+  },
+  "OneWhitepaper/Aino-API": {
+    "checkedAt": "2026-11-11T14:18:06.805Z",
     "status": "deferred",
     "reason": "daily-quota-exhausted",
     "nextAttemptAt": "2026-11-12T00:00:00.000Z"
