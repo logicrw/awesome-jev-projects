@@ -79946,5 +79946,228 @@
     "pushedAt": "2026-11-19T18:06:59Z",
     "lastSyncedAt": "2026-11-21T06:33:20.905Z",
     "archived": false
+  },
+  {
+    "id": "bbrainfuckk:qorx-jev-source-check",
+    "name": "qorx-jev-source-check",
+    "author": "bbrainfuckk",
+    "url": "https://github.com/bbrainfuckk/qorx-jev-source-check",
+    "repoId": 1469849157,
+    "category": "CLI & Pipelines",
+    "catalogKind": "developer-tool",
+    "jevRelation": "implemented",
+    "reviewBasis": "implementation-material",
+    "plainSummary": "Python CLI 与浏览器练习，通过调用 Jev /v1/systemone 校验检索代码是否真正回答问题。",
+    "plainSummaryEn": "Python CLI and browser exercise that calls Jev /v1/systemone to check whether retrieved code actually answers a question.",
+    "jevDecisionPoint": "Python CLI 与浏览器练习，通过调用 Jev /v1/systemone 校验检索代码是否真正回答问题。",
+    "jevDecisionPointEn": "Python CLI and browser exercise that calls Jev /v1/systemone to check whether retrieved code actually answers a question.",
+    "highlightBenefit": "材料已绑定固定版本；收录不代表独立运行或性能验证。",
+    "highlightBenefitEn": "References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.",
+    "tags": [
+      "cli-git-gates",
+      "typed-decisions"
+    ],
+    "summarySource": "ai-material-review",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "license": {
+      "status": "identified",
+      "spdx": "AGPL-3.0",
+      "name": "GNU Affero General Public License v3.0",
+      "url": "https://api.github.com/licenses/agpl-3.0"
+    },
+    "licenseStatus": "declared",
+    "createdAt": "2026-11-24T08:14:09Z",
+    "lastCommitAt": "2026-11-24T08:14:12Z",
+    "headSha": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+    "metadataFetchedAt": "2026-11-24T08:19:06.293Z",
+    "metadataStatus": "ok",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/55968278?v=4",
+    "verificationStatus": "material-reviewed",
+    "runtimeVerified": false,
+    "discoveredAt": "2026-11-24T08:19:06.293Z",
+    "claimStatus": "模型依据固定版本材料判断生态类型与 Jev 关联；未经本站独立运行、安全或性能验证。",
+    "claimStatusEn": "A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.",
+    "evidence": [
+      {
+        "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/jev_check.py",
+        "note": "固定版本的相关材料"
+      },
+      {
+        "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/build_preview.py",
+        "note": "固定版本的相关材料"
+      },
+      {
+        "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/app.js",
+        "note": "固定版本的相关材料"
+      }
+    ],
+    "sourceVerification": {
+      "method": "ai-material-review-v2",
+      "sha": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+      "files": [
+        {
+          "targetId": "R1",
+          "repoId": 1469849157,
+          "commit": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+          "path": "jev_check.py",
+          "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/jev_check.py",
+          "hash": "2e9ab4fb0d39735b3e24ca9189b7ee9aac51bb57891c2903dd4885c797ff5458",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7323
+          },
+          "sourcePartial": false,
+          "originalBytes": 7323
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1469849157,
+          "commit": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+          "path": "build_preview.py",
+          "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/build_preview.py",
+          "hash": "632f9af40eff91592f780abaa2ce2e03562663b1a6ab26beb9490ac9ee9af5fc",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 511
+          },
+          "sourcePartial": false,
+          "originalBytes": 511
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1469849157,
+          "commit": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+          "path": "app.js",
+          "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/app.js",
+          "hash": "8f0aac45d9148a5acc52062f0769caf40757cf047e29e9f3a2f27f344038f191",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 4193
+          },
+          "sourcePartial": false,
+          "originalBytes": 4193
+        }
+      ],
+      "materials": [
+        {
+          "targetId": "R1",
+          "repoId": 1469849157,
+          "commit": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+          "path": "jev_check.py",
+          "form": "source",
+          "span": {
+            "startByte": 3971,
+            "endByte": 4636
+          },
+          "spanSha256": "c824c854f42e0a4abb6008891d2c5dfc3355798815d3f1694058a1dca6aa9f90",
+          "partial": false,
+          "id": "M1c958bfd0da2695b",
+          "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/jev_check.py",
+          "sourceSha256": "2e9ab4fb0d39735b3e24ca9189b7ee9aac51bb57891c2903dd4885c797ff5458",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 7323
+          },
+          "sourcePartial": false,
+          "originalBytes": 7323
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1469849157,
+          "commit": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+          "path": "build_preview.py",
+          "form": "source",
+          "span": {
+            "startByte": 119,
+            "endByte": 164
+          },
+          "spanSha256": "ee783b3f0aaeacf3208c7cd53545a06ade4cf0b98b971d8b2261e55cbc4638b8",
+          "partial": false,
+          "id": "M85f6dcd22047f3c7",
+          "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/build_preview.py",
+          "sourceSha256": "632f9af40eff91592f780abaa2ce2e03562663b1a6ab26beb9490ac9ee9af5fc",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 511
+          },
+          "sourcePartial": false,
+          "originalBytes": 511
+        },
+        {
+          "targetId": "R1",
+          "repoId": 1469849157,
+          "commit": "3dca974974fd7ad014fabb8ad6e306f86c4bf6e2",
+          "path": "app.js",
+          "form": "source",
+          "span": {
+            "startByte": 1583,
+            "endByte": 1839
+          },
+          "spanSha256": "fc42ae329bf60f5c1fc96b76ea3ce5bb29cfb4f97a64043f3022e0c7c5328e7d",
+          "partial": true,
+          "id": "Madedcf7e20314b76",
+          "url": "https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/app.js",
+          "sourceSha256": "8f0aac45d9148a5acc52062f0769caf40757cf047e29e9f3a2f27f344038f191",
+          "sourceSpan": {
+            "startByte": 0,
+            "endByte": 4193
+          },
+          "sourcePartial": false,
+          "originalBytes": 4193
+        }
+      ],
+      "reviewRevision": "4f567912dc3385d04ff73d0f3205de3e82d8b3689334a141cb91810d9c04fa0b",
+      "model": {
+        "requested": "deepseek-flash",
+        "response": "deepseek-flash",
+        "systemFingerprint": "bc19ba97cbe016479903222bb1578db6"
+      },
+      "decision": "admit",
+      "catalogKind": "developer-tool",
+      "jevRelation": "implemented",
+      "reviewBasis": "implementation-material",
+      "claims": [
+        {
+          "type": "purpose",
+          "text": "Python CLI and browser exercise that checks whether retrieved code excerpts actually answer a question, holding two pinned FastAPI excerpts fixed while swapping candidate answer order.",
+          "support": [
+            "M1c958bfd0da2695b",
+            "M85f6dcd22047f3c7"
+          ]
+        },
+        {
+          "type": "mechanism",
+          "text": "Sends a single POST to the fixed HTTPS endpoint api.typesafe.ai /v1/systemone with a Bearer key and JSON body, without following redirects.",
+          "support": [
+            "M1c958bfd0da2695b"
+          ]
+        },
+        {
+          "type": "mechanism",
+          "text": "Imports jev_check module (EVIDENCE, requests_for) to drive the check flow.",
+          "support": [
+            "M85f6dcd22047f3c7"
+          ]
+        },
+        {
+          "type": "contribution",
+          "text": "Includes a browser UI that selects an answer among choices and compares it to the expected candidate.",
+          "support": [
+            "Madedcf7e20314b76"
+          ]
+        }
+      ],
+      "conflicts": []
+    },
+    "ingestion": {
+      "repository": "logicrw/awesome-jev-projects",
+      "issueNumber": 136,
+      "issueBodySha256": "3f17b51f6b97a08f66a2c62ea5b6e5f16eae6460e23ea74433d17142ecc664ba",
+      "issueTitleSha256": "9f8089553c7d13edeb32aec74aedbc2ee6aa4a0d8baffbb96039fd5898eea5db",
+      "reviewRevision": "4f567912dc3385d04ff73d0f3205de3e82d8b3689334a141cb91810d9c04fa0b",
+      "issueUrl": "https://github.com/logicrw/awesome-jev-projects/issues/136"
+    }
   }
 ]

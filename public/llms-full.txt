@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 869
+Catalog entries: 870
 
 ## Install the Agent Skill
 
@@ -12230,3 +12230,21 @@ Chrome extension uses Jev to judge data-changing requests, keeping AI agents rea
 - Details: https://logicrw.github.io/awesome-jev-projects/en/projects/onlyreadai/onlyread/
 - Source evidence: https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.ts
 - Source evidence: https://github.com/onlyreadai/onlyread/blob/8e1f626b53aed709c06d14e9efb5b2a39cf0301f/extension/src/background/judge/byok.test.ts
+
+## qorx-jev-source-check
+
+Python CLI and browser exercise that calls Jev /v1/systemone to check whether retrieved code actually answers a question.
+
+- Repository: https://github.com/bbrainfuckk/qorx-jev-source-check
+- Category: CLI & Pipelines
+- Jev decision: Python CLI and browser exercise that calls Jev /v1/systemone to check whether retrieved code actually answers a question.
+- Purpose: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+- Review scope: A model assessed the ecosystem role and Jev relationship from pinned materials; runtime, security and performance are not independently verified.
+- License: AGPL-3.0
+- Entry type: Developer tool
+- Jev relationship: Jev implementation
+- Review basis: Implementation material
+- Details: https://logicrw.github.io/awesome-jev-projects/en/projects/bbrainfuckk/qorx-jev-source-check/
+- Source evidence: https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/jev_check.py
+- Source evidence: https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/build_preview.py
+- Source evidence: https://github.com/bbrainfuckk/qorx-jev-source-check/blob/3dca974974fd7ad014fabb8ad6e306f86c4bf6e2/app.js

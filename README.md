@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Mentioned in Awesome" /></a>
   <a href="https://logicrw.github.io/awesome-jev-projects/en/"><img src="https://img.shields.io/badge/Live%20Radar-logicrw.github.io-d7fa91?style=flat-square&labelColor=1a201a&logo=safari" alt="Live Radar" /></a>
-  <a href="#categories"><img src="https://img.shields.io/badge/Curated%20Projects-869%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
+  <a href="#categories"><img src="https://img.shields.io/badge/Curated%20Projects-870%2B-2563eb?style=flat-square" alt="Projects Count" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-d97706.svg?style=flat-square" alt="License: MIT" /></a>
   <a href="https://github.com/logicrw/awesome-jev-projects/issues/new?template=project.yml"><img src="https://img.shields.io/badge/Submissions-via%20Issue-16a34a.svg?style=flat-square" alt="Submissions via Issue" /></a>
 </p>
@@ -32,7 +32,7 @@ When building autonomous agents, routing every small branching decision to a hea
 **TypeSafe Jev (System 1)** is purpose-built for fast, typed discrete decisions:
 - ⚡ **Sub-100ms Latency**: Delivers decisions in 50–100ms to keep agent loops snappy.
 - 🎯 **Native Typed Outputs**: Built-in primitives for `Choice`, `Score`, and `Noul` without fragile JSON regex parsing.
-- 🛡️ **Zero Vaporware**: 869+ projects and resources across 17 categories, distinguishing descriptive material from implementation evidence.
+- 🛡️ **Zero Vaporware**: 870+ projects and resources across 17 categories, distinguishing descriptive material from implementation evidence.
 
 ### 📊 Architecture Comparison: System 1 (Jev) vs System 2 (Reasoning LLMs)
 
@@ -50,7 +50,7 @@ When building autonomous agents, routing every small branching decision to a hea
 - ⚡ **Sticky Search & Floating Popover Filter**: Filter tags and categories anytime while scrolling via the anchored toolbar popover.
 - 🔍 **Fixed-Version Material**: Inspect linked source, SQL, documentation, or examples together with each entry’s review basis.
 
-> **[Search and filter ↗](https://logicrw.github.io/awesome-jev-projects/en/)** · **869 curated projects**
+> **[Search and filter ↗](https://logicrw.github.io/awesome-jev-projects/en/)** · **870 curated projects**
 
 A community catalog of Jev integrations, benchmarks, developer tools, research, and learning resources, with per-entry relationships, review basis, and license facts.
 
@@ -80,7 +80,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 ## Categories
 
 - [Browser & OS Action (56)](https://logicrw.github.io/awesome-jev-projects/en/categories/browser-os-action/)
-- [CLI & Pipelines (104)](https://logicrw.github.io/awesome-jev-projects/en/categories/cli-pipelines/)
+- [CLI & Pipelines (105)](https://logicrw.github.io/awesome-jev-projects/en/categories/cli-pipelines/)
 - [Classification (2)](https://logicrw.github.io/awesome-jev-projects/en/categories/classification-taxonomy/)
 - [Code Navigation (16)](https://logicrw.github.io/awesome-jev-projects/en/categories/codebase-graph-pathfinding/)
 - [Context GC (43)](https://logicrw.github.io/awesome-jev-projects/en/categories/context-gc-filter/)
@@ -104,15 +104,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Provides Python and TypeScript loops with separate offline and live checks.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/trycua/cua/) · License: MIT
 
-- [**jev-ultrafast**](https://github.com/browser-use/jev-ultrafast) — A browser Agent that uses Jev to choose actions and page controls, calling a text model only when input is needed.
-  - **Jev’s role in this entry**: Chooses an action and its matching DOM element in one request; a text model generates input text.
-  - **What this project offers**: Separates UI choices, text generation, and browser execution so each step can be inspected.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jev-ultrafast/) · License: MIT
-
 - [**jev-desktop**](https://github.com/lahfir/agent-desktop) — An optional Jev skill for agent-desktop that chooses controls and actions from native accessibility data.
   - **Jev’s role in this entry**: Jev selects a target and action and estimates presence and risk; local policy decides whether to execute.
   - **What this project offers**: Keeps the full UI tree out of the main Agent context while exposing the selected action.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jev-desktop/) · License: Apache-2.0
+
+- [**jev-ultrafast**](https://github.com/browser-use/jev-ultrafast) — A browser Agent that uses Jev to choose actions and page controls, calling a text model only when input is needed.
+  - **Jev’s role in this entry**: Chooses an action and its matching DOM element in one request; a text model generates input text.
+  - **What this project offers**: Separates UI choices, text generation, and browser execution so each step can be inspected.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jev-ultrafast/) · License: MIT
 
 - [**typesafe-computer-use**](https://github.com/awlevin/typesafe-computer-use) — Builds candidate actions from OCR and UI state for Jev to control macOS, calling a text model only when writing is needed.
   - **Jev’s role in this entry**: Selects the next step from deterministically extracted controls and actions before desktop execution.
@@ -192,15 +192,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jiangkoumo/ego-jev/) · License: MIT
 
-- [**jev-macos-loop**](https://github.com/jcpsimmons/jev-macos-loop) — A native macOS automation loop using local OCR and accessibility information with Jev action selection.
-  - **Jev’s role in this entry**: Jev selects controls or groups from locally observed candidates; coordinates and input execution stay on the Mac.
-  - **What this project offers**: Makes candidate controls and execution checks inspectable, including Finder workflows.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jcpsimmons/jev-macos-loop/) · License: AGPL-3.0
-
 - [**CUA-JEV**](https://github.com/ZJU-REAL/CUA-JEV) — The \[experimental open-task paths\](docs/OPEN\_TASKS.md) separate model planning from Jev's typed action selection. They discover browser DOM elements or Windows UI Automation controls dynamically and offer grounded structured-tool / physical-GUI alternatives without a site- or app-specific click sequence. A twelve-action browser-to-VS-Code research case now runs end to end with a model and Jev, but \*\*arbitrary-task generalization is not claimed\*\*.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zju-real/cua-jev/) · License: Custom license
+
+- [**jev-macos-loop**](https://github.com/jcpsimmons/jev-macos-loop) — A native macOS automation loop using local OCR and accessibility information with Jev action selection.
+  - **Jev’s role in this entry**: Jev selects controls or groups from locally observed candidates; coordinates and input execution stay on the Mac.
+  - **What this project offers**: Makes candidate controls and execution checks inspectable, including Finder workflows.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jcpsimmons/jev-macos-loop/) · License: AGPL-3.0
 
 - [**jevfill**](https://github.com/imohitmayank/jevfill) — Open \`test/sample-form.html\` in the browser, configure the extension, and click \*\*Autofill page\*\*.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -217,15 +217,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/friedjof/jev-mobile/) · License: MIT
 
-- [**jev-agent-browser**](https://github.com/forvela/jev-agent-browser) — Fast, bounded browser agents powered by Jev and agent-browser — typed actions, research, classification, and safe orchestration.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/forvela/jev-agent-browser/) · License: MIT
-
 - [**sedum**](https://github.com/sedum-dev/sedum) — Plain-English browser e2e tests cheap enough to run on every PR. Built on Jev and Playwright, open source, bring your own key.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sedum-dev/sedum/) · License: MIT
+
+- [**jev-agent-browser**](https://github.com/forvela/jev-agent-browser) — Fast, bounded browser agents powered by Jev and agent-browser — typed actions, research, classification, and safe orchestration.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/forvela/jev-agent-browser/) · License: MIT
 
 - [**jev-browser**](https://github.com/tontoko/jev-browser) — Playwright browser automation with Jev decisions through a shared CLI, MCP server and TypeScript SDK.
   - **Jev’s role in this entry**: Jev chooses actions, matches form fields or extracts structured content from page observations; Playwright executes.
@@ -237,15 +237,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/xinwang-nwpu/jev-mobile/) · License: MIT
 
-- [**jev-clerk**](https://github.com/stas4000/jev-clerk) — A macOS desktop clerk that books supplier invoices: Jev picks each click from a closed action list; a deep model only rewrites the playbook.
-  - **Jev’s role in this entry**: POSTs https://api.typesafe.ai/v1/systemone as jev-latest with a closed action Choice each step.
-  - **What this project offers**: Screen actions follow Jev's closed choices. Author demo numbers were not retested here. GitHub SPDX is empty; the LICENSE file is MIT.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/stas4000/jev-clerk/) · License: Custom license
-
 - [**aside-jev**](https://github.com/himomohi/aside-jev) — An MCP server and skill adding Jev decisions to Aside browser Agents.
   - **Jev’s role in this entry**: The Agent supplies action candidates; Jev picks an ID, then the Agent executes and verifies it through Aside.
   - **What this project offers**: Keeps choices within an application-owned action table while requiring separate outcome verification.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/himomohi/aside-jev/) · License: MIT
+
+- [**jev-clerk**](https://github.com/stas4000/jev-clerk) — A macOS desktop clerk that books supplier invoices: Jev picks each click from a closed action list; a deep model only rewrites the playbook.
+  - **Jev’s role in this entry**: POSTs https://api.typesafe.ai/v1/systemone as jev-latest with a closed action Choice each step.
+  - **What this project offers**: Screen actions follow Jev's closed choices. Author demo numbers were not retested here. GitHub SPDX is empty; the LICENSE file is MIT.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/stas4000/jev-clerk/) · License: Custom license
 
 - [**AskJev**](https://github.com/ranjan2829/AskJev) — Connects Agents to a browser over MCP, using Jev to choose page actions with confirmation gates for actions such as payment or deletion.
   - **Jev’s role in this entry**: Selects actions from current page controls and assesses risk and irreversibility.
@@ -327,6 +327,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/aidil2105/jev-browser-pilot/) · License: MIT
 
+- [**jev-tweet-radar**](https://github.com/DDnim/jev-tweet-radar) — A Chrome extension that scores each X timeline post with one Jev Noul batch for engagement value and optional tags.
+  - **Jev’s role in this entry**: One System One request asks Nouls for worth-engaging plus optional tags such as spam, buzz, and AI-ish.
+  - **What this project offers**: Turns timeline filtering into inspectable probabilities instead of generated commentary. Post text is sent to TypeSafe.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ddnim/jev-tweet-radar/) · License: MIT
+
 - [**jevis**](https://github.com/jaewgwon/jevis) — A Flutter integration\_test package that registers allowed UI actions and lets Jev pick the next action and whether the goal is done.
   - **Jev’s role in this entry**: POSTs to /v1/systemone as jev-latest: a goal Noul and a Choice over registered Flutter actions.
   - **What this project offers**: Turns natural-language tests into choices over a closed action list instead of free-form tapping.
@@ -356,11 +361,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/penglonghuang/jev-demo/) · License: MIT
-
-- [**jev-tweet-radar**](https://github.com/DDnim/jev-tweet-radar) — A Chrome extension that scores each X timeline post with one Jev Noul batch for engagement value and optional tags.
-  - **Jev’s role in this entry**: One System One request asks Nouls for worth-engaging plus optional tags such as spam, buzz, and AI-ish.
-  - **What this project offers**: Turns timeline filtering into inspectable probabilities instead of generated commentary. Post text is sent to TypeSafe.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ddnim/jev-tweet-radar/) · License: MIT
 
 - [**jevaluate**](https://github.com/ElshinQ/jevaluate) — Jevaluate: evaluate before you trust. Field notes, runnable scripts and an agent skill for TypeSafe Jev: gated evals, a browser loop, a product walk with DeepSeek vision, a UI text judge and a first-click tree test. Co-authored with Claude Fable 5.1.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -418,25 +418,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/omnijev/onejev/) · License: Apache-2.0
 
-- [**jgrep**](https://github.com/keltokhy/jgrep) — Filters text, structured records, functions, and diff hunks against plain-English descriptions using Jev Noul judgments.
-  - **Jev’s role in this entry**: Jev judges whether each input unit matches the user description; local code applies the probability threshold and returns matching source material.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/keltokhy/jgrep/) · License: MIT
-
 - [**skillranker**](https://github.com/Dicklesworthstone/skillranker) — A standalone Rust CLI powered by TypeSafe Jev that ranks agent skills for the next step using live session context, with local safeguards and feedback.
   - **Jev’s role in this entry**: Jev evaluates the agent live context against available skills, returning calibrated typed choices and probabilities in a single pass.
   - **What this project offers**: Replaces slow generative skill searches with millisecond Jev decisions, backed by local safety bounds and feedback loops.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/dicklesworthstone/skillranker/) · License: Custom license
 
-- [**jev-pokemon**](https://github.com/christianmat/jev-pokemon) — Jev, an AI decision model, plays Pokémon Red. It beat the game in 37h 40m.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+- [**jgrep**](https://github.com/keltokhy/jgrep) — Filters text, structured records, functions, and diff hunks against plain-English descriptions using Jev Noul judgments.
+  - **Jev’s role in this entry**: Jev judges whether each input unit matches the user description; local code applies the probability threshold and returns matching source material.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/christianmat/jev-pokemon/) · License: GPL-2.0
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/keltokhy/jgrep/) · License: MIT
 
 - [**jev-lint**](https://github.com/mizchi/jev-lint) — lint text in code by jev scorerer
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mizchi/jev-lint/) · License: MIT
+
+- [**jev-pokemon**](https://github.com/christianmat/jev-pokemon) — Jev, an AI decision model, plays Pokémon Red. It beat the game in 37h 40m.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/christianmat/jev-pokemon/) · License: GPL-2.0
 
 - [**hey-jev**](https://github.com/henryklunaris/hey-jev) — Open, quit, hide, minimise or switch to apps, open a new browser tab or a website ("open youtube.com in Brave"), Mac volume up / down / mute / set, Spotify volume, play / pause / next / previous, dark mode, lock or sleep the Mac. Two things in one sentence work too: "pause Spotify and open Slack".
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -473,15 +473,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Constrains coding agent trajectories using fast discrete judgments, preventing hallucinated dependencies and premature task completion.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/akashpriyadarshii/jev-superpowers/) · License: MIT
 
-- [**slop-grader**](https://github.com/lukstei/slop-grader) — Rule-based CLI and agent skill that evaluates text and markdown files against custom rulesets for AI slop, grammar, and technical doc quality using Jev scores and line-by-line violation flags, then guides an AI agent to auto-fix violations.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lukstei/slop-grader/) · License: MIT
-
 - [**jev-test-filter**](https://github.com/mizchi/jev-test-filter) — Score every test against a git diff with Jev, and emit the filter arguments vitest, node:test, Playwright, cargo test and go test already understand
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mizchi/jev-test-filter/) · License: MIT
+
+- [**slop-grader**](https://github.com/lukstei/slop-grader) — Rule-based CLI and agent skill that evaluates text and markdown files against custom rulesets for AI slop, grammar, and technical doc quality using Jev scores and line-by-line violation flags, then guides an AI agent to auto-fix violations.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lukstei/slop-grader/) · License: MIT
 
 - [**jev-skill-suggester**](https://github.com/win4r/jev-skill-suggester) — A Python CLI and Codex Skill that recommends a suitable installed skill for the current task using TypeSafe Jev Choice and Noul checks without executing candidate skills.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -503,6 +503,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wuxie888/jev-yaba-wechat/) · License: MIT
 
+- [**jev-cli**](https://github.com/tumf/jev-cli) — A CLI and stdio MCP server for typed Jev judgments over text or JSON.
+  - **Jev’s role in this entry**: Submits noul, choice and score questions and emits JSON or a primary value.
+  - **What this project offers**: Accepts files and stdin for use in shell scripts and MCP clients.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tumf/jev-cli/) · License: MIT
+
 - [**jev-cli**](https://github.com/Nasrallah-AL/jev-cli) — The jevctl command-line tool connects verification, classification and scoring questions to text input and scripts.
   - **Jev’s role in this entry**: Sends input and bounded answer options to Jev, then reports judgments and probabilities using local thresholds.
   - **What this project offers**: Provides structured results for pipelines and CI, with request inspection and dry-run support.
@@ -512,11 +517,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Chooses from bounded syntax and action options; local code constructs programs or invokes tools.
   - **What this project offers**: Shows coding choices and command-line judgments in inspectable traces.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/rhighs/jev-code/) · License: License not declared
-
-- [**jev-cli**](https://github.com/tumf/jev-cli) — A CLI and stdio MCP server for typed Jev judgments over text or JSON.
-  - **Jev’s role in this entry**: Submits noul, choice and score questions and emits JSON or a primary value.
-  - **What this project offers**: Accepts files and stdin for use in shell scripts and MCP clients.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tumf/jev-cli/) · License: MIT
 
 - [**Jev\_steer\_or\_queue**](https://github.com/Larkspur-Wang/Jev_steer_or_queue) — Let TypeSafe Jev decide whether a message you send mid-turn should steer, queue, or interrupt your coding agent. Claude Code plugin; Codex CLI in testing.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -533,35 +533,35 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/syumai/jevyoumean/) · License: MIT
 
-- [**rift**](https://github.com/exYze/rift) — An optional TypeSafe decision client in the Rust coding terminal Rift for bounded Jev judgments.
-  - **Jev’s role in this entry**: Sends state and typed questions to System One and parses answers for terminal workflows.
-  - **What this project offers**: Adds a separate decision interface alongside generative coding models.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/exyze/rift/) · License: MIT
+- [**pi-jev-model-router**](https://github.com/da-vinci-noob/pi-jev-model-router) — Route pi prompts to task-appropriate model tiers with TypeSafe Jev typed judgments. Budget-aware, with automatic fallback.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/da-vinci-noob/pi-jev-model-router/) · License: MIT
 
 - [**jev-tools**](https://github.com/NomenAK/jev-tools) — Six evidence-oriented tools for pi and omp coding agents, compatible with the Jev API format.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/nomenak/jev-tools/) · License: MIT
 
-- [**jevcache**](https://github.com/kushals256/jevcache) — MorrowCache — skip the chat call when the question is the same. OpenAI-compatible proxy. npm: @kushalicious/jevcache
+- [**Jev-Desktop**](https://github.com/jacks3tr/Jev-Desktop) — Jev Desktop lets AI agents use Windows applications through MCP or the command line. Hand off a task and let Jev observe windows, choose controls, type supplied text, and navigate locally. Your agent gets the result or a request for help instead of handling every click.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kushals256/jevcache/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jacks3tr/jev-desktop/) · License: MIT
 
-- [**pi-jev-model-router**](https://github.com/da-vinci-noob/pi-jev-model-router) — Route pi prompts to task-appropriate model tiers with TypeSafe Jev typed judgments. Budget-aware, with automatic fallback.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/da-vinci-noob/pi-jev-model-router/) · License: MIT
+- [**rift**](https://github.com/exYze/rift) — An optional TypeSafe decision client in the Rust coding terminal Rift for bounded Jev judgments.
+  - **Jev’s role in this entry**: Sends state and typed questions to System One and parses answers for terminal workflows.
+  - **What this project offers**: Adds a separate decision interface alongside generative coding models.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/exyze/rift/) · License: MIT
 
 - [**jev-blindspot**](https://github.com/jsk4581/jev-blindspot) — A side panel for Claude Code and Codex CLI that shows the blind spots of each prompt you submit: what the request would have needed to consider and shows no sign of. Jev decides, in one call per prompt, whether the prompt is worth a second look; only then does the agent's own headless mode read the project and return the items. Nothing blocks the prompt, nothing is added to the session.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jsk4581/jev-blindspot/) · License: MIT
 
-- [**Jev-Desktop**](https://github.com/jacks3tr/Jev-Desktop) — Jev Desktop lets AI agents use Windows applications through MCP or the command line. Hand off a task and let Jev observe windows, choose controls, type supplied text, and navigate locally. Your agent gets the result or a request for help instead of handling every click.
+- [**jevcache**](https://github.com/kushals256/jevcache) — MorrowCache — skip the chat call when the question is the same. OpenAI-compatible proxy. npm: @kushalicious/jevcache
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jacks3tr/jev-desktop/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kushals256/jevcache/) · License: MIT
 
 - [**jevsearch**](https://github.com/kylemclaren/jevsearch) — Site search that understands the question. Ranked by TypeSafe's Jev model.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -572,6 +572,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/danielnc/jev-browse/) · License: MIT
+
+- [**jevcut**](https://github.com/VBS2004/jevcut) — Auto-clipper that turns long videos (podcasts, talks, essays, comedy) into short standalone clips for Shorts, Reels and TikTok. Code lists every possible cut; an AI judge picks where each clip starts and ends. Benchmarked on 38 hand-labelled videos.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/vbs2004/jevcut/) · License: MIT
 
 - [**xscout-jev**](https://github.com/ethan-ab/xscout-jev) — xscout works for fields that are active on X: tech, AI, developer tools, crypto, finance, media, politics. Some markets barely post there; \`validate --online\` tells you early when most of the accounts you care about are missing or quiet.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -593,30 +598,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sumleo/prompt2jev/) · License: MIT
 
-- [**pytest-jev**](https://github.com/allebee/pytest-jev) — Extra state goes in \`context\`, such as a policy or the documents a RAG app retrieved. A claim can name it in backticks:
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/allebee/pytest-jev/) · License: MIT
-
-- [**typesafe-jev-incident-router**](https://github.com/kyle-chalmers/typesafe-jev-incident-router) — Confidence-gated incident routing with TypeSafe Jev
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kyle-chalmers/typesafe-jev-incident-router/) · License: License not declared
-
-- [**jevcut**](https://github.com/VBS2004/jevcut) — Auto-clipper that turns long videos (podcasts, talks, essays, comedy) into short standalone clips for Shorts, Reels and TikTok. Code lists every possible cut; an AI judge picks where each clip starts and ends. Benchmarked on 38 hand-labelled videos.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/vbs2004/jevcut/) · License: MIT
-
 - [**openjev**](https://github.com/lookski/openjev) — Turn any local LLM into a Jev-style System One decision engine: type-safe answers with raw softmax probabilities. 100% offline, zero API cost.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lookski/openjev/) · License: MIT
 
+- [**pytest-jev**](https://github.com/allebee/pytest-jev) — Extra state goes in \`context\`, such as a policy or the documents a RAG app retrieved. A claim can name it in backticks:
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/allebee/pytest-jev/) · License: MIT
+
 - [**tryjev**](https://github.com/sugarforever/tryjev) — A playground for Jev, TypeSafe AI's fast decision model: preset scenarios on the left, an editable state plus typed questions in the middle, typed answers with probabilities on the right. Bring your own key and pick a provider: OpenRouter (\`typesafe/jev-1.13\`, \`alpha.decisions\`), Vercel AI Gateway (\`typesafe-ai/jev\`, AI SDK \`experimental\_evaluate\`) or TypeSafe's own API (\`jev-latest\`, \`POST /v1/systemone\`).
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sugarforever/tryjev/) · License: MIT
+
+- [**typesafe-jev-incident-router**](https://github.com/kyle-chalmers/typesafe-jev-incident-router) — Confidence-gated incident routing with TypeSafe Jev
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kyle-chalmers/typesafe-jev-incident-router/) · License: License not declared
 
 - [**jev-agent-tools**](https://github.com/jkudish/jev-agent-tools) — Jev transport/provider layer: multi-provider transport layer that supports fail-closed validation. Used by jkudish/jev-browser and jkudish/jev-mcp.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -628,10 +628,10 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ishantanu/jevmetrics/) · License: Apache-2.0
 
-- [**jevopt**](https://github.com/Ramneet-Singh/jevopt) — Making intelligent compiler optimisation decisions with Jev
+- [**jev-assist**](https://github.com/glud123/jev-assist) — Don't burn your expensive main model on grep-and-guess grunt work — let jev rank the whole repo, and save the main model for reading the right files and writing the right code.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ramneet-singh/jevopt/) · License: GPL-3.0
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/glud123/jev-assist/) · License: MIT
 
 - [**jev-demo**](https://github.com/kiler398/jev-demo) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -648,10 +648,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/arpit-khandelwal/jev-linkedin-slop-filter/) · License: MIT
 
+- [**jev-mode**](https://github.com/ddfeyes/jev-mode) — I kept watching coding agents burn context on decisions that aren't hard - triage 400 tickets, tag 600 files, route to one of six teams. jev-mode moves those verdicts to a typed-judgment model. I A/B'd it: 78% fewer tokens, 16x less work-attributable input, accuracy 96.1% vs 93.7%. Python, no deps, MIT.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ddfeyes/jev-mode/) · License: MIT
+
 - [**jev-oas-sentinel**](https://github.com/ShuhanSun/jev-oas-sentinel) — JEV never writes a review or changes a specification. It returns typed decisions and probabilities; deterministic Python code decides whether to pass, request review, or block.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/shuhansun/jev-oas-sentinel/) · License: Apache-2.0
+
+- [**jevopt**](https://github.com/Ramneet-Singh/jevopt) — Making intelligent compiler optimisation decisions with Jev
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ramneet-singh/jevopt/) · License: GPL-3.0
 
 - [**hermes-jev**](https://github.com/DoGMaTiiC/hermes-jev) — Hermes Agent plugin: route each turn to the one skill that fits, via TypeSafe Jev on the Vercel AI Gateway. Fail-open, opt-in, stdlib only.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -663,15 +673,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/samplebias/jev_onco_statistical_hierarchy/) · License: MIT
 
-- [**jev-assist**](https://github.com/glud123/jev-assist) — Don't burn your expensive main model on grep-and-guess grunt work — let jev rank the whole repo, and save the main model for reading the right files and writing the right code.
+- [**jev-cli**](https://github.com/joshLong145/jev-cli) — A CLI wrapper written in python for Jev
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/glud123/jev-assist/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/joshlong145/jev-cli/) · License: License not declared
 
-- [**jev-mode**](https://github.com/ddfeyes/jev-mode) — I kept watching coding agents burn context on decisions that aren't hard - triage 400 tickets, tag 600 files, route to one of six teams. jev-mode moves those verdicts to a typed-judgment model. I A/B'd it: 78% fewer tokens, 16x less work-attributable input, accuracy 96.1% vs 93.7%. Python, no deps, MIT.
+- [**jev-local**](https://github.com/tapsin/jev-local) — JEV-Local: System-1 decision engine for local LLMs. Mimics TypefAI JEV: structured choices only, no chatter, calibrated confidence. Works with Ollama, vLLM, llama.cpp, LM Studio.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ddfeyes/jev-mode/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tapsin/jev-local/) · License: License not declared
+
+- [**paper-radar-jev**](https://github.com/LYchoon/paper-radar-jev) — An automated research paper radar that fetches the latest papers from arXiv, evaluates their relevance to a configurable research profile using TypeSafe AI, and ranks them by relevance score. Designed for personalized, daily literature discovery across different research domains.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lychoon/paper-radar-jev/) · License: MIT
 
 - [**TypeSafe AI Playground**](https://github.com/markjaquith/typesafe-ai-playground) — Rust CLI experiments for health-information screening, comment review, tone analysis and business or occupation classification.
   - **Jev’s role in this entry**: Sends text to Jev for separate Noul probabilities, scores or category choices.
@@ -688,16 +703,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Accepts standard input and supports direct TypeSafe calls or a Vercel gateway.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jtsang4/jev-cli/) · License: MIT
 
-- [**jev-cli**](https://github.com/joshLong145/jev-cli) — A CLI wrapper written in python for Jev
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/joshlong145/jev-cli/) · License: License not declared
-
-- [**jev-local**](https://github.com/tapsin/jev-local) — JEV-Local: System-1 decision engine for local LLMs. Mimics TypefAI JEV: structured choices only, no chatter, calibrated confidence. Works with Ollama, vLLM, llama.cpp, LM Studio.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tapsin/jev-local/) · License: License not declared
-
 - [**jev-qa-demos**](https://github.com/gauravkhuraana/jev-qa-demos) — Demos for the video "Jev explained for testers": TypeSafe AI's System One model, called through \*\*Vercel AI Gateway\*\* with the AI SDK's \`experimental\_evaluate\`.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -713,10 +718,10 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/boldbug1/jev-triage/) · License: MIT
 
-- [**paper-radar-jev**](https://github.com/LYchoon/paper-radar-jev) — An automated research paper radar that fetches the latest papers from arXiv, evaluates their relevance to a configurable research profile using TypeSafe AI, and ranks them by relevance score. Designed for personalized, daily literature discovery across different research domains.
+- [**jevault**](https://github.com/taichocop/jevault) — Jevault suggests existing destination folders. You can explicitly select a suggestion and confirm a manual move of the classified note. Jevault never moves notes automatically.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lychoon/paper-radar-jev/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/taichocop/jevault/) · License: MIT
 
 - [**typesafe-jev-calibrate-for-code-review**](https://github.com/Selmar/typesafe-jev-calibrate-for-code-review) — About calibrating Jev for code reviews
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -773,11 +778,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/aabbaass1/jev-router/) · License: License not declared
 
-- [**jevault**](https://github.com/taichocop/jevault) — Jevault suggests existing destination folders. You can explicitly select a suggestion and confirm a manual move of the classified note. Jevault never moves notes automatically.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/taichocop/jevault/) · License: MIT
-
 - [**jevcheck**](https://github.com/sathariels/jevcheck) — Probabilities and model versions move. A raw \`0.94\` is not a release decision. jevcheck records a \*\*production contract\*\* (baseline model + fixtures + expected answers) and evals a candidate against that fixture.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -787,6 +787,16 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/allebee/jevgrep/) · License: MIT
+
+- [**r2r-jev**](https://github.com/Thneoly/r2r-jev) — Jev turns unstructured state into typed probabilistic decisions. Evidence Admission decides which observations are eligible to enter governance. R2R turns admitted evidence and events into persistent, replayable relation state.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/thneoly/r2r-jev/) · License: Apache-2.0
+
+- [**typesafe-jev-tools**](https://github.com/wotai-dev/typesafe-jev-tools) — A Claude Code hook that asks whether the decision you are writing needs a model at all. Includes a measured 149-row comparison of TypeSafe Jev against Claude Haiku 4.5.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wotai-dev/typesafe-jev-tools/) · License: MIT
 
 - [**VideoAdGuard-Jev**](https://github.com/xianggelila177/VideoAdGuard-Jev) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -888,20 +898,18 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Does not write reviews, suggest patches, or approve. Policy is read from the base-ref config.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/thestral12/pr-sieve/) · License: MIT
 
-- [**r2r-jev**](https://github.com/Thneoly/r2r-jev) — Jev turns unstructured state into typed probabilistic decisions. Evidence Admission decides which observations are eligible to enter governance. R2R turns admitted evidence and events into persistent, replayable relation state.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/thneoly/r2r-jev/) · License: Apache-2.0
-
 - [**typesafe-jev-plugin**](https://github.com/arnab621/typesafe-jev-plugin) — Jev from Typesafe.ai is a "System One" AI model that returns \*\*typed, calibrated judgments\*\* instead of generating text. You define what to classify (a Choice), score (a Score), or verify (a Noul), and Jev returns a structured answer with a probability distribution — fast, cheap, and directly consumable by code.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/arnab621/typesafe-jev-plugin/) · License: License not declared
 
-- [**typesafe-jev-tools**](https://github.com/wotai-dev/typesafe-jev-tools) — A Claude Code hook that asks whether the decision you are writing needs a model at all. Includes a measured 149-row comparison of TypeSafe Jev against Claude Haiku 4.5.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wotai-dev/typesafe-jev-tools/) · License: MIT
+- [**qorx-jev-source-check**](https://github.com/bbrainfuckk/qorx-jev-source-check) — Python CLI and browser exercise that calls Jev /v1/systemone to check whether retrieved code actually answers a question.
+  - **Entry type**: Developer tool
+  - **Jev relationship**: Jev implementation
+  - **Review basis**: Implementation material
+  - **Jev’s role in this entry**: Python CLI and browser exercise that calls Jev /v1/systemone to check whether retrieved code actually answers a question.
+  - **What this project offers**: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bbrainfuckk/qorx-jev-source-check/) · License: AGPL-3.0
 
 - [**slopcheck-jev**](https://github.com/harshpuri84/slopcheck-jev) — A prose linter that catches AI writing tells. Regex settles the 18 a pattern can settle. Jev takes the 15 that need reading, as 15 Nouls in one call, 604 ms median. It ships as a Claude Code \`Stop\` hook that scores Claude's own output after every turn and warns rather than blocks.
   - **Jev’s role in this entry**: \*\*Deleting a feature made it more accurate.\*\* The first build made a second Jev call to pin each tell to a sentence. Removing it took precision from 0.80 to 0.95 and latency from 1,365 ms to 575 ms. Jev returns typed answers rather than text, so a quote has to come from a second round of typed questions about lines, and that round was where every defect lived. The README documents the two intermediate designs that were worse.
@@ -1062,25 +1070,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Can annotate records while preserving the existing archive path.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/reachjalil/jevlogs/) · License: MIT
 
-- [**azdaja**](https://github.com/kubet/azdaja) — Bare, open-source RLM layer for existing coding agents
-  - **Jev’s role in this entry**: Jev receives selected source material and explicit questions. It can rank passages, classify records, assess whether evidence supports a claim and judge whether records match for semantic joins. Its returned probabilities let the RLM compare results and decide what to inspect, combine or explore next.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kubet/azdaja/) · License: MIT
-
-- [**jev-chat-for-twitch**](https://github.com/ethanplusai/jev-chat-for-twitch) — Filter any live Twitch chat with Jev: a bring-your-own-key Chrome extension
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ethanplusai/jev-chat-for-twitch/) · License: MIT
-
 - [**omp-jev-compaction**](https://github.com/jerryfane/omp-jev-compaction) — An Oh My Pi extension that prunes tool history verbatim and reuses decisions to limit prefix rewrites.
   - **Jev’s role in this entry**: Jev judges tool-call and output utility; the extension truncates selected content with recovery notes.
   - **What this project offers**: Remembers pruning decisions and reapplies them across requests.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jerryfane/omp-jev-compaction/) · License: MIT
 
+- [**azdaja**](https://github.com/kubet/azdaja) — Bare, open-source RLM layer for existing coding agents
+  - **Jev’s role in this entry**: Jev receives selected source material and explicit questions. It can rank passages, classify records, assess whether evidence supports a claim and judge whether records match for semantic joins. Its returned probabilities let the RLM compare results and decide what to inspect, combine or explore next.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kubet/azdaja/) · License: MIT
+
 - [**fast-dev-compaction**](https://github.com/leonaaardob/fast-dev-compaction) — Codex plugin for context compaction, using Jev within session lifecycle hooks to preserve essential history while pruning noise.
   - **Jev’s role in this entry**: Assesses past conversation turns with Jev when context limits approach, selecting critical tool outputs and user requirements for retention.
   - **What this project offers**: Avoids blanket truncation or lossy re-summarization by selectively preserving exact code locations and decision traces.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/leonaaardob/fast-dev-compaction/) · License: MIT
+
+- [**jev-chat-for-twitch**](https://github.com/ethanplusai/jev-chat-for-twitch) — Filter any live Twitch chat with Jev: a bring-your-own-key Chrome extension
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ethanplusai/jev-chat-for-twitch/) · License: MIT
 
 - [**pi-fast-jev-compaction**](https://github.com/joelhooks/pi-fast-jev-compaction) — A Pi extension that prunes stale tool history verbatim and falls back to Pi summary compaction when needed.
   - **Jev’s role in this entry**: Judges whether calls and outputs should survive in the context sent to the model.
@@ -1097,25 +1105,30 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Keeps relevant descriptions while preserving manual access to other skills.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/shivampansuriya/jev-skill-gate/) · License: MIT
 
+- [**jev-skills**](https://github.com/eran-broder/jev-skills) — Skills without the context tax. Claude Code and Codex plugin: TypeSafe's Jev decides on every turn which skills the model sees. Always-on context cost: 0 tokens.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/eran-broder/jev-skills/) · License: MIT
+
 - [**jevbrief**](https://github.com/Parthkomalwad/jevbrief) — \[Adapters\](#adapters) &nbsp;·&nbsp; \[Quick start\](#quick-start) &nbsp;·&nbsp; \[Game demo\](#watch-jev-play-a-game) &nbsp;·&nbsp; \[Python\](#use-it-in-python) &nbsp;·&nbsp; \[Viewer\](#see-every-decision) &nbsp;·&nbsp; \[How it works\](#how-it-works) &nbsp;·&nbsp; \[Benchmarks\](#benchmarks) &nbsp;·&nbsp; \[Build an adapter\](#build-your-own-adapter) &nbsp;·&nbsp; \[Contributing\](#contributing)
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/parthkomalwad/jevbrief/) · License: MIT
 
-- [**jev-skills**](https://github.com/eran-broder/jev-skills) — Skills without the context tax. Claude Code and Codex plugin: TypeSafe's Jev decides on every turn which skills the model sees. Always-on context cost: 0 tokens.
+- [**deepseek-harness-jev-pre-compaction**](https://github.com/wjw66/deepseek-harness-jev-pre-compaction) — A pre-compaction advisor for DeepSeek Harness. Runs before the standard \`compaction-basic\` backend, using TypeSafe JEV to safely prune low-value tool results from model context. Original session events stay in the append-only log; only the model-visible view is replaced with compact markers or archive pointers to reduce context bloat.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/eran-broder/jev-skills/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wjw66/deepseek-harness-jev-pre-compaction/) · License: MIT
 
 - [**your-signal**](https://github.com/MithrilMan/your-signal) — A BYOK Chrome extension using Jev to score X posts against personal preferences and adjust their display.
   - **Jev’s role in this entry**: Scores relevance, substance, usefulness, and promotion; local weights and thresholds control highlighting, collapsing, or hiding.
   - **What this project offers**: Makes personal feed rules adjustable and display changes reversible.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mithrilman/your-signal/) · License: MIT
 
-- [**deepseek-harness-jev-pre-compaction**](https://github.com/wjw66/deepseek-harness-jev-pre-compaction) — A pre-compaction advisor for DeepSeek Harness. Runs before the standard \`compaction-basic\` backend, using TypeSafe JEV to safely prune low-value tool results from model context. Original session events stay in the append-only log; only the model-visible view is replaced with compact markers or archive pointers to reduce context bloat.
+- [**jev-compaction**](https://github.com/Waxmell114514/jev-compaction) — A context compactor that can only score, never write — so an agent's memory can't hold a fact the transcript never contained. Working demo, runs offline.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wjw66/deepseek-harness-jev-pre-compaction/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/waxmell114514/jev-compaction/) · License: MIT
 
 - [**alphaoptimizer**](https://github.com/alpha-tales/alphaoptimizer) — AlphaOptimizer is an open-source tool from AlphaTales that helps Codex work with large command and tool outputs. Instead of sending a huge log or search result straight into the context window, AlphaOptimizer keeps the useful parts visible, keeps the original output available for a limited time, and uses Jev to help rank what matters when an API key is configured.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1127,10 +1140,10 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kolawong/fast-compaction-dsh/) · License: Custom license
 
-- [**jev-compaction**](https://github.com/Waxmell114514/jev-compaction) — A context compactor that can only score, never write — so an agent's memory can't hold a fact the transcript never contained. Working demo, runs offline.
+- [**jevskill**](https://github.com/lazniak/jevskill) — Teach your coding agent to stop burning context. Jev (System One) via OpenRouter or TypeSafe: 325ms, 0.000013 USD per decision. A/B tested 99.3% fewer input tokens with accuracy up. Ships a reversible reduce and a ledger that learns when Jev pays off.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/waxmell114514/jev-compaction/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lazniak/jevskill/) · License: MIT
 
 - [**pi-jev-compaction**](https://github.com/nourhelmi/pi-jev-compaction) — Automatic Jev context clearing for Pi. Keep the conversation, prune stale tool output, retrieve originals without rerunning commands.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1141,11 +1154,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Judges relevance of eligible read-only tool records; local rules protect required content and assemble a handoff packet.
   - **What this project offers**: Preserves source references, selection reasons, and original text order in the handoff.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wang-auspicious/codex-jev-compaction/) · License: MIT
-
-- [**jevskill**](https://github.com/lazniak/jevskill) — Teach your coding agent to stop burning context. Jev (System One) via OpenRouter or TypeSafe: 325ms, 0.000013 USD per decision. A/B tested 99.3% fewer input tokens with accuracy up. Ships a reversible reduce and a ledger that learns when Jev pays off.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lazniak/jevskill/) · License: MIT
 
 - [**jev-carryforward**](https://github.com/Dharundp6/jev-carryforward) — What your last session knew, scored against what this one is doing. MCP server: a per-project ledger written as things happen, recalled per task with TypeSafe's Jev evaluation model via Vercel AI Gateway.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1250,15 +1258,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Collects several perspectives on a draft before it is sent.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/rafalwilinski/vibecheck/) · License: License not declared
 
-- [**refgarden**](https://github.com/AlbionaHoti/refgarden) — A visual-reference gallery drawing from The Met, NASA and Cosmos, with Jev in local Explore mode.
-  - **Jev’s role in this entry**: Jev selects search phrases and highlights references using titles and descriptions, not image pixels.
-  - **What this project offers**: Keeps source links; the public search demo does not call Jev and is not evidence of visual clustering.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/albionahoti/refgarden/) · License: MIT
-
 - [**snifftest**](https://github.com/DanRWilloughby/snifftest) — A Markdown and plain-text prose linter using local rules and optional Jev judgments.
   - **Jev’s role in this entry**: Assesses paragraphs against style rules such as redundant closings, clichés and excessive hedging.
   - **What this project offers**: Reports files, lines and rules while leaving revision to the author.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/danrwilloughby/snifftest/) · License: MIT
+
+- [**refgarden**](https://github.com/AlbionaHoti/refgarden) — A visual-reference gallery drawing from The Met, NASA and Cosmos, with Jev in local Explore mode.
+  - **Jev’s role in this entry**: Jev selects search phrases and highlights references using titles and descriptions, not image pixels.
+  - **What this project offers**: Keeps source links; the public search demo does not call Jev and is not evidence of visual clustering.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/albionahoti/refgarden/) · License: MIT
 
 - [**jevthoven**](https://github.com/cocktailpeanut/jevthoven) — Turns a music prompt into editable multitrack MIDI by asking Jev to choose instruments, harmony, and bar patterns.
   - **Jev’s role in this entry**: Selects form, instruments, chords, and rhythm candidates; local code renders the choices as notes.
@@ -1300,6 +1308,21 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/colinmcdermott/emoji-jev/) · License: License not declared
 
+- [**jev-music-theory-1**](https://github.com/adammichaelwood/jev-music-theory-1) — Explores Jev on harmony exercises and music-theory questions, alongside a piano demo driven by chord choices.
+  - **Jev’s role in this entry**: Chooses voices, pitches, durations, or chords; code grades exercises or synthesizes playback.
+  - **What this project offers**: Puts music-theory tests and an audible composition experiment in one project.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/adammichaelwood/jev-music-theory-1/) · License: License not declared
+
+- [**jev-paste**](https://github.com/Anson-gzy/jev-paste) — Contextual, inline clipboard decomposition for macOS — Tab-to-paste with full history and time-decay ranking. Powered by TypeSafe JEF.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/anson-gzy/jev-paste/) · License: MIT
+
+- [**jevspeak**](https://github.com/MM-sheng/jevspeak) — Jev can't generate text. So I made it talk anyway. A conversational interface built from probabilistic decisions and a deterministic language compiler — no generative LLM.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mm-sheng/jevspeak/) · License: MIT
+
 - [**voicevox-jev-proxy**](https://github.com/nemalabs/voicevox-jev-proxy) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -1320,25 +1343,10 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Uses explicit scene state to drive backgrounds, music and the next turn.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/phureewat29/got-jev/) · License: License not declared
 
-- [**jev-music-theory-1**](https://github.com/adammichaelwood/jev-music-theory-1) — Explores Jev on harmony exercises and music-theory questions, alongside a piano demo driven by chord choices.
-  - **Jev’s role in this entry**: Chooses voices, pitches, durations, or chords; code grades exercises or synthesizes playback.
-  - **What this project offers**: Puts music-theory tests and an audible composition experiment in one project.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/adammichaelwood/jev-music-theory-1/) · License: License not declared
-
-- [**jev-paste**](https://github.com/Anson-gzy/jev-paste) — Contextual, inline clipboard decomposition for macOS — Tab-to-paste with full history and time-decay ranking. Powered by TypeSafe JEF.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/anson-gzy/jev-paste/) · License: MIT
-
 - [**jev-playground**](https://github.com/wustep/jev-playground) — Can a System One model steer music? Jev picks the plan (enums only); code renders sheet, audio and MIDI.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wustep/jev-playground/) · License: License not declared
-
-- [**jevspeak**](https://github.com/MM-sheng/jevspeak) — Jev can't generate text. So I made it talk anyway. A conversational interface built from probabilistic decisions and a deterministic language compiler — no generative LLM.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mm-sheng/jevspeak/) · License: MIT
 
 - [**let-jev-speak**](https://github.com/suidouble/let-jev-speak) — TypeSafe's \`/v1/systemone\` endpoint classifies text — it returns a \`choice\`, a \`score\`, or a probability. It does not generate prose. This library makes it generate prose anyway: every word of the answer is a separate \`choice\` question over a vocabulary, and the loop feeds its own output back in as the prefix.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1423,15 +1431,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/milvus-io/milvus-model/) · License: Apache-2.0
 
-- [**pg\_typesafe**](https://github.com/giuliosmall/pg_typesafe) — A pre-alpha PostgreSQL C extension for calling Jev from SQL for classification, yes/no judgments, and scoring.
-  - **Jev’s role in this entry**: Converts SQL input into System One requests and returns answers through database functions.
-  - **What this project offers**: Adds typed semantic judgments to existing database queries.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/giuliosmall/pg_typesafe/) · License: MIT
-
 - [**laya-jev-GraphRAG**](https://github.com/bodepudimuneendra-netizen/laya-jev-GraphRAG) — Agentic GraphRAG engine using swappable System One decision models (local Laya / cloud Jev). Features a complete 4-phase pipeline (Ingestion, Pre-Retrieval, Traversal, Post-Retrieval) and evaluation across Neo4j, Memgraph, Apache AGE, and Kùzu driven by a custom A\* traversal algorithm.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bodepudimuneendra-netizen/laya-jev-graphrag/) · License: Apache-2.0
+
+- [**pg\_typesafe**](https://github.com/giuliosmall/pg_typesafe) — A pre-alpha PostgreSQL C extension for calling Jev from SQL for classification, yes/no judgments, and scoring.
+  - **Jev’s role in this entry**: Converts SQL input into System One requests and returns answers through database functions.
+  - **What this project offers**: Adds typed semantic judgments to existing database queries.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/giuliosmall/pg_typesafe/) · License: MIT
 
 - [**jeveryword**](https://github.com/jkrup/jeveryword) — Jev answers multiple-choice questions and does not generate text, so on its own it cannot return a name, an email address or a quote. jeveryword numbers the words of your text, offers those numbers as the answer options, and converts the numbers Jev picks back into the original substring with its character offsets.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1448,6 +1456,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Puts closed-set Jev answers on existing Polars columns instead of another chat-completion pass.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/pnthn-ai/polar_llama/) · License: MIT
 
+- [**jev-rag**](https://github.com/aifabrice/jev-rag) — Local knowledge search with three modes: BM25 + Jev by default, agentic multi-query lexical search + Jev without vectors, and optional BM25 + embeddings/RRF + Jev, with grounded streaming answers.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/aifabrice/jev-rag/) · License: MIT
+
 - [**jevframe**](https://github.com/ktaletsk/jevframe) — Semantic AI for pandas and Polars: classify text, analyze sentiment, and score DataFrame rows with natural-language questions and full probabilities using TypeSafe Jev.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -1458,30 +1471,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Uses a probability as a threshold or sort key instead of a generative reranker.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/hev/reranker/) · License: Apache-2.0
 
-- [**jev-rag**](https://github.com/aifabrice/jev-rag) — Local knowledge search with three modes: BM25 + Jev by default, agentic multi-query lexical search + Jev without vectors, and optional BM25 + embeddings/RRF + Jev, with grounded streaming answers.
+- [**duckdb-jev**](https://github.com/prasanthj/duckdb-jev) — High-throughput, robust native DuckDB extension for batched and streaming TypeSafe/Jev classification, scoring, and semantic predicates from SQL.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/aifabrice/jev-rag/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/prasanthj/duckdb-jev/) · License: Apache-2.0
 
 - [**jevql**](https://github.com/kylemclaren/jevql) — Adds Jev semantic filtering, grouping, and ranking around ordinary PostgreSQL without installing a database extension.
   - **Jev’s role in this entry**: The CLI or service layer evaluates jev\_\* calls over row text before completing the query.
   - **What this project offers**: Shares semantic SQL interfaces across a CLI, HTTP, MCP, and SDKs.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kylemclaren/jevql/) · License: MIT
 
-- [**duckdb-jev**](https://github.com/prasanthj/duckdb-jev) — High-throughput, robust native DuckDB extension for batched and streaming TypeSafe/Jev classification, scoring, and semantic predicates from SQL.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/prasanthj/duckdb-jev/) · License: Apache-2.0
-
 - [**jev-search-rerank-eval**](https://github.com/zhuyansen/jev-search-rerank-eval) — Retrieval evaluation system measuring Jev reranking against lexical, embedding, and fusion baselines across 9,831 query-document pairs.
   - **Jev’s role in this entry**: Invokes Jev judges to grade multi-level relevance on bilingual queries, evaluating ranking metrics and judge-circularity effects.
   - **What this project offers**: Provides rigorous empirical evidence comparing discrete judgment rerankers against vector search in multilingual discovery contexts.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zhuyansen/jev-search-rerank-eval/) · License: MIT
 
-- [**jev-search**](https://github.com/larguesa/jev-search) — Experimental semantic line search with TypeSafe Jev via OpenRouter. Python CLI with no runtime dependencies.
+- [**jev-bigquery-cloudrun**](https://github.com/jeffonelson/jev-bigquery-cloudrun) — Classify support tickets in BigQuery with Jev and Cloud Run
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/larguesa/jev-search/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jeffonelson/jev-bigquery-cloudrun/) · License: License not declared
 
 - [**jevpdf**](https://github.com/kylemclaren/jevpdf) — \`server/index.ts\` is a small Bun server that serves \`dist/\` and the \`/api/jev\` proxy, which uses the same forwarding code as dev (\`server/jev-upstream.ts\`). Because the live proxy spends real credits, it only accepts same-origin POSTs from the app, pins the model, caps request size, and rate-limits each IP.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1493,15 +1501,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Enables natural language function discovery across codebases at low cost, similar to an intelligent grep.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sufianetaouil/every/) · License: MIT
 
-- [**jev-bigquery-cloudrun**](https://github.com/jeffonelson/jev-bigquery-cloudrun) — Classify support tickets in BigQuery with Jev and Cloud Run
+- [**jev-search**](https://github.com/larguesa/jev-search) — Experimental semantic line search with TypeSafe Jev via OpenRouter. Python CLI with no runtime dependencies.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jeffonelson/jev-bigquery-cloudrun/) · License: License not declared
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/larguesa/jev-search/) · License: MIT
 
 - [**jev-harness**](https://github.com/PromtEngineer/jev-harness) — A Pi agent harness built around TypeSafe's Jev (System One model): router, context picker, gate, verifier. Tested on Neon Postgres branches.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/promtengineer/jev-harness/) · License: MIT
+
+- [**jev-papers**](https://github.com/stas4000/jev-papers) — 1,000 arXiv AI papers classified with one Jev decision each, checked against an LLM judge. Open rebuild, MIT.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/stas4000/jev-papers/) · License: MIT
 
 - [**jev-retrieval**](https://github.com/romeromarcelo/jev-retrieval) — Grep-shaped Rust CLI for coding agents that finds files matching a plain-language concept: a local BM25 pass recalls candidates, Jev verifies each file window-by-window with Noul gates, and one listwise Choice per lane reranks the kept files into \`path:line score\` output with calibrated probabilities. (Author-submitted: I am the maintainer.)
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1528,10 +1541,10 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/teempai/jev-in-codex/) · License: MIT
 
-- [**jev-papers**](https://github.com/stas4000/jev-papers) — 1,000 arXiv AI papers classified with one Jev decision each, checked against an LLM judge. Open rebuild, MIT.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+- [**jev-research-pipeline**](https://github.com/shimo4228/jev-research-pipeline) — \*\*Code owns the loop, Jev judges, Qwen writes: a daily research monitor for standing questions.\*\*
+  - **Jev’s role in this entry**: For each (fetched source, open research question) pair, Jev answers Noul gates (on topic, method transferable, evidence compatible) and then Score dimensions through Pydantic AI's native \`typesafe:\` model; deterministic code applies the thresholds and routes each pair to keep / review / drop.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/stas4000/jev-papers/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/shimo4228/jev-research-pipeline/) · License: MIT
 
 - [**jev-scout**](https://github.com/AkashPriyadarshii/jev-scout) — A repository and Rust crate search tool that asks Jev to score and select retrieved candidates for a request.
   - **Jev’s role in this entry**: Compares candidate information with the request, scores fit and maintenance signals, and chooses a candidate.
@@ -1553,16 +1566,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/shinpr/jev-reranker/) · License: MIT
 
-- [**jev-research-pipeline**](https://github.com/shimo4228/jev-research-pipeline) — \*\*Code owns the loop, Jev judges, Qwen writes: a daily research monitor for standing questions.\*\*
-  - **Jev’s role in this entry**: For each (fetched source, open research question) pair, Jev answers Noul gates (on topic, method transferable, evidence compatible) and then Score dimensions through Pydantic AI's native \`typesafe:\` model; deterministic code applies the thresholds and routes each pair to keep / review / drop.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/shimo4228/jev-research-pipeline/) · License: MIT
-
-- [**jevsql**](https://github.com/sarathi-aiml/jevsql) — Text-to-SQL where the model never writes SQL — typed, calibrated decisions (TypeSafe Jev) + code-assembled queries
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sarathi-aiml/jevsql/) · License: License not declared
-
 - [**hfjev**](https://github.com/hemanth/hfjev) — Classify Hugging Face datasets across typed semantic dimensions with TypeSafe Jev System One. Auto-adapts evaluation rubrics to dataset domains (reviews, news, LLM tuning, support) and classifies rows in a single parallel System One call with calibrated probabilities.
   - **Jev’s role in this entry**: hfjev classifies dataset rows in parallel across typed Choice, Score, and Noul dimensions against TypeSafe System One.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -1578,6 +1581,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/abhishekmamdapure/jev-information-extraction/) · License: License not declared
 
+- [**jevsql**](https://github.com/sarathi-aiml/jevsql) — Text-to-SQL where the model never writes SQL — typed, calibrated decisions (TypeSafe Jev) + code-assembled queries
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sarathi-aiml/jevsql/) · License: License not declared
+
 - [**jevtok-ts**](https://github.com/aarzhaev/jevtok-ts) — \*\*No Python, network calls, API keys, native extensions, or runtime dependencies.\*\* Vocabulary and lookup tables ship inside the package. Ordinary \`o200k\_base\` tokenization is not interchangeable with Jev: \`evidence\` is three tokens and \`2024\` is four.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -1587,6 +1595,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev judges whether each passage is useful evidence for the supplied task; local code selects verbatim passages and citations within the token budget.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/keltokhy/jselect/) · License: MIT
+
+- [**jev-bfs**](https://github.com/komikat/jev-bfs) — Wikipedia link race pathfinder guided by Jev: assesses outbound links to navigate between two articles in real time.
+  - **Jev’s role in this entry**: Applies Jev semantic heuristic scoring and pruning to outbound links at each BFS exploration step.
+  - **What this project offers**: Combines classic graph traversal with probabilistic judgments to prune the Wikipedia multi-hop search space.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/komikat/jev-bfs/) · License: MIT
 
 - [**jev-reviews**](https://github.com/halfspin-qc/jev-reviews) — The flagship experiment in this workspace is \*\*\`jev-reviews\`\*\*: an automated pipeline that ingests Google Maps restaurant reviews from \*\*Apify Storage\*\*, stores and deduplicates them in \*\*Supabase PostgreSQL\*\*, and classifies them using \*\*Jev (TypeSafe System One)\*\* or traditional generative LLMs across 5 operational pillars, extracting dishes, customer highlights, and owner recommendations.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1602,11 +1615,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/vijaycinn/el-jev/) · License: MIT
-
-- [**jev-bfs**](https://github.com/komikat/jev-bfs) — Wikipedia link race pathfinder guided by Jev: assesses outbound links to navigate between two articles in real time.
-  - **Jev’s role in this entry**: Applies Jev semantic heuristic scoring and pruning to outbound links at each BFS exploration step.
-  - **What this project offers**: Combines classic graph traversal with probabilistic judgments to prune the Wikipedia multi-hop search space.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/komikat/jev-bfs/) · License: MIT
 
 - [**jevsome-projects**](https://github.com/ozers/jevsome-projects) — A Jev project directory and discovery pipeline that stores integration evidence and can use Jev for classification.
   - **Jev’s role in this entry**: When configured with a key, sends project state and candidate categories to Jev; otherwise uses local classification rules.
@@ -1656,30 +1664,30 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/yushen100/wechat-jev-assistant/) · License: License not declared
 
-- [**jev-commit**](https://github.com/valentynkit/jev-commit) — A commit-msg hook that scores the message against the staged diff with one Jev request of five Nouls and warns by default. Default blocking is a local regex belt on high-precision added-line hits; the secret\_shaped Noul blocks only with --strict.
-  - **Jev’s role in this entry**: Five Noul questions in one request: checkable message, hunk match, debug leftovers, unmentioned work, and credential-shaped added lines. Default blocking is the regex belt; secret\_shaped participates only under --strict.
-  - **What this project offers**: Turns commit-message review into thresholded probabilities instead of prose; API failures still allow the commit.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/valentynkit/jev-commit/) · License: MIT
-
 - [**jev-chat-windows-deepseek-jev**](https://github.com/Aimark-dai/jev-chat-windows-deepseek-jev) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/aimark-dai/jev-chat-windows-deepseek-jev/) · License: Custom license
+
+- [**jev-commit**](https://github.com/valentynkit/jev-commit) — A commit-msg hook that scores the message against the staged diff with one Jev request of five Nouls and warns by default. Default blocking is a local regex belt on high-precision added-line hits; the secret\_shaped Noul blocks only with --strict.
+  - **Jev’s role in this entry**: Five Noul questions in one request: checkable message, hunk match, debug leftovers, unmentioned work, and credential-shaped added lines. Default blocking is the regex belt; secret\_shaped participates only under --strict.
+  - **What this project offers**: Turns commit-message review into thresholded probabilities instead of prose; API failures still allow the commit.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/valentynkit/jev-commit/) · License: MIT
 
 - [**jev-apply**](https://github.com/TheAdaply/jev-apply) — In Codex, Claude Code, or another CLI agent:
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/theadaply/jev-apply/) · License: MIT
 
-- [**jev-plays-pokemon-red**](https://github.com/valentynkit/jev-plays-pokemon-red) — Pokemon Red on PyBoy where Python owns the route and the arithmetic, and Jev chooses only among legal actions at actual branches.
-  - **Jev’s role in this entry**: A Choice over legal actions at each branch; battle turns also ask Noul faints\_this\_turn and should\_flee; failures take the code default.
-  - **What this project offers**: The model only picks among code-proven legal moves; a failed call never loosens the script.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/valentynkit/jev-plays-pokemon-red/) · License: MIT
-
 - [**jev-skip**](https://github.com/valentynkit/jev-skip) — A browser extension that classifies YouTube caption segments with Jev, splitting requests when the segment or token budget is exceeded, paints five categories on the seek bar, and auto-skips those painted slices over the threshold.
   - **Jev’s role in this entry**: One Choice per caption segment among content, sponsor, intro, outro, self\_promo, recap, and other. Painted categories sponsor, self\_promo, intro, outro, and recap skip when probability is at or above the threshold; content and other never skip.
   - **What this project offers**: Works on videos nobody has labeled yet; with no captions it does nothing.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/valentynkit/jev-skip/) · License: MIT
+
+- [**jev-plays-pokemon-red**](https://github.com/valentynkit/jev-plays-pokemon-red) — Pokemon Red on PyBoy where Python owns the route and the arithmetic, and Jev chooses only among legal actions at actual branches.
+  - **Jev’s role in this entry**: A Choice over legal actions at each branch; battle turns also ask Noul faints\_this\_turn and should\_flee; failures take the code default.
+  - **What this project offers**: The model only picks among code-proven legal moves; a failed call never loosens the script.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/valentynkit/jev-plays-pokemon-red/) · License: MIT
 
 - [**Jev-chat-assistant**](https://github.com/QCJLchina/Jev-chat-assistant) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1691,6 +1699,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Finds cross-language shapes that grep misses, and lands the ranked hits in the existing quickfix loop.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/valentynkit/jev.nvim/) · License: MIT
 
+- [**Jev-in-the-Loop**](https://github.com/Tongyun1/Jev-in-the-Loop) — Researching how Jev can accelerate tasks that rely on LLM decision-making.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tongyun1/jev-in-the-loop/) · License: MIT
+
 - [**spending-effort-with-jev**](https://github.com/Yaxin9Luo/spending-effort-with-jev) — Jev-powered /effort advisor for Claude Code: tells you when to switch effort, per prompt
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -1701,20 +1714,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/nssmd/jev-bot/) · License: MIT
 
-- [**Jev-in-the-Loop**](https://github.com/Tongyun1/Jev-in-the-Loop) — Researching how Jev can accelerate tasks that rely on LLM decision-making.
+- [**jev-chat-windows-laya**](https://github.com/ZJemYoung/jev-chat-windows-laya) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tongyun1/jev-in-the-loop/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zjemyoung/jev-chat-windows-laya/) · License: MIT
 
 - [**jev-laya-benchmark**](https://github.com/harrymunro/jev-laya-benchmark) — Speed and accuracy benchmark: TypeSafe's Jev API vs the local Laya MLX typed-decision model on synthetic tasks
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/harrymunro/jev-laya-benchmark/) · License: MIT
-
-- [**jev-chat-windows-laya**](https://github.com/ZJemYoung/jev-chat-windows-laya) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zjemyoung/jev-chat-windows-laya/) · License: MIT
 
 - [**jev-demos**](https://github.com/DataGobes/jev-demos) — Every demo lives in its own folder with its own README, dependencies and instructions. Most run without an API key in a clearly labelled \`SIMULATED\` mode; put \`TYPESAFE\_API\_KEY=...\` in the demo folder's \`.env\` for live results.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1725,6 +1733,16 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev first assesses whether a closed decision is possible, then selects among the target skill’s outcomes.
   - **What this project offers**: Includes API-call and response-check examples; it predicts the outcome without executing the target skill.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/danielkillenberger/jev-predict-skill/) · License: License not declared
+
+- [**jev-slop-guard**](https://github.com/davertor/jev-slop-guard) — Jev Slop Guard — a Chrome extension that scores and stamps AI slop on your X and LinkedIn feeds as you scroll
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/davertor/jev-slop-guard/) · License: MIT
+
+- [**JevCode**](https://github.com/coasty-ai/JevCode) — JevCode - Jev can code. We want to dogfood JevCode
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/coasty-ai/jevcode/) · License: MIT
 
 - [**astra-jev-harness**](https://github.com/Oranquelui/astra-jev-harness) — The default \`batch\` policy retains an entire batch when any judgment is uncertain. The experimental \`select --policy per-file\` retains uncertain/unjudged files while omitting confidently irrelevant siblings. Dependencies and the global no-match fallback still apply. Compare before changing policy; fewer bytes alone do not establish correctness.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1751,15 +1769,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/statico/jev-nethack/) · License: MIT
 
-- [**jev-slop-guard**](https://github.com/davertor/jev-slop-guard) — Jev Slop Guard — a Chrome extension that scores and stamps AI slop on your X and LinkedIn feeds as you scroll
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+- [**jev-book-tags**](https://github.com/iamjonatha/jev-book-tags) — A free calibre plugin that suggests genre and subject tags for individual books, selected books or an entire library, with configurable thresholds and review controls.
+  - **Jev’s role in this entry**: I maintain JEV Book Tags, an independent, free GPL-3.0-or-later calibre plugin. It was developed with substantial AI assistance and reviewed and tested during implementation. It is not affiliated with TypeSafe AI or calibre; users bring their own API key and external API charges may apply.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/davertor/jev-slop-guard/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/iamjonatha/jev-book-tags/) · License: Custom license
 
-- [**JevCode**](https://github.com/coasty-ai/JevCode) — JevCode - Jev can code. We want to dogfood JevCode
+- [**jev-crawlers**](https://github.com/russfranky/jev-crawlers) — Jev learns your repo's decision norms, then adversarially judges past decisions against them. Unix-style primitives (seed, expand, judge, verify, report, norms) with per-node typed judgments from typesafe-ai/jev.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/coasty-ai/jevcode/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/russfranky/jev-crawlers/) · License: MIT
 
 - [**jev-demo**](https://github.com/harsha89/jev-demo) — Showcase of TypeSafe JEV classifying emails: spam (noul), category (choice) and urgency (score) - Next.js + MUI app and Python script
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1775,16 +1793,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/x0ef/jev_projects/) · License: MIT
-
-- [**jev-book-tags**](https://github.com/iamjonatha/jev-book-tags) — A free calibre plugin that suggests genre and subject tags for individual books, selected books or an entire library, with configurable thresholds and review controls.
-  - **Jev’s role in this entry**: I maintain JEV Book Tags, an independent, free GPL-3.0-or-later calibre plugin. It was developed with substantial AI assistance and reviewed and tested during implementation. It is not affiliated with TypeSafe AI or calibre; users bring their own API key and external API charges may apply.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/iamjonatha/jev-book-tags/) · License: Custom license
-
-- [**jev-crawlers**](https://github.com/russfranky/jev-crawlers) — Jev learns your repo's decision norms, then adversarially judges past decisions against them. Unix-style primitives (seed, expand, judge, verify, report, norms) with per-node typed judgments from typesafe-ai/jev.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/russfranky/jev-crawlers/) · License: MIT
 
 - [**jev-linter-action**](https://github.com/sable-inc/jev-linter-action) — \`glob\` accepts one pattern or a newline-separated list. All matched files are reviewed together by default; \`per-file: true\` reviews each file independently. Missing inputs, malformed questions and ambiguous combinations fail before calls.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1844,15 +1852,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Defaults to a mock model and dry-runs without a private key; simulated results do not establish profitability.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jarrodwatts/jev-trader/) · License: MIT
 
-- [**jev-chat-windows**](https://github.com/jev-chat/jev-chat-windows) — A Windows companion reply assistant that captures WeChat Windows 4.x windows with local offline OCR, uses Jev to judge intent and generate three candidate replies, and fills the chosen text into the WeChat input box without auto-sending.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jev-chat/jev-chat-windows/) · License: Custom license
-
 - [**jev-seo**](https://github.com/AgriciDaniel/jev-seo) — \*\*PDF: how the audit was made, the scorecard and the priorities\*\*
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/agricidaniel/jev-seo/) · License: MIT
+
+- [**jev-chat-windows**](https://github.com/jev-chat/jev-chat-windows) — A Windows companion reply assistant that captures WeChat Windows 4.x windows with local offline OCR, uses Jev to judge intent and generate three candidate replies, and fills the chosen text into the WeChat input box without auto-sending.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jev-chat/jev-chat-windows/) · License: Custom license
 
 - [**tax-doc-classifier**](https://github.com/kyotofin/tax-doc-classifier) — A tax-document page classifier that uses Jev to choose from predefined IRS form and page categories.
   - **Jev’s role in this entry**: Extracts PDF page text and sends it to Jev for form type, page type, and confidence.
@@ -1899,40 +1907,40 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Connects natural-language conditions to existing sensors, notifications, and scenes.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/abovecolin/ha-jev/) · License: MIT
 
-- [**Working-Memory-Jev**](https://github.com/AustinAWay/Working-Memory-Jev) — Edit \`.env\` locally and replace the placeholder with your own key. Keep this file private; Git ignores it. Do not paste the key into frontend code, a browser field, an issue, or a command that will be saved in shell history.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/austinaway/working-memory-jev/) · License: Custom license
-
 - [**Jevstiller**](https://github.com/tomerglick57/Jevstiller) — Distill a repeated Jev classification task into a local model, on the fly — same answers, your hardware.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tomerglick57/jevstiller/) · License: Apache-2.0
 
-- [**JevIntent**](https://github.com/Nisaka520/JevIntent) — It is a FkWeChat plugin that analyzes a long-pressed WeChat text message with the Jev model for intent, emotion, urgency and reply posture and shows the result in local Toasts.
+- [**Working-Memory-Jev**](https://github.com/AustinAWay/Working-Memory-Jev) — Edit \`.env\` locally and replace the placeholder with your own key. Keep this file private; Git ignores it. Do not paste the key into frontend code, a browser field, an issue, or a command that will be saved in shell history.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/nisaka520/jevintent/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/austinaway/working-memory-jev/) · License: Custom license
 
 - [**Jev-Trades**](https://github.com/zadescoxp/Jev-Trades) — A dashboard combining live crypto market data with Jev-guided paper trading; no broker or live-order API is connected.
   - **Jev’s role in this entry**: Jev reviews completed minute candles and indicators; Python applies confidence and position limits to a simulated portfolio.
   - **What this project offers**: Shows market inputs, model judgments and paper positions together.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zadescoxp/jev-trades/) · License: Apache-2.0
 
+- [**JevIntent**](https://github.com/Nisaka520/JevIntent) — It is a FkWeChat plugin that analyzes a long-pressed WeChat text message with the Jev model for intent, emotion, urgency and reply posture and shows the result in local Toasts.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/nisaka520/jevintent/) · License: MIT
+
 - [**jev-reviewer**](https://github.com/choxos/jev-reviewer) — A systematic-review tool that selects verbatim evidence from papers and supplements for human checking and export.
   - **Jev’s role in this entry**: Jev selects candidate line IDs; code copies the original text with file and location references.
   - **What this project offers**: Connects quotes, source locations and human verification status.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/choxos/jev-reviewer/) · License: MIT
 
-- [**jev-anything**](https://github.com/grandamenium/jev-anything) — Agent skill for designing, building, testing, and tuning bounded JEV decision layers
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/grandamenium/jev-anything/) · License: MIT
-
 - [**JEV-Paper-Radar**](https://github.com/Eliot5566/JEV-Paper-Radar) — In GitHub Actions the links point at your own repo automatically (\`GITHUB\_REPOSITORY\`), so a fork needs no configuration. Locally, set \`output.feedback\_repo = "owner/name"\` or run \`paper-radar harvest --repo owner/name\`.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/eliot5566/jev-paper-radar/) · License: MIT
+
+- [**jev-anything**](https://github.com/grandamenium/jev-anything) — Agent skill for designing, building, testing, and tuning bounded JEV decision layers
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/grandamenium/jev-anything/) · License: MIT
 
 - [**JevScout**](https://github.com/hqman/JevScout) — A demo job-search Skill for coding Agents that browses company careers pages in Chrome, uses Jev to screen AI and software-engineering roles, and saves the results.
   - **Jev’s role in this entry**: Jev uses Choice to classify pages and Noul to assess careers links, role relevance, filter controls and candidate fit; local thresholds select navigation, job details and saved results.
@@ -1944,15 +1952,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bytelabs-oss/clash-jev/) · License: MIT
 
-- [**typesafe-ai-playground**](https://github.com/TypeSafeAI/typesafe-playground) — Community playground for TypeSafe AI and Jev featuring 110 real-world scenarios, dilemmas, and interactive experiments.
-  - **Jev’s role in this entry**: Submits custom states and questions to Jev via Next.js API routes, displaying discrete probabilities, latency, and confidence scores.
-  - **What this project offers**: Offers an intuitive web interface for exploring prompt criteria, testing edge cases, and evaluating discrete decision outputs.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bunsdev/typesafe-ai-playground/) · License: MIT
-
 - [**jev-usecases**](https://github.com/kenhuangus/jev-usecases) — Production TypeSafe Jev (System One) use-case harnesses with confidence-gated decision logic
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kenhuangus/jev-usecases/) · License: MIT
+
+- [**typesafe-ai-playground**](https://github.com/TypeSafeAI/typesafe-playground) — Community playground for TypeSafe AI and Jev featuring 110 real-world scenarios, dilemmas, and interactive experiments.
+  - **Jev’s role in this entry**: Submits custom states and questions to Jev via Next.js API routes, displaying discrete probabilities, latency, and confidence scores.
+  - **What this project offers**: Offers an intuitive web interface for exploring prompt criteria, testing edge cases, and evaluating discrete decision outputs.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bunsdev/typesafe-ai-playground/) · License: MIT
 
 - [**jev-trip**](https://github.com/liaoyuhua/jev-trip) — Jev Trip is an explainable day-trip planner. The LLM plans ahead; Jev chooses and checks. Deterministic code handles route facts, time calculations, validation, and versioning.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -1963,6 +1971,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/stas4000/jev-linkmap/) · License: Custom license
+
+- [**kojev**](https://github.com/ItisNoMatter/kojev) — Kotlin Multiplatform client for Jev that returns your own enum/sealed types instead of string keys.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/itisnomatter/kojev/) · License: MIT
 
 - [**Situation-Puzzle**](https://github.com/ZeroTang05/Situation-Puzzle) — Turtle-soup puzzle game whose code implements a JevClient calling Jev to judge player questions and solutions, with real end-to-end tests.
   - **Entry type**: Integration
@@ -1987,6 +2000,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/nisaka520/jevbystander/) · License: MIT
 
+- [**jev-span**](https://github.com/lzq-0529/jev-span) — Jev answers typed multiple-choice questions with calibrated probabilities, but it never returns entity spans on its own. \*\*JevSpan turns it into an entity recognizer.\*\* It cuts text at punctuation, offers every candidate window to Jev as an option, verifies what Jev nominates, and then lets Jev settle the exact boundaries and type. Every entity comes back with a probability and a trace of the questions that produced it.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lzq-0529/jev-span/) · License: MIT
+
 - [**jevernetes**](https://github.com/sunil-sadasivan/jevernetes) — Live Kubernetes log analysis, contextual investigation, and agent handoff powered by Jev.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -2002,10 +2020,10 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/dagfinndybvig/jev_ontology/) · License: License not declared
 
-- [**jev-span**](https://github.com/lzq-0529/jev-span) — Jev answers typed multiple-choice questions with calibrated probabilities, but it never returns entity spans on its own. \*\*JevSpan turns it into an entity recognizer.\*\* It cuts text at punctuation, offers every candidate window to Jev as an option, verifies what Jev nominates, and then lets Jev settle the exact boundaries and type. Every entity comes back with a probability and a trace of the questions that produced it.
+- [**jevmory**](https://github.com/romiluz13/jevmory) — Coding-agent memory where every fact is a verbatim quote graded by TypeSafe Jev's calibrated confidence. Local-first, SQLite receipts, zero dependencies.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lzq-0529/jev-span/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/romiluz13/jevmory/) · License: MIT
 
 - [**JevFlow**](https://github.com/Parth1811/JevFlow) — A Claude Code plugin that keeps your AI agents honest. Claude plans tasks as phases with checks, and when it tries to stop, Jevflow runs them and asks Jev if the work is really done. Many agents, one plan, with a live viewer to watch it all.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2017,25 +2035,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/darwintechlab/openjev/) · License: MIT
 
-- [**jevmory**](https://github.com/romiluz13/jevmory) — Coding-agent memory where every fact is a verbatim quote graded by TypeSafe Jev's calibrated confidence. Local-first, SQLite receipts, zero dependencies.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/romiluz13/jevmory/) · License: MIT
-
-- [**jev\_project\_context**](https://github.com/poiuyjie/jev_project_context) — Evidence-first long-term experiment memory skill for AI coding agents, with optional Jev decision-model layers
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/poiuyjie/jev_project_context/) · License: MIT
-
 - [**JevLight**](https://github.com/usail-hkust/JevLight) — Jev-powered traffic signal control on CityFlow with structured phase and green-time decisions.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/usail-hkust/jevlight/) · License: License not declared
 
-- [**kojev**](https://github.com/ItisNoMatter/kojev) — Kotlin Multiplatform client for Jev that returns your own enum/sealed types instead of string keys.
+- [**jev\_project\_context**](https://github.com/poiuyjie/jev_project_context) — Evidence-first long-term experiment memory skill for AI coding agents, with optional Jev decision-model layers
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/itisnomatter/kojev/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/poiuyjie/jev_project_context/) · License: MIT
 
 - [**cairn-jev-lab**](https://github.com/Cairn-ink/cairn-jev-lab) — Use it to test a memory policy before letting it decide what an agent keeps. The lab includes editable cases, a reusable JavaScript entry point, and reports that retain both successful judgments and mistakes. Node.js 22+, no runtime dependencies.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2052,15 +2060,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Shows how to connect judgments to engineering workflows using synthetic examples.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/foadsf/jev-for-engineers/) · License: MIT
 
-- [**jevtest**](https://github.com/joshhu/jevtest) — It provides a web and CLI demo that sends user text to Jev through OpenRouter for Choice, Score, and Noul probability judgments and compares the results side-by-side with a general LLM.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/joshhu/jevtest/) · License: License not declared
-
 - [**jev-music-tag**](https://github.com/xhongc/jev-music-tag) — A minimal FastAPI and React workbench that sends local audio tags to Jev for decisions and writes the returned metadata updates back to the audio files.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/xhongc/jev-music-tag/) · License: License not declared
+
+- [**jevtest**](https://github.com/joshhu/jevtest) — It provides a web and CLI demo that sends user text to Jev through OpenRouter for Choice, Score, and Noul probability judgments and compares the results side-by-side with a general LLM.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/joshhu/jevtest/) · License: License not declared
 
 - [**jevchess**](https://github.com/choxos/jevchess) — Jev, TypeSafe's System One model, plays chess against any OpenRouter LLM, Stockfish and you. One-page web app with live moves, Jev's move probabilities, saved games and win rates.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2082,6 +2090,26 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mingleiw/jev-oncall/) · License: MIT
 
+- [**jev-tab-grouper**](https://github.com/AstonyCat/jev-tab-grouper) — One-click AI tab grouping for Chrome — Jev typed decisions (~1s, whole window) or any OpenAI-compatible LLM that invents its own group names. Featured in awesome-jev.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/astonycat/jev-tab-grouper/) · License: MIT
+
+- [**jev-writer**](https://github.com/Kaos599/jev-writer) — Unlike generative writing assistants that flatter drafts, jev-writer enforces strict statistical safeguards: an observational power gate, date-confound controls, and Benjamini-Hochberg false-discovery corrections. It reports what it finds in plain English and refuses to state findings when sample sizes cannot support them.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kaos599/jev-writer/) · License: MIT
+
+- [**JevTools**](https://github.com/RileyCarney/JevTools) — A toolkit, knowledge base, web cockpit, and reference implementation for building AI applications with \*\*Jev (TypeSafe System One)\*\* via \*\*OpenRouter Alpha Decisions\*\* and \*\*TypeSafe Direct API\*\*.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/rileycarney/jevtools/) · License: GPL-3.0
+
+- [**robo-harness**](https://github.com/grmkris/robo-harness) — SO-101 robot-arm workbench combining Bun/Effect and Python drivers, using Jev for joint action constraints.
+  - **Jev’s role in this entry**: Assesses spatial coordinates and sensor states, using Jev to select safe step actions within bounded budgets.
+  - **What this project offers**: Extends TypeSafe Jev low-latency discrete judgments to physical-world robotic arm motion control.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/grmkris/robo-harness/) · License: License not declared
+
 - [**jev-connector**](https://github.com/juanlentino/jev-connector) — WordPress connector for the TypeSafe System One API (Jev): typed questions, confidence-scored answers, core Connectors API key management
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -2091,11 +2119,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sahajamit/jev-lens/) · License: MIT
-
-- [**jev-tab-grouper**](https://github.com/AstonyCat/jev-tab-grouper) — One-click AI tab grouping for Chrome — Jev typed decisions (~1s, whole window) or any OpenAI-compatible LLM that invents its own group names. Featured in awesome-jev.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/astonycat/jev-tab-grouper/) · License: MIT
 
 - [**jev-trading**](https://github.com/EthanAlgoX/jev-trading) — \*\*Jev Trading is a stock decision service that runs on your computer.\*\* Use the web workbench or call it from your own software over HTTP. It sends market data, indicators, fundamentals, and news collected by AIStock to a model, then returns a structured decision with a record of the evidence.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2111,16 +2134,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/daniel4x/jevemon/) · License: GPL-3.0
-
-- [**JevTools**](https://github.com/RileyCarney/JevTools) — A toolkit, knowledge base, web cockpit, and reference implementation for building AI applications with \*\*Jev (TypeSafe System One)\*\* via \*\*OpenRouter Alpha Decisions\*\* and \*\*TypeSafe Direct API\*\*.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/rileycarney/jevtools/) · License: GPL-3.0
-
-- [**robo-harness**](https://github.com/grmkris/robo-harness) — SO-101 robot-arm workbench combining Bun/Effect and Python drivers, using Jev for joint action constraints.
-  - **Jev’s role in this entry**: Assesses spatial coordinates and sensor states, using Jev to select safe step actions within bounded budgets.
-  - **What this project offers**: Extends TypeSafe Jev low-latency discrete judgments to physical-world robotic arm motion control.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/grmkris/robo-harness/) · License: License not declared
 
 - [**sqlite3-jev**](https://github.com/mattn/sqlite3-jev) — SQLite C extension enabling TypeSafe Jev judgments as native SQL functions for semantic scoring and choices.
   - **Jev’s role in this entry**: Registers custom functions like jev\_choice and jev\_score directly inside the SQLite query pipeline.
@@ -2157,15 +2170,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/snjrusmn/jev-humanizer/) · License: MIT
 
+- [**jev-intent-classification**](https://github.com/viniciusfinger/jev-intent-classification) — JEV intent classification using Python
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/viniciusfinger/jev-intent-classification/) · License: License not declared
+
 - [**jev-storyboard-lab**](https://github.com/jimmyliao/jev-storyboard-lab) — (\`agent\_framework.foundry.FoundryChatClient\` is a different client this repo doesn't use — its \`credential\` parameter only accepts Azure AD token credentials, not an API key. If you only have a key-based Azure OpenAI resource, \`OpenAIChatClient\` is the path that actually works.)
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jimmyliao/jev-storyboard-lab/) · License: MIT
-
-- [**jev-writer**](https://github.com/Kaos599/jev-writer) — Unlike generative writing assistants that flatter drafts, jev-writer enforces strict statistical safeguards: an observational power gate, date-confound controls, and Benjamini-Hochberg false-discovery corrections. It reports what it finds in plain English and refuses to state findings when sample sizes cannot support them.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kaos599/jev-writer/) · License: MIT
 
 - [**jevscan**](https://github.com/jevbook/jevscan) — An EVM Token screening tool with library, CLI and MCP interfaces for market-feature-based risk judgments.
   - **Jev’s role in this entry**: Uses a deterministic local engine by default; a TypeSafe key enables real Jev judgments over features.
@@ -2201,11 +2214,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/0xshikhar/jev-fuse/) · License: Apache-2.0
-
-- [**jev-intent-classification**](https://github.com/viniciusfinger/jev-intent-classification) — JEV intent classification using Python
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/viniciusfinger/jev-intent-classification/) · License: License not declared
 
 - [**jev-py-integration**](https://github.com/EmiRoberti77/jev-py-integration) — Jev System one AI model, very fast decision making engine. Jev AI will use input tokens but no output tokens
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2380,25 +2388,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Helps examine task-specific accuracy and whether confidence scores support chosen thresholds.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/abdelstark/jev-benchmarks/) · License: Apache-2.0
 
-- [**typesafe-playground**](https://github.com/kavehmz/typesafe-playground) — Interactive Jev experiments for support-routing previews and 3D driving simulations.
-  - **Jev’s role in this entry**: Judges support messages or chooses lanes and target speed from structured simulated sensors.
-  - **What this project offers**: Shows inputs, probabilities and resulting behavior together.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kavehmz/typesafe-playground/) · License: License not declared
-
 - [**jev-pref**](https://github.com/doeixd/jev-pref) — Turns AGENTS.md preferences into rules checked by Jev against hunks, staged files or PRs.
   - **Jev’s role in this entry**: Jev classifies change evidence against configured rules; code maps answers to review outcomes.
   - **What this project offers**: Feeds semantic-rule findings to coding Agents without replacing type checks, tests or security audits.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/doeixd/jev-pref/) · License: MIT
 
-- [**jev-rerank-bench**](https://github.com/anessbelbati/jev-rerank-bench) — Compares Jev, dedicated rerankers and chat models on the same retrieved passages.
-  - **Jev’s role in this entry**: Ranks candidate passages with Choice, Noul and rubric scores, then computes retrieval metrics.
-  - **What this project offers**: Publishes raw responses, scoring code and per-dataset results for inspection.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/anessbelbati/jev-rerank-bench/) · License: MIT
+- [**typesafe-playground**](https://github.com/kavehmz/typesafe-playground) — Interactive Jev experiments for support-routing previews and 3D driving simulations.
+  - **Jev’s role in this entry**: Judges support messages or chooses lanes and target speed from structured simulated sensors.
+  - **What this project offers**: Shows inputs, probabilities and resulting behavior together.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kavehmz/typesafe-playground/) · License: License not declared
 
 - [**jevcal**](https://github.com/abhixhek/jevcal) — A toolkit for evaluating Jev probabilities on labeled data, selecting confidence thresholds and checking model drift.
   - **Jev’s role in this entry**: Runs fixed questions and measures accuracy, calibration, coverage and escalation rates.
   - **What this project offers**: Connects threshold selection and model-change checks to reports and CI.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/abhixhek/jevcal/) · License: MIT
+
+- [**jev-rerank-bench**](https://github.com/anessbelbati/jev-rerank-bench) — Compares Jev, dedicated rerankers and chat models on the same retrieved passages.
+  - **Jev’s role in this entry**: Ranks candidate passages with Choice, Noul and rubric scores, then computes retrieval metrics.
+  - **What this project offers**: Publishes raw responses, scoring code and per-dataset results for inspection.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/anessbelbati/jev-rerank-bench/) · License: MIT
 
 - [**jev-benchmark**](https://github.com/wondertwins/jev-benchmark) — Benchmarks Jev on chess moves and identifying which game NPC a player addresses.
   - **Jev’s role in this entry**: Selects legal chess moves or judges whether an utterance addresses each NPC.
@@ -2624,15 +2632,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/taodav/jev_deep_rl/) · License: License not declared
 
-- [**JevBird**](https://github.com/leftspace89/JevBird) — A Python Flappy Bird game where code simulates candidate routes and Jev picks one.
-  - **Jev’s role in this entry**: For each new pipe, Jev selects a route and the game executes its scheduled flaps.
-  - **What this project offers**: Visualizes candidate trajectories, probabilities and the selected path.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/leftspace89/jevbird/) · License: MIT
-
 - [**jev-robotics-demo**](https://github.com/FazalAAli/jev-robotics-demo) — A MuJoCo arm demo where local code proposes candidate moves and Jev chooses the target, grasp or release, and completion.
   - **Jev’s role in this entry**: Chooses among candidate targets, grasp or release, and a done Noul.
   - **What this project offers**: Candidate motions are generated in a local physics copy; Jev only chooses. Author-reported timings were not retested here.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/fazalaali/jev-robotics-demo/) · License: MIT
+
+- [**JevBird**](https://github.com/leftspace89/JevBird) — A Python Flappy Bird game where code simulates candidate routes and Jev picks one.
+  - **Jev’s role in this entry**: For each new pipe, Jev selects a route and the game executes its scheduled flaps.
+  - **What this project offers**: Visualizes candidate trajectories, probabilities and the selected path.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/leftspace89/jevbird/) · License: MIT
 
 - [**jev-arena-nanojev**](https://github.com/liao96312/jev-arena-nanojev) — Jev Arena is a fully local grid tactical game arena where NanoJev, rule agents and search algorithms make per-step move, attack, shoot, heal, dash and environment-interaction decisions across multiple levels with a Chinese Pygame interface.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2882,20 +2890,35 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Keeps decision logs while some clients remain observation-only or choose whether to follow suggestions.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/felpsdev/jev-classifier/) · License: MIT
 
+- [**jev-mcp**](https://github.com/BYK/jev-mcp) — An evaluation-focused Jev MCP server for individual questions, batch processing and question or threshold comparisons.
+  - **Jev’s role in this entry**: Runs typed questions and uses labeled samples to measure accuracy and calibration.
+  - **What this project offers**: Makes question design and threshold choices inspectable through sample results.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/byk/jev-mcp/) · License: MIT
+
+- [**jev-playwright-mcp**](https://github.com/krw82/jev-playwright-mcp) — Jev-augmented Playwright MCP proxy — page-state triage, prompt-injection shielding, goal-based snapshot pruning, risky-action gating. Drop-in wrapper around @playwright/mcp for any coding agent.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/krw82/jev-playwright-mcp/) · License: MIT
+
+- [**jev-rust-review**](https://github.com/kindintelligence/jev-rust-review) — Rust-aware code review for Claude Code and coding agents, powered by TypeSafe Jev
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kindintelligence/jev-rust-review/) · License: MIT
+
 - [**jev-skill-router**](https://github.com/himomohi/jev-skill-router) — Keep skill catalogs outside the main LLM context. Jev selects relevant skills through one read-only MCP tool.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/himomohi/jev-skill-router/) · License: MIT
 
+- [**openrouter-jev-mcp**](https://github.com/ctmx/openrouter-jev-mcp) — A Python decision gateway and Model Context Protocol (MCP) server exposing TypeSafe's Jev model through OpenRouter's decisions endpoint to Claude Code, Codex, and Cursor agents.
+  - **Jev’s role in this entry**: The server exposes Jev Choice (\`jev\_classify\`), Score (\`jev\_score\`), and Noul (\`jev\_check\`) decisions over standard stdio MCP to AI coding agents, executing requests against OpenRouter's decisions endpoint:
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ctmx/openrouter-jev-mcp/) · License: MIT
+
 - [**tenbin**](https://github.com/simota/tenbin) — Documentation, an MCP server and a Skill for designing Jev judgments with question linting, batch evaluation and calibration.
   - **Jev’s role in this entry**: Runs Choice, Score and Noul over samples and uses measured results to design local thresholds.
   - **What this project offers**: Connects question design, sample evaluation and runtime rules.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/simota/tenbin/) · License: MIT
-
-- [**jev-mcp**](https://github.com/BYK/jev-mcp) — An evaluation-focused Jev MCP server for individual questions, batch processing and question or threshold comparisons.
-  - **Jev’s role in this entry**: Runs typed questions and uses labeled samples to measure accuracy and calibration.
-  - **What this project offers**: Makes question design and threshold choices inspectable through sample results.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/byk/jev-mcp/) · License: MIT
 
 - [**jev-mcp**](https://github.com/CodeIA-Academy/jev-mcp) — MCP local que expone Jev (TypeSafe) como herramienta para Claude Code, Codex, Hermes y cualquier agente: ask\_jev y list\_jev\_models, sin dependencias
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2916,16 +2939,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wangkuangkuang/jev-mcp-server/) · License: MIT
-
-- [**jev-playwright-mcp**](https://github.com/krw82/jev-playwright-mcp) — Jev-augmented Playwright MCP proxy — page-state triage, prompt-injection shielding, goal-based snapshot pruning, risky-action gating. Drop-in wrapper around @playwright/mcp for any coding agent.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/krw82/jev-playwright-mcp/) · License: MIT
-
-- [**jev-rust-review**](https://github.com/kindintelligence/jev-rust-review) — Rust-aware code review for Claude Code and coding agents, powered by TypeSafe Jev
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kindintelligence/jev-rust-review/) · License: MIT
 
 - [**jev-tool-search**](https://github.com/kachar/jev-tool-search) — Tool search for LLM agents: BM25 vs embeddings vs rerankers vs Jev on 525 real MCP tools, plus an experimental Jev search engine
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -2951,11 +2964,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Builds state and questions from input items, calls Jev and appends or separately outputs answers.
   - **What this project offers**: Supports form or JSON question configuration and use as an Agent tool.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/n3ndor/n8n-nodes-typesafe-jev/) · License: MIT
-
-- [**openrouter-jev-mcp**](https://github.com/ctmx/openrouter-jev-mcp) — A Python decision gateway and Model Context Protocol (MCP) server exposing TypeSafe's Jev model through OpenRouter's decisions endpoint to Claude Code, Codex, and Cursor agents.
-  - **Jev’s role in this entry**: The server exposes Jev Choice (\`jev\_classify\`), Score (\`jev\_score\`), and Noul (\`jev\_check\`) decisions over standard stdio MCP to AI coding agents, executing requests against OpenRouter's decisions endpoint:
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ctmx/openrouter-jev-mcp/) · License: MIT
 
 - [**toolJev**](https://github.com/VishiATChoudhary/toolJev) — Code Mode for MCP, where the sub-model is a calibrated decision model (Jev), not an LLM. Benchmarked on MCPToolBench++, LiveMCPBench, When2Call and live Claude agents.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3160,25 +3168,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Makes model routing explicit while retaining the selected route for the session.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/wundercorp/loki/) · License: MIT
 
-- [**muse-jev-playbook**](https://github.com/Bodila51/muse-jev-playbook) — Jev decision layer for Muse: a fast, cheap TypeSafe AI gate before expensive agent work — confidence policy, recipes, reference router, honest measurement.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bodila51/muse-jev-playbook/) · License: MIT
-
 - [**JevLoop**](https://github.com/zjunlp/JevLoop) — The agent loop where decisions don't cost a large language model call. Zero deps, runs offline, no API key needed.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zjunlp/jevloop/) · License: Apache-2.0
 
+- [**muse-jev-playbook**](https://github.com/Bodila51/muse-jev-playbook) — Jev decision layer for Muse: a fast, cheap TypeSafe AI gate before expensive agent work — confidence policy, recipes, reference router, honest measurement.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bodila51/muse-jev-playbook/) · License: MIT
+
 - [**jev-router**](https://github.com/dirien/jev-router) — Pass-through model router for Claude Code and Codex CLI that picks a model tier per human turn with Jev, TypeSafe AI's decision model
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/dirien/jev-router/) · License: Apache-2.0
-
-- [**switchboard**](https://github.com/ruban-24/switchboard) — Switchboard is a local Claude Code and Codex router. It assesses a new conversation's task with Jev, applies deterministic confidence rules to select the model and reasoning effort, and pins that route through follow-ups, tool calls, and resume to avoid unnecessary prompt-cache disruption.
-  - **Jev’s role in this entry**: Jev classifies the task's capability tier, whether context is sufficient, and the lowest adequate reasoning effort for the candidate model. Application code applies confidence floors, maps the result to a model and effort, and persists that pair for later turns and tool continuations.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ruban-24/switchboard/) · License: Apache-2.0
 
 - [**jev-opus**](https://github.com/WXK-AI/jev-opus) — Claude Opus 5.5 with the effort level re-decided every step by the TypeSafe Jev reflex — without breaking the prompt cache. CLI + Claude Code plugin.
   - **Jev’s role in this entry**: Jev chooses the reasoning effort level (low/medium/high) when a prompt arrives and after every tool batch, raising effort on failures and dropping back on pass.
@@ -3190,15 +3193,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/vizuh/sabi/) · License: MIT
 
-- [**laya-jev-lab**](https://github.com/yibie/laya-jev-lab) — Independent measurements of typed-decision models: Jev (TypeSafe API) vs Laya (open weights), and a local-first cascade that matches Jev's accuracy at 1.8x the speed
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+- [**switchboard**](https://github.com/ruban-24/switchboard) — Switchboard is a local Claude Code and Codex router. It assesses a new conversation's task with Jev, applies deterministic confidence rules to select the model and reasoning effort, and pins that route through follow-ups, tool calls, and resume to avoid unnecessary prompt-cache disruption.
+  - **Jev’s role in this entry**: Jev classifies the task's capability tier, whether context is sufficient, and the lowest adequate reasoning effort for the candidate model. Application code applies confidence floors, maps the result to a model and effort, and persists that pair for later turns and tool continuations.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/yibie/laya-jev-lab/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ruban-24/switchboard/) · License: Apache-2.0
 
 - [**pi-jev-router**](https://github.com/mejiasd3v/pi-jev-router) — Automatic model router for Pi coding assistant: integrates Jev via Vercel AI Gateway to dispatch tasks efficiently.
   - **Jev’s role in this entry**: Quickly estimates task complexity from code context and user query, routing between SLMs and frontier models.
   - **What this project offers**: Brings out-of-the-box intelligent cost-saving routing directly into the Pi terminal workflow.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mejiasd3v/pi-jev-router/) · License: MIT
+
+- [**laya-jev-lab**](https://github.com/yibie/laya-jev-lab) — Independent measurements of typed-decision models: Jev (TypeSafe API) vs Laya (open weights), and a local-first cascade that matches Jev's accuracy at 1.8x the speed
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/yibie/laya-jev-lab/) · License: MIT
 
 - [**jev-for-all**](https://github.com/emirbartu/jev-for-all) — Jev for every agentic development workflow — the System One decision model wired into whatever harness an agent codes in: OpenCode today, Claude Code and Hermes adapters next.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3235,15 +3243,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/idovmamane/dejevu/) · License: MIT
 
-- [**jevia**](https://github.com/assistant-ui/jevia) — outcome-aware & adaptive model routing for coding agents with deterministic cache powered by Jev
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/assistant-ui/jevia/) · License: MIT
-
 - [**Jev-Auto-Router**](https://github.com/miniLV/Jev-Auto-Router) — Jev Auto Router (Jev Router): experimental per-call GPT model routing for Codex via TypeSafe Jev and a local Responses proxy, with independent task verification.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/minilv/jev-auto-router/) · License: Apache-2.0
+
+- [**jevia**](https://github.com/assistant-ui/jevia) — outcome-aware & adaptive model routing for coding agents with deterministic cache powered by Jev
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/assistant-ui/jevia/) · License: MIT
 
 - [**opencode-jev-router**](https://github.com/robertn702/opencode-jev-router) — Adaptive reasoning effort for OpenCode via Jev, with an in-process plugin and Responses API proxy
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3255,6 +3263,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/alexpeclub/jev-model-router-claude-code/) · License: License not declared
 
+- [**opencode-jev-orchestrator**](https://github.com/aaronshaf/opencode-jev-orchestrator) — An OpenCode orchestrator that keeps a cheap sticky parent model and, when Jev flags a hard turn, escalates through a child subagent.
+  - **Jev’s role in this entry**: Scores task, reasoning, and tool complexity, then chooses fast / balanced / strong / long; local policy stays, escalates, or fans out.
+  - **What this project offers**: Keeps a cheap sticky parent model and opens a stronger child only when Jev flags a hard turn.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/aaronshaf/opencode-jev-orchestrator/) · License: MIT
+
 - [**tool-prune**](https://github.com/hemanth/tool-prune) — Calibrated tool selection and schema pruning for AI agents. Dual-engine: zero-dependency offline TurboQuant or TypeSafe System One (Jev). Prunes candidate MCP tools and schemas down to the relevant set before calling LLMs to eliminate hallucinations and save tokens.
   - **Jev’s role in this entry**: Jev makes atomic decisions on tool selection (\`choice\`) and whether user intent requires open-ended creative generation (\`noul\`), with calibrated probability distributions.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -3264,11 +3277,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/satviksinha/jev-model-router/) · License: MIT
-
-- [**opencode-jev-orchestrator**](https://github.com/aaronshaf/opencode-jev-orchestrator) — An OpenCode orchestrator that keeps a cheap sticky parent model and, when Jev flags a hard turn, escalates through a child subagent.
-  - **Jev’s role in this entry**: Scores task, reasoning, and tool complexity, then chooses fast / balanced / strong / long; local policy stays, escalates, or fans out.
-  - **What this project offers**: Keeps a cheap sticky parent model and opens a stronger child only when Jev flags a hard turn.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/aaronshaf/opencode-jev-orchestrator/) · License: MIT
 
 - [**jev-codex-pilot**](https://github.com/Charlyhno-eng/jev-codex-pilot) — A Codex overlay incorporating JEV to make the best decisions regarding model selection and depth of reasoning. All while automating the process via an automated Kanban system.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3285,6 +3293,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/trietphan/jev-claw/) · License: MIT
 
+- [**jev-research**](https://github.com/sherajdev/jev-research) — A Jev and Herdr integration guide with a prototype for routing tasks to different Agents.
+  - **Jev’s role in this entry**: Uses task and repository state to choose an executor and assess risk and dispatch readiness.
+  - **What this project offers**: Provides a readable, editable example of multi-Agent task routing.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sherajdev/jev-research/) · License: MIT
+
 - [**jev-agent-hooks**](https://github.com/onlyjq04/jev-agent-hooks) — TypeSafe Jev hooks for Claude Code, Codex and pi: per-turn skill suggestion and subagent model routing
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -3300,20 +3313,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/gholtzap/jev-codex-model-and-effort-router/) · License: License not declared
 
-- [**jev-research**](https://github.com/sherajdev/jev-research) — A Jev and Herdr integration guide with a prototype for routing tasks to different Agents.
-  - **Jev’s role in this entry**: Uses task and repository state to choose an executor and assess risk and dispatch readiness.
-  - **What this project offers**: Provides a readable, editable example of multi-Agent task routing.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/sherajdev/jev-research/) · License: MIT
-
 - [**jev-route**](https://github.com/mcftira/jev-route) — \*\*Run it. Log it. Distill it. Own it.\*\*
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/mcftira/jev-route/) · License: Apache-2.0
 
+- [**jev-routing-experiment**](https://github.com/TokenTrim/jev-routing-experiment) — Benchmarking TypeSafe's Jev decision model as a cost-efficient LLM router on RouterArena
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tokentrim/jev-routing-experiment/) · License: Apache-2.0
+
 - [**jevbus**](https://github.com/zkjoie/jevbus) — A streaming event bus whose routing, subscription and consumption are decided by a probabilistic judge. The reference judge is TypeSafe AI's Jev (System One) model: send it a payload and a set of typed questions, get back calibrated probabilities instead of prose.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zkjoie/jevbus/) · License: Apache-2.0
+
+- [**openclaw-jev-plugin**](https://github.com/herval/openclaw-jev-plugin) — A silenced message never reaches the language model, so it costs one Jev call and no model tokens. Direct messages always get an answer unless you choose to gate them too.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/herval/openclaw-jev-plugin/) · License: License not declared
 
 - [**tiershift**](https://github.com/iamvatsalpatel/tiershift) — Policy-driven model routing framework routing every LLM call to the cheapest capable tier in ~180 ms via TypeSafe Jev.
   - **Jev’s role in this entry**: Uses declarative YAML policies evaluated by Jev discrete classification without requiring pre-collected training data.
@@ -3364,16 +3382,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Selects a model from the task and candidate profiles and records probabilities and runs.
   - **What this project offers**: Exports observations for checking routing choices against user preferences.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/hugo-alves/jev-router-playground/) · License: MIT
-
-- [**jev-routing-experiment**](https://github.com/TokenTrim/jev-routing-experiment) — Benchmarking TypeSafe's Jev decision model as a cost-efficient LLM router on RouterArena
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tokentrim/jev-routing-experiment/) · License: Apache-2.0
-
-- [**openclaw-jev-plugin**](https://github.com/herval/openclaw-jev-plugin) — A silenced message never reaches the language model, so it costs one Jev call and no model tokens. Direct messages always get an answer unless you choose to gate them too.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/herval/openclaw-jev-plugin/) · License: License not declared
 
 - [**cribrix**](https://github.com/david96182/cribrix) — Self-hosted RAG service that uses Jev to decide which retrieved context reaches the generator and whether the generated answer is released.
   - **Jev’s role in this entry**: All calls go through the official typesafe-sdk (AsyncTypeSafeClient.system\_one):
@@ -3478,20 +3486,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/fstandhartinger/jevbench/) · License: MIT
 
-- [**instructor-php**](https://github.com/cognesy/instructor-php) — A TypeSafe Decision driver within Instructor PHP’s Polyglot module.
-  - **Jev’s role in this entry**: Converts application state and typed questions into Jev requests and maps responses to PHP decision objects.
-  - **What this project offers**: Lets PHP applications use Jev through a shared Decision interface.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/cognesy/instructor-php/) · License: MIT
+- [**pi-fabric**](https://github.com/monotykamary/pi-fabric) — Pi’s programmable runtime includes an optional Jev loop for observing state, making decisions and running bounded actions.
+  - **Jev’s role in this entry**: Programmed questions feed Jev judgments into local action logic under runtime budgets.
+  - **What this project offers**: Keeps observation, judgment and execution steps in a reusable program.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/monotykamary/pi-fabric/) · License: MIT
 
 - [**jev-visual**](https://github.com/hr98w/jev-visual) — Local Jev-like visual inference experiment on Apple Silicon Mac. Scores and classifies single images across multiple questions with 3 playable game demos.
   - **Jev’s role in this entry**: Reuses multimodal visual context to score candidate answers directly from logits without autoregressive generation.
   - **What this project offers**: Brings Jev-style single-pass multi-question scoring to local edge vision on Apple Silicon.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/hr98w/jev-visual/) · License: MIT
 
-- [**pi-fabric**](https://github.com/monotykamary/pi-fabric) — Pi’s programmable runtime includes an optional Jev loop for observing state, making decisions and running bounded actions.
-  - **Jev’s role in this entry**: Programmed questions feed Jev judgments into local action logic under runtime budgets.
-  - **What this project offers**: Keeps observation, judgment and execution steps in a reusable program.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/monotykamary/pi-fabric/) · License: MIT
+- [**instructor-php**](https://github.com/cognesy/instructor-php) — A TypeSafe Decision driver within Instructor PHP’s Polyglot module.
+  - **Jev’s role in this entry**: Converts application state and typed questions into Jev requests and maps responses to PHP decision objects.
+  - **What this project offers**: Lets PHP applications use Jev through a shared Decision interface.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/cognesy/instructor-php/) · License: MIT
 
 - [**typesafe-sdk-python**](https://github.com/typesafe-ai/typesafe-sdk-python) — Official TypeSafe Python SDK with synchronous and asynchronous clients for Jev System One, plus question and answer types.
   - **Jev’s role in this entry**: system\_one sends context and choice, score or yes/no questions to the API, then parses answers by question name.
@@ -3578,15 +3586,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zaious/jev-capability-atlas/) · License: MIT
 
-- [**jev-to-answer**](https://github.com/csskrtao/jev-to-answer) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/csskrtao/jev-to-answer/) · License: License not declared
-
 - [**jev-rs**](https://github.com/yijunyu/jev-rs) — System One judgments (noul/choice/score) from any LLM in one prefill — a Rust, Jev-compatible /v1/systemone engine
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/yijunyu/jev-rs/) · License: Apache-2.0
+
+- [**jev-to-answer**](https://github.com/csskrtao/jev-to-answer) — This project integrates Jev to provide structured decisions for its workflow. See the repository for implementation details.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/csskrtao/jev-to-answer/) · License: License not declared
 
 - [**jevalyn**](https://github.com/Ray-Hughes/jevalyn) — The decision layer for your Rails app. A Rails-native wrapper around TypeSafe's Jev System One API: typed, calibrated decisions in your control flow.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3598,25 +3606,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Advisor failures return to the original path rather than guaranteeing better parameters or lower costs.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tannermidd/specpi/) · License: MIT
 
-- [**discern**](https://github.com/doeixd/discern) — A semantic control-flow library for Effect: Jev's \`Choice\` / \`Noul\` / \`Score\` answers become typed branches. Thresholds are caller-supplied, and an answer below them takes an explicit \`Uncertain\` branch the compiler forces you to handle rather than being rounded up to the top label. Procedure routing filters candidates with deterministic predicates first and skips the model call entirely when one candidate survives.
+- [**jev-ai-sdk-form-router**](https://github.com/vercel-labs/jev-ai-sdk-form-router) — Route form submissions to the right people with Jev and AI SDK.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/doeixd/discern/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/vercel-labs/jev-ai-sdk-form-router/) · License: MIT
 
 - [**swift-jev**](https://github.com/d-date/swift-jev) — A Swift client for TypeSafe AI's Jev — typed judgements, not text
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/d-date/swift-jev/) · License: MIT
 
+- [**discern**](https://github.com/doeixd/discern) — A semantic control-flow library for Effect: Jev's \`Choice\` / \`Noul\` / \`Score\` answers become typed branches. Thresholds are caller-supplied, and an answer below them takes an explicit \`Uncertain\` branch the compiler forces you to handle rather than being rounded up to the top label. Procedure routing filters candidates with deterministic predicates first and skips the model call entirely when one candidate survives.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/doeixd/discern/) · License: MIT
+
 - [**swift-typesafe**](https://github.com/ainame/swift-typesafe) — A community Swift TypeSafe client with typed questions, dynamic questions and response parsing.
   - **Jev’s role in this entry**: Sends Jev questions through systemOne and exposes answers as Swift types or dynamic maps.
   - **What this project offers**: Supports integration on its documented platforms; Swift and OS requirements are version-specific.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ainame/swift-typesafe/) · License: MIT
-
-- [**jev-ai-sdk-form-router**](https://github.com/vercel-labs/jev-ai-sdk-form-router) — Route form submissions to the right people with Jev and AI SDK.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/vercel-labs/jev-ai-sdk-form-router/) · License: MIT
 
 - [**jev-dspy-lab**](https://github.com/jmanhype/jev-dspy-lab) — Reproducible calibration and selective-risk benchmarks for Jev/TypeSafe decisions in DSPy workflows
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3638,15 +3646,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Runs a high-performance decision server locally compatible with Jev APIs, without relying on proprietary cloud APIs.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/samratduttaofficial/watersheep/) · License: Apache-2.0
 
+- [**hermes-jev-plugin**](https://github.com/ajensenwaud/hermes-jev-plugin) — TypeSafe Jev (System One) decision tools for Hermes Agent: jev\_check / jev\_route / jev\_score / jev\_evaluate
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ajensenwaud/hermes-jev-plugin/) · License: MIT
+
 - [**usejev**](https://github.com/ali-master/usejev) — Run Laya locally with Bun: native ONNX inference, a TypeSafe-compatible API, and a bilingual decision playground.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ali-master/usejev/) · License: License not declared
 
-- [**hermes-jev-plugin**](https://github.com/ajensenwaud/hermes-jev-plugin) — TypeSafe Jev (System One) decision tools for Hermes Agent: jev\_check / jev\_route / jev\_score / jev\_evaluate
+- [**jev-numeric**](https://github.com/Bring-AI/jev-numeric) — \*\*Both are multiway decision trees; decimal-digit decoding is a ten-way instance.\*\* On an aligned decimal grid, they can have identical branches and leaves, expressed through different prompts. The digit is a \*\*Choice option\*\*, not a vocabulary token; Jev returns the option probabilities directly.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ajensenwaud/hermes-jev-plugin/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bring-ai/jev-numeric/) · License: Custom license
 
 - [**typesafe-sdk-java**](https://github.com/Premo-Cloud/typesafe-sdk-java) — A community Java TypeSafe client with a Spring Boot Starter for configuring Jev calls.
   - **Jev’s role in this entry**: Sends Java state and Noul, Choice, and Score questions to System One and parses typed results.
@@ -3658,11 +3671,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Brings native Jev decision primitives to the .NET ecosystem with dependency injection integration and configurable retry policies.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/saibimajdi/typesafeai-dotnet-sdk/) · License: MIT
 
-- [**jev-numeric**](https://github.com/Bring-AI/jev-numeric) — \*\*Both are multiway decision trees; decimal-digit decoding is a ten-way instance.\*\* On an aligned decimal grid, they can have identical branches and leaves, expressed through different prompts. The digit is a \*\*Choice option\*\*, not a vocabulary token; Jev returns the option probabilities directly.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bring-ai/jev-numeric/) · License: Custom license
-
 - [**jebadiah**](https://github.com/getainode/jebadiah) — Jebadiah, an open System One decision model: trainer, data builders, evals and every run record
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -3673,25 +3681,35 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/dougsong/jev-android/) · License: MIT
 
+- [**jev-layer**](https://github.com/typakon4/jev-layer) — Portable System-1 decision layer for agent harnesses with host-owned routing, receipts, replay, and fail-open integrations.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/typakon4/jev-layer/) · License: MIT
+
 - [**jev-web-analyzer**](https://github.com/replynodes/jev-web-analyzer) — See what Jev thinks about your SaaS website — powered by ReplyNodes web context and Vercel AI Gateway.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/replynodes/jev-web-analyzer/) · License: Apache-2.0
+
+- [**jevrag**](https://github.com/ajanm007/jevrag) — Replaces hardcoded RAG thresholds with explicit calibrated decision points. Five primitives (retrieval stopping, chunk splitting, context selection, answer abstention, cache trust) behind one swappable state → Decision → confidence → action interface, each evaluated on real datasets with a calibration harness that reports honestly.
+  - **Jev’s role in this entry**: jevrag/decision.py — the \`ask(state, questions) -\> DecisionResult\` method calls \`api.typesafe.ai/v1/systemone\` via the Jev backend. All five primitives in \`jevrag/primitives/\` route through this method.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ajanm007/jevrag/) · License: MIT
 
 - [**typesafe-sdk-go**](https://github.com/Tangerg/typesafe-sdk-go) — A Go TypeSafe SDK for defining typed questions and reading Jev choices, scores, and probabilities.
   - **Jev’s role in this entry**: Validates requests, calls System One, and decodes typed answers.
   - **What this project offers**: Packages authentication, requests, and error handling in a reusable Go client.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/tangerg/typesafe-sdk-go/) · License: MIT
 
+- [**daf-jev**](https://github.com/docxology/daf-jev) — A Python toolkit for Jev requests, batch evaluation, calibration and MCP access.
+  - **Jev’s role in this entry**: Builds Noul, Choice and Score questions, then combines returned probabilities through local functions.
+  - **What this project offers**: Reuses request, failure-recording and evaluation interfaces across experiments.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/docxology/daf-jev/) · License: MIT
+
 - [**jev-dsl**](https://github.com/inanna-malick/jev-dsl) — An early Haskell DSL that describes labeled Jev questions, renders requests and decodes matching answers.
   - **Jev’s role in this entry**: Uses inferred types and labeled handlers to connect Choice answers to predefined program branches.
   - **What this project offers**: Keeps questions, result types and branch handling in one inspectable definition.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/inanna-malick/jev-dsl/) · License: MIT
-
-- [**jev-layer**](https://github.com/typakon4/jev-layer) — Portable System-1 decision layer for agent harnesses with host-owned routing, receipts, replay, and fail-open integrations.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/typakon4/jev-layer/) · License: MIT
 
 - [**jevgo**](https://github.com/devbackend/jevgo) — Unofficial Go client for the TypeSafe AI System One API (Jev) — typed questions in, calibrated answers out.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3713,20 +3731,25 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Uses Zod’s error structure to attach semantic validation issues to fields.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/jomatsu/zod-jev/) · License: MIT
 
-- [**daf-jev**](https://github.com/docxology/daf-jev) — A Python toolkit for Jev requests, batch evaluation, calibration and MCP access.
-  - **Jev’s role in this entry**: Builds Noul, Choice and Score questions, then combines returned probabilities through local functions.
-  - **What this project offers**: Reuses request, failure-recording and evaluation interfaces across experiments.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/docxology/daf-jev/) · License: MIT
+- [**jev**](https://github.com/kataras/jev) — A Go client for the TypeSafe AI's System One API and its model, Jev.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kataras/jev/) · License: MIT
 
 - [**jev\_jsonschema**](https://github.com/Kiln-AI/jev_jsonschema) — \`probabilities\` is keyed by your schema's values, not Jev's internal labels, so a score of \`1\`–\`5\` reads as \`"1"\`–\`"5"\` and not \`"0"\`–\`"4"\`. Noul questions carry no confidence of their own, so \`confidence\` is \`None\` for booleans and numbers.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kiln-ai/jev_jsonschema/) · License: MIT
 
-- [**jevrag**](https://github.com/ajanm007/jevrag) — Replaces hardcoded RAG thresholds with explicit calibrated decision points. Five primitives (retrieval stopping, chunk splitting, context selection, answer abstention, cache trust) behind one swappable state → Decision → confidence → action interface, each evaluated on real datasets with a calibration harness that reports honestly.
-  - **Jev’s role in this entry**: jevrag/decision.py — the \`ask(state, questions) -\> DecisionResult\` method calls \`api.typesafe.ai/v1/systemone\` via the Jev backend. All five primitives in \`jevrag/primitives/\` route through this method.
+- [**jev-ood-calibration**](https://github.com/scienthoon/jev-ood-calibration) — Independent calibration test of TypeSafe's Jev on a task it cannot have seen: 900 rule-generated support tickets (choice / score / boolean) plus 3 public benchmarks via Vercel AI Gateway. Raw responses, ECE with noise floor, temperature refit, per-type sign of miscalibration. Reproducible for ~$0.06.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ajanm007/jevrag/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/scienthoon/jev-ood-calibration/) · License: MIT
+
+- [**Jev-PhoneControl**](https://github.com/ZTRRTUO/Jev-PhoneControl) — Visual Android automation powered by three agents: vision, a text-only supervisor, and TypeSafe JEV. Executes actions through ADB with a local web console.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ztrrtuo/jev-phonecontrol/) · License: Custom license
 
 - [**limpet**](https://github.com/noplan-inc/limpet) — A Stop hook guardrail for coding agents: prevents premature completion by judging plain-language rules via Jev.
   - **Jev’s role in this entry**: Intercepts agent termination signals, using Jev to verify if context meets natural language acceptance criteria.
@@ -3743,11 +3766,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Lets Ruby programs read choices, scores and probabilities directly.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/joshmn/typesafe-sdk/) · License: MIT
 
-- [**jev**](https://github.com/kataras/jev) — A Go client for the TypeSafe AI's System One API and its model, Jev.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kataras/jev/) · License: MIT
-
 - [**jev-go**](https://github.com/Stumble/jev-go) — A community Go SDK and CLI supporting TypeSafe directly and Vercel AI Gateway.
   - **Jev’s role in this entry**: Sends application state and questions to Jev and parses Choice, Score or Noul answers.
   - **What this project offers**: Packages requests and response parsing for typed decisions in applications.
@@ -3757,16 +3775,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/gudcks0305/jev-java/) · License: MIT
-
-- [**jev-ood-calibration**](https://github.com/scienthoon/jev-ood-calibration) — Independent calibration test of TypeSafe's Jev on a task it cannot have seen: 900 rule-generated support tickets (choice / score / boolean) plus 3 public benchmarks via Vercel AI Gateway. Raw responses, ECE with noise floor, temperature refit, per-type sign of miscalibration. Reproducible for ~$0.06.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/scienthoon/jev-ood-calibration/) · License: MIT
-
-- [**Jev-PhoneControl**](https://github.com/ZTRRTUO/Jev-PhoneControl) — Visual Android automation powered by three agents: vision, a text-only supervisor, and TypeSafe JEV. Executes actions through ADB with a local web console.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ztrrtuo/jev-phonecontrol/) · License: Custom license
 
 - [**jev-pilot**](https://github.com/h0j5bz0adh0-stack/jev-pilot) — Fast System-1 Decision, Arbitration & Safety Engine for Autonomous AI Agents (Powered by TypeSafe Jev)
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -3838,6 +3846,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/nanami-0713/dsh-jev-decide/) · License: MIT
 
+- [**jev-by-example**](https://github.com/ReallyArtificial/jev-by-example) — Ten runnable Jev examples for agent decisions: memory conflicts, tool-result checks, recovery, context selection, and handoffs. JavaScript, zero dependencies.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/reallyartificial/jev-by-example/) · License: MIT
+
 - [**jev-does-not-play-dice**](https://github.com/KantaHayashiAI/jev-does-not-play-dice) — Code, recorded outputs, and analysis scripts for probability-output experiments with Jev: fair random draws, Noul (Yes/No) questions, and forecast documents.
   - **Jev’s role in this entry**: The live evaluator calls hosted Jev through the Vercel AI SDK \`experimental\_evaluate\` path:
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
@@ -3847,6 +3860,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/rajmeet/jev-phone/) · License: MIT
+
+- [**jev-skills**](https://github.com/laguagu/jev-skills) — Practical agent skills and examples for building with Jev. API setup, routing, ranking, and evidence checks.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/laguagu/jev-skills/) · License: MIT
 
 - [**jev-starter**](https://github.com/hamakyo/jev-starter) — TypeScript patterns for thresholds, fallbacks, human review and evaluation on top of the TypeSafe SDK.
   - **Jev’s role in this entry**: Jev returns judgments; application policies choose automatic handling, fallback or human review.
@@ -3873,25 +3891,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/collapseindex/jev-builder/) · License: Custom license
 
-- [**jev-by-example**](https://github.com/ReallyArtificial/jev-by-example) — Ten runnable Jev examples for agent decisions: memory conflicts, tool-result checks, recovery, context selection, and handoffs. JavaScript, zero dependencies.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/reallyartificial/jev-by-example/) · License: MIT
-
 - [**jev-go-sdk**](https://github.com/ajayk/jev-go-sdk) — Dependency-free Go client for TypeSafe AI's System One API and the Jev model
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/ajayk/jev-go-sdk/) · License: Apache-2.0
 
-- [**jev-skills**](https://github.com/laguagu/jev-skills) — Practical agent skills and examples for building with Jev. API setup, routing, ranking, and evidence checks.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/laguagu/jev-skills/) · License: MIT
-
 - [**Jev4Mellea**](https://github.com/SoundBlaster/Jev4Mellea) — This is an unofficial, synchronous adapter. Jev evaluates text; it does not generate or repair it.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/soundblaster/jev4mellea/) · License: Apache-2.0
+
+- [**jevclient**](https://github.com/AboveColin/jevclient) — An asynchronous Python Jev client that batches typed questions in one request.
+  - **Jev’s role in this entry**: Calls TypeSafe through aiohttp and parses choices, scores and probabilities into objects.
+  - **What this project offers**: Fits existing async applications without parsing generated prose.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/abovecolin/jevclient/) · License: MIT
 
 - [**jevex**](https://github.com/jvsteiner/jevex) — An Agent experiment where Jev directs a tool loop, a chat model fills arguments and prose, and MCP tools execute.
   - **Jev’s role in this entry**: Jev selects the next action and approves the concrete call; tool results feed the next state.
@@ -3947,11 +3960,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/0xjba/jev-swap/) · License: MIT
-
-- [**jevclient**](https://github.com/AboveColin/jevclient) — An asynchronous Python Jev client that batches typed questions in one request.
-  - **Jev’s role in this entry**: Calls TypeSafe through aiohttp and parses choices, scores and probabilities into objects.
-  - **What this project offers**: Fits existing async applications without parsing generated prose.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/abovecolin/jevclient/) · License: MIT
 
 - [**jevish**](https://github.com/hemanth/jevish) — Every mode auto-curries when called with only the patterns:
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -4155,15 +4163,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Turns page judgments into reusable rules.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kitze/unclutter/) · License: MIT
 
-- [**interlinked-cli**](https://github.com/QuentinCody/interlinked-cli) — Interlinked adds optional Jev judgments and evidence checks to local coding-agent checks.
-  - **Jev’s role in this entry**: Assesses inputs such as test names, documentation claims and supporting evidence.
-  - **What this project offers**: Keeps model advice distinct from deterministic rules and records checks.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/quentincody/interlinked-cli/) · License: MIT
-
 - [**pi-warden**](https://github.com/DevMortimer/pi-warden) — Adds checks for project rules, out-of-scope actions, repeated failures, and completion claims to Pi Agents.
   - **Jev’s role in this entry**: Uses Jev to judge rule violations, irreversible actions, and task drift, feeding results back to the Agent.
   - **What this project offers**: Brings rule findings and actions needing confirmation into the active workflow.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/devmortimer/pi-warden/) · License: MIT
+
+- [**interlinked-cli**](https://github.com/QuentinCody/interlinked-cli) — Interlinked adds optional Jev judgments and evidence checks to local coding-agent checks.
+  - **Jev’s role in this entry**: Assesses inputs such as test names, documentation claims and supporting evidence.
+  - **What this project offers**: Keeps model advice distinct from deterministic rules and records checks.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/quentincody/interlinked-cli/) · License: MIT
 
 - [**pi-jev**](https://github.com/y0usaf/pi-jev) — A Pi extension that flags tool risks before execution and checks output for secrets and failure types.
   - **Jev’s role in this entry**: Jev scores destructive actions, scope and output risks; configuration chooses warnings or confirmation.
@@ -4184,6 +4192,14 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/openlayer-ai/jevals/) · License: MIT
+
+- [**onlyread**](https://github.com/onlyreadai/onlyread) — Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.
+  - **Entry type**: Integration
+  - **Jev relationship**: Jev implementation
+  - **Review basis**: Implementation material
+  - **Jev’s role in this entry**: Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.
+  - **What this project offers**: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/onlyreadai/onlyread/) · License: AGPL-3.0
 
 - [**jev-kit**](https://github.com/jonathanavis96/jev-kit) — Everything you need to run TypeSafe's Jev with Claude Code: a tool-call guard, tier guard, file search, browser agent, review, belay, compaction and installers.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -4225,28 +4241,30 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Demonstrates an approval integration; the author labels it a proof of concept, not production assurance.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/anpicasso/hermes-jev-approvals/) · License: MIT
 
-- [**onlyread**](https://github.com/onlyreadai/onlyread) — Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.
-  - **Entry type**: Integration
-  - **Jev relationship**: Jev implementation
-  - **Review basis**: Implementation material
-  - **Jev’s role in this entry**: Chrome extension uses Jev to judge data-changing requests, keeping AI agents read-only; source shows real Jev endpoint calls.
-  - **What this project offers**: References are pinned to a fixed revision; inclusion is not independent runtime or performance verification.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/onlyreadai/onlyread/) · License: AGPL-3.0
-
 - [**jev-edge**](https://github.com/kiwi0719/jev-edge) — Typed-judgment admission control at the traffic edge: three-layer prompt-injection and abuse filter for nginx/OpenResty, powered by TypeSafe Jev. Fail-open, cached, hot-reloadable.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/kiwi0719/jev-edge/) · License: Apache-2.0
+
+- [**jev-enforce**](https://github.com/erkamyaman/jev-enforce) — 📏 Claude Code plugin that makes Claude follow your CLAUDE.md: every reply and edit checked by TypeSafe Jev ✅
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/erkamyaman/jev-enforce/) · License: MIT
+
+- [**jev-engineering**](https://github.com/eugeniughelbur/jev-engineering) — A Claude Code tool-call gate. Clearly safe commands run with no permission prompt, clearly dangerous ones are blocked with the reason, and unclear ones get the normal prompt. Also ships review-router, a GitHub Action that routes AI code review to a full or quick read. Disclosure: I built and maintain it.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/eugeniughelbur/jev-engineering/) · License: MIT
 
 - [**pi-jev-sentinel**](https://github.com/harshwasan/pi-jev-sentinel) — Open-source Pi coding-agent extension that uses Jev to check tool calls before they run, scan files for prompt injection, flag risky replies, and keep secrets out of what it sends.
   - **Jev’s role in this entry**: Before each tool call, Jev receives the user's request (or pinned task), the proposed command, the agent's explanation, and recent conversation. It answers a Choice for intent (on task / off task / injected / needs more context) and a Score for risk (safe / needs approval / harmful). Local code turns these into run, ask the user, or warn. If Jev says more context would help, the extension adds it and asks again.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/harshwasan/pi-jev-sentinel/) · License: MIT
 
-- [**jev-engineering**](https://github.com/eugeniughelbur/jev-engineering) — A Claude Code tool-call gate. Clearly safe commands run with no permission prompt, clearly dangerous ones are blocked with the reason, and unclear ones get the normal prompt. Also ships review-router, a GitHub Action that routes AI code review to a full or quick read. Disclosure: I built and maintain it.
+- [**jev-engineering**](https://github.com/codejunkie99/jev-engineering) — Jev Engineering: Typed Decision Systems for Reliable Agent Workflows. Paper, diagrams, and companion examples by Av1dlive.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/eugeniughelbur/jev-engineering/) · License: MIT
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/codejunkie99/jev-engineering/) · License: License not declared
 
 - [**medula**](https://github.com/JoaquinRuiz/medula) — Suggesting Médula for the coding-agents domain. I'm the author.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -4258,30 +4276,20 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/zhangxaochen/dsh-jev/) · License: MIT
 
-- [**jev-enforce**](https://github.com/erkamyaman/jev-enforce) — 📏 Claude Code plugin that makes Claude follow your CLAUDE.md: every reply and edit checked by TypeSafe Jev ✅
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/erkamyaman/jev-enforce/) · License: MIT
-
-- [**jev-engineering**](https://github.com/codejunkie99/jev-engineering) — Jev Engineering: Typed Decision Systems for Reliable Agent Workflows. Paper, diagrams, and companion examples by Av1dlive.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/codejunkie99/jev-engineering/) · License: License not declared
-
 - [**jev-risk-check-provider**](https://github.com/caiovicentino/jev-risk-check-provider) — x402check — LIVE payer-intent risk checks for x402 agent commerce: typed decisions (TypeSafe Jev), ES256-signed attestations, mainnet USDC settlement. did:web:x402check.xyz
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/caiovicentino/jev-risk-check-provider/) · License: MIT
 
-- [**jev-security-scan**](https://github.com/win4r/jev-security-scan) — Reviews Agent Skills and MCP configurations and source code with local static checks and TypeSafe Jev before installation or execution, reporting file and line evidence, risk categories, model probabilities, and coverage gaps.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/win4r/jev-security-scan/) · License: MIT
-
 - [**jev-phishing-bench**](https://github.com/anisselbd/jev-phishing-bench) — The signal result above was challenged on three points: no non-AI baseline, selection and evaluation on the same emails, and no equivalent decomposition for the LLM. Three controls were added (\`bench/heuristics.py\`, \`bench/protocol.py\`, \`run\_llm\_signals.py\`); nothing above was changed. Full tables in \`results/report.md\`, chart in \`results/controls.png\`.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/anisselbd/jev-phishing-bench/) · License: License not declared
+
+- [**jev-security-scan**](https://github.com/win4r/jev-security-scan) — Reviews Agent Skills and MCP configurations and source code with local static checks and TypeSafe Jev before installation or execution, reporting file and line evidence, risk categories, model probabilities, and coverage gaps.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/win4r/jev-security-scan/) · License: MIT
 
 - [**JevPR**](https://github.com/HexyeDEV/JevPR) — PR Risk review, automated by Jev
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -4318,6 +4326,11 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Makes checkpoints that may require user confirmation explicit.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/hyunjunjeon/jev-judgment/) · License: MIT
 
+- [**jevshield**](https://github.com/lgy1027/jevshield) — Sub-100ms security gate for AI agent tool calls, powered by TypeSafe's Jev (System-1) decision model. Single-request Choice/Noul/Score evaluation, dual-factor blocking matrix, calibrated-confidence routing, fail-closed parsing, zero-config local fallback. LangChain-ready.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lgy1027/jevshield/) · License: Apache-2.0
+
 - [**safer-with-jev**](https://github.com/andrelandgraf/safer-with-jev) — An HTTP inspection gateway that checks request content with Jev before optionally forwarding it to an HTTPS destination.
   - **Jev’s role in this entry**: Jev judges prompt injection or unsafe content; local rules forward, flag or block the request.
   - **What this project offers**: Adds an inspectable content check ahead of an existing HTTP service.
@@ -4333,15 +4346,15 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Approval-call failures request human review; model judgments cannot guarantee detection of every risk.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/nicolasmontone/jev-tool-permissions/) · License: License not declared
 
-- [**jevshield**](https://github.com/lgy1027/jevshield) — Sub-100ms security gate for AI agent tool calls, powered by TypeSafe's Jev (System-1) decision model. Single-request Choice/Noul/Score evaluation, dual-factor blocking matrix, calibrated-confidence routing, fail-closed parsing, zero-config local fallback. LangChain-ready.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/lgy1027/jevshield/) · License: Apache-2.0
-
 - [**pi-jev-guard**](https://github.com/Reindeer-AI/pi-jev-guard) — Check Pi code edits against repository Markdown rules with TypeSafe Jev
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/reindeer-ai/pi-jev-guard/) · License: License not declared
+
+- [**jev-decisions**](https://github.com/bojansandhaus/jev-decisions) — Jev Decisions Plugin for Hermes (and other AI Agents): tool risk reviews, human approval recommendations, evidence checks, and a local decision journal.
+  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
+  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bojansandhaus/jev-decisions/) · License: MIT
 
 - [**jev-model-tokengate**](https://github.com/Thanh-Mathieu95/jev-model-tokengate) — An OpenAI-compatible proxy that sits between your LLM and your users. It evaluates each sliding window of tokens \*\*while the response is still streaming\*\* and cuts the stream \*\*before\*\* a violating token can reach the screen.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -4358,10 +4371,10 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/shikaizhong-design/ego-jev-ultrafast/) · License: Custom license
 
-- [**jev-decisions**](https://github.com/bojansandhaus/jev-decisions) — Jev Decisions Plugin for Hermes (and other AI Agents): tool risk reviews, human approval recommendations, evidence checks, and a local decision journal.
-  - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
-  - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/bojansandhaus/jev-decisions/) · License: MIT
+- [**jev-cvss**](https://github.com/Red5d/jev-cvss) — Scripts that use Jev to select CVSS metrics from vulnerability descriptions, then compute v3.0, v3.1 or v4.0 scores in Python.
+  - **Jev’s role in this entry**: Maps attack conditions and impacts to discrete metrics; local CVSS formulas calculate the numeric score.
+  - **What this project offers**: Exposes the selected metrics and vector alongside the final score.
+  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/red5d/jev-cvss/) · License: MIT
 
 - [**jev-guard**](https://github.com/ClemensSchartmueller/jev-guard) — High-speed, cross-agent safety gate plugin for \*\*Claude Code\*\*, \*\*Codex CLI\*\*, and \*\*Antigravity\*\*.
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
@@ -4402,11 +4415,6 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
   - **Jev’s role in this entry**: Jev returns a structured decision for the local program; consult the source for the exact decision policy.
   - **What this project offers**: Adds structured choices or scores to the workflow; performance and cost benefits have not been independently verified.
   - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/0xwhrari/grok-jev-guard/) · License: MIT
-
-- [**jev-cvss**](https://github.com/Red5d/jev-cvss) — Scripts that use Jev to select CVSS metrics from vulnerability descriptions, then compute v3.0, v3.1 or v4.0 scores in Python.
-  - **Jev’s role in this entry**: Maps attack conditions and impacts to discrete metrics; local CVSS formulas calculate the numeric score.
-  - **What this project offers**: Exposes the selected metrics and vector alongside the final score.
-  - [Entry details and fixed-version material](https://logicrw.github.io/awesome-jev-projects/en/projects/red5d/jev-cvss/) · License: MIT
 
 - [**jev-secret-detection**](https://github.com/teyhouse/jev-secret-detection) — Benchmark and tool evaluating how well TypeSafe Jev identifies real secret credentials in file snippets.
   - **Jev’s role in this entry**: Submits code snippets to Jev to evaluate hardcoded credential risk, returning boolean and confidence scores.

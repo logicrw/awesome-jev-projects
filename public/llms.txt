@@ -4,7 +4,7 @@ A community catalog for TypeSafe Jev and System-1 Agent architectures, including
 
 Website: https://logicrw.github.io/awesome-jev-projects/
 Repository: https://github.com/logicrw/awesome-jev-projects
-Catalog entries: 869
+Catalog entries: 870
 
 ## Install the Agent Skill
 
@@ -32,7 +32,7 @@ npx skills add https://logicrw.github.io/awesome-jev-projects/
 
 ## Categories
 - [Browser & OS Action](https://logicrw.github.io/awesome-jev-projects/en/categories/browser-os-action/): 56
-- [CLI & Pipelines](https://logicrw.github.io/awesome-jev-projects/en/categories/cli-pipelines/): 104
+- [CLI & Pipelines](https://logicrw.github.io/awesome-jev-projects/en/categories/cli-pipelines/): 105
 - [Classification & Taxonomy](https://logicrw.github.io/awesome-jev-projects/en/categories/classification-taxonomy/): 2
 - [Codebase & Graph Pathfinding](https://logicrw.github.io/awesome-jev-projects/en/categories/codebase-graph-pathfinding/): 16
 - [Context GC & Filter](https://logicrw.github.io/awesome-jev-projects/en/categories/context-gc-filter/): 43
