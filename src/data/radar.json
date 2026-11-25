@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-11-24T22:09:42.375Z",
+  "lastAttemptAt": "2026-11-25T07:49:39.939Z",
   "mode": "full",
   "lastSuccessfulAt": null,
   "status": "partial",
@@ -9,99 +9,99 @@
       "query": "topic:jev fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 3218,
+      "total": 3217,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "repositories: typesafe jev fork:true",
       "query": "typesafe jev fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 8870,
+      "total": 8864,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "repositories: typesafe-ai fork:true",
       "query": "typesafe-ai fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 3492,
+      "total": 3490,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "repositories: jev-mcp fork:true",
       "query": "jev-mcp fork:true",
       "status": "bounded",
-      "count": 200,
-      "total": 974,
-      "pages": 2,
-      "firstPage": 3
+      "count": 98,
+      "total": 973,
+      "pages": 1,
+      "firstPage": 5
     },
     {
       "name": "repositories: jev decision fork:true",
       "query": "jev decision fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 9440,
+      "total": 9438,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "repositories: \"TypeSafe AI\" in:readme fork:true",
       "query": "\"TypeSafe AI\" in:readme fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 28452,
+      "total": 28496,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "repositories: \"Jev API\" in:readme fork:true",
       "query": "\"Jev API\" in:readme fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 16772,
+      "total": 16801,
       "pages": 2,
-      "firstPage": 9
+      "firstPage": 1
     },
     {
       "name": "repositories: topic:typesafe-ai fork:true",
       "query": "topic:typesafe-ai fork:true",
       "status": "bounded",
-      "count": 29,
+      "count": 200,
       "total": 629,
-      "pages": 1,
-      "firstPage": 7
+      "pages": 2,
+      "firstPage": 1
     },
     {
       "name": "repositories: topic:typesafe ai fork:true",
       "query": "topic:typesafe ai fork:true",
       "status": "bounded",
-      "count": 200,
+      "count": 182,
       "total": 382,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "repositories: \"api.typesafe.ai\" in:readme fork:true",
       "query": "\"api.typesafe.ai\" in:readme fork:true",
       "status": "search-cap",
-      "count": 99,
-      "total": 10181,
+      "count": 100,
+      "total": 10189,
       "pages": 1,
-      "firstPage": 9
+      "firstPage": 10
     },
     {
       "name": "repositories: \"typesafe.ai\" \"jev\" in:readme fork:true",
       "query": "\"typesafe.ai\" \"jev\" in:readme fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 26875,
+      "total": 26911,
       "pages": 2,
-      "firstPage": 9
+      "firstPage": 1
     },
     {
       "name": "repositories: \"from typesafe import jev\" in:readme fork:true",
@@ -117,81 +117,81 @@
       "query": "\"@typesafe/jev\" in:readme fork:true",
       "status": "search-cap",
       "count": 200,
-      "total": 44997,
+      "total": 45157,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "code: \"api.typesafe.ai\" in:file",
       "query": "\"api.typesafe.ai\" in:file",
       "status": "search-cap",
       "count": 200,
-      "total": 55168,
+      "total": 58496,
       "pages": 2,
-      "firstPage": 9
+      "firstPage": 1
     },
     {
       "name": "code: \"typesafe.ai\" in:file",
       "query": "\"typesafe.ai\" in:file",
       "status": "search-cap",
       "count": 200,
-      "total": 99328,
+      "total": 101888,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "code: \"from typesafe import\" in:file",
       "query": "\"from typesafe import\" in:file",
       "status": "bounded",
-      "count": 200,
-      "total": 420,
-      "pages": 2,
-      "firstPage": 3
+      "count": 22,
+      "total": 422,
+      "pages": 1,
+      "firstPage": 5
     },
     {
       "name": "code: \"@typesafe/jev\" in:file",
       "query": "\"@typesafe/jev\" in:file",
       "status": "bounded",
-      "count": 200,
-      "total": 283,
-      "pages": 2,
-      "firstPage": 1
+      "count": 79,
+      "total": 279,
+      "pages": 1,
+      "firstPage": 3
     },
     {
       "name": "commits: \"typesafe.ai\"",
       "query": "\"typesafe.ai\"",
       "status": "search-cap",
       "count": 200,
-      "total": 9956,
+      "total": 9987,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "commits: \"Jev\" \"AI\"",
       "query": "\"Jev\" \"AI\"",
       "status": "search-cap",
       "count": 200,
-      "total": 267180,
+      "total": 267501,
       "pages": 2,
-      "firstPage": 3
+      "firstPage": 5
     },
     {
       "name": "issues: \"typesafe.ai\" is:pr in:title,body",
       "query": "\"typesafe.ai\" is:pr in:title,body",
       "status": "bounded",
       "count": 200,
-      "total": 564,
+      "total": 558,
       "pages": 2,
-      "firstPage": 1
+      "firstPage": 3
     },
     {
       "name": "issues: \"Jev\" \"TypeSafe\" is:pr in:title,body",
       "query": "\"Jev\" \"TypeSafe\" is:pr in:title,body",
       "status": "search-cap",
       "count": 200,
-      "total": 36496,
+      "total": 36555,
       "pages": 2,
-      "firstPage": 9
+      "firstPage": 1
     },
     {
       "name": "Known repository metadata + latest commit",
@@ -208,13 +208,13 @@
     "failed": 20
   },
   "discovery": {
-    "candidates": 2458,
+    "candidates": 2446,
     "checked": 60,
     "rejected": 0,
-    "deferred": 2454
+    "deferred": 2441
   },
-  "runUrl": "https://github.com/logicrw/awesome-jev-projects/actions/runs/45498218981",
-  "finishedAt": "2026-11-24T22:35:39.523Z",
+  "runUrl": "https://github.com/logicrw/awesome-jev-projects/actions/runs/45571161774",
+  "finishedAt": "2026-11-25T08:15:36.146Z",
   "totalProjects": 870,
-  "projectsSha256": "5124ba8d426df9a717b9d544686a07d3a78727cec42239baab2596ab29116d7d"
+  "projectsSha256": "19996e9b273786095641b0cc1d895d418409af52c8f5af807272bb03ca861a4f"
 }
